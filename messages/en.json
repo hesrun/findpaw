@@ -1,0 +1,191 @@
+{
+    "auth": {
+        "btns": {
+            "sign": "Sign in",
+            "signup": "Sign up",
+            "signOut": "Sign out"
+        },
+        "titles": {
+            "sign": "Welcome back!",
+            "signup": "Create an account"
+        },
+        "fields": {
+            "email": "Email",
+            "userName": "User name",
+            "password": "Password",
+            "confirmPassword": "Confirm password",
+            "role": "Account type"
+        },
+        "errors": {
+            "emailInvalid": "Please enter a valid email address",
+            "userNameInvalid": "Please enter a valid user name",
+            "passwordInvalid": "Password must be at least 8 characters"
+        },
+        "links": {
+            "noAccount": "Don't have an account?",
+            "haveAccount": "Already have an account?"
+        },
+        "notifications": {
+            "signInSuccess": "Successfully signed in",
+            "signUpSuccess": "Account created successfully, please check your email to verify your account"
+        }
+    },
+    "HomePage": {
+        "title": "Hello world!"
+    },
+    "roles": {
+        "user": "User",
+        "shelter": "Shelter",
+        "admin": "Admin",
+        "clinic": "Clinic"
+    },
+    "global": {
+        "noPhoto": "No photo",
+        "loading": "Loading...",
+        "yes": "Yes",
+        "no": "No",
+        "close": "Close",
+        "createdAt": "Created at",
+        "updatedAt": "Updated at"
+    },
+    "sidebar": {
+        "pets": "My Pets",
+        "settings": "Settings",
+        "account": "Account",
+        "shelters": "My Shelters"
+    },
+    "dashboard": {
+        "myPets": {
+            "titles": {
+                "title": "My Pets",
+                "addPet": "Add a new pet",
+                "description": "Here you can manage your pets and their information."
+            },
+            "buttons": {
+                "addPet": "Add a new pet",
+                "saving": "Saving...",
+                "save": "Save",
+                "delete": "Delete pet",
+                "deleting": "Deleting...",
+                "edit": "Edit pet",
+                "back": "Back"
+            },
+            "emptyState": {
+                "title": "No pets yet",
+                "btn": "Add Your First Pet"
+            },
+            "fields": {
+                "petName": "Pet name",
+                "species": "Species",
+                "speciesPlaceholder": "Select a species",
+                "breed": "Breed",
+                "age": "Age (months)",
+                "sex": "Sex",
+                "sexPlaceholder": "Select a sex",
+                "listingType": "Listing type",
+                "listingTypePlaceholder": "Select a listing type",
+                "description": "Description",
+                "photo": "Photo",
+                "city": "City",
+                "shelter": "Shelter",
+                "selectShelter": "Select a shelter",
+                "price": "Price (CZK)",
+                "address": "Address",
+                "imageUrl": "Image URL",
+                "vaccinated": "Vaccinated",
+                "sterilized": "Sterilized",
+                "specialNeeds": "Special needs"
+            },
+            "species": {
+                "dog": "Dog",
+                "cat": "Cat",
+                "bird": "Bird",
+                "fish": "Fish",
+                "rodent": "Rodent",
+                "ferret": "Ferret",
+                "rabbit": "Rabbit",
+                "reptile": "Reptile",
+                "horse": "Horse",
+                "other": "Other"
+            },
+            "type": {
+                "lost": "Lost",
+                "found": "Found",
+                "adoption": "Adoption",
+                "sale": "Sale"
+            },
+            "sex": {
+                "male": "Male",
+                "female": "Female",
+                "unknown": "Unknown"
+            },
+            "cardTitles": {
+                "general": "General information",
+                "shelter": "Shelter",
+                "listing": "Listing details",
+                "photo": "Photo",
+                "checkList": "Health Checklist",
+                "location": "Location"
+            },
+            "notifications": {
+                "createSuccess": "Pet created successfully",
+                "createError": "An error occurred while creating the pet",
+                "deleteSuccess": "Pet deleted successfully",
+                "deleteError": "An error occurred while deleting the pet",
+                "updateSuccess": "Pet updated successfully",
+                "updateError": "An error occurred while updating the pet"
+            },
+            "status": {
+                "active": "Active",
+                "inactive": "Inactive"
+            }
+        },
+        "myShelters": {
+            "titles": {
+                "title": "My Shelters",
+                "addShelter": "Add a new shelter",
+                "editShelter": "Edit shelter",
+                "description": "Here you can manage your shelters."
+            },
+            "buttons": {
+                "addShelter": "Add shelter",
+                "save": "Save",
+                "saving": "Saving...",
+                "edit": "Edit shelter",
+                "delete": "Delete shelter",
+                "back": "Back"
+            },
+            "emptyState": {
+                "title": "No shelters yet",
+                "btn": "Add Your First Shelter"
+            },
+            "fields": {
+                "name": "Shelter name",
+                "description": "Description",
+                "phone": "Phone",
+                "email": "Email",
+                "website": "Website",
+                "city": "City",
+                "address": "Address",
+                "photos": "Photos"
+            },
+            "cardTitles": {
+                "general": "General information",
+                "contacts": "Contacts",
+                "location": "Location",
+                "photos": "Photos"
+            },
+            "notifications": {
+                "createSuccess": "Shelter created successfully",
+                "createError": "An error occurred while creating the shelter",
+                "deleteSuccess": "Shelter deleted successfully",
+                "deleteError": "An error occurred while deleting the shelter",
+                "updateSuccess": "Shelter updated successfully",
+                "updateError": "An error occurred while updating the shelter"
+            }
+        }
+    },
+    "modalLabels": {
+        "petDetails": "Pet Details"
+    }
+}

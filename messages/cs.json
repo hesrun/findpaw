@@ -1,0 +1,179 @@
+{
+    "auth": {
+        "btns": {
+            "sign": "Přihlásit se",
+            "signup": "Registrovat se",
+            "signOut": "Odhlásit se"
+        },
+        "titles": {
+            "sign": "Vítejte zpět!",
+            "signup": "Vytvořit účet"
+        },
+        "fields": {
+            "email": "E-mail",
+            "userName": "Uživatelské jméno",
+            "password": "Heslo",
+            "confirmPassword": "Potvrdit heslo",
+            "role": "Typ účtu"
+        },
+        "errors": {
+            "emailInvalid": "Zadejte prosím platnou e-mailovou adresu",
+            "userNameInvalid": "Zadejte prosím platné uživatelské jméno",
+            "passwordInvalid": "Heslo musí mít alespoň 8 znaků"
+        },
+        "links": {
+            "noAccount": "Nemáte účet?",
+            "haveAccount": "Již máte účet?"
+        },
+        "notifications": {
+            "signInSuccess": "Přihlášení proběhlo úspěšně",
+            "signUpSuccess": "Účet byl úspěšně vytvořen, zkontrolujte prosím svůj e-mail pro ověření účtu"
+        }
+    },
+    "HomePage": {
+        "title": "Ahoj světe!"
+    },
+    "roles": {
+        "user": "Uživatel",
+        "shelter": "Útulek",
+        "admin": "Admin",
+        "clinic": "Klinika"
+    },
+    "sidebar": {
+        "pets": "Moji mazlíčci",
+        "settings": "Nastavení",
+        "account": "Účet",
+        "shelters": "Moje útulky"
+    },
+    "dashboard": {
+        "myPets": {
+            "titles": {
+                "title": "Moji mazlíčci",
+                "addPet": "Přidat nového mazlíčka",
+                "description": "Zde můžete spravovat své mazlíčky a jejich informace."
+            },
+            "buttons": {
+                "addPet": "Přidat nového mazlíčka",
+                "saving": "Ukládání...",
+                "save": "Uložit",
+                "delete": "Smazat mazlíčka",
+                "deleting": "Mazání...",
+                "edit": "Upravit mazlíčka",
+                "back": "Zpět"
+            },
+            "emptyState": {
+                "title": "Zatím žádní mazlíčci",
+                "btn": "Přidat prvního mazlíčka"
+            },
+            "fields": {
+                "petName": "Jméno mazlíčka",
+                "species": "Druh",
+                "speciesPlaceholder": "Vyberte druh",
+                "breed": "Plemeno",
+                "age": "Věk (měsíce)",
+                "sex": "Pohlaví",
+                "sexPlaceholder": "Vyberte pohlaví",
+                "listingType": "Typ inzerátu",
+                "listingTypePlaceholder": "Vyberte typ inzerátu",
+                "description": "Popis",
+                "photo": "Fotografie",
+                "city": "Město",
+                "shelter": "Útulek",
+                "selectShelter": "Vyberte útulek",
+                "price": "Cena (CZK)",
+                "address": "Adresa",
+                "imageUrl": "URL obrázku",
+                "vaccinated": "Očkovaný",
+                "sterilized": "Sterilizovaný",
+                "specialNeeds": "Zvláštní potřeby"
+            },
+            "species": {
+                "dog": "Pes",
+                "cat": "Kočka",
+                "bird": "Pták",
+                "fish": "Ryba",
+                "rodent": "Hlodavec",
+                "ferret": "Fretka",
+                "rabbit": "Králík",
+                "reptile": "Plaz",
+                "horse": "Kůň",
+                "other": "Jiný"
+            },
+            "type": {
+                "lost": "Ztracený",
+                "found": "Nalezený",
+                "adoption": "Adopce",
+                "sale": "Prodej"
+            },
+            "sex": {
+                "male": "Samec",
+                "female": "Samice",
+                "unknown": "Neznámé"
+            },
+            "cardTitles": {
+                "general": "Obecné informace",
+                "shelter": "Útulek",
+                "listing": "Detaily inzerátu",
+                "photo": "Fotografie",
+                "checkList": "Zdravotní kontrolní seznam",
+                "location": "Poloha"
+            },
+            "notifications": {
+                "createSuccess": "Mazlíček byl úspěšně vytvořen",
+                "createError": "Při vytváření mazlíčka došlo k chybě",
+                "deleteSuccess": "Mazlíček byl úspěšně smazán",
+                "deleteError": "Při mazání mazlíčka došlo k chybě",
+                "updateSuccess": "Mazlíček byl úspěšně aktualizován",
+                "updateError": "Při aktualizaci mazlíčka došlo k chybě"
+            },
+            "status": {
+                "active": "Aktivní",
+                "inactive": "Neaktivní"
+            }
+        },
+        "myShelters": {
+            "titles": {
+                "title": "Moje útulky",
+                "addShelter": "Přidat nový útulek",
+                "editShelter": "Upravit útulek",
+                "description": "Zde můžete spravovat své útulky."
+            },
+            "buttons": {
+                "addShelter": "Přidat útulek",
+                "save": "Uložit",
+                "saving": "Ukládání...",
+                "edit": "Upravit útulek",
+                "delete": "Smazat útulek",
+                "back": "Zpět"
+            },
+            "emptyState": {
+                "title": "Zatím žádné útulky",
+                "btn": "Přidat první útulek"
+            },
+            "fields": {
+                "name": "Název útulku",
+                "description": "Popis",
+                "phone": "Telefon",
+                "email": "E-mail",
+                "website": "Web",
+                "city": "Město",
+                "address": "Adresa",
+                "photos": "Fotografie"
+            },
+            "cardTitles": {
+                "general": "Obecné informace",
+                "contacts": "Kontakty",
+                "location": "Poloha",
+                "photos": "Fotografie"
+            },
+            "notifications": {
+                "createSuccess": "Útulek byl úspěšně vytvořen",
+                "createError": "Při vytváření útulku došlo k chybě",
+                "deleteSuccess": "Útulek byl úspěšně smazán",
+                "deleteError": "Při mazání útulku došlo k chybě",
+                "updateSuccess": "Útulek byl úspěšně aktualizován",
+                "updateError": "Při aktualizaci útulku došlo k chybě"
+            }
+        }
+    }
+}
