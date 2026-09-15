@@ -22,11 +22,9 @@ export default async function Sidebar() {
     }
 
     return (
-        <aside className="border-r border-border bg-white">
-            <div className="flex flex-col gap-6 p-2 h-[calc(100vh-4rem)] sticky top-0">
-                <SideBarNav role={role} />
-                <SideBarAccount />
-            </div>
+        <aside className="bg-white rounded-2xl">
+            <SideBarNav role={role} />
+            <SideBarAccount />
         </aside>
     );
 }

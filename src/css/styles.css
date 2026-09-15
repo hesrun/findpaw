@@ -1,0 +1,146 @@
+@import 'tailwindcss';
+@import '@heroui/styles';
+
+@layer base {
+}
+
+@layer components {
+    .container {
+        @apply mx-auto px-4;
+    }
+    .button {
+        @apply font-heading font-bold;
+    }
+    .chip {
+        @apply font-heading font-bold;
+    }
+}
+@layer utilities {
+}
+
+@theme inline {
+    --font-heading: var(--font-nunito);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-muted: var(--muted);
+    --color-border: var(--border);
+    --color-surface: var(--surface);
+    --color-surface-foreground: var(--surface-foreground);
+    --color-surface-secondary: var(--surface-secondary);
+    --color-surface-secondary-foreground: var(--surface-secondary-foreground);
+    --color-surface-tertiary: var(--surface-tertiary);
+    --color-surface-tertiary-foreground: var(--surface-tertiary-foreground);
+    --color-danger: var(--danger);
+    --color-danger-foreground: var(--danger-foreground);
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+    --color-overlay: var(--overlay);
+    --color-overlay-foreground: var(--overlay-foreground);
+    --color-field-background: var(--field-background);
+    --color-field-foreground: var(--field-foreground);
+    --color-field-placeholder: var(--field-placeholder);
+    --color-separator: var(--separator);
+    --radius-field: var(--field-radius);
+    --shadow-my: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
+}
+
+:root,
+.light,
+.default,
+[data-theme='light'],
+[data-theme='default'] {
+    /* Theme Colors (Light Mode) */
+    --accent: oklch(50.02% 0.2215 291.12);
+    --accent-foreground: oklch(99.11% 0 0);
+    --background: oklch(97.02% 0.02 291.12);
+    --border: oklch(90% 0.02 291.12);
+    --danger: oklch(65.32% 0.2421 30.22);
+    --danger-foreground: oklch(99.11% 0 0);
+    --default: oklch(94% 0.02 291.12);
+    --default-foreground: oklch(21.03% 0.0059 291.12);
+    --field-background: oklch(100% 0.01 291.12);
+    --field-border: transparent;
+    --field-foreground: oklch(21.03% 0.02 291.12);
+    --field-placeholder: oklch(55.17% 0.04 291.12);
+    --focus: oklch(50.02% 0.2215 291.12);
+    --foreground: oklch(21.03% 0.02 291.12);
+    --muted: oklch(55.17% 0.04 291.12);
+    --overlay: oklch(100% 0.006 291.12);
+    --overlay-foreground: oklch(21.03% 0.02 291.12);
+    --scrollbar: oklch(87.1% 0.02 291.12);
+    --segment: oklch(100% 0.02 291.12);
+    --segment-foreground: oklch(21.03% 0.02 291.12);
+    --separator: oklch(92% 0.02 291.12);
+    --success: oklch(73.29% 0.2012 155.29);
+    --success-foreground: oklch(21.03% 0.0059 155.29);
+    --surface: oklch(100% 0.01 291.12);
+    --surface-foreground: oklch(21.03% 0.02 291.12);
+    --surface-secondary: oklch(95.24% 0.016 291.12);
+    --surface-secondary-foreground: oklch(21.03% 0.02 291.12);
+    --surface-tertiary: oklch(93.73% 0.016 291.12);
+    --surface-tertiary-foreground: oklch(21.03% 0.02 291.12);
+    --warning: oklch(78.19% 0.1648 76.81);
+    --warning-foreground: oklch(21.03% 0.0059 76.81);
+
+    /* Border Radius */
+    --radius: 0.5rem;
+    --field-radius: 0.75rem;
+
+    /* Font Family */
+    /* Make sure to load Inter font in your app */
+    --font-sans: var(--font-geist);
+    --font-nunito: var(--font-nunito);
+}
+
+.dark,
+[data-theme='dark'] {
+    color-scheme: dark;
+    /* Theme Colors (Dark Mode) */
+    --accent: oklch(50.02% 0.2215 291.12);
+    --accent-foreground: oklch(99.11% 0 0);
+    --background: oklch(12% 0.02 291.12);
+    --border: oklch(28% 0.02 291.12);
+    --danger: oklch(59.4% 0.2046 29.11);
+    --danger-foreground: oklch(99.11% 0 0);
+    --default: oklch(27.4% 0.02 291.12);
+    --default-foreground: oklch(99.11% 0 0);
+    --field-background: oklch(21.03% 0.04 291.12);
+    --field-border: transparent;
+    --field-foreground: oklch(99.11% 0.02 291.12);
+    --field-placeholder: oklch(70.5% 0.04 291.12);
+    --focus: oklch(50.02% 0.2215 291.12);
+    --foreground: oklch(99.11% 0.02 291.12);
+    --muted: oklch(70.5% 0.04 291.12);
+    --overlay: oklch(21.03% 0.04 291.12);
+    --overlay-foreground: oklch(99.11% 0.02 291.12);
+    --scrollbar: oklch(70.5% 0.02 291.12);
+    --segment: oklch(39.64% 0.02 291.12);
+    --segment-foreground: oklch(99.11% 0.02 291.12);
+    --separator: oklch(25% 0.02 291.12);
+    --success: oklch(73.29% 0.2012 155.29);
+    --success-foreground: oklch(21.03% 0.0059 155.29);
+    --surface: oklch(21.03% 0.04 291.12);
+    --surface-foreground: oklch(99.11% 0.02 291.12);
+    --surface-secondary: oklch(25.7% 0.03 291.12);
+    --surface-secondary-foreground: oklch(99.11% 0.02 291.12);
+    --surface-tertiary: oklch(27.21% 0.03 291.12);
+    --surface-tertiary-foreground: oklch(99.11% 0.02 291.12);
+    --warning: oklch(82.03% 0.1444 80.82);
+    --warning-foreground: oklch(21.03% 0.0059 80.82);
+}
+
+@keyframes pawstep {
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

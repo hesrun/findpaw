@@ -120,7 +120,8 @@ const sexes = ['male', 'female', 'unknown'] as const;
 const species = ['dog', 'cat', 'bird', 'rabbit', 'rodent', 'other'] as const;
 
 // --- Хелперы ---
-const pick = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+const pick = <T>(arr: readonly T[]): T =>
+    arr[Math.floor(Math.random() * arr.length)];
 const randInt = (min: number, max: number) =>
     Math.floor(Math.random() * (max - min + 1)) + min;
 const maybe = <T>(val: T, chance = 0.7): T | null =>

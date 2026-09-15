@@ -1,6 +1,5 @@
-import { Button } from '@heroui/react';
+import { buttonVariants, Link } from '@heroui/react';
 import { getTranslations } from 'next-intl/server';
-import Link from 'next/link';
 import { supabaseServer } from '@shared/lib/supabase/server';
 import SignOutButton from './SignOutButton';
 
@@ -21,13 +20,14 @@ export default async function HeaderAuth() {
 
     return (
         <div className="flex items-center gap-2">
-            <Link href="/signin">
-                <Button size="sm" variant="secondary">
-                    {t('btns.sign')}
-                </Button>
+            <Link
+                href="/signin"
+                className={buttonVariants({ size: 'sm', variant: 'secondary' })}
+            >
+                {t('btns.sign')}
             </Link>
-            <Link href="/signup">
-                <Button size="sm">{t('btns.signup')}</Button>
+            <Link href="/signup" className={buttonVariants({ size: 'sm' })}>
+                {t('btns.signup')}
             </Link>
         </div>
     );

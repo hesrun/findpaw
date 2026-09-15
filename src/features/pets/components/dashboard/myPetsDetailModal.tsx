@@ -12,7 +12,7 @@ import DashboardCard from '@shared/components/UI/DashboardCard';
 import { TbHomeShield, TbScissors, TbVaccine } from 'react-icons/tb';
 import { formatDate } from '@shared/helpers/dateFormat';
 import ImageCap from '@shared/components/UI/ImageCap';
-import { PetWithShelter } from '@types/pets';
+import type { PetWithShelter } from '../../../../types/pets';
 
 function ListItem({
     label,
@@ -69,7 +69,10 @@ export default function MyPetsDetailModal({
                                     {selectedPet.image_url ? (
                                         <div className="grid grid-cols-3 gap-2">
                                             {selectedPet.image_url.map(
-                                                (url, index) => (
+                                                (
+                                                    url: string,
+                                                    index: number,
+                                                ) => (
                                                     <Image
                                                         key={index}
                                                         width={600}

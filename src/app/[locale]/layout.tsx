@@ -3,11 +3,11 @@ import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { Nunito } from 'next/font/google';
 import type { Metadata } from 'next';
-import './globals.css';
+import '@/css/styles.css';
 import Header from '@components/header/Header';
 import { routing } from '@/i18n/routing';
 import { Toast } from '@heroui/react';
-import { IoPaw } from 'react-icons/io5';
+import TanstackProvider from '@shared/providers/TanstackProvider';
 
 export const metadata: Metadata = {
     title: 'Pet Finder',
@@ -36,11 +36,13 @@ export default async function RootLayout({
             <body
                 className={`${nunito.variable} flex flex-col min-h-screen bg-background text-foreground`}
             >
-                <NextIntlClientProvider locale={locale}>
-                    <Toast.Provider />
-                    <Header />
-                    {children}
-                </NextIntlClientProvider>
+                <TanstackProvider>
+                    <NextIntlClientProvider locale={locale}>
+                        <Toast.Provider />
+                        <Header />
+                        {children}
+                    </NextIntlClientProvider>
+                </TanstackProvider>
             </body>
         </html>
     );

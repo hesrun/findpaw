@@ -1,4 +1,9 @@
 {
+    "header": {
+        "pets": "Pets",
+        "shelters": "Shelters",
+        "about": "About Us"
+    },
     "auth": {
         "btns": {
             "sign": "Sign in",
@@ -96,29 +101,6 @@
                 "sterilized": "Sterilized",
                 "specialNeeds": "Special needs"
             },
-            "species": {
-                "dog": "Dog",
-                "cat": "Cat",
-                "bird": "Bird",
-                "fish": "Fish",
-                "rodent": "Rodent",
-                "ferret": "Ferret",
-                "rabbit": "Rabbit",
-                "reptile": "Reptile",
-                "horse": "Horse",
-                "other": "Other"
-            },
-            "type": {
-                "lost": "Lost",
-                "found": "Found",
-                "adoption": "Adoption",
-                "sale": "Sale"
-            },
-            "sex": {
-                "male": "Male",
-                "female": "Female",
-                "unknown": "Unknown"
-            },
             "cardTitles": {
                 "general": "General information",
                 "shelter": "Shelter",
@@ -187,5 +169,38 @@
     },
     "modalLabels": {
         "petDetails": "Pet Details"
+    },
+    "pets": {
+        "species": {
+            "dog": "Dog",
+            "cat": "Cat",
+            "bird": "Bird",
+            "fish": "Fish",
+            "rodent": "Rodent",
+            "ferret": "Ferret",
+            "rabbit": "Rabbit",
+            "reptile": "Reptile",
+            "horse": "Horse",
+            "other": "Other"
+        },
+        "listingType": {
+            "lost": "Lost",
+            "found": "Found",
+            "adoption": "Adoption",
+            "sale": "Sale"
+        },
+        "sex": {
+            "male": "Male",
+            "female": "Female",
+            "unknown": "Unknown"
+        }
+    },
+    "PetAge": {
+        "months": "{count, plural, one {# month} other {# months}}",
+        "years": "{count, plural, one {# year} other {# years}}",
+        "yearsAndMonths": "{years, plural, one {# year} other {# years}} and {months, plural, one {# month} other {# months}}",
+
+        "monthsShort": "{count, plural, one {#month} other {#months}}",
+        "yearsShort": "~{years} years"
     }
 }

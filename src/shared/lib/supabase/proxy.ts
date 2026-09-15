@@ -32,17 +32,27 @@ export async function updateSession(request: NextRequest) {
         },
     );
 
-    // Do not run code between createServerClient and
-    // supabase.auth.getClaims(). A simple mistake could make it very hard to debug
-    // issues with users being randomly logged out.
+    try {
+        const { data } = await supabase.auth.getClaims();
 
-    // IMPORTANT: If you remove getClaims() and you use server-side rendering
-    // with the Supabase client, your users may be randomly logged out.
-    const { data } = await supabase.auth.getClaims();
+        return {
+            response: supabaseResponse,
+            isAuthenticated: !!data?.claims,
+            claims: data?.claims ?? null,
+            isError: false,
+        };
+    } catch (error) {
+        alert('asgsadfgsdfgsd');
+        console.warn(
+            '[Middleware Supabase Connection Error]:',
+            error instanceof Error ? error.message : error,
+        );
 
-    return {
-        response: supabaseResponse,
-        isAuthenticated: !!data?.claims,
-        claims: data?.claims ?? null,
-    };
+        return {
+            response: supabaseResponse,
+            isAuthenticated: false,
+            claims: null,
+            isError: true,
+        };
+    }
 }

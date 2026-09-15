@@ -1,10 +1,11 @@
 import { Avatar, Card, Chip } from '@heroui/react';
 import { TbCurrencyKroneCzech, TbHomeShield } from 'react-icons/tb';
-import { SPECIES } from '../../constants';
 import MyPetActionsDropdown from './MyPetActionsDropdown';
 import { FaLocationDot } from 'react-icons/fa6';
 import { useTranslations } from 'next-intl';
-import { PetWithShelter } from '@types/pets';
+import type { PetWithShelter } from '@/types/pets';
+import SpeciesChip from '@UI/SpeciesChip';
+import ListingChip from '@UI/ListingChips';
 
 export default function MyPetsCard({
     pet,
@@ -16,6 +17,9 @@ export default function MyPetsCard({
     setIsModalOpen: (open: boolean) => void;
 }) {
     const t = useTranslations('dashboard.myPets');
+    const tSpecies = useTranslations('pets.species');
+    const tListingType = useTranslations('pets.listingType');
+
     const handleCardClick = () => {
         setSelectedPet(pet);
         setIsModalOpen(true);
@@ -42,11 +46,10 @@ export default function MyPetsCard({
                 </Avatar>
                 <div className="text-accent font-medium">{pet.name}</div>
                 <div className="flex items-center gap-4">
-                    <Chip variant="primary" className="bg-accent text-white">
-                        <Chip.Label className="flex items-center gap-1 uppercase">
-                            {t(`type.${pet.listing_type}`)}
-                        </Chip.Label>
-                    </Chip>
+                    <ListingChip
+                        label={tListingType(pet.listing_type)}
+                        type={pet.listing_type}
+                    />
                     {pet.listing_type === 'sale' && (
                         <div className="flex items-center font-medium text-teal-600">
                             {pet.price ?? 'N/A'}
@@ -55,18 +58,10 @@ export default function MyPetsCard({
                     )}
                 </div>
                 <div className="flex items-center gap-4">
-                    <Chip
-                        variant="primary"
-                        className="bg-accent text-white max-w-max"
-                    >
-                        <Chip.Label className="flex items-center gap-1 uppercase">
-                            {
-                                SPECIES.find((type) => type.id === pet.species)
-                                    ?.icon
-                            }
-                            {t(`species.${pet.species}`)}
-                        </Chip.Label>
-                    </Chip>
+                    <SpeciesChip
+                        label={tSpecies(pet.species)}
+                        type={pet.species}
+                    />
                     <div className="text-sm font-medium text-muted">
                         {pet.age_months ?? 'N/A'} {t('fields.age')}
                     </div>
@@ -98,7 +93,7 @@ export default function MyPetsCard({
                     color={pet.status === 'active' ? 'success' : 'danger'}
                 >
                     <Chip.Label className="uppercase text-white">
-                        {t(`status.${pet.status}`)}
+                        {t(`status.${pet.status as string}` as unknown as any)}
                     </Chip.Label>
                 </Chip>
                 <div onClick={(e) => e.stopPropagation()}>

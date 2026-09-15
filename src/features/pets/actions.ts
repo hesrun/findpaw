@@ -3,6 +3,7 @@
 import { Enums } from '@supabase/database.types';
 import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { revalidatePath } from 'next/cache';
+import { PetCreateSchema, PetUpdateSchema } from './schemas';
 
 function getEnum<T extends string>(formData: FormData, key: string) {
     const value = formData.get(key);
@@ -27,25 +28,52 @@ export async function createPet(formData: FormData) {
         }
     }
 
-    const { error } = await supabase.from('pets').insert({
-        name: formData.get('name') as string | null,
-        address: formData.get('address') as string | null,
-        age_months: Number(formData.get('age_months')),
-        breed: formData.get('breed') as string | null,
-        city: formData.get('city') as string | null,
-        created_at: new Date().toISOString(),
-        description: formData.get('description') as string | null,
-        image_url: imageUrls.length ? imageUrls : null,
-        owner_id: user.id,
+    const raw = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        age_months: formData.get('age_months'),
+        breed: formData.get('breed'),
+        city: formData.get('city'),
+        address: formData.get('address'),
+        image_url: imageUrls,
         shelter_id: shelterId,
-        listing_type: formData.get('listing_type') as Enums<'pet_listing_type'>,
-        price: formData.get('price') ? Number(formData.get('price')) : null,
-        sex: getEnum<Enums<'pet_sex'>>(formData, 'sex'),
-        species: formData.get('species') as Enums<'pet_species'>,
+        listing_type: formData.get('listing_type'),
+        price: formData.get('price'),
+        sex: formData.get('sex'),
+        species: formData.get('species'),
         is_special_needs: formData.get('is_special_needs') === 'on',
         is_sterilized: formData.get('is_sterilized') === 'on',
         is_vaccinated: formData.get('is_vaccinated') === 'on',
-        status: getEnum<Enums<'pet_status'>>(formData, 'status') ?? undefined,
+    };
+
+    const parsed = PetCreateSchema.safeParse(raw);
+    if (!parsed.success) {
+        return { success: false, errors: parsed.error.flatten() };
+    }
+
+    const data = parsed.data;
+
+    const { error } = await supabase.from('pets').insert({
+        name: data.name,
+        address: data.address,
+        age_months: data.age_months,
+        breed: data.breed,
+        city: data.city,
+        created_at: new Date().toISOString(),
+        description: data.description,
+        image_url:
+            data.image_url && data.image_url.length ? data.image_url : null,
+        owner_id: user.id,
+        shelter_id: data.shelter_id ?? null,
+        listing_type: (data.listing_type ??
+            'adoption') as Enums<'pet_listing_type'>,
+        price: (data.price ?? null) as number | null,
+        sex: data.sex as Enums<'pet_sex'> | undefined,
+        species: data.species as Enums<'pet_species'>,
+        is_special_needs: data.is_special_needs ?? false,
+        is_sterilized: data.is_sterilized ?? false,
+        is_vaccinated: data.is_vaccinated ?? false,
+        status: undefined,
     });
 
     if (error) throw error;
@@ -53,40 +81,6 @@ export async function createPet(formData: FormData) {
     revalidatePath('/dashboard/pets');
 
     return { success: true };
-}
-
-export async function getPet(petId: string) {
-    console.log('Fetching pet with ID:', petId);
-    const { supabase, user } = await getSupabaseWithUser();
-    const { data, error } = await supabase
-        .from('pets')
-        .select('*, shelter:shelters(id, name, city, address, phone, email)')
-        .eq('id', petId)
-        .eq('owner_id', user.id)
-        .single();
-
-    if (error) throw error;
-
-    return data;
-}
-
-export async function getPets(page: number, pageSize: number = 20) {
-    const from = (page - 1) * pageSize;
-
-    const { supabase, user } = await getSupabaseWithUser();
-
-    const { data, error, count } = await supabase
-        .from('pets')
-        .select('*, shelter:shelters(id, name, city, address, phone, email)', {
-            count: 'exact',
-        })
-        .range(from, from + pageSize - 1)
-        .eq('owner_id', user.id)
-        .order('created_at', { ascending: false });
-
-    if (error) throw error;
-
-    return { data, total: count ?? 0 };
 }
 
 export async function deletePet(petId: string) {
@@ -123,28 +117,55 @@ export async function updatePet(petId: string, formData: FormData) {
         }
     }
 
+    const raw = {
+        name: formData.get('name'),
+        description: formData.get('description'),
+        age_months: formData.get('age_months'),
+        breed: formData.get('breed'),
+        city: formData.get('city'),
+        address: formData.get('address'),
+        image_url: imageUrls,
+        shelter_id: shelterId,
+        listing_type: formData.get('listing_type'),
+        price: formData.get('price'),
+        sex: formData.get('sex'),
+        species: formData.get('species'),
+        is_special_needs: formData.get('is_special_needs') === 'on',
+        is_sterilized: formData.get('is_sterilized') === 'on',
+        is_vaccinated: formData.get('is_vaccinated') === 'on',
+        status: formData.get('status'),
+    };
+
+    const parsed = PetUpdateSchema.safeParse(raw);
+
+    if (!parsed.success) {
+        return { success: false, errors: parsed.error.flatten() };
+    }
+
+    const data = parsed.data;
+
     const { error } = await supabase
         .from('pets')
         .update({
-            name: formData.get('name') as string | null,
-            address: formData.get('address') as string | null,
-            age_months: Number(formData.get('age_months')),
-            breed: formData.get('breed') as string | null,
-            city: formData.get('city') as string | null,
-            description: formData.get('description') as string | null,
-            image_url: imageUrls.length ? imageUrls : null,
-            listing_type: formData.get(
-                'listing_type',
-            ) as Enums<'pet_listing_type'>,
-            price: formData.get('price') ? Number(formData.get('price')) : null,
-            sex: getEnum<Enums<'pet_sex'>>(formData, 'sex'),
-            species: formData.get('species') as Enums<'pet_species'>,
-            is_special_needs: formData.get('is_special_needs') === 'on',
-            is_sterilized: formData.get('is_sterilized') === 'on',
-            is_vaccinated: formData.get('is_vaccinated') === 'on',
-            status:
-                getEnum<Enums<'pet_status'>>(formData, 'status') ?? undefined,
-            shelter_id: shelterId,
+            name: data.name,
+            address: data.address,
+            age_months: data.age_months,
+            breed: data.breed,
+            city: data.city,
+            description: data.description,
+            image_url:
+                data.image_url && data.image_url.length ? data.image_url : null,
+            listing_type: (data.listing_type ?? undefined) as
+                | Enums<'pet_listing_type'>
+                | undefined,
+            price: (data.price ?? null) as number | null,
+            sex: data.sex as Enums<'pet_sex'> | undefined,
+            species: data.species as Enums<'pet_species'> | undefined,
+            is_special_needs: data.is_special_needs ?? false,
+            is_sterilized: data.is_sterilized ?? false,
+            is_vaccinated: data.is_vaccinated ?? false,
+            status: (data as any).status ?? undefined,
+            shelter_id: data.shelter_id ?? null,
         })
         .eq('id', petId)
         .eq('owner_id', user.id);

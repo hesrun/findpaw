@@ -1,14 +1,14 @@
 import PetForm from '@/features/pets/components/dashboard/PetForm';
 import { getTranslations } from 'next-intl/server';
 import getProfile from '@shared/lib/supabase/profile';
-import { getAllShelters } from '@features/shelters/actions';
+import { getMyAllShelters } from '@features/shelters/queries';
 
 export default async function AddPet() {
     const t = await getTranslations('dashboard.myPets');
 
     const profile = await getProfile();
     const shelters =
-        profile?.role === 'shelter' ? await getAllShelters() : null;
+        profile?.role === 'shelter' ? await getMyAllShelters() : null;
 
     return (
         <div>

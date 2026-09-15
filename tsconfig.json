@@ -20,11 +20,12 @@
         ],
         "paths": {
             "@/*": ["./src/*"],
+            "@messages/*": ["./messages/*"],
             "@shared/*": ["./src/shared/*"],
             "@components/*": ["./src/shared/components/*"],
+            "@UI/*": ["./src/shared/components/UI/*"],
             "@features/*": ["./src/features/*"],
-            "@supabase/*": ["./supabase/*"],
-            "@types/*": ["./src/types/*"]
+            "@supabase/*": ["./supabase/*"]
         }
     },
     "include": [

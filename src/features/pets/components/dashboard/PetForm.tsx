@@ -34,8 +34,18 @@ import {
 import DashboardCard from '@shared/components/UI/DashboardCard';
 import { TbScissors, TbVaccine } from 'react-icons/tb';
 import { useRouter } from 'next/navigation';
-import { PetWithShelter } from '@types/pets';
-import { Shelter } from '@types/shelters';
+import type { PetWithShelter } from '@/types/pets';
+import type { Shelter } from '@/types/shelters';
+import clsx from 'clsx';
+
+const radioClasses = {
+    base: 'rounded-xl border border-accent px-4 py-1.5 transition-all',
+    hovered:
+        'group-data-[hovered=true]:bg-accent/10 group-data-[hovered=true]:border-accent',
+    focus: 'group-data-[focus-visible=true]:ring-2 group-data-[focus-visible=true]:ring-accent group-data-[focus-visible=true]:ring-offset-2',
+    selected:
+        'group-data-[selected=true]:border-accent group-data-[selected=true]:bg-accent group-data-[selected=true]:text-white',
+};
 
 export default function PetForm({
     initialData,
@@ -45,7 +55,10 @@ export default function PetForm({
     shelters?: Shelter[] | null;
 }) {
     const isEditing = !!initialData;
+
     const t = useTranslations('dashboard.myPets');
+    const tPets = useTranslations('pets');
+
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
     const fileUploaderRef = useRef<FileUploaderRef>(null);
@@ -104,14 +117,20 @@ export default function PetForm({
                                     <Radio
                                         key={option.id}
                                         value={option.id}
-                                        className="mt-0 h-9 flex border border-accent items-center justify-center has-checked:bg-accent has-checked:text-white rounded-xl gap-2 text-accent px-4 hover:bg-accent/10 transition-colors"
+                                        className="m-0 group"
                                     >
-                                        <div className="text-lg">
-                                            {option.icon}
-                                        </div>
-                                        <span className="text-sm font-medium">
-                                            {t(option.label)}
-                                        </span>
+                                        <Radio.Content
+                                            className={clsx(
+                                                radioClasses.base,
+                                                radioClasses.hovered,
+                                                radioClasses.focus,
+                                                radioClasses.selected,
+                                            )}
+                                        >
+                                            <span className="text-sm font-heading font-bold">
+                                                {tPets(`species.${option.id}`)}
+                                            </span>
+                                        </Radio.Content>
                                     </Radio>
                                 ))}
                             </div>
@@ -151,14 +170,20 @@ export default function PetForm({
                                         <Radio
                                             key={option.id}
                                             value={option.id}
-                                            className="mt-0 h-9 flex flex-1 border border-accent items-center justify-center has-checked:bg-accent has-checked:text-white rounded-xl gap-2 text-accent px-4 hover:bg-accent/10 transition-colors"
+                                            className="m-0 group"
                                         >
-                                            <div className="text-lg">
-                                                {option.icon}
-                                            </div>
-                                            <span className="text-sm font-medium">
-                                                {t(option.label)}
-                                            </span>
+                                            <Radio.Content
+                                                className={clsx(
+                                                    radioClasses.base,
+                                                    radioClasses.hovered,
+                                                    radioClasses.focus,
+                                                    radioClasses.selected,
+                                                )}
+                                            >
+                                                <span className="text-sm font-heading font-bold">
+                                                    {tPets(`sex.${option.id}`)}
+                                                </span>
+                                            </Radio.Content>
                                         </Radio>
                                     ))}
                                 </div>
@@ -218,14 +243,22 @@ export default function PetForm({
                                         <Radio
                                             key={option.id}
                                             value={option.id}
-                                            className="mt-0 h-9 flex flex-1 border border-accent items-center justify-center has-checked:bg-accent has-checked:text-white rounded-xl gap-2 text-accent px-4 hover:bg-accent/10 transition-colors"
+                                            className="m-0 group"
                                         >
-                                            <div className="text-lg">
-                                                {option.icon}
-                                            </div>
-                                            <span className="text-sm font-medium">
-                                                {t(option.label)}
-                                            </span>
+                                            <Radio.Content
+                                                className={clsx(
+                                                    radioClasses.base,
+                                                    radioClasses.hovered,
+                                                    radioClasses.focus,
+                                                    radioClasses.selected,
+                                                )}
+                                            >
+                                                <span className="text-sm font-heading font-bold">
+                                                    {tPets(
+                                                        `listingType.${option.id}`,
+                                                    )}
+                                                </span>
+                                            </Radio.Content>
                                         </Radio>
                                     ))}
                                 </div>
