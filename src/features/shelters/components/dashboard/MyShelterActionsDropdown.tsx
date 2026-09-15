@@ -4,7 +4,7 @@ import { Button, Dropdown, Label, toast } from '@heroui/react';
 import { useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { deleteShelter } from '../../actions';
+import { deleteShelter } from '@features/shelters/actions';
 import { LuEllipsis } from 'react-icons/lu';
 import { BiPencil } from 'react-icons/bi';
 import { IoTrashBin } from 'react-icons/io5';

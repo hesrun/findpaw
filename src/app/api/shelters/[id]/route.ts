@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
-import { getPublicShelter } from '../../../../features/shelters/queries';
+import { getPublicShelter } from '@features/shelters/queries';
 
-export async function GET(req: Request, { params }: { params: any }) {
+export async function GET(
+    req: Request,
+    { params }: { params: Promise<{ id: string }> },
+) {
     try {
         const { id } = await params;
         const data = await getPublicShelter(id);

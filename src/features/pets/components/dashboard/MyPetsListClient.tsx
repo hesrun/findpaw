@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import MyPetsDetailModal from './myPetsDetailModal';
 import MyPagination from '@shared/components/UI/Pagination';
-import type { PetWithShelter } from '../../../../types/pets';
+import type { PetWithShelter } from '@/types/pets';
 
 export default function MyPetsListClient({
     pets,

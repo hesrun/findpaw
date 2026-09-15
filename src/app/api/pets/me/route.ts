@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getMyPets } from '../../../../features/pets/queries';
+import { getMyPets } from '@features/pets/queries';
 
 export async function GET(req: Request) {
     try {

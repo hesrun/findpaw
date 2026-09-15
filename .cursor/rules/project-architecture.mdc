@@ -1,0 +1,15 @@
+---
+description: 'Project-wide architecture and documentation routing'
+globs: 'src/**/*.{ts,tsx}'
+alwaysApply: true
+---
+
+Read `AGENTS.md` before changing code. Read the relevant file in `docs/` before editing:
+
+- `docs/architecture.md` for boundaries and data flow;
+- `docs/development.md` for workflow and validation;
+- `docs/features/pets.md` or `docs/features/shelters.md` for domain work;
+- `docs/database.md` for Supabase;
+- `docs/i18n.md` for translations.
+
+Keep domain logic in `src/features`, use path aliases, validate external input on the server, preserve ownership and RLS, and keep route handlers thin.

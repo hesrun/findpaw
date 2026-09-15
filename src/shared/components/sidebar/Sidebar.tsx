@@ -1,7 +1,7 @@
 import SideBarAccount from './SideBarAccount';
 import SideBarNav from './SidebarNav';
 import { supabaseServer } from '@shared/lib/supabase/server';
-import type { Database } from '../../../../supabase/database.types';
+import type { Database } from '@supabase/database.types';
 
 type UserRole = Database['public']['Enums']['user_role'];
 

@@ -1,6 +1,7 @@
+import Pagination from '@UI/Pagination';
 import { Database } from '@supabase/database.types';
 import MySheltersCard from './MySheltersCard';
-import MyPagination from '../../../../shared/components/UI/Pagination';
+import MyPagination from '@UI/Pagination';
 import Link from 'next/link';
 import { Button } from '@heroui/react';
 import { useTranslations } from 'next-intl';

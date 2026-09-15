@@ -1,4 +1,4 @@
-import { supabaseServer } from '../../lib/supabase/server';
+import { supabaseServer } from '@shared/lib/supabase/server';
 
 export default async function SideBarAccount() {
     const supabase = await supabaseServer();

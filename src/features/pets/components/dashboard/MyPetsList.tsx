@@ -1,4 +1,4 @@
-import { getMyPets } from '../../queries';
+import { getMyPets } from '@features/pets/queries';
 import MyPetsEmpty from './MyPetsEmpty';
 import MyPetsListClient from './MyPetsListClient';
 

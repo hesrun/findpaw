@@ -1,4 +1,4 @@
-import { getMyShelters } from '../../queries';
+import { getMyShelters } from '@features/shelters/queries';
 import MySheltersEmpty from './MySheltersEmpty';
 import MySheltersListClient from './MySheltersListClient';
 

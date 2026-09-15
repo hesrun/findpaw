@@ -4,7 +4,7 @@ import { PiPawPrintThin } from 'react-icons/pi';
 import { formatAge } from '@/shared/helpers/ageFormat';
 import ListingChip from '@/shared/components/UI/ListingChips';
 import { getTranslations } from 'next-intl/server';
-import SexIcon from '../../../../shared/components/UI/SexIcon';
+import SexIcon from '@UI/SexIcon';
 import { TbHomeShield } from 'react-icons/tb';
 
 export default async function PetCard({ pet }: { pet: PetWithShelter }) {

@@ -7,6 +7,8 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint",
+        "typecheck": "tsc --noEmit",
+        "check": "npm run lint && npm run typecheck && npm run build",
         "login": "npx supabase login",
         "migration:push": "npx supabase db push",
         "gentypes": "npx supabase gen types typescript --project-id \"igulesrzbrglolehioxa\" --schema public > supabase/database.types.ts"

@@ -1,8 +1,9 @@
 'use client';
+
+import { signIn } from '@features/auth/actions/actions';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
-import { signIn } from '../../../../features/auth/actions/actions';
 import {
     Button,
     Card,

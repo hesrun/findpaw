@@ -5,11 +5,6 @@ import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { revalidatePath } from 'next/cache';
 import { PetCreateSchema, PetUpdateSchema } from './schemas';
 
-function getEnum<T extends string>(formData: FormData, key: string) {
-    const value = formData.get(key);
-    return value ? (value as T) : null;
-}
-
 export async function createPet(formData: FormData) {
     const { supabase, user } = await getSupabaseWithUser();
 

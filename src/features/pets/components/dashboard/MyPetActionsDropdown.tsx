@@ -5,7 +5,7 @@ import { useTransition } from 'react';
 import { BiPencil } from 'react-icons/bi';
 import { FaEllipsisVertical } from 'react-icons/fa6';
 import { IoTrashBin } from 'react-icons/io5';
-import { deletePet } from '../../actions';
+import { deletePet } from '@features/pets/actions';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 

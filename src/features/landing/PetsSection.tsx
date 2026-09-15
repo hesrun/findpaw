@@ -1,5 +1,5 @@
-import FeaturedPets from '../pets/components/public/FeaturedPets';
-import { getPublicPets } from '../pets/queries';
+import FeaturedPets from '@features/pets/components/public/FeaturedPets';
+import { getPublicPets } from '@features/pets/queries';
 
 export default async function PetsSection() {
     const { data: pets } = await getPublicPets({

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getMyShelters } from '../../../../features/shelters/queries';
+import { getMyShelters } from '@features/shelters/queries';
 
 export async function GET(req: Request) {
     try {

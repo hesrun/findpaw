@@ -16,13 +16,13 @@ import {
     toast,
 } from '@heroui/react';
 import { useState, useRef, useTransition } from 'react';
-import { SEX_OPTIONS, SPECIES, LISTING_TYPES } from '../../constants';
+import { SEX_OPTIONS, SPECIES, LISTING_TYPES } from '@features/pets/constants';
 import { useTranslations } from 'next-intl';
 import {
     FileUploader,
     FileUploaderRef,
 } from '@shared/components/UI/FileUploader';
-import { createPet, updatePet } from '../../actions';
+import { createPet, updatePet } from '@features/pets/actions';
 import {
     LuBadgeAlert,
     LuCamera,

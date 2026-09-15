@@ -17,7 +17,7 @@ import {
     FileUploaderRef,
 } from '@shared/components/UI/FileUploader';
 import DashboardCard from '@shared/components/UI/DashboardCard';
-import { createShelter, updateShelter } from '../../actions';
+import { createShelter, updateShelter } from '@features/shelters/actions';
 import { LuBuilding2, LuCamera, LuContact, LuMapPin } from 'react-icons/lu';
 import { Database } from '@supabase/database.types';
 

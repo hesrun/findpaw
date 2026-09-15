@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pet Finder
+
+Pet Finder is a localized application for publishing, discovering, and managing pet listings and shelter profiles.
+
+## Stack
+
+- Next.js 16 App Router
+- React 19 and TypeScript
+- Supabase for authentication, database, storage, and Row-Level Security
+- `next-intl` for English and Czech locales
+- TanStack Query for client-side server state
+- Zod for runtime validation at external input boundaries
+- HeroUI, Tailwind CSS, and Framer Motion for the interface
 
 ## Getting Started
 
-First, run the development server:
+Requirements:
+
+- Node.js compatible with the repository toolchain;
+- npm;
+- a configured Supabase project;
+- the variables listed in `.env.example`.
+
+Install dependencies and start development:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). Copy `.env.example` to `.env.local` and fill in local values. Never commit `.env.local` or service-role credentials.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command                  | Purpose                                 |
+| ------------------------ | --------------------------------------- |
+| `npm run dev`            | Start the development server            |
+| `npm run lint`           | Run ESLint                              |
+| `npm run typecheck`      | Run TypeScript without emitting files   |
+| `npm run build`          | Create a production build               |
+| `npm run check`          | Run lint, typecheck, and build          |
+| `npm run start`          | Start the production build              |
+| `npm run login`          | Authenticate the Supabase CLI           |
+| `npm run migration:push` | Apply pending Supabase migrations       |
+| `npm run gentypes`       | Regenerate `supabase/database.types.ts` |
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+src/app/       routes, layouts, and API route handlers
+src/features/  domain modules: pets, shelters, auth
+src/shared/    reusable UI, providers, helpers, and Supabase clients
+src/i18n/      locale routing and request configuration
+supabase/      migrations, policies, and generated database types
+messages/      locale message catalogs
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Documentation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [Architecture](docs/architecture.md)
+- [Development guide](docs/development.md)
+- [Database and Supabase](docs/database.md)
+- [Internationalization](docs/i18n.md)
+- [Pets feature](docs/features/pets.md)
+- [Shelters feature](docs/features/shelters.md)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Before changing code, read `AGENTS.md` and the relevant document above. `CLAUDE.md`, `.github/copilot-instructions.md`, and `.cursor/rules/` provide agent-specific entry points to the same project rules.

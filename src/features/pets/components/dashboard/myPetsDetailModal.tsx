@@ -12,7 +12,7 @@ import DashboardCard from '@shared/components/UI/DashboardCard';
 import { TbHomeShield, TbScissors, TbVaccine } from 'react-icons/tb';
 import { formatDate } from '@shared/helpers/dateFormat';
 import ImageCap from '@shared/components/UI/ImageCap';
-import type { PetWithShelter } from '../../../../types/pets';
+import type { PetWithShelter } from '@/types/pets';
 
 function ListItem({
     label,

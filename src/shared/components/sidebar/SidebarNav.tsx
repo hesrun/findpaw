@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MdPets, MdSettings } from 'react-icons/md';
 import { TbHomeShield } from 'react-icons/tb';
-import type { Database } from '../../../../supabase/database.types';
+import type { Database } from '@supabase/database.types';
 
 type UserRole = Database['public']['Enums']['user_role'];
 

@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
-import { getPublicPet } from '../../../../features/pets/queries';
+import { getPublicPet } from '@features/pets/queries';
 
-export async function GET(req: Request, { params }: { params: any }) {
+export async function GET(
+    req: Request,
+    { params }: { params: Promise<{ id: string }> },
+) {
     try {
         const { id } = await params;
         const data = await getPublicPet(id);

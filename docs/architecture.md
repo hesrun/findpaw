@@ -1,0 +1,107 @@
+# Architecture
+
+## Overview
+
+Pet Finder is a Next.js App Router application with Supabase as its backend, `next-intl` for localization, and TanStack Query for client-side server state.
+
+The application is organized by domain feature:
+
+```text
+src/
+  app/                 routes, layouts, API route handlers
+  features/            domain modules and business workflows
+  shared/              reusable infrastructure and UI
+  i18n/                locale routing and request configuration
+  types/               shared application types
+supabase/
+  migrations/          database schema history and RLS policies
+  database.types.ts    generated Supabase TypeScript contract
+```
+
+## Layer Responsibilities
+
+### `src/app`
+
+Route files compose pages and layouts. They may load data through feature queries, but should not contain domain business logic or direct Supabase mutations.
+
+`src/proxy.ts` owns locale routing and early authentication/role redirects. This project uses Next.js 16's `proxy` convention rather than the older `middleware.ts` convention. Read the relevant local Next.js guide before changing routing or request lifecycle code.
+
+### `src/features/<domain>`
+
+A feature owns code that is specific to one business domain:
+
+- `queries.ts` - server-side reads;
+- `actions.ts` - server actions for browser mutations;
+- `schemas.ts` - runtime validation of external input and inferred types;
+- `hooks.ts` - client-side React Query hooks when a client fetch is required;
+- `components/` - domain UI, separated by audience where useful.
+
+Current domains include `pets`, `shelters`, and `auth`.
+
+### `src/shared`
+
+Shared code must be genuinely reusable across domains. It contains Supabase clients, authentication helpers, common UI, providers, and formatters. Do not move domain rules into `shared` merely to shorten an import.
+
+## Data Flows
+
+### Server-rendered page
+
+```text
+Page or Server Component
+  -> feature query
+  -> Supabase server client
+  -> RLS
+  -> database
+```
+
+Use this flow for dashboard pages and server-rendered detail pages. Do not call an internal API route from a Server Component just to reach the database.
+
+### Client-side public listing
+
+```text
+Client Component
+  -> feature hook
+  -> internal GET API route
+  -> feature query
+  -> Supabase server client
+  -> RLS
+```
+
+Use this flow when the UI needs client-side refetching, pagination, or React Query cache behavior.
+
+### Form mutation
+
+```text
+Client form
+  -> upload external files when needed
+  -> server action
+  -> Zod validation
+  -> authentication and ownership checks
+  -> Supabase mutation
+  -> revalidatePath or targeted cache invalidation
+```
+
+### API route
+
+API route handlers are thin adapters. They parse the HTTP request, call a feature query or action, and return a stable HTTP response. They must not duplicate business rules or Supabase queries.
+
+## Server and Client Boundaries
+
+- Keep Supabase server clients and server actions out of client components.
+- Use `import type` for types used by client code.
+- Validate `FormData`, URL parameters, and JSON bodies on the server.
+- Use generated Supabase types for database rows and insert/update payloads.
+- Use RLS and server-side checks as the security boundary; client checks are only UX.
+
+## Import Conventions
+
+Prefer the configured aliases:
+
+- `@/*` for `src/*`;
+- `@features/*` for feature modules;
+- `@shared/*` for shared infrastructure;
+- `@components/*` for shared components;
+- `@UI/*` for shared UI;
+- `@supabase/*` for generated database types and Supabase files.
+
+Avoid long relative imports such as `../../../../features/...`.
