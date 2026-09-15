@@ -69,6 +69,20 @@ Client Component
 
 Use this flow when the UI needs client-side refetching, pagination, or React Query cache behavior.
 
+### SEO-first public listing
+
+Public landing sections combine server rendering with client-side query state:
+
+```text
+Server Component
+  -> feature query for initial records
+  -> initialData passed to Client Component
+  -> TanStack Query hook for refreshes or filters
+  -> internal GET API route
+```
+
+The initial records are present in the first server response for SEO and fast content display. The Client Component owns only interactive state and subsequent refetching. The shelter landing section currently uses this pattern for the six newest shelters; its order is fixed by `created_at` descending.
+
 ### Form mutation
 
 ```text

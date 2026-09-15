@@ -1,15 +1,21 @@
-import { PetWithShelter } from '@/types/pets';
+'use client';
+
+import { useTranslations } from 'next-intl';
+import type { PetWithShelter } from '@/types/pets';
 import Image from 'next/image';
 import { PiPawPrintThin } from 'react-icons/pi';
-import { formatAge } from '@/shared/helpers/ageFormat';
 import ListingChip from '@/shared/components/UI/ListingChips';
-import { getTranslations } from 'next-intl/server';
 import SexIcon from '@UI/SexIcon';
-import { TbHomeShield } from 'react-icons/tb';
 
-export default async function PetCard({ pet }: { pet: PetWithShelter }) {
-    const translations = await getTranslations('pets');
-    const ageFormat = await formatAge(pet.age_months, 'short');
+export default function PetCard({ pet }: { pet: PetWithShelter }) {
+    const translations = useTranslations('pets');
+    const ageTranslations = useTranslations('PetAge');
+    const ageFormat =
+        pet.age_months < 12
+            ? ageTranslations('monthsShort', { count: pet.age_months })
+            : ageTranslations('yearsShort', {
+                  years: Math.floor(pet.age_months / 12),
+              });
 
     return (
         <article className="bg-white rounded-4xl shadow-my relative">

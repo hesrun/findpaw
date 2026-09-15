@@ -38,7 +38,14 @@
     "HomePage": {
         "heroTitle": "Find your missing pet or give a warm home to a <br></br><highlight>new companion</highlight>",
         "heroDescription": "Browse listings from verified shelters and pet owners, or report a lost pet in minutes — your neighborhood is looking too.",
-        "browsePets": "Browse pets"
+        "browsePets": "Browse pets",
+        "recentPetsTitle": "Recently added pets",
+        "allListings": "All",
+        "loadingPets": "Loading pets...",
+        "noPetsFound": "No pets found for this listing type.",
+        "recentSheltersTitle": "Recently added shelters",
+        "loadingShelters": "Loading shelters...",
+        "noSheltersFound": "No shelters found."
     },
     "roles": {
         "user": "User",

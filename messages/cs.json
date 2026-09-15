@@ -38,7 +38,14 @@
     "HomePage": {
         "heroTitle": "Najděte svého ztraceného mazlíčka nebo nabídněte domov novému <br></br><highlight>zvířecímu společníkovi</highlight>",
         "heroDescription": "Procházejte nabídky ověřených útulků a majitelů zvířat nebo během několika minut nahlaste ztraceného mazlíčka — vaše okolí také hledá.",
-        "browsePets": "Procházet mazlíčky"
+        "browsePets": "Procházet mazlíčky",
+        "recentPetsTitle": "Nedávno přidaní mazlíčci",
+        "allListings": "Vše",
+        "loadingPets": "Načítání mazlíčků...",
+        "noPetsFound": "Pro tento typ inzerátu nebyli nalezeni žádní mazlíčci.",
+        "recentSheltersTitle": "Nedávno přidané útulky",
+        "loadingShelters": "Načítání útulků...",
+        "noSheltersFound": "Nebyly nalezeny žádné útulky."
     },
     "roles": {
         "user": "Uživatel",

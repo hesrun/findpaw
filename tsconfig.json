@@ -25,7 +25,8 @@
             "@components/*": ["./src/shared/components/*"],
             "@UI/*": ["./src/shared/components/UI/*"],
             "@features/*": ["./src/features/*"],
-            "@supabase/*": ["./supabase/*"]
+            "@supabase/*": ["./supabase/*"],
+            "@types/*": ["./src/types/*"]
         }
     },
     "include": [

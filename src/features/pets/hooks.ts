@@ -7,31 +7,37 @@ import type { getPublicPets } from './queries';
 type PublicPetsResult = Awaited<ReturnType<typeof getPublicPets>>;
 
 function createPetsQueryString(filters: PetFilters) {
-	const params = new URLSearchParams();
+    const params = new URLSearchParams();
 
-	for (const [key, value] of Object.entries(filters)) {
-		if (value !== undefined && value !== '') {
-			params.set(key, String(value));
-		}
-	}
+    for (const [key, value] of Object.entries(filters)) {
+        if (value !== undefined && value !== '') {
+            params.set(key, String(value));
+        }
+    }
 
-	return params.toString();
+    return params.toString();
 }
 
-export function usePublicPets(filters: PetFilters = {}) {
-	return useQuery<PublicPetsResult>({
-		queryKey: ['pets', 'public', filters],
-		queryFn: async () => {
-			const queryString = createPetsQueryString(filters);
-			const response = await fetch(
-				queryString ? `/api/pets?${queryString}` : '/api/pets',
-			);
+export function usePublicPets(
+    filters: PetFilters = {},
+    initialData?: PublicPetsResult,
+) {
+    return useQuery<PublicPetsResult>({
+        queryKey: ['pets', 'public', filters],
+        initialData:
+            Object.keys(filters).length === 0 ? initialData : undefined,
+        staleTime: 30_000,
+        queryFn: async () => {
+            const queryString = createPetsQueryString(filters);
+            const response = await fetch(
+                queryString ? `/api/pets?${queryString}` : '/api/pets',
+            );
 
-			if (!response.ok) {
-				throw new Error('Failed to load public pets');
-			}
+            if (!response.ok) {
+                throw new Error('Failed to load public pets');
+            }
 
-			return response.json() as Promise<PublicPetsResult>;
-		},
-	});
+            return response.json() as Promise<PublicPetsResult>;
+        },
+    });
 }

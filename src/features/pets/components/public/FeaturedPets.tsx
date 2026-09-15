@@ -1,14 +1,95 @@
-import { PetWithShelter } from '@/types/pets';
-import PetCard from './PetCard';
+'use client';
 
-export default function FeaturedPets({ pets }: { pets: PetWithShelter[] }) {
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { LISTING_TYPES } from '../../constants';
+import type { PetFilters } from '../../schemas';
+import type { getPublicPets } from '../../queries';
+import { usePublicPets } from '../../hooks';
+import PetCard from './PetCard';
+import PetCardSkeleton from './PetCardSkeleton';
+import clsx from 'clsx';
+
+type PublicPetsResult = Awaited<ReturnType<typeof getPublicPets>>;
+
+const PAGE_SIZE = 8;
+const FILTER_BUTTON_BASE_CLASS =
+    'px-4 py-1 rounded-full shadow-my font-heading font-bold transition-colors duration-300 cursor-pointer';
+const FILTER_BUTTON_ACTIVE_CLASS = 'bg-accent text-white';
+const FILTER_BUTTON_INACTIVE_CLASS =
+    'bg-white text-accent hover:bg-accent hover:text-white';
+
+function getFilterButtonClass(isActive: boolean) {
+    return clsx(
+        FILTER_BUTTON_BASE_CLASS,
+        isActive ? FILTER_BUTTON_ACTIVE_CLASS : FILTER_BUTTON_INACTIVE_CLASS,
+    );
+}
+
+export default function FeaturedPets({
+    initialData,
+}: {
+    initialData: PublicPetsResult;
+}) {
+    const tHome = useTranslations('HomePage');
+    const tListingType = useTranslations('pets.listingType');
+    const [filters, setFilters] = useState<PetFilters>({});
+    const { data, isFetching } = usePublicPets(filters, initialData);
+    const pets = data?.data ?? [];
+
     return (
-        <ul className="grid grid-cols-4 gap-4">
-            {pets.map((pet) => (
-                <li key={pet.id}>
-                    <PetCard key={pet.id} pet={pet} />
-                </li>
-            ))}
-        </ul>
+        <section>
+            <div className="container">
+                <h2 className="text-accent font-heading font-bold text-3xl mt-12 mb-4">
+                    {tHome('recentPetsTitle')}
+                </h2>
+
+                <div className="flex flex-wrap gap-2 mb-6" role="tablist">
+                    <button
+                        type="button"
+                        aria-pressed={!filters.listing_type}
+                        className={getFilterButtonClass(!filters.listing_type)}
+                        onClick={() => setFilters({ pageSize: PAGE_SIZE })}
+                    >
+                        {tHome('allListings')}
+                    </button>
+                    {LISTING_TYPES.map(({ id }) => (
+                        <button
+                            key={id}
+                            type="button"
+                            aria-pressed={filters.listing_type === id}
+                            className={getFilterButtonClass(
+                                filters.listing_type === id,
+                            )}
+                            onClick={() =>
+                                setFilters({
+                                    listing_type: id,
+                                    pageSize: PAGE_SIZE,
+                                })
+                            }
+                        >
+                            {tListingType(id)}
+                        </button>
+                    ))}
+                </div>
+                {isFetching ? (
+                    <div className="grid grid-cols-4 gap-4">
+                        {Array.from({ length: PAGE_SIZE }).map((_, index) => (
+                            <PetCardSkeleton key={index} />
+                        ))}
+                    </div>
+                ) : pets.length > 0 ? (
+                    <ul className="grid grid-cols-4 gap-4">
+                        {pets.map((pet) => (
+                            <li key={pet.id}>
+                                <PetCard pet={pet} />
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>{tHome('noPetsFound')}</p>
+                )}
+            </div>
+        </section>
     );
 }

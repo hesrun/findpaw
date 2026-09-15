@@ -9,8 +9,11 @@ The shelters feature owns shelter profiles, shelter dashboard management, public
 - `src/features/shelters/queries.ts` - public and owner-scoped reads;
 - `src/features/shelters/actions.ts` - create, update, and delete server actions;
 - `src/features/shelters/schemas.ts` - runtime validation and inferred types;
-- `src/features/shelters/components` - dashboard UI;
+- `src/features/shelters/hooks.ts` - client-side public shelter queries;
+- `src/features/shelters/components` - public and dashboard UI;
 - `src/app/api/shelters` - HTTP adapters used by client-side fetching;
+- `src/features/landing/SheltersSection.tsx` - server-rendered landing data loader;
+- `src/features/shelters/components/public/FeaturedShelters.tsx` - public shelter listing;
 - `src/app/[locale]/dashboard/shelters` - dashboard routes.
 
 ## Domain Rules
@@ -24,7 +27,9 @@ The shelters feature owns shelter profiles, shelter dashboard management, public
 ## Access Patterns
 
 - Server-rendered dashboard pages call owner-scoped queries directly.
-- Public client-side discovery may use the shelter API route and feature query.
+- The landing page fetches the six most recently created shelters on the server and passes them as `initialData` for the first SEO-friendly render.
+- Public client-side shelter data uses `usePublicShelters` and the shelter API route, so later refreshes remain compatible with TanStack Query.
+- The current landing section does not expose sorting controls; ordering is fixed to newest first by `created_at`.
 - Forms use server actions with runtime validation.
 - Ownership and RLS checks are required for every mutation.
 
