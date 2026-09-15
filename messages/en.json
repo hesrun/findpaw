@@ -36,7 +36,9 @@
         }
     },
     "HomePage": {
-        "title": "Hello world!"
+        "heroTitle": "Find your missing pet or give a warm home to a <br></br><highlight>new companion</highlight>",
+        "heroDescription": "Browse listings from verified shelters and pet owners, or report a lost pet in minutes — your neighborhood is looking too.",
+        "browsePets": "Browse pets"
     },
     "roles": {
         "user": "User",

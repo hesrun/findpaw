@@ -1,4 +1,9 @@
 {
+    "header": {
+        "pets": "Mazlíčci",
+        "shelters": "Útulky",
+        "about": "O nás"
+    },
     "auth": {
         "btns": {
             "sign": "Přihlásit se",
@@ -31,13 +36,24 @@
         }
     },
     "HomePage": {
-        "title": "Ahoj světe!"
+        "heroTitle": "Najděte svého ztraceného mazlíčka nebo nabídněte domov novému <br></br><highlight>zvířecímu společníkovi</highlight>",
+        "heroDescription": "Procházejte nabídky ověřených útulků a majitelů zvířat nebo během několika minut nahlaste ztraceného mazlíčka — vaše okolí také hledá.",
+        "browsePets": "Procházet mazlíčky"
     },
     "roles": {
         "user": "Uživatel",
         "shelter": "Útulek",
-        "admin": "Admin",
+        "admin": "Administrátor",
         "clinic": "Klinika"
+    },
+    "global": {
+        "noPhoto": "Žádná fotografie",
+        "loading": "Načítání...",
+        "yes": "Ano",
+        "no": "Ne",
+        "close": "Zavřít",
+        "createdAt": "Vytvořeno",
+        "updatedAt": "Aktualizováno"
     },
     "sidebar": {
         "pets": "Moji mazlíčci",
@@ -86,29 +102,6 @@
                 "vaccinated": "Očkovaný",
                 "sterilized": "Sterilizovaný",
                 "specialNeeds": "Zvláštní potřeby"
-            },
-            "species": {
-                "dog": "Pes",
-                "cat": "Kočka",
-                "bird": "Pták",
-                "fish": "Ryba",
-                "rodent": "Hlodavec",
-                "ferret": "Fretka",
-                "rabbit": "Králík",
-                "reptile": "Plaz",
-                "horse": "Kůň",
-                "other": "Jiný"
-            },
-            "type": {
-                "lost": "Ztracený",
-                "found": "Nalezený",
-                "adoption": "Adopce",
-                "sale": "Prodej"
-            },
-            "sex": {
-                "male": "Samec",
-                "female": "Samice",
-                "unknown": "Neznámé"
             },
             "cardTitles": {
                 "general": "Obecné informace",
@@ -175,5 +168,40 @@
                 "updateError": "Při aktualizaci útulku došlo k chybě"
             }
         }
+    },
+    "modalLabels": {
+        "petDetails": "Detaily mazlíčka"
+    },
+    "pets": {
+        "species": {
+            "dog": "Pes",
+            "cat": "Kočka",
+            "bird": "Pták",
+            "fish": "Ryba",
+            "rodent": "Hlodavec",
+            "ferret": "Fretka",
+            "rabbit": "Králík",
+            "reptile": "Plaz",
+            "horse": "Kůň",
+            "other": "Jiné"
+        },
+        "listingType": {
+            "lost": "Ztracený",
+            "found": "Nalezený",
+            "adoption": "Adopce",
+            "sale": "Prodej"
+        },
+        "sex": {
+            "male": "Samec",
+            "female": "Samice",
+            "unknown": "Neznámé"
+        }
+    },
+    "PetAge": {
+        "months": "{count, plural, one {# měsíc} few {# měsíce} other {# měsíců}}",
+        "years": "{count, plural, one {# rok} few {# roky} other {# let}}",
+        "yearsAndMonths": "{years, plural, one {# rok} few {# roky} other {# let}} a {months, plural, one {# měsíc} few {# měsíce} other {# měsíců}}",
+        "monthsShort": "{count} měs.",
+        "yearsShort": "~{years} let"
     }
 }
