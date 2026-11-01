@@ -26,7 +26,7 @@ export default function SignIn() {
             const result = await signIn(formData);
 
             if (result?.error) {
-                toast.danger(result.error);
+                toast.danger(t(`errors.${result.error}`));
             } else {
                 toast.success(t('notifications.signInSuccess'));
                 router.push('/dashboard/pets');

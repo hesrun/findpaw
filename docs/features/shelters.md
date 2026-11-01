@@ -4,18 +4,6 @@
 
 The shelters feature owns shelter profiles, shelter dashboard management, public shelter discovery, contact information, and shelter image references.
 
-## Code Map
-
-- `src/features/shelters/queries.ts` - public and owner-scoped reads;
-- `src/features/shelters/actions.ts` - create, update, and delete server actions;
-- `src/features/shelters/schemas.ts` - runtime validation and inferred types;
-- `src/features/shelters/hooks.ts` - client-side public shelter queries;
-- `src/features/shelters/components` - public and dashboard UI;
-- `src/app/api/shelters` - HTTP adapters used by client-side fetching;
-- `src/features/landing/SheltersSection.tsx` - server-rendered landing data loader;
-- `src/features/shelters/components/public/FeaturedShelters.tsx` - public shelter listing;
-- `src/app/[locale]/dashboard/shelters` - dashboard routes.
-
 ## Domain Rules
 
 - A shelter profile has an owner.
@@ -33,11 +21,6 @@ The shelters feature owns shelter profiles, shelter dashboard management, public
 - Forms use server actions with runtime validation.
 - Ownership and RLS checks are required for every mutation.
 
-## Adding A Shelter Field
+## Decisions
 
-1. Add a new Supabase migration.
-2. Regenerate `database.types.ts`.
-3. Update the create and update schemas.
-4. Update actions, queries, forms, and translations.
-5. Review public exposure and RLS policies.
-6. Update this document if the field changes a domain rule.
+Record shelter-specific choices here (date, decision, why). Project-wide choices go to `docs/decisions.md`.

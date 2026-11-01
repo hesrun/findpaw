@@ -2,46 +2,61 @@
 
 import { redirect } from 'next/navigation';
 import { supabaseServer } from '@shared/lib/supabase/server';
+import { SignInSchema, SignUpSchema } from '@features/auth/schemas';
 
-export async function signIn(formData: FormData) {
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
+// Error values are `auth.errors.*` translation keys; raw Supabase messages are not exposed.
+export type AuthResult = {
+    error?: 'invalidData' | 'signInFailed' | 'signUpFailed';
+};
+
+export async function signIn(formData: FormData): Promise<AuthResult> {
+    const parsed = SignInSchema.safeParse({
+        email: formData.get('email'),
+        password: formData.get('password'),
+    });
+
+    if (!parsed.success) {
+        return { error: 'invalidData' };
+    }
 
     const supabase = await supabaseServer();
 
-    const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-    });
+    const { error } = await supabase.auth.signInWithPassword(parsed.data);
 
     if (error) {
-        return { error: error.message };
+        return { error: 'signInFailed' };
     }
 
     return {};
 }
 
-export async function signUp(formData: FormData) {
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const fullName = formData.get('userName') as string;
-    const role = formData.get('role') as string;
+export async function signUp(formData: FormData): Promise<AuthResult> {
+    const parsed = SignUpSchema.safeParse({
+        email: formData.get('email'),
+        password: formData.get('password'),
+        userName: formData.get('userName'),
+        role: formData.get('role'),
+    });
 
-    const ALLOWED_ROLES = ['user', 'shelter', 'clinic'];
-    const safeRole = ALLOWED_ROLES.includes(role) ? role : 'user';
+    if (!parsed.success) {
+        return { error: 'invalidData' };
+    }
 
+    const { email, password, userName, role } = parsed.data;
     const supabase = await supabaseServer();
 
+    // The role here is only a request: the database trigger enforces the allow-list.
     const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-            data: { full_name: fullName, role: safeRole },
+            data: { full_name: userName, role },
         },
     });
 
     if (error) {
-        return { error: error.message };
+        console.error('[signUp]', error.message);
+        return { error: 'signUpFailed' };
     }
 
     return {};

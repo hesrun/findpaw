@@ -1,13 +1,19 @@
-import getSupabaseWithUser from './auth';
+import { cache } from 'react';
+import { getCurrentUser } from './auth';
 
-export default async function getProfile() {
-    const { supabase, user } = await getSupabaseWithUser();
+// Memoized per request; returns null for anonymous visitors.
+const getProfile = cache(async () => {
+    const { supabase, user } = await getCurrentUser();
+
+    if (!user) return null;
 
     const { data: profile } = await supabase
         .from('profiles')
         .select(`*`)
-        .eq('id', user?.id)
-        .single();
+        .eq('id', user.id)
+        .maybeSingle();
 
     return profile;
-}
+});
+
+export default getProfile;

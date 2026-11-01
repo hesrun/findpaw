@@ -1,7 +1,0 @@
----
-description: 'Supabase schema, migrations, generated types, and RLS'
-globs: 'supabase/**/*,src/shared/lib/supabase/**/*'
-alwaysApply: false
----
-
-Read `docs/database.md` before editing. Use new timestamped migrations, never rewrite applied migrations, preserve RLS and ownership policies, and regenerate `supabase/database.types.ts` after schema changes.

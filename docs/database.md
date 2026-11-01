@@ -4,15 +4,9 @@
 
 Database schema changes are stored in timestamped files under `supabase/migrations`. `supabase/database.types.ts` is generated output and must not be hand-edited.
 
-## Migration Workflow
+## Migrations
 
-1. Create a new timestamped SQL migration.
-2. Add the schema change and its security policies.
-3. Apply it with `npm run migration:push`.
-4. Regenerate TypeScript types with `npm run gentypes`.
-5. Update affected queries, actions, and schemas.
-6. Verify owner, public-read, and unauthorized cases.
-7. Run lint, typecheck, and build.
+The step-by-step procedure is the `migration` skill (`.claude/skills/migration/SKILL.md`).
 
 Do not modify a migration that has already been applied to a shared or production database. Add a new migration instead.
 
@@ -25,6 +19,10 @@ For owner-scoped data:
 - select only rows the current user may see;
 - insert only when the owner matches the authenticated user;
 - update and delete only rows owned by the authenticated user.
+
+Never authorize from `user_metadata` / `raw_user_meta_data`: users can set it themselves at sign-up and through `auth.updateUser()`. Roles must come from a source users cannot write, such as `profiles.role` or `app_metadata`. `profiles.role` is set only by the sign-up trigger, which accepts `user`, `shelter`, or `clinic` from metadata and never `admin`; users cannot insert profiles or update the `role` column (column-level grants). `src/proxy.ts` reads the role from `profiles`.
+
+When adding related data, consider storage policies and delete behavior (`on delete cascade` / `set null`) together with the table.
 
 A server action or middleware check is not a replacement for RLS. Client-side checks are not security controls.
 

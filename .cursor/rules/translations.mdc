@@ -1,7 +1,0 @@
----
-description: 'Localization and translation files'
-globs: 'messages/*.json,src/i18n/**/*'
-alwaysApply: false
----
-
-Read `docs/i18n.md` before editing. Keep `en` and `cs` message trees synchronized and do not hardcode user-visible text in JSX.

@@ -1,18 +1,12 @@
-import { supabaseServer } from '@shared/lib/supabase/server';
+import { getCurrentUser } from '@shared/lib/supabase/auth';
+import getProfile from '@shared/lib/supabase/profile';
 
 export default async function SideBarAccount() {
-    const supabase = await supabaseServer();
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
+    const { user } = await getCurrentUser();
 
     if (!user) return null;
 
-    const { data } = await supabase
-        .from('profiles')
-        .select('full_name')
-        .eq('id', user?.id)
-        .single();
+    const data = await getProfile();
 
     return (
         <div className="mt-auto flex items-center gap-2 p-2">

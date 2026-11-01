@@ -109,13 +109,4 @@ API route handlers are thin adapters. They parse the HTTP request, call a featur
 
 ## Import Conventions
 
-Prefer the configured aliases:
-
-- `@/*` for `src/*`;
-- `@features/*` for feature modules;
-- `@shared/*` for shared infrastructure;
-- `@components/*` for shared components;
-- `@UI/*` for shared UI;
-- `@supabase/*` for generated database types and Supabase files.
-
-Avoid long relative imports such as `../../../../features/...`.
+Use the path aliases defined in `tsconfig.json` (`compilerOptions.paths`) instead of long relative imports such as `../../../../features/...`.

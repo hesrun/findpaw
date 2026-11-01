@@ -24,7 +24,10 @@
         "errors": {
             "emailInvalid": "Please enter a valid email address",
             "userNameInvalid": "Please enter a valid user name",
-            "passwordInvalid": "Password must be at least 8 characters"
+            "passwordInvalid": "Password must be at least 8 characters",
+            "invalidData": "Please check the form and try again",
+            "signInFailed": "Invalid email or password",
+            "signUpFailed": "Could not create the account. Please try again later"
         },
         "links": {
             "noAccount": "Don't have an account?",
@@ -208,7 +211,6 @@
         "months": "{count, plural, one {# month} other {# months}}",
         "years": "{count, plural, one {# year} other {# years}}",
         "yearsAndMonths": "{years, plural, one {# year} other {# years}} and {months, plural, one {# month} other {# months}}",
-
         "monthsShort": "{count, plural, one {#month} other {#months}}",
         "yearsShort": "~{years} years"
     }

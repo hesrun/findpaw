@@ -32,18 +32,14 @@ Copy `.env.example` to `.env.local` and fill in the values locally. Never commit
 | `npm run migration:push` | Apply pending Supabase migrations       |
 | `npm run gentypes`       | Regenerate `supabase/database.types.ts` |
 
-## Feature Workflow
+## Workflows
 
-1. Identify the domain feature under `src/features`.
-2. Read the relevant feature document in `docs/features`.
-3. Add or update the Zod schema for external input.
-4. Add server reads to `queries.ts` and browser mutations to `actions.ts`.
-5. Keep route handlers and route pages thin.
-6. Add or update translations in both `messages/en.json` and `messages/cs.json`.
-7. Add a database migration for schema changes; never edit an applied migration.
-8. Regenerate Supabase types after a schema change.
-9. Run the narrowest relevant check, then `npm run check` before sharing the change.
-10. Update documentation when architecture, security, database, or workflow contracts change.
+Step-by-step procedures are Claude Code skills:
+
+- new domain feature: `.claude/skills/new-feature/SKILL.md`;
+- schema, policy, or storage change: `.claude/skills/migration/SKILL.md`.
+
+Run the narrowest relevant check after an edit, then `npm run check` before sharing the change.
 
 ## Validation Boundaries
 

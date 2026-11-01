@@ -12,18 +12,26 @@ import {
 } from '@heroui/react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useTransition, type ReactNode } from 'react';
 import { signUp } from '@/features/auth/actions/actions';
+import type { SignUpRole } from '@features/auth/schemas';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { TbHomeShield } from 'react-icons/tb';
 import { BiClinic } from 'react-icons/bi';
 import clsx from 'clsx';
 
-const profileRoles = [
-    { value: 'user' as const, icon: <FaRegUserCircle /> },
-    { value: 'shelter' as const, icon: <TbHomeShield /> },
-    { value: 'clinic' as const, icon: <BiClinic /> },
-];
+// Keyed by the database role enum: adding or renaming a sign-up role
+// fails type checking until it has an icon here.
+const roleIcons = {
+    user: <FaRegUserCircle />,
+    shelter: <TbHomeShield />,
+    clinic: <BiClinic />,
+} satisfies Record<SignUpRole, ReactNode>;
+
+const profileRoles = (Object.keys(roleIcons) as SignUpRole[]).map((value) => ({
+    value,
+    icon: roleIcons[value],
+}));
 
 export default function SignUp() {
     const roles = useTranslations('roles');
@@ -38,7 +46,7 @@ export default function SignUp() {
             const result = await signUp(formData);
 
             if (result?.error) {
-                toast.danger(result.error);
+                toast.danger(t(`errors.${result.error}`));
             } else {
                 toast.success(t('notifications.signUpSuccess'));
                 router.push('/signin');

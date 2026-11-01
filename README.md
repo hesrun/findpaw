@@ -63,5 +63,6 @@ messages/      locale message catalogs
 - [Internationalization](docs/i18n.md)
 - [Pets feature](docs/features/pets.md)
 - [Shelters feature](docs/features/shelters.md)
+- [Decisions](docs/decisions.md)
 
-Before changing code, read `AGENTS.md` and the relevant document above. `CLAUDE.md`, `.github/copilot-instructions.md`, and `.cursor/rules/` provide agent-specific entry points to the same project rules.
+Before changing code, read `AGENTS.md` and the relevant document above. `CLAUDE.md` imports `AGENTS.md` for Claude Code; step-by-step procedures live in `.claude/skills/`.

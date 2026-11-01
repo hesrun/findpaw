@@ -24,7 +24,10 @@
         "errors": {
             "emailInvalid": "Zadejte prosím platnou e-mailovou adresu",
             "userNameInvalid": "Zadejte prosím platné uživatelské jméno",
-            "passwordInvalid": "Heslo musí mít alespoň 8 znaků"
+            "passwordInvalid": "Heslo musí mít alespoň 8 znaků",
+            "invalidData": "Zkontrolujte prosím formulář a zkuste to znovu",
+            "signInFailed": "Nesprávný e-mail nebo heslo",
+            "signUpFailed": "Účet se nepodařilo vytvořit. Zkuste to prosím později"
         },
         "links": {
             "noAccount": "Nemáte účet?",

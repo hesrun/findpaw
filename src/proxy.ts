@@ -18,6 +18,7 @@ const ROLE_RESTRICTED_ROUTES: Array<{
 export async function proxy(request: NextRequest) {
     const {
         response: supabaseResponse,
+        supabase,
         isAuthenticated,
         claims,
     } = await updateSession(request);
@@ -65,15 +66,20 @@ export async function proxy(request: NextRequest) {
     }
 
     // Role-based route protection
-    if (isAuthenticated) {
-        const userRole = claims?.user_metadata?.role as string | undefined;
-        const restricted = ROLE_RESTRICTED_ROUTES.find((r) =>
-            pathnameWithoutLocale.startsWith(r.path),
-        );
-        if (
-            restricted &&
-            (!userRole || !restricted.allowedRoles.includes(userRole))
-        ) {
+    // Role comes from profiles.role (not user-writable), never from user_metadata.
+    const restricted = isAuthenticated
+        ? ROLE_RESTRICTED_ROUTES.find((r) =>
+              pathnameWithoutLocale.startsWith(r.path),
+          )
+        : undefined;
+    if (restricted) {
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('role')
+            .eq('id', claims?.sub ?? '')
+            .maybeSingle();
+        const userRole = profile?.role;
+        if (!userRole || !restricted.allowedRoles.includes(userRole)) {
             const fallback = restricted.redirectTo ?? '/dashboard';
             const url = new URL(`/${locale}${fallback}`, request.url);
             const redirectResponse = NextResponse.redirect(url);

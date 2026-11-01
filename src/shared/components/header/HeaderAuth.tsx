@@ -1,14 +1,11 @@
 import { buttonVariants, Link } from '@heroui/react';
 import { getTranslations } from 'next-intl/server';
-import { supabaseServer } from '@shared/lib/supabase/server';
+import { getCurrentUser } from '@shared/lib/supabase/auth';
 import SignOutButton from './SignOutButton';
 
 export default async function HeaderAuth() {
     const t = await getTranslations('auth');
-    const supabase = await supabaseServer();
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
+    const { user } = await getCurrentUser();
 
     if (user) {
         return (

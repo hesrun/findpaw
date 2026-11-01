@@ -37,12 +37,12 @@ export async function updateSession(request: NextRequest) {
 
         return {
             response: supabaseResponse,
+            supabase,
             isAuthenticated: !!data?.claims,
             claims: data?.claims ?? null,
             isError: false,
         };
     } catch (error) {
-        alert('asgsadfgsdfgsd');
         console.warn(
             '[Middleware Supabase Connection Error]:',
             error instanceof Error ? error.message : error,
@@ -50,6 +50,7 @@ export async function updateSession(request: NextRequest) {
 
         return {
             response: supabaseResponse,
+            supabase,
             isAuthenticated: false,
             claims: null,
             isError: true,

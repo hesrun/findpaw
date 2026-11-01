@@ -4,16 +4,6 @@
 
 The pets feature owns pet listings, public discovery, owner dashboard management, filters, pagination, and pet image references.
 
-## Code Map
-
-- `src/features/pets/queries.ts` - public and owner-scoped reads;
-- `src/features/pets/actions.ts` - create, update, and delete server actions;
-- `src/features/pets/schemas.ts` - runtime input validation and inferred filter/input types;
-- `src/features/pets/hooks.ts` - client-side public listing queries;
-- `src/features/pets/components` - public and dashboard UI;
-- `src/app/api/pets` - HTTP adapters used by client-side fetching;
-- `src/app/[locale]/dashboard/pets` - dashboard routes.
-
 ## Domain Rules
 
 - A pet listing has an owner.
@@ -31,12 +21,6 @@ The pets feature owns pet listings, public discovery, owner dashboard management
 - Forms use server actions.
 - Every mutation validates external input and relies on server-side authorization plus RLS.
 
-## Adding A Pet Field
+## Decisions
 
-1. Update the Supabase migration.
-2. Regenerate `database.types.ts`.
-3. Update the relevant Zod schemas.
-4. Update actions, query selections, and UI forms.
-5. Add translations in both locales.
-6. Check public visibility and owner policies.
-7. Update this document if the domain rule changed.
+Record pet-specific choices here (date, decision, why). Project-wide choices go to `docs/decisions.md`.
