@@ -3,6 +3,8 @@
 import { useTranslations } from 'next-intl';
 import type { getPublicShelters } from '../../queries';
 import { usePublicShelters } from '../../hooks';
+import ShelterCard from './ShelterCard';
+import ShelterCardSkeleton from './ShelterCardSkeleton';
 
 type PublicSheltersResult = Awaited<ReturnType<typeof getPublicShelters>>;
 
@@ -28,18 +30,20 @@ export default function FeaturedShelters({
                 </h2>
 
                 {isFetching ? (
-                    <p>{t('loadingShelters')}</p>
+                    <div
+                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+                        aria-busy="true"
+                        aria-label={t('loadingShelters')}
+                    >
+                        {Array.from({ length: PAGE_SIZE }).map((_, index) => (
+                            <ShelterCardSkeleton key={index} />
+                        ))}
+                    </div>
                 ) : shelters.length > 0 ? (
-                    <ul className="grid grid-cols-3 gap-4">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {shelters.map((shelter) => (
                             <li key={shelter.id}>
-                                <article className="shelter-card">
-                                    <h3>{shelter.name}</h3>
-                                    {shelter.city && <p>{shelter.city}</p>}
-                                    {shelter.description && (
-                                        <p>{shelter.description}</p>
-                                    )}
-                                </article>
+                                <ShelterCard shelter={shelter} />
                             </li>
                         ))}
                     </ul>

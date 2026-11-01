@@ -50,6 +50,11 @@
         "loadingShelters": "Načítání útulků...",
         "noSheltersFound": "Nebyly nalezeny žádné útulky."
     },
+    "shelterCard": {
+        "call": "Zavolat {phone}",
+        "email": "Napsat e-mail na {email}",
+        "website": "Otevřít web"
+    },
     "roles": {
         "user": "Uživatel",
         "shelter": "Útulek",
@@ -162,6 +167,9 @@
                 "city": "Město",
                 "address": "Adresa",
                 "photos": "Fotografie"
+            },
+            "errors": {
+                "websiteInvalid": "Zadejte odkaz začínající na http:// nebo https://"
             },
             "cardTitles": {
                 "general": "Obecné informace",

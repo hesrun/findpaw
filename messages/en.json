@@ -50,6 +50,11 @@
         "loadingShelters": "Loading shelters...",
         "noSheltersFound": "No shelters found."
     },
+    "shelterCard": {
+        "call": "Call {phone}",
+        "email": "Email {email}",
+        "website": "Open website"
+    },
     "roles": {
         "user": "User",
         "shelter": "Shelter",
@@ -162,6 +167,9 @@
                 "city": "City",
                 "address": "Address",
                 "photos": "Photos"
+            },
+            "errors": {
+                "websiteInvalid": "Enter a link starting with http:// or https://"
             },
             "cardTitles": {
                 "general": "General information",

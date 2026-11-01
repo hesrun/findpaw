@@ -19,6 +19,7 @@ import {
 import DashboardCard from '@shared/components/UI/DashboardCard';
 import { createShelter, updateShelter } from '@features/shelters/actions';
 import { LuBuilding2, LuCamera, LuContact, LuMapPin } from 'react-icons/lu';
+import { isHttpUrl } from '@shared/lib/url';
 import { Database } from '@supabase/database.types';
 
 type Shelter = Database['public']['Tables']['shelters']['Row'];
@@ -124,6 +125,11 @@ export default function ShelterForm({
                             name="website"
                             variant="secondary"
                             defaultValue={initialData?.website ?? ''}
+                            validate={(value) =>
+                                value && !isHttpUrl(value)
+                                    ? t('errors.websiteInvalid')
+                                    : null
+                            }
                         >
                             <Label>{t('fields.website')}</Label>
                             <Input placeholder="https://" />
