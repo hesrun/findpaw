@@ -32,6 +32,17 @@ Step-by-step procedures live in Claude Code skills, not in `docs/`:
 - Keep shared code in `src/shared` only when it is genuinely reusable across domains.
 - Prefer configured path aliases such as `@features/*` and `@shared/*` over long relative imports.
 
+## Components
+
+- Logic always goes into hooks: URL or state syncing, debouncing, derived lists, event handlers with rules, data loading. A component body is hook calls, a few derived values, and `return`. ESLint `max-statements` (10, `.tsx` only) warns when a component or one of its handlers grows past that; extract a hook instead of raising the limit.
+- No logic inside JSX: multi-line arrow handlers in `onClick`/`onChange`, ternary chains, and `.filter().map()` with conditions go into a hook or a named function above `return`. The linter cannot see this (all JSX is one statement), so it relies on this rule and review.
+- One hook per concern. A shared resource has one owning hook, and thinner hooks build on it: only `useCatalogUrl` writes the catalog URL, while `useCatalogSort` and `useActiveFilterChips` use it. Reference: `src/features/pets/components/public/catalog/hooks/`.
+- Long markup is fine. Do not split JSX into subcomponents on your own initiative. Split when the user asks, when the same markup repeats (make a generic component with props, like `PillGroup` / `OptionSelect`), or when a part needs its own state.
+- Never define a component inside another component, and do not use `renderX()` helpers for JSX blocks; extract a real component instead.
+- Hook locations: React Query fetching stays in the feature `hooks.ts`; UI hooks for one widget live in `components/<audience>/<widget>/hooks/`; hooks reusable across domains go to `src/shared/hooks/`. Search `src/shared/hooks` before writing a new one.
+- A widget split into several components shares its state through one context provider at the widget root (see `components/public/catalog/CatalogFiltersContext.tsx`). State that belongs in the URL stays in the URL. Do not add a global store (Zustand or similar) without recording the decision in `docs/decisions.md`.
+- React Compiler is enabled: do not add `useMemo`/`useCallback`/`memo` for performance.
+
 ## Security And Data
 
 - Validate `FormData`, URL parameters, JSON bodies, and external data on the server with the existing Zod schemas.

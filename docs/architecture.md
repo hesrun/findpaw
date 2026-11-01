@@ -95,7 +95,7 @@ Client filter form
   -> RLS
 ```
 
-The URL is the only filter state. Every result page is server-rendered, shareable, and indexable. The client component holds only debounced text input and the pending state. The pet catalog (`/pets`) uses this pattern.
+The URL is the only filter state. Every result page is server-rendered, shareable, and indexable. The client component holds only debounced text input and the pending state. The pet catalog (`/pets`) uses this pattern: `components/public/catalog/hooks/useCatalogUrl.ts` is the only code that reads and writes the catalog query string, and `CatalogFiltersContext` shares that one instance with the sidebar, mobile drawer, toolbar, chips, and results wrapper.
 
 ### Form mutation
 

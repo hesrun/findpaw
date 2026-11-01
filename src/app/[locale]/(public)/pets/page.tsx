@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
-import PetFilters from '@features/pets/components/public/PetFilters';
+import PetCatalogShell from '@features/pets/components/public/catalog/PetCatalogShell';
 import PetsCatalog from '@features/pets/components/public/PetsCatalog';
 import PetsCatalogSkeleton from '@features/pets/components/public/PetsCatalogSkeleton';
 import {
@@ -49,14 +49,14 @@ export default async function PetsPage({
                 {t('title')}
             </h1>
             <p className="text-muted mb-6">{t('description')}</p>
-            <PetFilters>
+            <PetCatalogShell>
                 <Suspense
                     key={JSON.stringify(filters)}
                     fallback={<PetsCatalogSkeleton />}
                 >
                     <PetsCatalog filters={filters} />
                 </Suspense>
-            </PetFilters>
+            </PetCatalogShell>
         </main>
     );
 }

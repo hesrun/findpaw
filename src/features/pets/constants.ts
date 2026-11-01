@@ -59,3 +59,67 @@ export const PET_AGE_GROUP_MONTHS = {
     adult: { min: 12, max: 96 },
     senior: { min: 96, max: null },
 } satisfies Record<PetAgeGroup, { min: number; max: number | null }>;
+
+// Public catalog (/pets) filter UI. Every key below is a URL query parameter
+// read by the catalog page through PetFiltersSchema.
+
+// Select value meaning "no filter" for "All ..." options.
+export const CATALOG_ALL_OPTION = 'all';
+
+// Typing in text filters updates the URL after this pause.
+export const CATALOG_TEXT_DEBOUNCE_MS = 400;
+
+// Sort choices shown to users, mapped to the sortBy/ascending URL parameters.
+export const CATALOG_SORT_OPTIONS = {
+    newest: { sortBy: 'created_at', ascending: false },
+    oldest: { sortBy: 'created_at', ascending: true },
+    priceAsc: { sortBy: 'price', ascending: true },
+    priceDesc: { sortBy: 'price', ascending: false },
+    youngest: { sortBy: 'age_months', ascending: true },
+    oldestPet: { sortBy: 'age_months', ascending: false },
+} satisfies Record<
+    string,
+    { sortBy: (typeof PET_SORT_FIELDS)[number]; ascending: boolean }
+>;
+export type CatalogSortKey = keyof typeof CATALOG_SORT_OPTIONS;
+export const CATALOG_SORT_KEYS = Object.keys(
+    CATALOG_SORT_OPTIONS,
+) as CatalogSortKey[];
+// Matches the server default (created_at, descending), so it is not written to the URL.
+export const CATALOG_DEFAULT_SORT: CatalogSortKey = 'newest';
+
+// Filters edited as free text (debounced).
+export const CATALOG_TEXT_FILTER_KEYS = [
+    'q',
+    'city',
+    'breed',
+    'min_price',
+    'max_price',
+] as const;
+export type CatalogTextKey = (typeof CATALOG_TEXT_FILTER_KEYS)[number];
+
+// Price only applies to this listing type; leaving it clears the price range.
+export const CATALOG_PRICED_LISTING_TYPE =
+    'sale' satisfies Enums<'pet_listing_type'>;
+export const CATALOG_PRICE_KEYS = [
+    'min_price',
+    'max_price',
+] as const satisfies readonly CatalogTextKey[];
+
+// Yes/no filters and their translation keys in petsPage.filters.
+export const CATALOG_FLAG_FILTER_KEYS = [
+    'from_shelter',
+    'vaccinated',
+    'sterilized',
+] as const;
+export type CatalogFlagKey = (typeof CATALOG_FLAG_FILTER_KEYS)[number];
+export const CATALOG_FLAG_LABEL_KEYS = {
+    from_shelter: 'fromShelter',
+    vaccinated: 'vaccinated',
+    sterilized: 'sterilized',
+} as const satisfies Record<CatalogFlagKey, string>;
+
+// "unknown" is a data-entry fallback, not something people search for.
+export const SEX_FILTER_OPTIONS = SEX_OPTIONS.filter(
+    ({ id }) => id !== 'unknown',
+);

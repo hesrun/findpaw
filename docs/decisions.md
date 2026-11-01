@@ -14,6 +14,10 @@ Browser mutations go through server actions. Internal GET API routes exist only 
 
 `/pets` reads its filters from `searchParams` and calls `getPublicPets` in a Server Component. The filter form only rewrites the query string. Unlike the landing sections, every filter combination is a separate URL that must render with content for sharing and SEO, so a client cache would duplicate state that the URL already holds. The `/api/pets` route and `usePublicPets` remain for the landing section.
 
+## Catalog filter UI: one URL hook and one context, no Zustand
+
+The catalog filter UI is split into small components (`src/features/pets/components/public/catalog/`). Filters, search, and sort all write the same query string, so one hook (`useCatalogUrl`) owns every URL write: separate writers would drop text that is typed but not yet debounced when another control navigates first. One context at the widget root shares that hook instance. A Zustand store was rejected: the URL is already the single source of filter state, and a store would be a second copy to keep in sync with back/forward navigation and server rendering. Zustand can still be considered for truly global client state (for example favorites) with its own entry here.
+
 ## Next.js 16 `proxy.ts`
 
 Locale routing and early auth/role redirects live in `src/proxy.ts` (the Next.js 16 replacement for `middleware.ts`). Redirects there are UX only; RLS and server-side checks remain the security boundary.
