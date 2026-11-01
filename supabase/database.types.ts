@@ -20,6 +20,8 @@ export type Database = {
           age_months: number
           breed: string | null
           city: string | null
+          close_reason: Database["public"]["Enums"]["pet_close_reason"] | null
+          closed_at: string | null
           created_at: string | null
           description: string | null
           id: string
@@ -42,6 +44,8 @@ export type Database = {
           age_months: number
           breed?: string | null
           city?: string | null
+          close_reason?: Database["public"]["Enums"]["pet_close_reason"] | null
+          closed_at?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
@@ -64,6 +68,8 @@ export type Database = {
           age_months?: number
           breed?: string | null
           city?: string | null
+          close_reason?: Database["public"]["Enums"]["pet_close_reason"] | null
+          closed_at?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
@@ -189,6 +195,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      pet_close_reason: "reunited" | "adopted" | "sold" | "withdrawn"
       pet_listing_type: "lost" | "found" | "adoption" | "sale"
       pet_sex: "male" | "female" | "unknown"
       pet_species:
@@ -202,7 +209,7 @@ export type Database = {
         | "reptile"
         | "horse"
         | "other"
-      pet_status: "active" | "closed"
+      pet_status: "active" | "closed" | "reserved" | "hidden"
       user_role: "user" | "shelter" | "admin" | "clinic"
     }
     CompositeTypes: {
@@ -331,6 +338,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      pet_close_reason: ["reunited", "adopted", "sold", "withdrawn"],
       pet_listing_type: ["lost", "found", "adoption", "sale"],
       pet_sex: ["male", "female", "unknown"],
       pet_species: [
@@ -345,7 +353,7 @@ export const Constants = {
         "horse",
         "other",
       ],
-      pet_status: ["active", "closed"],
+      pet_status: ["active", "closed", "reserved", "hidden"],
       user_role: ["user", "shelter", "admin", "clinic"],
     },
   },

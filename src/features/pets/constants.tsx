@@ -25,3 +25,12 @@ export const SEX_OPTIONS: { id: Enums<'pet_sex'> }[] = [
     { id: 'female' },
     { id: 'unknown' },
 ] as const;
+
+// Close reasons that make sense for each listing type.
+// Mirrors the pets_close_reason_matches_listing_type check in the database.
+export const CLOSE_REASONS_BY_LISTING_TYPE = {
+    lost: ['reunited', 'withdrawn'],
+    found: ['reunited', 'adopted', 'withdrawn'],
+    adoption: ['adopted', 'withdrawn'],
+    sale: ['sold', 'withdrawn'],
+} satisfies Record<Enums<'pet_listing_type'>, Enums<'pet_close_reason'>[]>;

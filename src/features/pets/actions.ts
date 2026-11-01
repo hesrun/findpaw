@@ -3,7 +3,11 @@
 import { Enums } from '@supabase/database.types';
 import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { revalidatePath } from 'next/cache';
-import { PetCreateSchema, PetUpdateSchema } from './schemas';
+import {
+    PetCreateSchema,
+    PetStatusChangeSchema,
+    PetUpdateSchema,
+} from './schemas';
 
 export async function createPet(formData: FormData) {
     const { supabase, user } = await getSupabaseWithUser();
@@ -68,7 +72,6 @@ export async function createPet(formData: FormData) {
         is_special_needs: data.is_special_needs ?? false,
         is_sterilized: data.is_sterilized ?? false,
         is_vaccinated: data.is_vaccinated ?? false,
-        status: undefined,
     });
 
     if (error) throw error;
@@ -128,7 +131,6 @@ export async function updatePet(petId: string, formData: FormData) {
         is_special_needs: formData.get('is_special_needs') === 'on',
         is_sterilized: formData.get('is_sterilized') === 'on',
         is_vaccinated: formData.get('is_vaccinated') === 'on',
-        status: formData.get('status'),
     };
 
     const parsed = PetUpdateSchema.safeParse(raw);
@@ -159,13 +161,43 @@ export async function updatePet(petId: string, formData: FormData) {
             is_special_needs: data.is_special_needs ?? false,
             is_sterilized: data.is_sterilized ?? false,
             is_vaccinated: data.is_vaccinated ?? false,
-            status: (data as any).status ?? undefined,
             shelter_id: data.shelter_id ?? null,
         })
         .eq('id', petId)
         .eq('owner_id', user.id);
 
     if (error) throw error;
+
+    revalidatePath('/dashboard/pets');
+    return { success: true };
+}
+
+// Status changes go through this action only; the edit form never sends a status.
+// closed_at is set by a database trigger, and the database checks that the
+// close reason fits the listing type.
+export async function changePetStatus(petId: string, formData: FormData) {
+    const parsed = PetStatusChangeSchema.safeParse({
+        status: formData.get('status'),
+        close_reason: formData.get('close_reason'),
+    });
+
+    if (!parsed.success) {
+        return { success: false, error: 'invalidStatus' as const };
+    }
+
+    const { supabase, user } = await getSupabaseWithUser();
+    const { status, close_reason } = parsed.data;
+
+    const { error } = await supabase
+        .from('pets')
+        .update({ status, close_reason: close_reason ?? null })
+        .eq('id', petId)
+        .eq('owner_id', user.id);
+
+    if (error) {
+        console.error('[changePetStatus]', error.message);
+        return { success: false, error: 'statusChangeError' as const };
+    }
 
     revalidatePath('/dashboard/pets');
     return { success: true };

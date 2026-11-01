@@ -50,11 +50,6 @@
         "loadingShelters": "Načítání útulků...",
         "noSheltersFound": "Nebyly nalezeny žádné útulky."
     },
-    "shelterCard": {
-        "call": "Zavolat {phone}",
-        "email": "Napsat e-mail na {email}",
-        "website": "Otevřít web"
-    },
     "roles": {
         "user": "Uživatel",
         "shelter": "Útulek",
@@ -90,7 +85,14 @@
                 "delete": "Smazat mazlíčka",
                 "deleting": "Mazání...",
                 "edit": "Upravit mazlíčka",
-                "back": "Zpět"
+                "back": "Zpět",
+                "reserve": "Označit jako rezervované",
+                "unreserve": "Zrušit rezervaci",
+                "hide": "Skrýt",
+                "publish": "Zveřejnit",
+                "reopen": "Znovu otevřít",
+                "closeListing": "Uzavřít inzerát",
+                "cancel": "Zrušit"
             },
             "emptyState": {
                 "title": "Zatím žádní mazlíčci",
@@ -132,11 +134,19 @@
                 "deleteSuccess": "Mazlíček byl úspěšně smazán",
                 "deleteError": "Při mazání mazlíčka došlo k chybě",
                 "updateSuccess": "Mazlíček byl úspěšně aktualizován",
-                "updateError": "Při aktualizaci mazlíčka došlo k chybě"
+                "updateError": "Při aktualizaci mazlíčka došlo k chybě",
+                "statusChangeSuccess": "Stav inzerátu byl aktualizován",
+                "statusChangeError": "Stav inzerátu se nepodařilo změnit"
             },
             "status": {
                 "active": "Aktivní",
-                "inactive": "Neaktivní"
+                "reserved": "Rezervováno",
+                "hidden": "Skryto",
+                "closed": "Uzavřeno"
+            },
+            "closeModal": {
+                "title": "Uzavřít inzerát",
+                "description": "Jak to dopadlo? Inzerát zmizí z veřejné nabídky."
             }
         },
         "myShelters": {
@@ -213,7 +223,14 @@
             "male": "Samec",
             "female": "Samice",
             "unknown": "Neznámé"
-        }
+        },
+        "closeReason": {
+            "reunited": "Vrátil se domů",
+            "adopted": "Našel nový domov",
+            "sold": "Prodáno",
+            "withdrawn": "Staženo bez výsledku"
+        },
+        "reserved": "Rezervováno"
     },
     "PetAge": {
         "months": "{count, plural, one {# měsíc} few {# měsíce} other {# měsíců}}",

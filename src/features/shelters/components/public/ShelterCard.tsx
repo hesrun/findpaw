@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import type { ReactNode } from 'react';
 import type { Shelter } from '@/types/shelters';
 import Image from 'next/image';
 import { isHttpUrl } from '@shared/lib/url';
@@ -10,16 +10,50 @@ import {
     PiPhone,
 } from 'react-icons/pi';
 
-const CONTACT_LINK_CLASS =
-    'w-9 h-9 rounded-full bg-accent/10 text-accent flex items-center justify-center text-lg transition-colors duration-300 hover:bg-accent hover:text-white';
+function ContactLink({
+    href,
+    icon,
+    children,
+    external,
+}: {
+    href: string;
+    icon: ReactNode;
+    children: ReactNode;
+    external?: boolean;
+}) {
+    return (
+        <li>
+            <a
+                href={href}
+                {...(external && {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                })}
+                className="group flex items-center gap-2 text-sm min-w-0"
+            >
+                <span
+                    className="w-8 h-8 shrink-0 rounded-full bg-accent/10 text-accent flex items-center justify-center text-base transition-colors duration-300 group-hover:bg-accent group-hover:text-white"
+                    aria-hidden
+                >
+                    {icon}
+                </span>
+                <span className="truncate transition-colors duration-300 group-hover:text-accent">
+                    {children}
+                </span>
+            </a>
+        </li>
+    );
+}
 
 export default function ShelterCard({ shelter }: { shelter: Shelter }) {
-    const t = useTranslations('shelterCard');
     const location = [shelter.city, shelter.address].filter(Boolean).join(', ');
     const image = shelter.img_url?.[0];
     // Also checked on save; re-checked here for rows written outside the form.
     const website =
         shelter.website && isHttpUrl(shelter.website) ? shelter.website : null;
+    const websiteLabel = website
+        ? new URL(website).hostname.replace(/^www\./, '')
+        : null;
 
     return (
         <article className="bg-white rounded-4xl shadow-my h-full flex flex-col">
@@ -51,40 +85,29 @@ export default function ShelterCard({ shelter }: { shelter: Shelter }) {
                         {shelter.description}
                     </p>
                 )}
-                <div className="flex gap-2 mt-auto pt-2">
+                <ul className="flex flex-col gap-2 mt-auto pt-2">
                     {shelter.phone && (
-                        <a
+                        <ContactLink
                             href={`tel:${shelter.phone}`}
-                            className={CONTACT_LINK_CLASS}
-                            aria-label={t('call', { phone: shelter.phone })}
-                            title={shelter.phone}
+                            icon={<PiPhone />}
                         >
-                            <PiPhone aria-hidden />
-                        </a>
+                            {shelter.phone}
+                        </ContactLink>
                     )}
                     {shelter.email && (
-                        <a
+                        <ContactLink
                             href={`mailto:${shelter.email}`}
-                            className={CONTACT_LINK_CLASS}
-                            aria-label={t('email', { email: shelter.email })}
-                            title={shelter.email}
+                            icon={<PiEnvelopeSimple />}
                         >
-                            <PiEnvelopeSimple aria-hidden />
-                        </a>
+                            {shelter.email}
+                        </ContactLink>
                     )}
                     {website && (
-                        <a
-                            href={website}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={CONTACT_LINK_CLASS}
-                            aria-label={t('website')}
-                            title={website}
-                        >
-                            <PiGlobe aria-hidden />
-                        </a>
+                        <ContactLink href={website} icon={<PiGlobe />} external>
+                            {websiteLabel}
+                        </ContactLink>
                     )}
-                </div>
+                </ul>
             </div>
         </article>
     );

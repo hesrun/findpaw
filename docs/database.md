@@ -26,6 +26,8 @@ When adding related data, consider storage policies and delete behavior (`on del
 
 A server action or middleware check is not a replacement for RLS. Client-side checks are not security controls.
 
+Permissive policies combine with OR. When a table has both an owner policy and a public policy, the server client (which carries the user's session) returns the owner's private rows too, so public queries must filter visibility explicitly (for example `status in ('active', 'reserved')` for pets) instead of relying on the public policy alone.
+
 ## Supabase Clients
 
 - Use the server client for Server Components and server-side queries.

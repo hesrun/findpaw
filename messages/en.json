@@ -50,11 +50,6 @@
         "loadingShelters": "Loading shelters...",
         "noSheltersFound": "No shelters found."
     },
-    "shelterCard": {
-        "call": "Call {phone}",
-        "email": "Email {email}",
-        "website": "Open website"
-    },
     "roles": {
         "user": "User",
         "shelter": "Shelter",
@@ -90,7 +85,14 @@
                 "delete": "Delete pet",
                 "deleting": "Deleting...",
                 "edit": "Edit pet",
-                "back": "Back"
+                "back": "Back",
+                "reserve": "Mark as reserved",
+                "unreserve": "Remove reservation",
+                "hide": "Hide",
+                "publish": "Publish",
+                "reopen": "Reopen",
+                "closeListing": "Close listing",
+                "cancel": "Cancel"
             },
             "emptyState": {
                 "title": "No pets yet",
@@ -132,11 +134,19 @@
                 "deleteSuccess": "Pet deleted successfully",
                 "deleteError": "An error occurred while deleting the pet",
                 "updateSuccess": "Pet updated successfully",
-                "updateError": "An error occurred while updating the pet"
+                "updateError": "An error occurred while updating the pet",
+                "statusChangeSuccess": "Listing status updated",
+                "statusChangeError": "Could not update the listing status"
             },
             "status": {
                 "active": "Active",
-                "inactive": "Inactive"
+                "reserved": "Reserved",
+                "hidden": "Hidden",
+                "closed": "Closed"
+            },
+            "closeModal": {
+                "title": "Close listing",
+                "description": "How did it end? The listing will be removed from public listings."
             }
         },
         "myShelters": {
@@ -213,7 +223,14 @@
             "male": "Male",
             "female": "Female",
             "unknown": "Unknown"
-        }
+        },
+        "closeReason": {
+            "reunited": "Returned home",
+            "adopted": "Found a new home",
+            "sold": "Sold",
+            "withdrawn": "Withdrawn without result"
+        },
+        "reserved": "Reserved"
     },
     "PetAge": {
         "months": "{count, plural, one {# month} other {# months}}",

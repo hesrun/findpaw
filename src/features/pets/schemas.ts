@@ -1,17 +1,11 @@
 import { z } from 'zod';
 import { Constants } from '@supabase/database.types';
 
-const PetListingTypeSchema = z.enum(
-    Constants.public.Enums.pet_listing_type as unknown as [string, ...string[]],
-);
-
-const PetSexSchema = z.enum(
-    Constants.public.Enums.pet_sex as unknown as [string, ...string[]],
-);
-
-const PetSpeciesSchema = z.enum(
-    Constants.public.Enums.pet_species as unknown as [string, ...string[]],
-);
+const PetListingTypeSchema = z.enum(Constants.public.Enums.pet_listing_type);
+const PetSexSchema = z.enum(Constants.public.Enums.pet_sex);
+const PetSpeciesSchema = z.enum(Constants.public.Enums.pet_species);
+const PetStatusSchema = z.enum(Constants.public.Enums.pet_status);
+const PetCloseReasonSchema = z.enum(Constants.public.Enums.pet_close_reason);
 
 const optionalNumber = (schema: z.ZodNumber) =>
     z.preprocess(
@@ -45,6 +39,21 @@ export const PetCreateSchema = z.object({
 
 export const PetUpdateSchema = PetCreateSchema.partial();
 
+// A closed listing needs a reason; other statuses must not carry one.
+// The database enforces the same rule and checks the reason against the listing type.
+export const PetStatusChangeSchema = z
+    .object({
+        status: PetStatusSchema,
+        close_reason: z.preprocess(
+            (value) => (value === '' ? null : value),
+            PetCloseReasonSchema.nullish(),
+        ),
+    })
+    .refine(
+        ({ status, close_reason }) => (status === 'closed') === !!close_reason,
+        { message: 'invalidCloseReason', path: ['close_reason'] },
+    );
+
 export const PetFiltersSchema = z.object({
     page: optionalNumber(z.number().int().positive()),
     pageSize: optionalNumber(z.number().int().positive()),
@@ -65,3 +74,4 @@ export const PetFiltersSchema = z.object({
 export type PetCreate = z.infer<typeof PetCreateSchema>;
 export type PetUpdate = z.infer<typeof PetUpdateSchema>;
 export type PetFilters = z.infer<typeof PetFiltersSchema>;
+export type PetStatusChange = z.infer<typeof PetStatusChangeSchema>;

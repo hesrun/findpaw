@@ -2,9 +2,13 @@ import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { supabaseServer } from '@shared/lib/supabase/server';
 import { z } from 'zod';
 import { PetFiltersSchema } from './schemas';
-import type { Database } from '@supabase/database.types';
+import type { Database, Enums } from '@supabase/database.types';
 
 export type PetFilters = z.infer<typeof PetFiltersSchema>;
+
+// The owner's own RLS policy is OR-ed with the public one, so a signed-in owner
+// would otherwise see their hidden/closed pets in public listings.
+const PUBLIC_PET_STATUSES = ['active', 'reserved'] satisfies Enums<'pet_status'>[];
 
 export async function getMyPet(petId: string) {
     const { supabase, user } = await getSupabaseWithUser();
@@ -45,6 +49,7 @@ export async function getPublicPet(petId: string) {
         .from('pets')
         .select('*, shelter:shelters(id, name, city, address, phone, email)')
         .eq('id', petId)
+        .in('status', PUBLIC_PET_STATUSES)
         .single();
 
     if (error) throw error;
@@ -65,6 +70,7 @@ export async function getPublicPets(filters: unknown) {
         .select('*, shelter:shelters(id, name, city, address, phone, email)', {
             count: 'exact',
         })
+        .in('status', PUBLIC_PET_STATUSES)
         .order(parsed.sortBy || 'created_at', {
             ascending: parsed.ascending ?? false,
         });

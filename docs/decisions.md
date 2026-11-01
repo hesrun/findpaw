@@ -22,6 +22,10 @@ Users pick `user`, `shelter`, or `clinic` at sign-up. The choice travels in user
 
 `getCurrentUser` (`src/shared/lib/supabase/auth.ts`) and `getProfile` (`src/shared/lib/supabase/profile.ts`) are wrapped in React `cache()`, so every Server Component in one render shares a single `auth.getUser()` call and a single `profiles` query. The cache lives for one request only, so it never serves stale or another user's data. Server components call these helpers instead of querying Supabase themselves. A client-side user provider is not used yet because almost no client components need the user; when they do, the layout should pass `getProfile()` output into it rather than use the browser Supabase client.
 
+## Pet status and close reason are separate fields
+
+`pets.status` (`active`, `reserved`, `hidden`, `closed`) says what the listing is doing now and drives public visibility; `close_reason` says how a closed listing ended. One long status enum (`adopted`, `sold`, ...) would make the public policy and the UI harder and allow nonsense combinations; with two fields a single check ties the reason to the listing type. `closed_at` is set by a trigger so the date cannot be faked from the client and is ready for "found a home in N days" statistics. `hidden` deliberately has no reason: it is a pause, not an outcome. Moderation (`pending`) is not modelled yet.
+
 ## Open: styling approach
 
 HeroUI v3 is built on Tailwind CSS v4 (`@heroui/styles` has `tailwindcss` as a peer dependency), so Tailwind cannot be removed while HeroUI components are in use. The preferred direction is SCSS modules on the existing CSS custom-property tokens in `src/css/styles.css`, possibly replacing HeroUI with React Aria Components over time. Not yet decided.

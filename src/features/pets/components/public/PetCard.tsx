@@ -1,5 +1,6 @@
 'use client';
 
+import { Chip } from '@heroui/react';
 import { useTranslations } from 'next-intl';
 import type { PetWithShelter } from '@/types/pets';
 import Image from 'next/image';
@@ -45,11 +46,18 @@ export default function PetCard({ pet }: { pet: PetWithShelter }) {
                 <div className="absolute top-4 right-4">
                     {pet.sex && <SexIcon sex={pet.sex} />}
                 </div>
-                <div className="absolute top-4 left-4">
+                <div className="absolute top-4 left-4 flex flex-col gap-1">
                     <ListingChip
                         label={translations(`listingType.${pet.listing_type}`)}
                         type={pet.listing_type}
                     />
+                    {pet.status === 'reserved' && (
+                        <Chip className="max-w-max bg-amber-500">
+                            <Chip.Label className="uppercase text-white">
+                                {translations('reserved')}
+                            </Chip.Label>
+                        </Chip>
+                    )}
                 </div>
             </a>
         </article>

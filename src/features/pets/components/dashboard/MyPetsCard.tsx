@@ -1,11 +1,21 @@
 import { Avatar, Card, Chip } from '@heroui/react';
+import type { ComponentProps } from 'react';
 import { TbCurrencyKroneCzech, TbHomeShield } from 'react-icons/tb';
 import MyPetActionsDropdown from './MyPetActionsDropdown';
 import { FaLocationDot } from 'react-icons/fa6';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import type { Enums } from '@supabase/database.types';
 import type { PetWithShelter } from '@/types/pets';
 import SpeciesChip from '@UI/SpeciesChip';
 import ListingChip from '@UI/ListingChips';
+import { formatDate } from '@shared/helpers/dateFormat';
+
+const STATUS_COLORS = {
+    active: 'success',
+    reserved: 'warning',
+    hidden: 'default',
+    closed: 'danger',
+} satisfies Record<Enums<'pet_status'>, ComponentProps<typeof Chip>['color']>;
 
 export default function MyPetsCard({
     pet,
@@ -19,6 +29,8 @@ export default function MyPetsCard({
     const t = useTranslations('dashboard.myPets');
     const tSpecies = useTranslations('pets.species');
     const tListingType = useTranslations('pets.listingType');
+    const tReason = useTranslations('pets.closeReason');
+    const locale = useLocale() as 'en' | 'cs';
 
     const handleCardClick = () => {
         setSelectedPet(pet);
@@ -87,17 +99,26 @@ export default function MyPetsCard({
                         </>
                     )}
                 </div>
-                <Chip
-                    className="max-w-max ml-auto"
-                    variant="primary"
-                    color={pet.status === 'active' ? 'success' : 'danger'}
-                >
-                    <Chip.Label className="uppercase text-white">
-                        {t(`status.${pet.status as string}` as unknown as any)}
-                    </Chip.Label>
-                </Chip>
+                <div className="ml-auto flex flex-col items-end gap-1">
+                    <Chip
+                        className="max-w-max"
+                        variant="primary"
+                        color={STATUS_COLORS[pet.status]}
+                    >
+                        <Chip.Label className="uppercase text-white">
+                            {t(`status.${pet.status}`)}
+                        </Chip.Label>
+                    </Chip>
+                    {pet.status === 'closed' && pet.close_reason && (
+                        <span className="text-xs text-muted text-right">
+                            {tReason(pet.close_reason)}
+                            {pet.closed_at &&
+                                ` · ${formatDate(pet.closed_at, { locale, format: 'short' })}`}
+                        </span>
+                    )}
+                </div>
                 <div onClick={(e) => e.stopPropagation()}>
-                    <MyPetActionsDropdown petId={pet.id} />
+                    <MyPetActionsDropdown pet={pet} />
                 </div>
             </div>
         </Card>
