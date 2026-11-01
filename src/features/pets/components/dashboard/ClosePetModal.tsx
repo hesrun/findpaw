@@ -35,7 +35,7 @@ export default function ClosePetModal({
                 >
                     <Modal.CloseTrigger />
                     <Modal.Header>
-                        <Modal.Heading className="font-heading font-bold text-xl text-accent">
+                        <Modal.Heading className="font-display font-extrabold text-xl">
                             {t('closeModal.title')}
                         </Modal.Heading>
                     </Modal.Header>

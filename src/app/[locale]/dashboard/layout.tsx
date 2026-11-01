@@ -6,9 +6,10 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex-1 grid grid-cols-[250px_1fr]">
+        // Lavender backdrop (same as auth) so white cards and the sidebar stand out.
+        <div className="flex-1 grid grid-cols-[260px_1fr] gap-6 p-6 bg-hero">
             <Sidebar />
-            <main className="p-4 relative">{children}</main>
+            <main className="relative min-w-0">{children}</main>
         </div>
     );
 }

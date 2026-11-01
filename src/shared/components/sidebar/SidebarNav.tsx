@@ -51,10 +51,10 @@ export default function SideBarNav({ role }: { role: UserRole }) {
                     <li key={item.name}>
                         <Link
                             href={item.href}
-                            className={`flex font-heading items-center gap-2 font-bold p-2 rounded ${
+                            className={`flex font-heading items-center gap-2.5 font-bold px-3 py-2.5 rounded-full transition-colors ${
                                 pathname.includes(item.href)
-                                    ? 'bg-accent text-white'
-                                    : 'text-accent hover:bg-accent hover:text-white'
+                                    ? 'bg-soft text-accent'
+                                    : 'text-muted hover:bg-soft hover:text-accent'
                             }`}
                         >
                             <span className="text-xl">{item.icon}</span>

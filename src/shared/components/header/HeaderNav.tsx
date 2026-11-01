@@ -30,10 +30,11 @@ export default function HeaderNav() {
                     key={item.key}
                     href={item.href}
                     className={clsx(
-                        'transition-colors font-medium font-nunito',
-                        pathname === item.href
-                            ? 'font-semibold text-accent'
-                            : 'text-black hover:text-accent',
+                        'transition-colors font-bold',
+                        // pathname carries the locale prefix (/en/pets)
+                        pathname.endsWith(item.href)
+                            ? 'text-foreground'
+                            : 'text-muted hover:text-accent',
                     )}
                 >
                     {t(item.key)}

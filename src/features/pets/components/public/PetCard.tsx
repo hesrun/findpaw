@@ -1,12 +1,11 @@
 'use client';
 
-import { Chip } from '@heroui/react';
 import { useTranslations } from 'next-intl';
 import type { PetWithShelter } from '@/types/pets';
 import Image from 'next/image';
-import { PiPawPrintThin } from 'react-icons/pi';
+import { LuMapPin } from 'react-icons/lu';
 import ListingChip from '@/shared/components/UI/ListingChips';
-import SexIcon from '@UI/SexIcon';
+import PetPlaceholder from '@UI/PetPlaceholder';
 
 export default function PetCard({ pet }: { pet: PetWithShelter }) {
     const translations = useTranslations('pets');
@@ -17,49 +16,62 @@ export default function PetCard({ pet }: { pet: PetWithShelter }) {
             : ageTranslations('yearsShort', {
                   years: Math.floor(pet.age_months / 12),
               });
+    const image = pet.image_url?.[0];
+    const facts = [
+        pet.breed,
+        pet.age_months != null ? ageFormat : null,
+        pet.sex && pet.sex !== 'unknown' ? translations(`sex.${pet.sex}`) : null,
+    ].filter(Boolean);
 
     return (
-        <article className="bg-white rounded-4xl shadow-my relative">
-            <a href="">
-                <div className="aspect-2/1 bg-background/50 flex items-center justify-center overflow-hidden rounded-t-4xl">
-                    {!pet.image_url || pet.image_url.length === 0 ? (
-                        <PiPawPrintThin className="m-auto text-accent/50 text-[4rem]" />
-                    ) : (
-                        <Image
-                            src={pet.image_url[0]}
-                            alt=""
-                            width={300}
-                            height={300}
-                        />
-                    )}
-                </div>
-                <div className="p-4">
-                    <div className="flex items-center justify-between">
-                        <h3 className="font-heading font-bold">{pet.name}</h3>
-                    </div>
-                    <div className="text-muted flex gap-2 flex-wrap text-sm">
-                        {pet.breed && <span>{pet.breed}</span>}
-                        {pet.age_months && <span>{ageFormat}</span>}
-                        {pet.city && <span>{pet.city}</span>}
-                    </div>
-                </div>
-                <div className="absolute top-4 right-4">
-                    {pet.sex && <SexIcon sex={pet.sex} />}
-                </div>
-                <div className="absolute top-4 left-4 flex flex-col gap-1">
+        <article className="h-full bg-surface rounded-card shadow-my ring-1 ring-border flex flex-col">
+            <div className="relative m-2 mb-0 aspect-4/3 overflow-hidden rounded-media">
+                {image ? (
+                    <Image
+                        src={image}
+                        alt={pet.name ?? ''}
+                        fill
+                        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                        className="object-cover"
+                    />
+                ) : (
+                    <PetPlaceholder species={pet.species} />
+                )}
+                <div className="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5">
                     <ListingChip
                         label={translations(`listingType.${pet.listing_type}`)}
                         type={pet.listing_type}
                     />
                     {pet.status === 'reserved' && (
-                        <Chip className="max-w-max bg-amber-500">
-                            <Chip.Label className="uppercase text-white">
-                                {translations('reserved')}
-                            </Chip.Label>
-                        </Chip>
+                        <span className="inline-flex items-center rounded-full bg-[#ffe2c4] px-3 py-1 text-xs font-extrabold text-[#7c2d12]">
+                            {translations('reserved')}
+                        </span>
                     )}
                 </div>
-            </a>
+            </div>
+            <div className="grid gap-1.5 px-4 pt-3 pb-4">
+                <h3 className="font-display font-extrabold text-xl leading-tight">
+                    {pet.name}
+                </h3>
+                {facts.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                        {facts.map((fact) => (
+                            <span
+                                key={fact}
+                                className="rounded-full bg-soft px-2.5 py-0.5 text-[13px] font-bold text-muted"
+                            >
+                                {fact}
+                            </span>
+                        ))}
+                    </div>
+                )}
+                {pet.city && (
+                    <p className="flex items-center gap-1 text-[13px] text-muted">
+                        <LuMapPin aria-hidden className="size-3.5" />
+                        {pet.city}
+                    </p>
+                )}
+            </div>
         </article>
     );
 }

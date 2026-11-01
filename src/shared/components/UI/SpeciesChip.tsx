@@ -1,7 +1,7 @@
-import { Chip } from '@heroui/react';
 import { Enums } from '@supabase/database.types';
-import clsx from 'clsx';
+import PetPlaceholder from './PetPlaceholder';
 
+// Soft pill with the species face, matching the listing chips.
 export default function SpeciesChip({
     label,
     type,
@@ -9,22 +9,14 @@ export default function SpeciesChip({
     label: string;
     type?: Enums<'pet_species'>;
 }) {
-    const styles = {
-        dog: 'bg-yellow-500',
-        cat: 'bg-purple-500',
-        bird: 'bg-blue-500',
-        fish: 'bg-teal-500',
-        rodent: 'bg-pink-500',
-        ferret: 'bg-indigo-500',
-        rabbit: 'bg-orange-500',
-        reptile: 'bg-green-500',
-        horse: 'bg-red-500',
-        other: 'bg-gray-500',
-    };
-
     return (
-        <Chip className={clsx('max-w-max', type && styles[type])}>
-            <Chip.Label className="uppercase text-white">{label}</Chip.Label>
-        </Chip>
+        <span className="inline-flex max-w-max items-center gap-1.5 rounded-full bg-soft py-0.5 pr-3 pl-0.5 text-xs font-extrabold text-muted">
+            {type && (
+                <span className="size-5 overflow-hidden rounded-full">
+                    <PetPlaceholder species={type} round />
+                </span>
+            )}
+            {label}
+        </span>
     );
 }

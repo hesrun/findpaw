@@ -39,9 +39,11 @@
         }
     },
     "HomePage": {
-        "heroTitle": "Najděte svého ztraceného mazlíčka nebo nabídněte domov novému <br></br><highlight>zvířecímu společníkovi</highlight>",
+        "heroTitle": "Najděte svého ztraceného mazlíčka <cat></cat> nebo nabídněte domov novému zvířecímu společníkovi <dog></dog>",
         "heroDescription": "Procházejte nabídky ověřených útulků a majitelů zvířat nebo během několika minut nahlaste ztraceného mazlíčka — vaše okolí také hledá.",
         "browsePets": "Procházet mazlíčky",
+        "reportLost": "Nahlásit ztracené zvíře",
+        "petsWaiting": "<b>{count, plural, one {# mazlíček čeká} few {# mazlíčci čekají} other {# mazlíčků čeká}}</b> na nový domov",
         "recentPetsTitle": "Nedávno přidaní mazlíčci",
         "allListings": "Vše",
         "loadingPets": "Načítání mazlíčků...",

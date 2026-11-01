@@ -14,7 +14,7 @@ export default async function SheltersPage({
     return (
         <>
             <div className="mb-6">
-                <h1 className="font-heading font-bold text-accent text-3xl mb-2">
+                <h1 className="font-display font-extrabold text-3xl mb-2">
                     {t('titles.title')}
                 </h1>
                 <p className="text-muted">{t('titles.description')}</p>

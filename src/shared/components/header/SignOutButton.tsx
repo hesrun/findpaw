@@ -5,7 +5,7 @@ import { signOut } from '@/features/auth/actions/actions';
 
 export default function SignOutButton({ label }: { label: string }) {
     return (
-        <Button size="sm" onPress={() => signOut()}>
+        <Button size="sm" variant="outline" onPress={() => signOut()}>
             {label}
         </Button>
     );

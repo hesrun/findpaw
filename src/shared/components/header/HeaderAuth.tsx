@@ -19,7 +19,7 @@ export default async function HeaderAuth() {
         <div className="flex items-center gap-2">
             <Link
                 href="/signin"
-                className={buttonVariants({ size: 'sm', variant: 'secondary' })}
+                className={buttonVariants({ size: 'sm', variant: 'outline' })}
             >
                 {t('btns.sign')}
             </Link>

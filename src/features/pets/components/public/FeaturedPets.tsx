@@ -14,10 +14,11 @@ type PublicPetsResult = Awaited<ReturnType<typeof getPublicPets>>;
 
 const PAGE_SIZE = 8;
 const FILTER_BUTTON_BASE_CLASS =
-    'px-4 py-1 rounded-full shadow-my font-heading font-bold transition-colors duration-300 cursor-pointer';
-const FILTER_BUTTON_ACTIVE_CLASS = 'bg-accent text-white';
+    'px-4 py-1.5 rounded-full text-sm font-heading font-bold transition-colors duration-300 cursor-pointer';
+const FILTER_BUTTON_ACTIVE_CLASS =
+    'bg-accent text-accent-foreground shadow-[0_8px_18px_-8px_color-mix(in_oklch,var(--accent)_55%,transparent)]';
 const FILTER_BUTTON_INACTIVE_CLASS =
-    'bg-white text-accent hover:bg-accent hover:text-white';
+    'bg-surface text-muted ring-1 ring-border hover:text-accent';
 
 function getFilterButtonClass(isActive: boolean) {
     return clsx(
@@ -40,7 +41,7 @@ export default function FeaturedPets({
     return (
         <section>
             <div className="container">
-                <h2 className="text-accent font-heading font-bold text-3xl mt-12 mb-4">
+                <h2 className="font-display font-extrabold text-3xl mt-14 mb-4">
                     {tHome('recentPetsTitle')}
                 </h2>
 

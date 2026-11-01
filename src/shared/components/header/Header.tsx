@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Header() {
     return (
-        <header className="bg-white text-black p-6 shadow-[0_4px_30px_0px_rgba(0,0,0,0.03)]">
+        <header className="bg-surface text-foreground p-6 border-b border-border">
             <div className="container flex justify-between items-center">
                 <Link href="/">
                     <Image

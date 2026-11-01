@@ -25,7 +25,7 @@ export default function FeaturedShelters({
     return (
         <section>
             <div className="container">
-                <h2 className="text-accent font-heading font-bold text-3xl mt-12 mb-4">
+                <h2 className="font-display font-extrabold text-3xl mt-14 mb-4">
                     {t('recentSheltersTitle')}
                 </h2>
 

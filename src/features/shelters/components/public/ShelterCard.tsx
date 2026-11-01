@@ -2,13 +2,8 @@ import type { ReactNode } from 'react';
 import type { Shelter } from '@/types/shelters';
 import Image from 'next/image';
 import { isHttpUrl } from '@shared/lib/url';
-import {
-    PiEnvelopeSimple,
-    PiGlobe,
-    PiMapPin,
-    PiPawPrintThin,
-    PiPhone,
-} from 'react-icons/pi';
+import { PiEnvelopeSimple, PiGlobe, PiMapPin, PiPhone } from 'react-icons/pi';
+import { ShelterPlaceholder } from '@UI/PetPlaceholder';
 
 function ContactLink({
     href,
@@ -32,7 +27,7 @@ function ContactLink({
                 className="group flex items-center gap-2 text-sm min-w-0"
             >
                 <span
-                    className="w-8 h-8 shrink-0 rounded-full bg-accent/10 text-accent flex items-center justify-center text-base transition-colors duration-300 group-hover:bg-accent group-hover:text-white"
+                    className="w-8 h-8 shrink-0 rounded-full bg-soft text-accent flex items-center justify-center text-base transition-colors duration-300 group-hover:bg-accent group-hover:text-white"
                     aria-hidden
                 >
                     {icon}
@@ -56,8 +51,8 @@ export default function ShelterCard({ shelter }: { shelter: Shelter }) {
         : null;
 
     return (
-        <article className="bg-white rounded-4xl shadow-my h-full flex flex-col">
-            <div className="relative aspect-2/1 bg-background/50 flex items-center justify-center overflow-hidden rounded-t-4xl">
+        <article className="bg-surface rounded-card shadow-my ring-1 ring-border h-full flex flex-col">
+            <div className="relative m-2 mb-0 aspect-2/1 overflow-hidden rounded-media">
                 {image ? (
                     <Image
                         src={image}
@@ -67,11 +62,11 @@ export default function ShelterCard({ shelter }: { shelter: Shelter }) {
                         className="object-cover"
                     />
                 ) : (
-                    <PiPawPrintThin className="m-auto text-accent/50 text-[4rem]" />
+                    <ShelterPlaceholder />
                 )}
             </div>
-            <div className="p-4 flex flex-col gap-2 grow">
-                <h3 className="font-heading font-bold text-lg">
+            <div className="px-4 pt-3 pb-4 flex flex-col gap-2 grow">
+                <h3 className="font-display font-extrabold text-xl leading-tight">
                     {shelter.name}
                 </h3>
                 {location && (

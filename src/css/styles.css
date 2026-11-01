@@ -11,16 +11,44 @@
     .button {
         @apply font-heading font-bold;
     }
+    /* Soft Playful: buttons cast a soft shadow in their own accent hue. */
+    .button--primary {
+        box-shadow: 0 10px 22px -8px
+            color-mix(in oklch, var(--accent) 55%, transparent);
+    }
+    .button--secondary,
+    .button--outline {
+        box-shadow: 0 10px 22px -12px
+            color-mix(in oklch, var(--accent) 22%, transparent);
+    }
+    @media (hover: hover) {
+        .button--primary:hover {
+            box-shadow: 0 14px 28px -8px
+                color-mix(in oklch, var(--accent) 60%, transparent);
+        }
+    }
     .chip {
         @apply font-heading font-bold;
+    }
+    /* Cards must stand out on the white page: soft lilac shadow + hairline ring. */
+    .card {
+        border-radius: var(--radius-card);
+        box-shadow:
+            var(--shadow-my),
+            0 0 0 1px var(--border);
     }
 }
 @layer utilities {
 }
 
 @theme inline {
+    /* UI labels, buttons, chips */
     --font-heading: var(--font-nunito);
+    /* Page and card titles */
+    --font-display: var(--font-baloo), var(--font-nunito);
     --color-background: var(--background);
+    --color-hero: var(--hero);
+    --color-soft: var(--soft);
     --color-foreground: var(--foreground);
     --color-accent: var(--accent);
     --color-accent-foreground: var(--accent-foreground);
@@ -45,7 +73,11 @@
     --color-field-placeholder: var(--field-placeholder);
     --color-separator: var(--separator);
     --radius-field: var(--field-radius);
-    --shadow-my: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
+    --radius-card: 28px;
+    --radius-media: 22px;
+    --shadow-my:
+        0 1px 2px 0 rgba(76, 29, 149, 0.05),
+        0 12px 32px -8px rgba(76, 29, 149, 0.14);
 }
 
 :root,
@@ -56,13 +88,16 @@
     /* Theme Colors (Light Mode) */
     --accent: oklch(50.02% 0.2215 291.12);
     --accent-foreground: oklch(99.11% 0 0);
-    --background: oklch(97.02% 0.02 291.12);
-    --border: oklch(90% 0.02 291.12);
+    /* Soft Playful: white page, lavender reserved for hero, fields and pills */
+    --background: oklch(100% 0 0);
+    --hero: #f7f3fe;
+    --soft: #f2edfd;
+    --border: #ece6f7;
     --danger: oklch(65.32% 0.2421 30.22);
     --danger-foreground: oklch(99.11% 0 0);
     --default: oklch(94% 0.02 291.12);
     --default-foreground: oklch(21.03% 0.0059 291.12);
-    --field-background: oklch(100% 0.01 291.12);
+    --field-background: #f7f3fe;
     --field-border: transparent;
     --field-foreground: oklch(21.03% 0.02 291.12);
     --field-placeholder: oklch(55.17% 0.04 291.12);
@@ -74,10 +109,10 @@
     --scrollbar: oklch(87.1% 0.02 291.12);
     --segment: oklch(100% 0.02 291.12);
     --segment-foreground: oklch(21.03% 0.02 291.12);
-    --separator: oklch(92% 0.02 291.12);
+    --separator: #ece6f7;
     --success: oklch(73.29% 0.2012 155.29);
     --success-foreground: oklch(21.03% 0.0059 155.29);
-    --surface: oklch(100% 0.01 291.12);
+    --surface: oklch(100% 0 0);
     --surface-foreground: oklch(21.03% 0.02 291.12);
     --surface-secondary: oklch(95.24% 0.016 291.12);
     --surface-secondary-foreground: oklch(21.03% 0.02 291.12);
@@ -88,12 +123,11 @@
 
     /* Border Radius */
     --radius: 0.5rem;
-    --field-radius: 0.75rem;
+    --field-radius: 1rem;
 
-    /* Font Family */
-    /* Make sure to load Inter font in your app */
-    --font-sans: var(--font-geist);
-    --font-nunito: var(--font-nunito);
+    /* Font Family: Nunito for text, Baloo 2 (--font-baloo) for display titles.
+       --font-nunito / --font-baloo come from next/font classes on <html>. */
+    --font-sans: var(--font-nunito);
 }
 
 .dark,

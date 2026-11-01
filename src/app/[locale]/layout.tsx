@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { Nunito } from 'next/font/google';
+import { Baloo_2, Nunito } from 'next/font/google';
 import type { Metadata } from 'next';
 import '@/css/styles.css';
 import Header from '@components/header/Header';
@@ -19,6 +19,12 @@ const nunito = Nunito({
     variable: '--font-nunito',
 });
 
+// Display titles only. No Cyrillic in Baloo 2; the site ships en/cs (latin-ext).
+const baloo = Baloo_2({
+    subsets: ['latin', 'latin-ext'],
+    variable: '--font-baloo',
+});
+
 export default async function RootLayout({
     children,
     params,
@@ -32,10 +38,8 @@ export default async function RootLayout({
         notFound();
     }
     return (
-        <html lang={locale}>
-            <body
-                className={`${nunito.variable} flex flex-col min-h-screen bg-background text-foreground`}
-            >
+        <html lang={locale} className={`${nunito.variable} ${baloo.variable}`}>
+            <body className="flex flex-col min-h-screen bg-background text-foreground">
                 <TanstackProvider>
                     <NextIntlClientProvider locale={locale}>
                         <Toast.Provider />

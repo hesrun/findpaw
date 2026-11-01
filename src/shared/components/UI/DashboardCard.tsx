@@ -1,4 +1,5 @@
 import { Card } from '@heroui/react';
+import clsx from 'clsx';
 
 interface DashboardCardProps {
     title?: string;
@@ -12,14 +13,18 @@ export default function DashboardCard({
     description,
     icon,
     children,
+    className,
     ...props
 }: DashboardCardProps & React.HTMLAttributes<HTMLDivElement>) {
     return (
-        <Card {...props}>
+        <Card
+            {...props}
+            className={clsx('rounded-card shadow-my ring-1 ring-border', className)}
+        >
             <Card.Header>
                 {title && (
-                    <Card.Title className="flex items-center gap-2 text-lg">
-                        {icon}
+                    <Card.Title className="flex items-center gap-2 font-display font-extrabold text-lg">
+                        {icon && <span className="text-accent">{icon}</span>}
                         {title}
                     </Card.Title>
                 )}

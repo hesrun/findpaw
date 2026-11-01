@@ -39,9 +39,11 @@
         }
     },
     "HomePage": {
-        "heroTitle": "Find your missing pet or give a warm home to a <br></br><highlight>new companion</highlight>",
+        "heroTitle": "Find your missing pet <cat></cat> or give a warm home to a new companion <dog></dog>",
         "heroDescription": "Browse listings from verified shelters and pet owners, or report a lost pet in minutes — your neighborhood is looking too.",
         "browsePets": "Browse pets",
+        "reportLost": "Report a lost pet",
+        "petsWaiting": "<b>{count, plural, one {# pet is} other {# pets are}}</b> waiting for a home",
         "recentPetsTitle": "Recently added pets",
         "allListings": "All",
         "loadingPets": "Loading pets...",

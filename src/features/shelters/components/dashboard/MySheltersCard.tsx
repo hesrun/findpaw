@@ -5,12 +5,13 @@ import { Database } from '@supabase/database.types';
 import { FaLocationDot } from 'react-icons/fa6';
 import { LuGlobe, LuMail, LuPhone } from 'react-icons/lu';
 import MyShelterActionsDropdown from './MyShelterActionsDropdown';
+import { ShelterPlaceholder } from '@UI/PetPlaceholder';
 
 type Shelter = Database['public']['Tables']['shelters']['Row'];
 
 export default function MySheltersCard({ shelter }: { shelter: Shelter }) {
     return (
-        <Card className="hover:bg-muted/10 transition-colors">
+        <Card className="rounded-[24px] shadow-my ring-1 ring-border hover:ring-accent/40 transition-shadow">
             <div className="grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center">
                 <Avatar size="lg">
                     {shelter.img_url?.length ? (
@@ -19,12 +20,14 @@ export default function MySheltersCard({ shelter }: { shelter: Shelter }) {
                             src={shelter.img_url[0]}
                         />
                     ) : (
-                        <Avatar.Fallback className="bg-accent text-white">
-                            {shelter.name ? shelter.name[0] : 'S'}
+                        <Avatar.Fallback className="overflow-hidden p-0">
+                            <ShelterPlaceholder />
                         </Avatar.Fallback>
                     )}
                 </Avatar>
-                <div className="font-medium text-accent">{shelter.name}</div>
+                <div className="font-display font-extrabold text-lg">
+                    {shelter.name}
+                </div>
                 <div className="flex items-center gap-2">
                     <FaLocationDot className="text-green-500 text-xl" />
                     <span className="font-medium text-sm">

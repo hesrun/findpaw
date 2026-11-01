@@ -43,6 +43,19 @@ export async function getMyPets(page: number, pageSize: number = 20) {
     return { data, total: count ?? 0 };
 }
 
+// Count only (HEAD request, no rows) for the landing hero.
+export async function countPublicPets() {
+    const supabase = await supabaseServer();
+    const { count, error } = await supabase
+        .from('pets')
+        .select('id', { count: 'exact', head: true })
+        .in('status', PUBLIC_PET_STATUSES);
+
+    if (error) throw error;
+
+    return count ?? 0;
+}
+
 export async function getPublicPet(petId: string) {
     const supabase = await supabaseServer();
     const { data, error } = await supabase

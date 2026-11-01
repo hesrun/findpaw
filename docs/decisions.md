@@ -26,6 +26,10 @@ Users pick `user`, `shelter`, or `clinic` at sign-up. The choice travels in user
 
 `pets.status` (`active`, `reserved`, `hidden`, `closed`) says what the listing is doing now and drives public visibility; `close_reason` says how a closed listing ended. One long status enum (`adopted`, `sold`, ...) would make the public policy and the UI harder and allow nonsense combinations; with two fields a single check ties the reason to the listing type. `closed_at` is set by a trigger so the date cannot be faked from the client and is ready for "found a home in N days" statistics. `hidden` deliberately has no reason: it is a pause, not an outcome. Moderation (`pending`) is not modelled yet.
 
+## Visual language: Soft Playful
+
+Chosen from four concepts (2026-11). White page; lavender (`--hero`, `--soft`) only for the hero, form fields and pills. Baloo 2 (`font-display`) for page and card titles, Nunito for text and UI (`font-heading` stays Nunito because buttons and chips use it). The accent stays the HeroUI token `oklch(50% 0.22 291)`; primary and outline buttons cast a soft shadow in the accent hue (`.button--*` overrides in `styles.css`). Cards use `rounded-card` (28px) with media inset at `rounded-media` (22px). Chips are sentence case with a colored dot, not all-caps fills. Listings without a photo show flat, low-contrast species faces from `PetPlaceholder` instead of a generic icon. The dark theme block in `styles.css` is not wired to anything and was not redesigned.
+
 ## Open: styling approach
 
 HeroUI v3 is built on Tailwind CSS v4 (`@heroui/styles` has `tailwindcss` as a peer dependency), so Tailwind cannot be removed while HeroUI components are in use. The preferred direction is SCSS modules on the existing CSS custom-property tokens in `src/css/styles.css`, possibly replacing HeroUI with React Aria Components over time. Not yet decided.

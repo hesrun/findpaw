@@ -1,5 +1,5 @@
-import { Avatar, Card, Chip } from '@heroui/react';
-import type { ComponentProps } from 'react';
+import { Avatar, Card } from '@heroui/react';
+import clsx from 'clsx';
 import { TbCurrencyKroneCzech, TbHomeShield } from 'react-icons/tb';
 import MyPetActionsDropdown from './MyPetActionsDropdown';
 import { FaLocationDot } from 'react-icons/fa6';
@@ -9,13 +9,15 @@ import type { PetWithShelter } from '@/types/pets';
 import SpeciesChip from '@UI/SpeciesChip';
 import ListingChip from '@UI/ListingChips';
 import { formatDate } from '@shared/helpers/dateFormat';
+import PetPlaceholder from '@UI/PetPlaceholder';
 
-const STATUS_COLORS = {
-    active: 'success',
-    reserved: 'warning',
-    hidden: 'default',
-    closed: 'danger',
-} satisfies Record<Enums<'pet_status'>, ComponentProps<typeof Chip>['color']>;
+// Soft background + dark text pairs (Soft Playful status palette).
+const STATUS_CLASSES = {
+    active: 'bg-[#dcf3e8] text-[#11643f]',
+    reserved: 'bg-[#ffe6cc] text-[#8a3b0c]',
+    hidden: 'bg-[#eeeaf5] text-[#5b5470]',
+    closed: 'bg-[#ffe0e3] text-[#9f1239]',
+} satisfies Record<Enums<'pet_status'>, string>;
 
 export default function MyPetsCard({
     pet,
@@ -41,7 +43,7 @@ export default function MyPetsCard({
         <Card
             key={pet.id}
             onClick={handleCardClick}
-            className="cursor-pointer hover:bg-muted/10 transition-colors"
+            className="cursor-pointer rounded-[24px] shadow-my ring-1 ring-border hover:ring-accent/40 transition-shadow"
         >
             <div className="grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center">
                 <Avatar size="lg">
@@ -51,12 +53,14 @@ export default function MyPetsCard({
                             src={pet.image_url[0]}
                         />
                     ) : (
-                        <Avatar.Fallback className="bg-accent text-white">
-                            {pet.name ? pet.name[0] : 'P'}
+                        <Avatar.Fallback className="overflow-hidden p-0">
+                            <PetPlaceholder species={pet.species} round />
                         </Avatar.Fallback>
                     )}
                 </Avatar>
-                <div className="text-accent font-medium">{pet.name}</div>
+                <div className="font-display font-extrabold text-lg">
+                    {pet.name}
+                </div>
                 <div className="flex items-center gap-4">
                     <ListingChip
                         label={tListingType(pet.listing_type)}
@@ -100,15 +104,14 @@ export default function MyPetsCard({
                     )}
                 </div>
                 <div className="ml-auto flex flex-col items-end gap-1">
-                    <Chip
-                        className="max-w-max"
-                        variant="primary"
-                        color={STATUS_COLORS[pet.status]}
+                    <span
+                        className={clsx(
+                            'rounded-full px-3 py-1 text-xs font-extrabold',
+                            STATUS_CLASSES[pet.status],
+                        )}
                     >
-                        <Chip.Label className="uppercase text-white">
-                            {t(`status.${pet.status}`)}
-                        </Chip.Label>
-                    </Chip>
+                        {t(`status.${pet.status}`)}
+                    </span>
                     {pet.status === 'closed' && pet.close_reason && (
                         <span className="text-xs text-muted text-right">
                             {tReason(pet.close_reason)}
