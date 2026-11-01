@@ -5,5 +5,8 @@ export type Pet = Database['public']['Tables']['pets']['Row'];
 export type PetInsert = Database['public']['Tables']['pets']['Insert'];
 
 export type PetWithShelter = Pet & {
-    shelter: Pick<Shelter, 'id' | 'name' | 'city' | 'address'> | null;
+    shelter: Pick<
+        Shelter,
+        'id' | 'name' | 'city' | 'address' | 'phone' | 'email'
+    > | null;
 };

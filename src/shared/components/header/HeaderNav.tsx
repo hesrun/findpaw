@@ -1,7 +1,6 @@
 'use client';
-import Link from 'next/link';
+import { Link, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
-import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 const navigations = [
@@ -31,8 +30,9 @@ export default function HeaderNav() {
                     href={item.href}
                     className={clsx(
                         'transition-colors font-bold',
-                        // pathname carries the locale prefix (/en/pets)
-                        pathname.endsWith(item.href)
+                        // next-intl's pathname has no locale prefix (/pets/123)
+                        pathname === item.href ||
+                            pathname.startsWith(`${item.href}/`)
                             ? 'text-foreground'
                             : 'text-muted hover:text-accent',
                     )}

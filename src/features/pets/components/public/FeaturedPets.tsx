@@ -9,6 +9,8 @@ import { usePublicPets } from '../../hooks';
 import PetCard from './PetCard';
 import PetCardSkeleton from './PetCardSkeleton';
 import clsx from 'clsx';
+import { Link } from '@/i18n/navigation';
+import { LuArrowRight } from 'react-icons/lu';
 
 type PublicPetsResult = Awaited<ReturnType<typeof getPublicPets>>;
 
@@ -41,9 +43,18 @@ export default function FeaturedPets({
     return (
         <section>
             <div className="container">
-                <h2 className="font-display font-extrabold text-3xl mt-14 mb-4">
-                    {tHome('recentPetsTitle')}
-                </h2>
+                <div className="flex flex-wrap items-baseline justify-between gap-2 mt-14 mb-4">
+                    <h2 className="font-display font-extrabold text-3xl">
+                        {tHome('recentPetsTitle')}
+                    </h2>
+                    <Link
+                        href="/pets"
+                        className="inline-flex items-center gap-1 font-heading font-bold text-accent hover:underline"
+                    >
+                        {tHome('viewAllPets')}
+                        <LuArrowRight aria-hidden />
+                    </Link>
+                </div>
 
                 <div className="flex flex-wrap gap-2 mb-6" role="tablist">
                     <button

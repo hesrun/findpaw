@@ -11,6 +11,7 @@ Read `AGENTS.md`, `docs/architecture.md`, and the closest existing feature (`src
 
 1. Create `src/features/<domain>/`:
    - `schemas.ts` - Zod schemas for every external input (FormData, URL params, JSON). Build enums from `Constants.public.Enums` in `supabase/database.types.ts`; do not duplicate enum values.
+   - `constants.ts` - every constant of the feature: option lists, limits, page sizes, sort fields, buckets, config maps. Schemas, queries, and components import from here; do not declare constants in those files. Only component-private Tailwind class strings stay in the component.
    - `queries.ts` - server-side reads. Use `getSupabaseWithUser()` from `@shared/lib/supabase/auth` for owner-scoped reads and `supabaseServer()` for public reads. Parse filters with the schema; whitelist sort columns and cap page size.
    - `actions.ts` - `'use server'` mutations: parse FormData once, `safeParse`, check auth and ownership, mutate, `revalidatePath`. Return one consistent result shape.
    - `hooks.ts` - `'use client'` TanStack Query hooks only when client-side fetching is needed. Import query types with `import type`.

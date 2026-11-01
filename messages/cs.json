@@ -50,7 +50,8 @@
         "noPetsFound": "Pro tento typ inzerátu nebyli nalezeni žádní mazlíčci.",
         "recentSheltersTitle": "Nedávno přidané útulky",
         "loadingShelters": "Načítání útulků...",
-        "noSheltersFound": "Nebyly nalezeny žádné útulky."
+        "noSheltersFound": "Nebyly nalezeny žádné útulky.",
+        "viewAllPets": "Zobrazit všechny mazlíčky"
     },
     "roles": {
         "user": "Uživatel",
@@ -65,7 +66,12 @@
         "no": "Ne",
         "close": "Zavřít",
         "createdAt": "Vytvořeno",
-        "updatedAt": "Aktualizováno"
+        "updatedAt": "Aktualizováno",
+        "pagination": {
+            "summary": "Zobrazeno {start}–{end} z {total}",
+            "prev": "Předchozí",
+            "next": "Další"
+        }
     },
     "sidebar": {
         "pets": "Moji mazlíčci",
@@ -240,5 +246,86 @@
         "yearsAndMonths": "{years, plural, one {# rok} few {# roky} other {# let}} a {months, plural, one {# měsíc} few {# měsíce} other {# měsíců}}",
         "monthsShort": "{count} měs.",
         "yearsShort": "~{years} let"
+    },
+    "petsPage": {
+        "metaTitle": "Mazlíčci hledající domov — Pet Finder",
+        "title": "Všichni mazlíčci",
+        "description": "Ztracená a nalezená zvířata, inzeráty k adopci a prodeji od útulků i majitelů.",
+        "results": "{count, plural, =0 {Žádní mazlíčci} one {# mazlíček} few {# mazlíčci} other {# mazlíčků}}",
+        "empty": "Těmto filtrům neodpovídá žádný mazlíček.",
+        "emptyHint": "Zkuste odebrat některé filtry nebo hledat něco jiného.",
+        "filters": {
+            "search": "Hledat",
+            "searchPlaceholder": "Jméno nebo popis",
+            "species": "Druh",
+            "allSpecies": "Všechny druhy",
+            "listingType": "Typ inzerátu",
+            "allListings": "Vše",
+            "city": "Město",
+            "cityPlaceholder": "Jakékoli město",
+            "priceFrom": "Cena od (Kč)",
+            "priceTo": "Cena do (Kč)",
+            "sort": "Řadit podle",
+            "sortOptions": {
+                "newest": "Nejnovější",
+                "oldest": "Nejstarší inzeráty",
+                "priceAsc": "Cena: od nejnižší",
+                "priceDesc": "Cena: od nejvyšší",
+                "youngest": "Nejmladší",
+                "oldestPet": "Nejstarší zvířata"
+            },
+            "reset": "Zrušit filtry",
+            "title": "Filtry",
+            "openFilters": "Filtry",
+            "sex": "Pohlaví",
+            "anySex": "Jakékoli",
+            "age": "Věk",
+            "anyAge": "Jakýkoli věk",
+            "ageGroups": {
+                "young": "Mládě (do 1 roku)",
+                "adult": "Dospělý (1–8 let)",
+                "senior": "Senior (8+ let)"
+            },
+            "breed": "Plemeno",
+            "breedPlaceholder": "Jakékoli plemeno",
+            "more": "Další",
+            "fromShelter": "Pouze z útulků",
+            "vaccinated": "Očkovaný",
+            "sterilized": "Kastrovaný",
+            "showResults": "Zobrazit výsledky",
+            "clearAll": "Zrušit vše",
+            "chips": {
+                "q": "„{value}“",
+                "city": "Město: {value}",
+                "breed": "Plemeno: {value}",
+                "min_price": "Od {value} Kč",
+                "max_price": "Do {value} Kč"
+            },
+            "removeFilter": "Odebrat filtr: {label}",
+            "activeFilters": "Aktivní filtry"
+        },
+        "detail": {
+            "backToList": "Všichni mazlíčci",
+            "metaTitle": "{name} — {listingType} | Pet Finder",
+            "unnamed": "Mazlíček bez jména",
+            "price": "Cena",
+            "free": "Zdarma",
+            "location": "Poloha",
+            "about": "O mazlíčkovi",
+            "noDescription": "Majitel zatím nepřidal popis.",
+            "health": "Zdraví",
+            "vaccinated": "Očkovaný",
+            "sterilized": "Kastrovaný",
+            "specialNeeds": "Zvláštní potřeby",
+            "species": "Druh",
+            "breed": "Plemeno",
+            "age": "Věk",
+            "sex": "Pohlaví",
+            "publishedAt": "Zveřejněno {date}",
+            "shelter": "Útulek",
+            "contactShelter": "Kontaktovat útulek",
+            "noContact": "Kontaktní údaje k tomuto inzerátu zatím nejsou veřejné.",
+            "photo": "Fotka {index}"
+        }
     }
 }

@@ -8,8 +8,12 @@ export async function GET(
     try {
         const { id } = await params;
         const data = await getPublicPet(id);
+        if (!data) {
+            return NextResponse.json({ error: 'notFound' }, { status: 404 });
+        }
         return NextResponse.json(data);
     } catch (err) {
-        return NextResponse.json({ error: String(err) }, { status: 404 });
+        console.error('GET /api/pets/[id] failed', err);
+        return NextResponse.json({ error: 'internal' }, { status: 500 });
     }
 }

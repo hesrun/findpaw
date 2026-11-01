@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { Constants } from '@supabase/database.types';
+import { PET_AGE_GROUPS, PET_SORT_FIELDS } from './constants';
 
 const PetListingTypeSchema = z.enum(Constants.public.Enums.pet_listing_type);
 const PetSexSchema = z.enum(Constants.public.Enums.pet_sex);
@@ -54,17 +55,30 @@ export const PetStatusChangeSchema = z
         { message: 'invalidCloseReason', path: ['close_reason'] },
     );
 
+export const PetIdSchema = z.string().uuid();
+
+// Checkbox-style URL flag: only "true" turns it on; anything else means "not set".
+const flag = z.preprocess(
+    (value) => (value === 'true' || value === true ? true : undefined),
+    z.literal(true).optional(),
+);
+
 export const PetFiltersSchema = z.object({
     page: optionalNumber(z.number().int().positive()),
-    pageSize: optionalNumber(z.number().int().positive()),
+    pageSize: optionalNumber(z.number().int().positive().max(48)),
     species: PetSpeciesSchema.optional(),
     city: z.string().optional(),
     breed: z.string().optional(),
     listing_type: PetListingTypeSchema.optional(),
+    sex: PetSexSchema.optional(),
+    age: z.enum(PET_AGE_GROUPS).optional(),
+    from_shelter: flag,
+    vaccinated: flag,
+    sterilized: flag,
     min_price: optionalNumber(z.number().min(0)),
     max_price: optionalNumber(z.number().min(0)),
     q: z.string().optional(),
-    sortBy: z.string().optional(),
+    sortBy: z.enum(PET_SORT_FIELDS).optional(),
     ascending: z.preprocess(
         (v) => v === 'true' || v === true,
         z.boolean().optional(),

@@ -33,6 +33,7 @@ A feature owns code that is specific to one business domain:
 - `queries.ts` - server-side reads;
 - `actions.ts` - server actions for browser mutations;
 - `schemas.ts` - runtime validation of external input and inferred types;
+- `constants.ts` - the single home for the feature's constants (option lists, limits, sort fields, buckets, config maps); other files import them instead of declaring their own;
 - `hooks.ts` - client-side React Query hooks when a client fetch is required;
 - `components/` - domain UI, separated by audience where useful.
 
@@ -82,6 +83,19 @@ Server Component
 ```
 
 The initial records are present in the first server response for SEO and fast content display. The Client Component owns only interactive state and subsequent refetching. The shelter landing section currently uses this pattern for the six newest shelters; its order is fixed by `created_at` descending.
+
+### URL-driven public catalog
+
+```text
+Client filter form
+  -> router.replace with new query string (inside a transition)
+  -> Server Component page parses searchParams with the feature schema
+  -> feature query
+  -> Supabase server client
+  -> RLS
+```
+
+The URL is the only filter state. Every result page is server-rendered, shareable, and indexable. The client component holds only debounced text input and the pending state. The pet catalog (`/pets`) uses this pattern.
 
 ### Form mutation
 

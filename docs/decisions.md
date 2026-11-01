@@ -10,6 +10,10 @@ Public landing sections load their first records in a Server Component and pass 
 
 Browser mutations go through server actions. Internal GET API routes exist only for client-side fetching that needs React Query cache, pagination, or refetching. Server Components call feature queries directly and never call internal API routes.
 
+## Public pet catalog: server-rendered from the URL, no TanStack Query
+
+`/pets` reads its filters from `searchParams` and calls `getPublicPets` in a Server Component. The filter form only rewrites the query string. Unlike the landing sections, every filter combination is a separate URL that must render with content for sharing and SEO, so a client cache would duplicate state that the URL already holds. The `/api/pets` route and `usePublicPets` remain for the landing section.
+
 ## Next.js 16 `proxy.ts`
 
 Locale routing and early auth/role redirects live in `src/proxy.ts` (the Next.js 16 replacement for `middleware.ts`). Redirects there are UX only; RLS and server-side checks remain the security boundary.

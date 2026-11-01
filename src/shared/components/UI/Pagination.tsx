@@ -1,6 +1,7 @@
 'use client';
 
 import { Pagination } from '@heroui/react';
+import { useTranslations } from 'next-intl';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 export default function MyPagination({
@@ -14,11 +15,12 @@ export default function MyPagination({
     total: number;
     pageSize: number;
 }) {
+    const t = useTranslations('global.pagination');
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    const startItem = (currentPage - 1) * pageSize + 1;
+    const startItem = Math.min((currentPage - 1) * pageSize + 1, total);
     const endItem = Math.min(currentPage * pageSize, total);
 
     const handlePageChange = (page: number) => {
@@ -30,7 +32,11 @@ export default function MyPagination({
     return (
         <Pagination className="w-full">
             <Pagination.Summary>
-                Showing {startItem}-{endItem} of {total} results
+                {t('summary', {
+                    start: startItem,
+                    end: endItem,
+                    total,
+                })}
             </Pagination.Summary>
             <Pagination.Content>
                 <Pagination.Item>
@@ -39,15 +45,15 @@ export default function MyPagination({
                         onPress={() => handlePageChange(currentPage - 1)}
                     >
                         <Pagination.PreviousIcon />
-                        <span>Prev</span>
+                        <span>{t('prev')}</span>
                     </Pagination.Previous>
                 </Pagination.Item>
                 <Pagination.Item>
                     <Pagination.Next
-                        isDisabled={currentPage === totalPages}
+                        isDisabled={currentPage >= totalPages}
                         onPress={() => handlePageChange(currentPage + 1)}
                     >
-                        <span>Next</span>
+                        <span>{t('next')}</span>
                         <Pagination.NextIcon />
                     </Pagination.Next>
                 </Pagination.Item>
