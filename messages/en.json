@@ -366,5 +366,44 @@
             "pets": "{count, plural, =0 {Pets} one {# pet} other {# pets}} from this shelter",
             "noPets": "This shelter has no active listings right now."
         }
+    },
+    "aboutPage": {
+        "metaTitle": "About Pet Finder",
+        "title": "Helping pets find their way home",
+        "lead": "Pet Finder brings together pet owners, finders and animal shelters in one place: report a lost pet, help a found one get home, or give a shelter animal a new family.",
+        "stats": {
+            "pets": "Pets on the site",
+            "shelters": "Shelters"
+        },
+        "listingTypesTitle": "Four kinds of listings",
+        "listingTypesLead": "Every listing has a type, so the right people see it. Use the filters in the catalog to show only what you need.",
+        "listingTypes": {
+            "lost": "Your pet went missing. Add photos, the area where it was last seen and, if you like, a reward for the finder.",
+            "found": "You found an animal on the street. Publish it so the owner can recognise it and get in touch.",
+            "adoption": "Animals looking for a new home, from shelters and from owners who can no longer keep them.",
+            "sale": "Pets offered by breeders and owners, with a price shown upfront."
+        },
+        "audienceTitle": "Who it is for",
+        "audience": {
+            "owners": {
+                "title": "Owners and finders",
+                "text": "Create an account, publish listings in a couple of minutes and manage them in your dashboard: reserve, hide or close them when the pet is home."
+            },
+            "shelters": {
+                "title": "Shelters",
+                "text": "Create a shelter profile with contacts and photos, attach your animals to it and get a public shelter page that lists everyone looking for a home."
+            }
+        },
+        "ctaTitle": "Every listing brings a pet closer to home",
+        "ctaText": "Browse the animals waiting right now or add your own listing.",
+        "ctaBrowse": "Browse pets",
+        "ctaAdd": "Add a listing"
+    },
+    "notFound": {
+        "title": "Oops, nothing here but the cat",
+        "text": "The page you are looking for has moved, found a new home, or never existed. The cat is not going to help.",
+        "home": "Back to home",
+        "pets": "Browse pets",
+        "catLabel": "A cat on a stage, turned away from you"
     }
 }

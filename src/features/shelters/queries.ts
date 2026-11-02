@@ -51,6 +51,18 @@ export async function getMyShelters(page: number, pageSize: number = 20) {
     return { data, total: count ?? 0 };
 }
 
+// Count only (HEAD request, no rows) for public stats.
+export async function countPublicShelters() {
+    const supabase = await supabaseServer();
+    const { count, error } = await supabase
+        .from('shelters')
+        .select('id', { count: 'exact', head: true });
+
+    if (error) throw error;
+
+    return count ?? 0;
+}
+
 // Returns null for malformed ids and missing shelters.
 // cache() lets generateMetadata and the page share one query per request.
 export const getPublicShelter = cache(async (shelterId: string) => {
