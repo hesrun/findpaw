@@ -59,6 +59,15 @@ export default function SignIn() {
                 <Button fullWidth type="submit" isPending={isPending}>
                     {t('btns.sign')}
                 </Button>
+                <p className="text-sm text-center text-muted">
+                    {t('links.noAccount')}{' '}
+                    <Link
+                        href={AUTH_ROUTES.signUp}
+                        className="font-bold text-accent hover:underline"
+                    >
+                        {t('btns.signup')}
+                    </Link>
+                </p>
             </Card>
         </form>
     );

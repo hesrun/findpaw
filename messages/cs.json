@@ -3,7 +3,9 @@
         "pets": "Mazlíčci",
         "shelters": "Útulky",
         "about": "O nás",
-        "userMenu": "Nabídka účtu"
+        "userMenu": "Nabídka účtu",
+        "openMenu": "Otevřít menu",
+        "menu": "Menu"
     },
     "auth": {
         "btns": {

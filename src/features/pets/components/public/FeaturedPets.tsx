@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import { LISTING_TYPES } from '../../constants';
+import { FEATURED_PETS_COUNT, LISTING_TYPES } from '../../constants';
 import type { PetFilters } from '../../schemas';
 import type { getPublicPets } from '../../queries';
 import { usePublicPets } from '../../hooks';
@@ -14,7 +14,6 @@ import { LuArrowRight } from 'react-icons/lu';
 
 type PublicPetsResult = Awaited<ReturnType<typeof getPublicPets>>;
 
-const PAGE_SIZE = 8;
 const FILTER_BUTTON_BASE_CLASS =
     'px-4 py-1.5 rounded-full text-sm font-heading font-bold transition-colors duration-300 cursor-pointer';
 const FILTER_BUTTON_ACTIVE_CLASS =
@@ -61,7 +60,9 @@ export default function FeaturedPets({
                         type="button"
                         aria-pressed={!filters.listing_type}
                         className={getFilterButtonClass(!filters.listing_type)}
-                        onClick={() => setFilters({ pageSize: PAGE_SIZE })}
+                        onClick={() =>
+                            setFilters({ pageSize: FEATURED_PETS_COUNT })
+                        }
                     >
                         {tHome('allListings')}
                     </button>
@@ -76,7 +77,7 @@ export default function FeaturedPets({
                             onClick={() =>
                                 setFilters({
                                     listing_type: id,
-                                    pageSize: PAGE_SIZE,
+                                    pageSize: FEATURED_PETS_COUNT,
                                 })
                             }
                         >
@@ -85,13 +86,15 @@ export default function FeaturedPets({
                     ))}
                 </div>
                 {isFetching ? (
-                    <div className="grid grid-cols-4 gap-4">
-                        {Array.from({ length: PAGE_SIZE }).map((_, index) => (
-                            <PetCardSkeleton key={index} />
-                        ))}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        {Array.from({ length: FEATURED_PETS_COUNT }).map(
+                            (_, index) => (
+                                <PetCardSkeleton key={index} />
+                            ),
+                        )}
                     </div>
                 ) : pets.length > 0 ? (
-                    <ul className="grid grid-cols-4 gap-4">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                         {pets.map((pet) => (
                             <li key={pet.id}>
                                 <PetCard pet={pet} />

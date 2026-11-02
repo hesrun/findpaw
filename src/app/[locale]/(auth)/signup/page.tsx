@@ -15,7 +15,9 @@ import type { ReactNode } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { TbHomeShield } from 'react-icons/tb';
 import clsx from 'clsx';
+import { Link } from '@/i18n/navigation';
 import {
+    AUTH_ROUTES,
     DEFAULT_SIGN_UP_ROLE,
     SIGN_UP_ROLES,
     type SignUpRole,
@@ -115,6 +117,15 @@ export default function SignUp() {
                 <Button fullWidth type="submit" isPending={isPending}>
                     {t('btns.signup')}
                 </Button>
+                <p className="text-sm text-center text-muted">
+                    {t('links.haveAccount')}{' '}
+                    <Link
+                        href={AUTH_ROUTES.signIn}
+                        className="font-bold text-accent hover:underline"
+                    >
+                        {t('btns.sign')}
+                    </Link>
+                </p>
             </Card>
         </form>
     );

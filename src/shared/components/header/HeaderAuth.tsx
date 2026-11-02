@@ -1,5 +1,7 @@
-import { buttonVariants, Link } from '@heroui/react';
+import { buttonVariants } from '@heroui/react';
 import { getTranslations } from 'next-intl/server';
+import { LuUserRound } from 'react-icons/lu';
+import { Link } from '@/i18n/navigation';
 import { getCurrentUser } from '@shared/lib/supabase/auth';
 import getProfile from '@shared/lib/supabase/profile';
 import HeaderUserMenu from './HeaderUserMenu';
@@ -22,17 +24,39 @@ export default async function HeaderAuth() {
         );
     }
 
+    // Mobile: one icon (sign-up is linked from the sign-in page).
+    // Desktop (md+): both text buttons.
     return (
-        <div className="flex items-center gap-2">
+        <>
             <Link
                 href="/signin"
-                className={buttonVariants({ size: 'sm', variant: 'outline' })}
+                aria-label={t('btns.sign')}
+                title={t('btns.sign')}
+                className={buttonVariants({
+                    isIconOnly: true,
+                    variant: 'outline',
+                    className: 'rounded-full md:hidden',
+                })}
             >
-                {t('btns.sign')}
+                <LuUserRound className="text-xl" aria-hidden />
             </Link>
-            <Link href="/signup" className={buttonVariants({ size: 'sm' })}>
-                {t('btns.signup')}
-            </Link>
-        </div>
+            <div className="hidden md:flex items-center gap-2">
+                <Link
+                    href="/signin"
+                    className={buttonVariants({
+                        size: 'sm',
+                        variant: 'outline',
+                    })}
+                >
+                    {t('btns.sign')}
+                </Link>
+                <Link
+                    href="/signup"
+                    className={buttonVariants({ size: 'sm' })}
+                >
+                    {t('btns.signup')}
+                </Link>
+            </div>
+        </>
     );
 }

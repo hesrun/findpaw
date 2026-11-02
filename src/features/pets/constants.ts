@@ -46,6 +46,9 @@ export const PUBLIC_PET_STATUSES = [
 // Cards per page in the public catalog (/pets): full rows of 2 or 3 columns.
 export const CATALOG_PAGE_SIZE = 12;
 
+// Recently added pets on the landing page (two rows of four on desktop).
+export const FEATURED_PETS_COUNT = 8;
+
 // Columns the public catalog may sort by; anything else is rejected.
 export const PET_SORT_FIELDS = ['created_at', 'price', 'age_months'] as const;
 

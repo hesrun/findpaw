@@ -3,7 +3,9 @@
         "pets": "Pets",
         "shelters": "Shelters",
         "about": "About Us",
-        "userMenu": "Account menu"
+        "userMenu": "Account menu",
+        "openMenu": "Open menu",
+        "menu": "Menu"
     },
     "auth": {
         "btns": {
