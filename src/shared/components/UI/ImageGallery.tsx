@@ -3,20 +3,19 @@
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import { useState } from 'react';
-import PetPlaceholder from '@UI/PetPlaceholder';
-import type { Enums } from '@supabase/database.types';
+import { useState, type ReactNode } from 'react';
 
-export default function PetGallery({
+// Main image with thumbnails. `placeholder` is shown when there are no images.
+export default function ImageGallery({
     images,
     name,
-    species,
+    placeholder,
 }: {
     images: string[];
     name: string;
-    species: Enums<'pet_species'>;
+    placeholder: ReactNode;
 }) {
-    const t = useTranslations('petsPage.detail');
+    const t = useTranslations('global');
     const [activeIndex, setActiveIndex] = useState(0);
     const active = images[activeIndex];
 
@@ -33,7 +32,7 @@ export default function PetGallery({
                         className="object-cover"
                     />
                 ) : (
-                    <PetPlaceholder species={species} />
+                    placeholder
                 )}
             </div>
 

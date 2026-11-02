@@ -2,6 +2,7 @@
 
 import {
     Button,
+    Description,
     FieldError,
     Input,
     Label,
@@ -16,7 +17,13 @@ import {
     toast,
 } from '@heroui/react';
 import { useState, useRef, useTransition } from 'react';
-import { SEX_OPTIONS, SPECIES, LISTING_TYPES } from '@features/pets/constants';
+import {
+    SEX_OPTIONS,
+    SPECIES,
+    LISTING_TYPES,
+    PRICED_LISTING_TYPE,
+    REWARD_LISTING_TYPE,
+} from '@features/pets/constants';
 import { useTranslations } from 'next-intl';
 import {
     FileUploader,
@@ -62,8 +69,8 @@ export default function PetForm({
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
     const fileUploaderRef = useRef<FileUploaderRef>(null);
-    const [listingType, setListingType] = useState(
-        initialData?.listing_type || false,
+    const [listingType, setListingType] = useState<string | null>(
+        initialData?.listing_type ?? null,
     );
     const [selectedShelterId, setSelectedShelterId] = useState(
         initialData?.shelter_id ?? null,
@@ -233,9 +240,7 @@ export default function PetForm({
                                 defaultValue={
                                     initialData?.listing_type ?? undefined
                                 }
-                                onChange={(nextValue) =>
-                                    setListingType(nextValue === 'sale')
-                                }
+                                onChange={setListingType}
                             >
                                 <Label>{t('fields.listingType')}</Label>
                                 <div className="flex flex-wrap gap-2 mt-1">
@@ -264,7 +269,26 @@ export default function PetForm({
                                 </div>
                                 <FieldError />
                             </RadioGroup>
-                            {listingType && (
+                            {listingType === REWARD_LISTING_TYPE && (
+                                <NumberField
+                                    name="reward"
+                                    minValue={1}
+                                    variant="secondary"
+                                    defaultValue={
+                                        initialData?.reward ?? undefined
+                                    }
+                                >
+                                    <Label>{t('fields.reward')}</Label>
+                                    <NumberField.Group>
+                                        <NumberField.Input className="col-span-3" />
+                                    </NumberField.Group>
+                                    <Description>
+                                        {t('fields.rewardHint')}
+                                    </Description>
+                                    <FieldError />
+                                </NumberField>
+                            )}
+                            {listingType === PRICED_LISTING_TYPE && (
                                 <NumberField
                                     name="price"
                                     minValue={0}

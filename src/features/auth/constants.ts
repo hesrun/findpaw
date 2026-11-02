@@ -1,15 +1,22 @@
 import { Constants, type Database } from '@supabase/database.types';
 
 type UserRole = Database['public']['Enums']['user_role'];
-export type SignUpRole = Exclude<UserRole, 'admin'>;
+
+// Roles that cannot be picked at sign-up: 'admin' is assigned only by an
+// administrator; 'clinic' is hidden until clinic features exist.
+export const SIGN_UP_EXCLUDED_ROLES = ['admin', 'clinic'] as const;
+
+export type SignUpRole = Exclude<
+    UserRole,
+    (typeof SIGN_UP_EXCLUDED_ROLES)[number]
+>;
 
 export const PASSWORD_MIN_LENGTH = 8;
 export const USER_NAME_MIN_LENGTH = 3;
 
-// Roles a user may pick at sign-up: every database role except 'admin',
-// which is assigned only by an administrator.
 export const SIGN_UP_ROLES = Constants.public.Enums.user_role.filter(
-    (role): role is SignUpRole => role !== 'admin',
+    (role): role is SignUpRole =>
+        !(SIGN_UP_EXCLUDED_ROLES as readonly UserRole[]).includes(role),
 );
 export const DEFAULT_SIGN_UP_ROLE = 'user' satisfies SignUpRole;
 

@@ -31,6 +31,11 @@ export const PetCreateSchema = z.object({
         (value) => (value === '' || value == null ? null : Number(value)),
         z.number().nonnegative().nullable().optional(),
     ),
+    // Kept only for lost listings; the actions clear it for other types.
+    reward: z.preprocess(
+        (value) => (value === '' || value == null ? null : Number(value)),
+        z.number().positive().nullable().optional(),
+    ),
     sex: PetSexSchema.optional(),
     species: PetSpeciesSchema,
     is_special_needs: z.boolean().optional(),

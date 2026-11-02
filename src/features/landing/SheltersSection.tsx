@@ -1,12 +1,12 @@
 import FeaturedShelters from '@features/shelters/components/public/FeaturedShelters';
 import { getPublicShelters } from '@features/shelters/queries';
 
-const PAGE_SIZE = 6;
+import { FEATURED_SHELTERS_COUNT } from '@features/shelters/constants';
 
 export default async function SheltersSection() {
     const shelters = await getPublicShelters({
         page: 1,
-        pageSize: PAGE_SIZE,
+        pageSize: FEATURED_SHELTERS_COUNT,
         sortBy: 'created_at',
         ascending: false,
     });

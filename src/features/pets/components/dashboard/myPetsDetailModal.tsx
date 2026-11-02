@@ -11,6 +11,8 @@ import {
 import DashboardCard from '@shared/components/UI/DashboardCard';
 import { TbHomeShield, TbScissors, TbVaccine } from 'react-icons/tb';
 import { formatDate } from '@shared/helpers/dateFormat';
+import { formatCzk } from '@shared/helpers/currencyFormat';
+import { REWARD_LISTING_TYPE } from '@features/pets/constants';
 import ImageCap from '@shared/components/UI/ImageCap';
 import type { PetWithShelter } from '@/types/pets';
 
@@ -132,6 +134,19 @@ export default function MyPetsDetailModal({
                                                     value={selectedPet.price}
                                                 />
                                             )}
+                                            {selectedPet.listing_type ===
+                                                REWARD_LISTING_TYPE &&
+                                                selectedPet.reward && (
+                                                    <ListItem
+                                                        label={pets(
+                                                            'fields.reward',
+                                                        )}
+                                                        value={formatCzk(
+                                                            selectedPet.reward,
+                                                            locale,
+                                                        )}
+                                                    />
+                                                )}
                                             <ListItem
                                                 label={global('createdAt')}
                                                 value={

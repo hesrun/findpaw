@@ -1,6 +1,7 @@
 import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { supabaseServer } from '@shared/lib/supabase/server';
-import { ShelterFiltersSchema } from './schemas';
+import { cache } from 'react';
+import { ShelterFiltersSchema, ShelterIdSchema } from './schemas';
 import { z } from 'zod';
 
 export type ShelterFilters = z.infer<typeof ShelterFiltersSchema>;
@@ -50,18 +51,23 @@ export async function getMyShelters(page: number, pageSize: number = 20) {
     return { data, total: count ?? 0 };
 }
 
-export async function getPublicShelter(shelterId: string) {
+// Returns null for malformed ids and missing shelters.
+// cache() lets generateMetadata and the page share one query per request.
+export const getPublicShelter = cache(async (shelterId: string) => {
+    const id = ShelterIdSchema.safeParse(shelterId);
+    if (!id.success) return null;
+
     const supabase = await supabaseServer();
 
     const { data, error } = await supabase
         .from('shelters')
         .select('*')
-        .eq('id', shelterId)
-        .single();
+        .eq('id', id.data)
+        .maybeSingle();
 
     if (error) throw error;
     return data;
-}
+});
 
 export async function getPublicShelters(filters: unknown) {
     const parsed = ShelterFiltersSchema.parse(filters);
@@ -76,7 +82,9 @@ export async function getPublicShelters(filters: unknown) {
         .select('*', { count: 'exact' })
         .order(parsed.sortBy || 'created_at', {
             ascending: parsed.ascending ?? false,
-        });
+        })
+        // Stable order across pages when the sort column has ties.
+        .order('id');
 
     if (parsed.city) query = query.eq('city', parsed.city);
     if (parsed.q) {
@@ -86,6 +94,8 @@ export async function getPublicShelters(filters: unknown) {
 
     const { data, error, count } = await query.range(from, from + pageSize - 1);
 
+    // PostgREST rejects a range past the last row (e.g. ?page=999): show an empty page.
+    if (error?.code === 'PGRST103') return { data: [], total: count ?? 0 };
     if (error) throw error;
 
     return { data, total: count ?? 0 };

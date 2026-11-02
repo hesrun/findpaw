@@ -33,6 +33,7 @@ export type Database = {
           name: string | null
           owner_id: string
           price: number | null
+          reward: number | null
           sex: Database["public"]["Enums"]["pet_sex"] | null
           shelter_id: string | null
           species: Database["public"]["Enums"]["pet_species"]
@@ -57,6 +58,7 @@ export type Database = {
           name?: string | null
           owner_id: string
           price?: number | null
+          reward?: number | null
           sex?: Database["public"]["Enums"]["pet_sex"] | null
           shelter_id?: string | null
           species: Database["public"]["Enums"]["pet_species"]
@@ -81,6 +83,7 @@ export type Database = {
           name?: string | null
           owner_id?: string
           price?: number | null
+          reward?: number | null
           sex?: Database["public"]["Enums"]["pet_sex"] | null
           shelter_id?: string | null
           species?: Database["public"]["Enums"]["pet_species"]

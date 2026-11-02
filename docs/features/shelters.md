@@ -12,6 +12,19 @@ The shelters feature owns shelter profiles, shelter dashboard management, public
 - A shelter selected for a pet listing must belong to the current user.
 - Public visibility is governed by Supabase policies.
 
+## Public Pages
+
+| Route | What it shows |
+| --- | --- |
+| `/shelters` | All shelters, 12 per page (`SHELTER_CATALOG_PAGE_SIZE`), newest first. No filters yet. |
+| `/shelters/[id]` | One shelter: gallery, description, contacts, and its public pets, 6 per page (`SHELTER_PETS_PAGE_SIZE`). |
+
+- Only `?page=` is read from the URL (`parsePageParam`); malformed or repeated values fall back to page 1, and a page past the end shows an empty list.
+- `getPublicShelter` returns `null` for malformed ids and missing shelters; the page answers both with the same 404, like the pet page.
+- The shelter's pets come from `getPublicPets(filters, { shelterId })`. `shelterId` is a server-side scope, not a URL filter, so it does not appear in the pets catalog filters. Public pet statuses still apply.
+- `ShelterCard` links to the detail page through its title with a stretched `::after` overlay, because the card already contains contact links and links cannot be nested.
+- `sortBy` for public shelter queries is limited to `SHELTER_SORT_FIELDS`.
+
 ## Access Patterns
 
 - Server-rendered dashboard pages call owner-scoped queries directly.

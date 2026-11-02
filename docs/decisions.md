@@ -26,6 +26,8 @@ Locale routing and early auth/role redirects live in `src/proxy.ts` (the Next.js
 
 Users pick `user`, `shelter`, or `clinic` at sign-up. The choice travels in user metadata, so the `handle_new_user` trigger accepts it only from that allow-list and falls back to `user`; `admin` is assigned only through the service role or SQL. After sign-up `profiles.role` is the source of truth. RLS policies cannot restrict columns, so `authenticated` has column-level `update` grants only on editable profile fields and no `insert` on `profiles`: the trigger is the only writer of `role`.
 
+`clinic` is hidden from the sign-up form for now (`SIGN_UP_EXCLUDED_ROLES` in `src/features/auth/constants.ts`); `signUp` maps it to `user`. The database trigger still accepts `clinic`, so a direct Supabase sign-up call can create a clinic account. This is acceptable while clinics have no extra rights; remove `clinic` from the trigger allow-list with a migration before they get any.
+
 ## Current user via per-request `cache()`, no client provider
 
 `getCurrentUser` (`src/shared/lib/supabase/auth.ts`) and `getProfile` (`src/shared/lib/supabase/profile.ts`) are wrapped in React `cache()`, so every Server Component in one render shares a single `auth.getUser()` call and a single `profiles` query. The cache lives for one request only, so it never serves stale or another user's data. Server components call these helpers instead of querying Supabase themselves. A client-side user provider is not used yet because almost no client components need the user; when they do, the layout should pass `getProfile()` output into it rather than use the browser Supabase client.

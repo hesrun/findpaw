@@ -4,13 +4,14 @@ import { routing } from '@/i18n/routing';
 import {
     DEFAULT_SIGN_UP_ROLE,
     PASSWORD_MIN_LENGTH,
+    SIGN_UP_EXCLUDED_ROLES,
     USER_NAME_MIN_LENGTH,
 } from '@features/auth/constants';
 
-// Every database role except 'admin', which is assigned only by an administrator.
+// Roles from SIGN_UP_EXCLUDED_ROLES are rejected and fall back to the default.
 const SignUpRoleSchema = z
     .enum(Constants.public.Enums.user_role)
-    .exclude(['admin']);
+    .exclude([...SIGN_UP_EXCLUDED_ROLES]);
 
 export const SignInSchema = z.object({
     email: z.string().email(),

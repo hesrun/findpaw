@@ -8,6 +8,16 @@ import {
     PetStatusChangeSchema,
     PetUpdateSchema,
 } from './schemas';
+import { REWARD_LISTING_TYPE } from './constants';
+
+// The database allows a reward only on lost listings, so switching the type
+// away from 'lost' must clear it in the same write.
+function rewardFor(
+    listingType: string | undefined,
+    reward: number | null | undefined,
+) {
+    return listingType === REWARD_LISTING_TYPE ? (reward ?? null) : null;
+}
 
 export async function createPet(formData: FormData) {
     const { supabase, user } = await getSupabaseWithUser();
@@ -38,6 +48,7 @@ export async function createPet(formData: FormData) {
         shelter_id: shelterId,
         listing_type: formData.get('listing_type'),
         price: formData.get('price'),
+        reward: formData.get('reward'),
         sex: formData.get('sex'),
         species: formData.get('species'),
         is_special_needs: formData.get('is_special_needs') === 'on',
@@ -67,6 +78,7 @@ export async function createPet(formData: FormData) {
         listing_type: (data.listing_type ??
             'adoption') as Enums<'pet_listing_type'>,
         price: (data.price ?? null) as number | null,
+        reward: rewardFor(data.listing_type ?? 'adoption', data.reward),
         sex: data.sex as Enums<'pet_sex'> | undefined,
         species: data.species as Enums<'pet_species'>,
         is_special_needs: data.is_special_needs ?? false,
@@ -126,6 +138,7 @@ export async function updatePet(petId: string, formData: FormData) {
         shelter_id: shelterId,
         listing_type: formData.get('listing_type'),
         price: formData.get('price'),
+        reward: formData.get('reward'),
         sex: formData.get('sex'),
         species: formData.get('species'),
         is_special_needs: formData.get('is_special_needs') === 'on',
@@ -156,6 +169,7 @@ export async function updatePet(petId: string, formData: FormData) {
                 | Enums<'pet_listing_type'>
                 | undefined,
             price: (data.price ?? null) as number | null,
+            reward: rewardFor(data.listing_type, data.reward),
             sex: data.sex as Enums<'pet_sex'> | undefined,
             species: data.species as Enums<'pet_species'> | undefined,
             is_special_needs: data.is_special_needs ?? false,

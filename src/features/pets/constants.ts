@@ -98,9 +98,15 @@ export const CATALOG_TEXT_FILTER_KEYS = [
 ] as const;
 export type CatalogTextKey = (typeof CATALOG_TEXT_FILTER_KEYS)[number];
 
-// Price only applies to this listing type; leaving it clears the price range.
-export const CATALOG_PRICED_LISTING_TYPE =
-    'sale' satisfies Enums<'pet_listing_type'>;
+// Price only applies to this listing type.
+export const PRICED_LISTING_TYPE = 'sale' satisfies Enums<'pet_listing_type'>;
+
+// A finder's reward only applies to this listing type.
+// Mirrors the pets_reward_only_for_lost check in the database.
+export const REWARD_LISTING_TYPE = 'lost' satisfies Enums<'pet_listing_type'>;
+
+// Leaving the priced listing type in the catalog clears the price range.
+export const CATALOG_PRICED_LISTING_TYPE = PRICED_LISTING_TYPE;
 export const CATALOG_PRICE_KEYS = [
     'min_price',
     'max_price',

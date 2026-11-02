@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { isHttpUrl } from '@shared/lib/url';
 import { PiEnvelopeSimple, PiGlobe, PiMapPin, PiPhone } from 'react-icons/pi';
 import { ShelterPlaceholder } from '@UI/PetPlaceholder';
+import { Link } from '@/i18n/navigation';
 import ContactLink from './ContactLink';
 
 export default function ShelterCard({ shelter }: { shelter: Shelter }) {
@@ -16,7 +17,7 @@ export default function ShelterCard({ shelter }: { shelter: Shelter }) {
         : null;
 
     return (
-        <article className="bg-surface rounded-card shadow-my ring-1 ring-border h-full flex flex-col">
+        <article className="group relative bg-surface rounded-card shadow-my ring-1 ring-border h-full flex flex-col transition-shadow duration-300 hover:ring-accent/40 has-focus-visible:ring-accent">
             <div className="relative m-2 mb-0 aspect-2/1 overflow-hidden rounded-media">
                 {image ? (
                     <Image
@@ -31,8 +32,15 @@ export default function ShelterCard({ shelter }: { shelter: Shelter }) {
                 )}
             </div>
             <div className="px-4 pt-3 pb-4 flex flex-col gap-2 grow">
-                <h3 className="font-display font-extrabold text-xl leading-tight">
-                    {shelter.name}
+                <h3 className="font-display font-extrabold text-xl leading-tight transition-colors duration-300 group-hover:text-accent">
+                    {/* The ::after overlay makes the whole card clickable;
+                        contact links sit above it (z-10). */}
+                    <Link
+                        href={`/shelters/${shelter.id}`}
+                        className="outline-none after:absolute after:inset-0 after:rounded-card"
+                    >
+                        {shelter.name}
+                    </Link>
                 </h3>
                 {location && (
                     <p className="text-muted text-sm flex items-center gap-1">
@@ -45,7 +53,7 @@ export default function ShelterCard({ shelter }: { shelter: Shelter }) {
                         {shelter.description}
                     </p>
                 )}
-                <ul className="flex flex-col gap-2 mt-auto pt-2">
+                <ul className="relative z-10 flex flex-col gap-2 mt-auto pt-2">
                     {shelter.phone && (
                         <ContactLink
                             href={`tel:${shelter.phone}`}

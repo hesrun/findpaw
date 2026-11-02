@@ -10,6 +10,12 @@ import SpeciesChip from '@UI/SpeciesChip';
 import ListingChip from '@UI/ListingChips';
 import { formatDate } from '@shared/helpers/dateFormat';
 import PetPlaceholder from '@UI/PetPlaceholder';
+import { LuGift } from 'react-icons/lu';
+import { formatCzk } from '@shared/helpers/currencyFormat';
+import {
+    PRICED_LISTING_TYPE,
+    REWARD_LISTING_TYPE,
+} from '@features/pets/constants';
 
 // Soft background + dark text pairs (Soft Playful status palette).
 const STATUS_CLASSES = {
@@ -66,12 +72,22 @@ export default function MyPetsCard({
                         label={tListingType(pet.listing_type)}
                         type={pet.listing_type}
                     />
-                    {pet.listing_type === 'sale' && (
+                    {pet.listing_type === PRICED_LISTING_TYPE && (
                         <div className="flex items-center font-medium text-teal-600">
                             {pet.price ?? 'N/A'}
                             <TbCurrencyKroneCzech className="inline mr-1 text-xl" />
                         </div>
                     )}
+                    {pet.listing_type === REWARD_LISTING_TYPE &&
+                        pet.reward && (
+                            <div
+                                className="flex items-center gap-1 font-medium text-amber-700"
+                                title={t('fields.reward')}
+                            >
+                                <LuGift aria-hidden />
+                                {formatCzk(pet.reward, locale)}
+                            </div>
+                        )}
                 </div>
                 <div className="flex items-center gap-4">
                     <SpeciesChip

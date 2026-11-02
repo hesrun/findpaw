@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { ZodError } from 'zod';
 import { getPublicShelters } from '@features/shelters/queries';
 
 export async function GET(req: Request) {
@@ -9,6 +10,13 @@ export async function GET(req: Request) {
         );
         return NextResponse.json(result);
     } catch (err) {
-        return NextResponse.json({ error: String(err) }, { status: 400 });
+        if (err instanceof ZodError) {
+            return NextResponse.json(
+                { error: 'invalidFilters' },
+                { status: 400 },
+            );
+        }
+        console.error('GET /api/shelters failed', err);
+        return NextResponse.json({ error: 'internal' }, { status: 500 });
     }
 }

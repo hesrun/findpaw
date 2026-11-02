@@ -14,7 +14,6 @@ import { useTranslations } from 'next-intl';
 import type { ReactNode } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { TbHomeShield } from 'react-icons/tb';
-import { BiClinic } from 'react-icons/bi';
 import clsx from 'clsx';
 import {
     DEFAULT_SIGN_UP_ROLE,
@@ -29,7 +28,6 @@ import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidat
 const roleIcons = {
     user: <FaRegUserCircle />,
     shelter: <TbHomeShield />,
-    clinic: <BiClinic />,
 } satisfies Record<SignUpRole, ReactNode>;
 
 export default function SignUp() {
@@ -55,7 +53,7 @@ export default function SignUp() {
                         variant="secondary"
                     >
                         <Label>{t('fields.role')}</Label>
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-2 gap-4">
                             {SIGN_UP_ROLES.map((role) => (
                                 <Radio
                                     key={role}

@@ -1,9 +1,11 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 import type { ReactNode } from 'react';
-import { LuBadgeAlert, LuMapPin } from 'react-icons/lu';
+import { LuBadgeAlert, LuGift, LuMapPin } from 'react-icons/lu';
 import { TbScissors, TbVaccine } from 'react-icons/tb';
 import ListingChip from '@/shared/components/UI/ListingChips';
 import { formatAge } from '@shared/helpers/ageFormat';
+import { formatCzk } from '@shared/helpers/currencyFormat';
+import { PRICED_LISTING_TYPE, REWARD_LISTING_TYPE } from '../../constants';
 import { formatDate } from '@shared/helpers/dateFormat';
 import type { PetWithShelter } from '@/types/pets';
 import PetShelterContact from './PetShelterContact';
@@ -97,19 +99,25 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
                         </span>
                     </p>
                 )}
-                {pet.listing_type === 'sale' && (
+                {pet.listing_type === PRICED_LISTING_TYPE && (
                     <p className="font-display font-extrabold text-3xl text-accent">
                         <span className="sr-only">{t('price')}: </span>
                         {pet.price
-                            ? new Intl.NumberFormat(
-                                  dateLocale === 'cs' ? 'cs-CZ' : 'en-US',
-                                  {
-                                      style: 'currency',
-                                      currency: 'CZK',
-                                      maximumFractionDigits: 0,
-                                  },
-                              ).format(pet.price)
+                            ? formatCzk(pet.price, locale)
                             : t('free')}
+                    </p>
+                )}
+                {pet.listing_type === REWARD_LISTING_TYPE && pet.reward && (
+                    <p className="inline-flex items-center gap-2 self-start rounded-media bg-amber-100 px-4 py-2 text-amber-800">
+                        <LuGift aria-hidden className="text-2xl shrink-0" />
+                        <span className="grid">
+                            <span className="text-xs font-bold uppercase tracking-wide">
+                                {t('reward')}
+                            </span>
+                            <span className="font-display font-extrabold text-2xl leading-tight">
+                                {formatCzk(pet.reward, locale)}
+                            </span>
+                        </span>
                     </p>
                 )}
             </div>

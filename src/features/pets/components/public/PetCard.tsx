@@ -1,15 +1,27 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { PetWithShelter } from '@/types/pets';
 import Image from 'next/image';
-import { LuMapPin } from 'react-icons/lu';
+import { LuGift, LuMapPin } from 'react-icons/lu';
 import ListingChip from '@/shared/components/UI/ListingChips';
+import { formatCzk } from '@shared/helpers/currencyFormat';
+import { PRICED_LISTING_TYPE, REWARD_LISTING_TYPE } from '../../constants';
 import PetPlaceholder from '@UI/PetPlaceholder';
 import { Link } from '@/i18n/navigation';
 
 export default function PetCard({ pet }: { pet: PetWithShelter }) {
     const translations = useTranslations('pets');
+    const tDetail = useTranslations('petsPage.detail');
+    const locale = useLocale();
+    const price =
+        pet.listing_type === PRICED_LISTING_TYPE && pet.price
+            ? formatCzk(pet.price, locale)
+            : null;
+    const reward =
+        pet.listing_type === REWARD_LISTING_TYPE && pet.reward
+            ? formatCzk(pet.reward, locale)
+            : null;
     const ageTranslations = useTranslations('PetAge');
     const ageFormat =
         pet.age_months < 12
@@ -78,6 +90,18 @@ export default function PetCard({ pet }: { pet: PetWithShelter }) {
                         <p className="flex items-center gap-1 text-[13px] text-muted">
                             <LuMapPin aria-hidden className="size-3.5" />
                             {pet.city}
+                        </p>
+                    )}
+                    {price && (
+                        <p className="font-display font-extrabold text-lg text-accent">
+                            <span className="sr-only">{tDetail('price')}: </span>
+                            {price}
+                        </p>
+                    )}
+                    {reward && (
+                        <p className="inline-flex items-center gap-1.5 self-start rounded-full bg-amber-100 px-3 py-1 text-sm font-extrabold text-amber-800">
+                            <LuGift aria-hidden className="shrink-0" />
+                            {tDetail('rewardShort', { amount: reward })}
                         </p>
                     )}
                 </div>

@@ -77,7 +77,12 @@ export const getPublicPet = cache(async (petId: string) => {
     return data;
 });
 
-export async function getPublicPets(filters: unknown) {
+// `scope` is set by the server, not by URL filters: the shelter page lists
+// only that shelter's pets.
+export async function getPublicPets(
+    filters: unknown,
+    scope: { shelterId?: string } = {},
+) {
     const parsed = PetFiltersSchema.parse(filters);
     const page = parsed.page ?? 1;
     const pageSize = parsed.pageSize ?? 20;
@@ -98,6 +103,7 @@ export async function getPublicPets(filters: unknown) {
         // Stable order across pages when the sort column has ties.
         .order('id');
 
+    if (scope.shelterId) query = query.eq('shelter_id', scope.shelterId);
     if (parsed.species) query = query.eq('species', parsed.species);
     if (parsed.listing_type)
         query = query.eq('listing_type', parsed.listing_type);

@@ -8,7 +8,7 @@ import ShelterCardSkeleton from './ShelterCardSkeleton';
 
 type PublicSheltersResult = Awaited<ReturnType<typeof getPublicShelters>>;
 
-const PAGE_SIZE = 6;
+import { FEATURED_SHELTERS_COUNT } from '../../constants';
 
 export default function FeaturedShelters({
     initialData,
@@ -17,7 +17,7 @@ export default function FeaturedShelters({
 }) {
     const t = useTranslations('HomePage');
     const { data, isFetching } = usePublicShelters(
-        { pageSize: PAGE_SIZE },
+        { pageSize: FEATURED_SHELTERS_COUNT },
         initialData,
     );
     const shelters = data?.data ?? [];
@@ -35,9 +35,11 @@ export default function FeaturedShelters({
                         aria-busy="true"
                         aria-label={t('loadingShelters')}
                     >
-                        {Array.from({ length: PAGE_SIZE }).map((_, index) => (
-                            <ShelterCardSkeleton key={index} />
-                        ))}
+                        {Array.from({ length: FEATURED_SHELTERS_COUNT }).map(
+                            (_, index) => (
+                                <ShelterCardSkeleton key={index} />
+                            ),
+                        )}
                     </div>
                 ) : shelters.length > 0 ? (
                     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

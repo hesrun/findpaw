@@ -10,6 +10,7 @@ The pets feature owns pet listings, public discovery, owner dashboard management
 - `age_months` is stored as a non-negative integer.
 - `listing_type` is one of the database enum values.
 - Price must be non-negative and is relevant to sale listings.
+- `reward` is the owner's reward for whoever finds a lost pet (CZK). The `pets_reward_only_for_lost` check allows it only on `lost` listings and only above zero. `createPet` / `updatePet` clear it when the listing type is not `lost`, so changing the type cannot violate the check. `PRICED_LISTING_TYPE` and `REWARD_LISTING_TYPE` in `constants.ts` decide which amount the form and the cards show; `formatCzk` (`src/shared/helpers/currencyFormat.ts`) formats both.
 
 ## Listing Status
 

@@ -87,7 +87,8 @@
             "summary": "Showing {start}–{end} of {total}",
             "prev": "Prev",
             "next": "Next"
-        }
+        },
+        "photo": "Photo {index}"
     },
     "sidebar": {
         "pets": "My Pets",
@@ -142,7 +143,9 @@
                 "imageUrl": "Image URL",
                 "vaccinated": "Vaccinated",
                 "sterilized": "Sterilized",
-                "specialNeeds": "Special needs"
+                "specialNeeds": "Special needs",
+                "reward": "Reward (CZK)",
+                "rewardHint": "Optional. Shown to everyone who sees the listing."
             },
             "cardTitles": {
                 "general": "General information",
@@ -341,7 +344,25 @@
             "shelter": "Shelter",
             "contactShelter": "Contact the shelter",
             "noContact": "Contact details are not public for this listing yet.",
-            "photo": "Photo {index}"
+            "reward": "Reward for the finder",
+            "rewardShort": "Reward {amount}"
+        }
+    },
+    "sheltersPage": {
+        "metaTitle": "Animal shelters — Pet Finder",
+        "title": "Shelters",
+        "description": "Animal shelters on Pet Finder: contacts and pets looking for a home.",
+        "results": "{count, plural, =0 {No shelters} one {# shelter} other {# shelters}}",
+        "empty": "No shelters yet.",
+        "detail": {
+            "backToList": "All shelters",
+            "metaTitle": "{name} — shelter | Pet Finder",
+            "about": "About the shelter",
+            "noDescription": "The shelter has not added a description yet.",
+            "contacts": "Contacts",
+            "noContacts": "The shelter has not added contact details yet.",
+            "pets": "{count, plural, =0 {Pets} one {# pet} other {# pets}} from this shelter",
+            "noPets": "This shelter has no active listings right now."
         }
     }
 }

@@ -87,7 +87,8 @@
             "summary": "Zobrazeno {start}–{end} z {total}",
             "prev": "Předchozí",
             "next": "Další"
-        }
+        },
+        "photo": "Fotka {index}"
     },
     "sidebar": {
         "pets": "Moji mazlíčci",
@@ -142,7 +143,9 @@
                 "imageUrl": "URL obrázku",
                 "vaccinated": "Očkovaný",
                 "sterilized": "Sterilizovaný",
-                "specialNeeds": "Zvláštní potřeby"
+                "specialNeeds": "Zvláštní potřeby",
+                "reward": "Odměna (Kč)",
+                "rewardHint": "Nepovinné. Uvidí ji každý, kdo si inzerát prohlédne."
             },
             "cardTitles": {
                 "general": "Obecné informace",
@@ -341,7 +344,25 @@
             "shelter": "Útulek",
             "contactShelter": "Kontaktovat útulek",
             "noContact": "Kontaktní údaje k tomuto inzerátu zatím nejsou veřejné.",
-            "photo": "Fotka {index}"
+            "reward": "Odměna pro nálezce",
+            "rewardShort": "Odměna {amount}"
+        }
+    },
+    "sheltersPage": {
+        "metaTitle": "Útulky pro zvířata — Pet Finder",
+        "title": "Útulky",
+        "description": "Útulky pro zvířata na Pet Finder: kontakty a zvířata, která hledají domov.",
+        "results": "{count, plural, =0 {Žádné útulky} one {# útulek} few {# útulky} other {# útulků}}",
+        "empty": "Zatím zde nejsou žádné útulky.",
+        "detail": {
+            "backToList": "Všechny útulky",
+            "metaTitle": "{name} — útulek | Pet Finder",
+            "about": "O útulku",
+            "noDescription": "Útulek zatím nepřidal popis.",
+            "contacts": "Kontakty",
+            "noContacts": "Útulek zatím nepřidal kontaktní údaje.",
+            "pets": "{count, plural, =0 {Zvířata} one {# zvíře} few {# zvířata} other {# zvířat}} z tohoto útulku",
+            "noPets": "Útulek momentálně nemá žádné aktivní inzeráty."
         }
     }
 }

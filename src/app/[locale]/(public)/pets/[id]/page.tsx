@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { LuArrowLeft } from 'react-icons/lu';
 import PetDetails from '@features/pets/components/public/PetDetails';
-import PetGallery from '@features/pets/components/public/PetGallery';
+import ImageGallery from '@UI/ImageGallery';
+import PetPlaceholder from '@UI/PetPlaceholder';
 import { getPublicPet } from '@features/pets/queries';
 import { Link } from '@/i18n/navigation';
 
@@ -69,10 +70,10 @@ export default async function PetPage({ params }: { params: Params }) {
 
             <div className="grid gap-8 lg:grid-cols-[7fr_5fr] items-start">
                 <div className="grid gap-6">
-                    <PetGallery
+                    <ImageGallery
                         images={pet.image_url ?? []}
                         name={pet.name || t('unnamed')}
-                        species={pet.species}
+                        placeholder={<PetPlaceholder species={pet.species} />}
                     />
                     <section className="bg-surface rounded-card shadow-my ring-1 ring-border p-5">
                         <h2 className="font-display font-extrabold text-xl mb-2">
