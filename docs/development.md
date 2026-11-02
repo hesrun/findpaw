@@ -58,15 +58,23 @@ Variables prefixed with `NEXT_PUBLIC_` may be available in browser code. Service
 
 ## Supabase Auth Setup
 
-Password recovery needs two settings in the Supabase Dashboard:
+Sign-up confirmation and password recovery need these settings in the Supabase Dashboard:
 
 1. Authentication → URL Configuration → Redirect URLs: add `http://localhost:3000/**` and the production origin with `/**`.
-2. Authentication → Email Templates → Reset Password: the link must carry the token hash to the app's confirm route:
+2. Authentication → Emails → Templates: the email templates live in `supabase/templates/` and are the source of truth. The local stack loads them through `supabase/config.toml`; the hosted project does not, so after changing a template paste its HTML and subject into the Dashboard by hand:
+    - Confirm sign up ← `supabase/templates/confirmation.html`, subject "Confirm your email";
+    - Reset password ← `supabase/templates/recovery.html`, subject "Reset your password".
+
+    Each link carries the token hash to the app's confirm route, for example:
 
     ```html
     <a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=recovery">Reset password</a>
     ```
 
-    `redirectTo` is built by `requestPasswordReset` as `<origin>/api/auth/confirm?locale=<locale>`.
+    `redirectTo` / `emailRedirectTo` is built by `requestPasswordReset` and `signUp` as `<origin>/api/auth/confirm?locale=<locale>`, so the template appends parameters with `&`. Emails are English-only for now.
+
+    The logo is loaded from `{{ .SiteURL }}/logo/logo-email.png`, a PNG rendered from `public/logo/LogoColor.svg` (Gmail and Outlook do not show SVG). It only loads when Site URL is a public origin, so it is missing in emails from the local stack. Re-render the PNG when the logo changes.
+
+`supabase config push` is not used for this: it pushes the whole local Auth config, including the local `site_url`, rate limits, and `enable_confirmations = false`.
 
 The built-in Supabase email service sends only a few emails per hour; configure custom SMTP for production.

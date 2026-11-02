@@ -1,3 +1,4 @@
+import type { EmailOtpType } from '@supabase/supabase-js';
 import { Constants, type Database } from '@supabase/database.types';
 
 type UserRole = Database['public']['Enums']['user_role'];
@@ -35,3 +36,27 @@ export const AUTH_CONFIRM_PATH = '/api/auth/confirm';
 
 // Value of the `error` search parameter on the forgot-password page.
 export const LINK_EXPIRED_ERROR = 'linkExpired';
+
+// Email link types accepted by the confirm route. `email` confirms a sign-up
+// (Supabase deprecated `signup` in its favor); `recovery` resets a password.
+export const AUTH_CONFIRM_TYPES = [
+    'email',
+    'recovery',
+] as const satisfies readonly EmailOtpType[];
+
+export type AuthConfirmType = (typeof AUTH_CONFIRM_TYPES)[number];
+
+// Locale-less pages the confirm route redirects to after verifying a link.
+export const AUTH_CONFIRM_REDIRECTS = {
+    email: {
+        success: AUTH_ROUTES.afterSignIn,
+        failure: AUTH_ROUTES.signIn,
+    },
+    recovery: {
+        success: AUTH_ROUTES.resetPassword,
+        failure: `${AUTH_ROUTES.forgotPassword}?error=${LINK_EXPIRED_ERROR}`,
+    },
+} as const satisfies Record<
+    AuthConfirmType,
+    { success: string; failure: string }
+>;

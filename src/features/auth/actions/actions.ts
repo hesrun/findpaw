@@ -50,21 +50,25 @@ export async function signUp(formData: FormData): Promise<AuthResult> {
         password: formData.get('password'),
         userName: formData.get('userName'),
         role: formData.get('role'),
+        locale: formData.get('locale'),
     });
 
     if (!parsed.success) {
         return { error: 'invalidData' };
     }
 
-    const { email, password, userName, role } = parsed.data;
+    const { email, password, userName, role, locale } = parsed.data;
+    const origin = await getRequestOrigin();
     const supabase = await supabaseServer();
 
     // The role here is only a request: the database trigger enforces the allow-list.
+    // The confirmation email links to emailRedirectTo, checked against Redirect URLs.
     const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
             data: { full_name: userName, role },
+            emailRedirectTo: `${origin}${AUTH_CONFIRM_PATH}?locale=${locale}`,
         },
     });
 

@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { Constants } from '@supabase/database.types';
 import { routing } from '@/i18n/routing';
 import {
+    AUTH_CONFIRM_TYPES,
     DEFAULT_SIGN_UP_ROLE,
     PASSWORD_MIN_LENGTH,
     SIGN_UP_EXCLUDED_ROLES,
@@ -23,6 +24,7 @@ export const SignUpSchema = z.object({
     password: z.string().min(PASSWORD_MIN_LENGTH),
     userName: z.string().trim().min(USER_NAME_MIN_LENGTH),
     role: SignUpRoleSchema.catch(DEFAULT_SIGN_UP_ROLE),
+    locale: z.enum(routing.locales).catch(routing.defaultLocale),
 });
 
 export const ForgotPasswordSchema = z.object({
@@ -43,7 +45,7 @@ export const ResetPasswordSchema = z
 // redirect target is built on the server, so the link cannot redirect elsewhere.
 export const AuthConfirmParamsSchema = z.object({
     token_hash: z.string().min(1),
-    type: z.enum(['recovery']),
+    type: z.enum(AUTH_CONFIRM_TYPES),
     locale: z.enum(routing.locales).catch(routing.defaultLocale),
 });
 
