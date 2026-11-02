@@ -1,8 +1,7 @@
 import { buttonVariants } from '@heroui/react';
 import { getTranslations } from 'next-intl/server';
-import NotFoundCat from '@UI/NotFoundCat';
+import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-
 // Localized 404 inside the site layout: for notFound() in pages and,
 // through [...rest], for any unknown path under a locale.
 export default async function NotFound() {
@@ -11,16 +10,17 @@ export default async function NotFound() {
     return (
         <main className="container flex-1 grid place-items-center py-12">
             <div className="grid justify-items-center gap-6 text-center">
-                <div
-                    className="flex items-center gap-2 sm:gap-4 font-display font-extrabold text-accent leading-none text-[7rem] sm:text-[11rem]"
-                    aria-label="404"
-                >
-                    <span aria-hidden>4</span>
-                    <div className="w-32 sm:w-52">
-                        <NotFoundCat label={t('catLabel')} />
-                    </div>
-                    <span aria-hidden>4</span>
-                </div>
+                {/* The photo fades to white at the edges; the radial mask
+                    blends that fade into the page background in both themes. */}
+                <Image
+                    src="/images/not-found.webp"
+                    alt={t('catLabel')}
+                    width={1408}
+                    height={768}
+                    loading="eager"
+                    sizes="(min-width: 768px) 720px, 100vw"
+                    className="w-full max-w-180 h-auto mask-[radial-gradient(ellipse_closest-side,black_70%,transparent)]"
+                />
                 <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-balance">
                     {t('title')}
                 </h1>
