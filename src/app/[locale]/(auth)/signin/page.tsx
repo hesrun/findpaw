@@ -1,9 +1,6 @@
 'use client';
 
-import { signIn } from '@features/auth/actions/actions';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
 import {
     Button,
     Card,
@@ -11,28 +8,17 @@ import {
     Input,
     Label,
     TextField,
-    toast,
 } from '@heroui/react';
+import { Link } from '@/i18n/navigation';
+import { AUTH_ROUTES } from '@features/auth/constants';
+import { useSignInForm } from '@features/auth/hooks/useSignInForm';
+import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
 
 export default function SignIn() {
     const t = useTranslations('auth');
-    const router = useRouter();
-    const [isPending, startTransition] = useTransition();
+    const { handleSubmit, isPending } = useSignInForm();
+    const { validateEmail, validatePassword } = useAuthFieldValidation();
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
-        startTransition(async () => {
-            const result = await signIn(formData);
-
-            if (result?.error) {
-                toast.danger(t(`errors.${result.error}`));
-            } else {
-                toast.success(t('notifications.signInSuccess'));
-                router.push('/dashboard/pets');
-            }
-        });
-    }
     return (
         <form
             onSubmit={handleSubmit}
@@ -47,16 +33,7 @@ export default function SignIn() {
                         isRequired
                         name="email"
                         type="email"
-                        validate={(value) => {
-                            if (
-                                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                                    value,
-                                )
-                            ) {
-                                return t('errors.emailInvalid');
-                            }
-                            return null;
-                        }}
+                        validate={validateEmail}
                     >
                         <Label>{t('fields.email')}</Label>
                         <Input placeholder={t('fields.email')} />
@@ -64,28 +41,24 @@ export default function SignIn() {
                     </TextField>
                     <TextField
                         isRequired
-                        minLength={8}
                         name="password"
                         type="password"
-                        validate={(value) => {
-                            if (value.length < 8) {
-                                return t('errors.passwordInvalid');
-                            }
-                            return null;
-                        }}
+                        validate={validatePassword}
                     >
                         <Label>{t('fields.password')}</Label>
                         <Input placeholder={t('fields.password')} />
                         <FieldError />
                     </TextField>
+                    <Link
+                        href={AUTH_ROUTES.forgotPassword}
+                        className="justify-self-end text-sm text-accent hover:underline"
+                    >
+                        {t('links.forgotPassword')}
+                    </Link>
                 </div>
-                <div className="flex gap-2">
-                    <Button fullWidth type="submit" isPending={isPending}>
-                        {({ isPending }) => (
-                            <>{isPending ? 'Loading...' : t('btns.sign')}</>
-                        )}
-                    </Button>
-                </div>
+                <Button fullWidth type="submit" isPending={isPending}>
+                    {t('btns.sign')}
+                </Button>
             </Card>
         </form>
     );

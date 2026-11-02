@@ -55,3 +55,18 @@ Use generated Supabase types for data already inside the typed application flow 
 ## Environment Safety
 
 Variables prefixed with `NEXT_PUBLIC_` may be available in browser code. Service-role credentials and other secrets must remain server-only and must never be prefixed with `NEXT_PUBLIC_` or exposed to client components.
+
+## Supabase Auth Setup
+
+Password recovery needs two settings in the Supabase Dashboard:
+
+1. Authentication → URL Configuration → Redirect URLs: add `http://localhost:3000/**` and the production origin with `/**`.
+2. Authentication → Email Templates → Reset Password: the link must carry the token hash to the app's confirm route:
+
+    ```html
+    <a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=recovery">Reset password</a>
+    ```
+
+    `redirectTo` is built by `requestPasswordReset` as `<origin>/api/auth/confirm?locale=<locale>`.
+
+The built-in Supabase email service sends only a few emails per hour; configure custom SMTP for production.

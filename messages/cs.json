@@ -2,24 +2,30 @@
     "header": {
         "pets": "Mazlíčci",
         "shelters": "Útulky",
-        "about": "O nás"
+        "about": "O nás",
+        "userMenu": "Nabídka účtu"
     },
     "auth": {
         "btns": {
             "sign": "Přihlásit se",
             "signup": "Registrovat se",
-            "signOut": "Odhlásit se"
+            "signOut": "Odhlásit se",
+            "sendResetLink": "Odeslat odkaz",
+            "updatePassword": "Změnit heslo"
         },
         "titles": {
             "sign": "Vítejte zpět!",
-            "signup": "Vytvořit účet"
+            "signup": "Vytvořit účet",
+            "forgotPassword": "Zapomněli jste heslo?",
+            "resetPassword": "Nastavte nové heslo"
         },
         "fields": {
             "email": "E-mail",
             "userName": "Uživatelské jméno",
             "password": "Heslo",
             "confirmPassword": "Potvrdit heslo",
-            "role": "Typ účtu"
+            "role": "Typ účtu",
+            "newPassword": "Nové heslo"
         },
         "errors": {
             "emailInvalid": "Zadejte prosím platnou e-mailovou adresu",
@@ -27,15 +33,25 @@
             "passwordInvalid": "Heslo musí mít alespoň 8 znaků",
             "invalidData": "Zkontrolujte prosím formulář a zkuste to znovu",
             "signInFailed": "Nesprávný e-mail nebo heslo",
-            "signUpFailed": "Účet se nepodařilo vytvořit. Zkuste to prosím později"
+            "signUpFailed": "Účet se nepodařilo vytvořit. Zkuste to prosím později",
+            "passwordsMismatch": "Hesla se neshodují",
+            "updatePasswordFailed": "Heslo se nepodařilo změnit. Zkuste to prosím později",
+            "linkExpired": "Odkaz pro obnovení je neplatný nebo vypršel. Vyžádejte si nový."
         },
         "links": {
             "noAccount": "Nemáte účet?",
-            "haveAccount": "Již máte účet?"
+            "haveAccount": "Již máte účet?",
+            "forgotPassword": "Zapomněli jste heslo?",
+            "backToSignIn": "Zpět na přihlášení"
         },
         "notifications": {
             "signInSuccess": "Přihlášení proběhlo úspěšně",
-            "signUpSuccess": "Účet byl úspěšně vytvořen, zkontrolujte prosím svůj e-mail pro ověření účtu"
+            "signUpSuccess": "Účet byl úspěšně vytvořen, zkontrolujte prosím svůj e-mail pro ověření účtu",
+            "resetEmailSent": "Pokud k tomuto e-mailu existuje účet, odkaz pro obnovení je na cestě. Zkontrolujte svou schránku.",
+            "passwordUpdated": "Heslo bylo úspěšně změněno"
+        },
+        "hints": {
+            "forgotPassword": "Zadejte e-mail svého účtu a pošleme vám odkaz pro obnovení hesla."
         }
     },
     "HomePage": {

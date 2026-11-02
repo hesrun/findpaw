@@ -2,24 +2,30 @@
     "header": {
         "pets": "Pets",
         "shelters": "Shelters",
-        "about": "About Us"
+        "about": "About Us",
+        "userMenu": "Account menu"
     },
     "auth": {
         "btns": {
             "sign": "Sign in",
             "signup": "Sign up",
-            "signOut": "Sign out"
+            "signOut": "Sign out",
+            "sendResetLink": "Send reset link",
+            "updatePassword": "Update password"
         },
         "titles": {
             "sign": "Welcome back!",
-            "signup": "Create an account"
+            "signup": "Create an account",
+            "forgotPassword": "Forgot your password?",
+            "resetPassword": "Set a new password"
         },
         "fields": {
             "email": "Email",
             "userName": "User name",
             "password": "Password",
             "confirmPassword": "Confirm password",
-            "role": "Account type"
+            "role": "Account type",
+            "newPassword": "New password"
         },
         "errors": {
             "emailInvalid": "Please enter a valid email address",
@@ -27,15 +33,25 @@
             "passwordInvalid": "Password must be at least 8 characters",
             "invalidData": "Please check the form and try again",
             "signInFailed": "Invalid email or password",
-            "signUpFailed": "Could not create the account. Please try again later"
+            "signUpFailed": "Could not create the account. Please try again later",
+            "passwordsMismatch": "Passwords do not match",
+            "updatePasswordFailed": "Could not update the password. Please try again later",
+            "linkExpired": "The reset link is invalid or has expired. Request a new one."
         },
         "links": {
             "noAccount": "Don't have an account?",
-            "haveAccount": "Already have an account?"
+            "haveAccount": "Already have an account?",
+            "forgotPassword": "Forgot password?",
+            "backToSignIn": "Back to sign in"
         },
         "notifications": {
             "signInSuccess": "Successfully signed in",
-            "signUpSuccess": "Account created successfully, please check your email to verify your account"
+            "signUpSuccess": "Account created successfully, please check your email to verify your account",
+            "resetEmailSent": "If an account exists for this email, a reset link is on its way. Check your inbox.",
+            "passwordUpdated": "Password updated successfully"
+        },
+        "hints": {
+            "forgotPassword": "Enter your account email and we'll send you a link to reset your password."
         }
     },
     "HomePage": {

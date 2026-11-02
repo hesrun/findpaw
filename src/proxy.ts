@@ -6,7 +6,10 @@ import { NextRequest, NextResponse } from 'next/server';
 const intlMiddleware = createMiddleware(routing);
 
 const PROTECTED_PATHS = ['/dashboard'];
-const AUTH_PATHS = ['/signin', '/signup'];
+const AUTH_PATHS = ['/signin', '/signup', '/forgot-password'];
+// Needs the session created by the recovery email link. Not an auth path:
+// the user is already signed in when they get here.
+const RECOVERY_PATH = '/reset-password';
 
 // Routes that require specific roles. First matching rule wins.
 const ROLE_RESTRICTED_ROUTES: Array<{
@@ -44,6 +47,21 @@ export async function proxy(request: NextRequest) {
     // Unauthenticated user hitting a protected route → send to sign-in
     if (isProtectedRoute && !isAuthenticated) {
         const url = new URL(`/${locale}/signin`, request.url);
+        const redirectResponse = NextResponse.redirect(url);
+        supabaseResponse.cookies
+            .getAll()
+            .forEach(({ name, value, ...options }) => {
+                redirectResponse.cookies.set(name, value, options);
+            });
+        return redirectResponse;
+    }
+
+    // No recovery session (expired or reused link) → ask for a new email
+    if (pathnameWithoutLocale.startsWith(RECOVERY_PATH) && !isAuthenticated) {
+        const url = new URL(
+            `/${locale}/forgot-password?error=linkExpired`,
+            request.url,
+        );
         const redirectResponse = NextResponse.redirect(url);
         supabaseResponse.cookies
             .getAll()
