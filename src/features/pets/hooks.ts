@@ -24,8 +24,7 @@ export function usePublicPets(
 ) {
     return useQuery<PublicPetsResult>({
         queryKey: ['pets', 'public', filters],
-        initialData:
-            Object.keys(filters).length === 0 ? initialData : undefined,
+        initialData,
         staleTime: 30_000,
         queryFn: async () => {
             const queryString = createPetsQueryString(filters);

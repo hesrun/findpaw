@@ -35,8 +35,14 @@ export default function FeaturedPets({
 }) {
     const tHome = useTranslations('HomePage');
     const tListingType = useTranslations('pets.listingType');
-    const [filters, setFilters] = useState<PetFilters>({});
-    const { data, isFetching } = usePublicPets(filters, initialData);
+    const [filters, setFilters] = useState<PetFilters>({
+        pageSize: FEATURED_PETS_COUNT,
+    });
+    // Server-rendered data matches only the unfiltered "all listings" tab.
+    const { data, isFetching } = usePublicPets(
+        filters,
+        filters.listing_type ? undefined : initialData,
+    );
     const pets = data?.data ?? [];
 
     return (
