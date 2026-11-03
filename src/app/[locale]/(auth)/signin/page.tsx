@@ -22,7 +22,7 @@ export default function SignIn() {
     return (
         <form
             onSubmit={handleSubmit}
-            className="grid gap-8 w-full max-w-md m-auto p-6 mt-[10%]"
+            className="grid gap-8 w-full max-w-md m-auto p-6"
         >
             <Card className="p-6 grid gap-6">
                 <h1 className="text-3xl font-display font-extrabold">

@@ -53,7 +53,8 @@
             "passwordUpdated": "Heslo bylo úspěšně změněno"
         },
         "hints": {
-            "forgotPassword": "Zadejte e-mail svého účtu a pošleme vám odkaz pro obnovení hesla."
+            "forgotPassword": "Zadejte e-mail svého účtu a pošleme vám odkaz pro obnovení hesla.",
+            "signUpConsent": "Registrací souhlasíte s <terms>Podmínkami užívání</terms> a potvrzujete, že jste se seznámili se <privacy>Zásadami zpracování osobních údajů</privacy>."
         }
     },
     "HomePage": {
@@ -435,5 +436,15 @@
         "remove": "Odebrat fotku",
         "tooLarge": "Maximální velikost souboru je {size} MB",
         "uploadError": "Nepodařilo se nahrát jednu nebo více fotek"
+    },
+    "footer": {
+        "tagline": "Ztracená, nalezená i hledající domov: inzeráty zvířat a útulky z celé České republiky.",
+        "explore": "Procházet",
+        "legal": "Právní informace",
+        "privacy": "Ochrana osobních údajů",
+        "terms": "Podmínky užívání",
+        "cookies": "Cookies",
+        "contact": "Kontakt",
+        "copyright": "© {year} Pet Finder"
     }
 }

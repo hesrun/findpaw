@@ -5,6 +5,7 @@ import { Baloo_2, Nunito } from 'next/font/google';
 import type { Metadata } from 'next';
 import '@/css/styles.css';
 import Header from '@components/header/Header';
+import Footer from '@components/footer/Footer';
 import { routing } from '@/i18n/routing';
 import { Toast } from '@heroui/react';
 import TanstackProvider from '@shared/providers/TanstackProvider';
@@ -39,12 +40,17 @@ export default async function RootLayout({
     }
     return (
         <html lang={locale} className={`${nunito.variable} ${baloo.variable}`}>
-            <body className="flex flex-col min-h-screen bg-background text-foreground">
+            <body className="bg-background text-foreground">
                 <TanstackProvider>
                     <NextIntlClientProvider locale={locale}>
                         <Toast.Provider />
-                        <Header />
-                        {children}
+                        {/* Header and page fill the screen; the footer
+                            always starts below the fold. */}
+                        <div className="flex flex-col min-h-dvh">
+                            <Header />
+                            {children}
+                        </div>
+                        <Footer />
                     </NextIntlClientProvider>
                 </TanstackProvider>
             </body>

@@ -1,0 +1,241 @@
+{
+    "effectiveFrom": "Účinné od {date}",
+    "contents": "Obsah",
+    "privacy": {
+        "metaTitle": "Zásady zpracování osobních údajů",
+        "title": "Zásady zpracování osobních údajů",
+        "intro": [
+            "Tyto zásady vysvětlují, jak při provozu webu Pet Finder zpracováváme osobní údaje, k jakým účelům, jak dlouho a jaká máte práva. Řídí se nařízením (EU) 2016/679 (GDPR) a zákonem č. 110/2019 Sb., o zpracování osobních údajů."
+        ],
+        "sections": [
+            {
+                "id": "controller",
+                "title": "Kdo je správce",
+                "content": [
+                    "Správcem osobních údajů je {name}, fyzická osoba (dále jen „provozovatel“ nebo „my“).",
+                    "Ve všech věcech týkajících se osobních údajů nás kontaktujte na e-mailu {email}. Pověřence pro ochranu osobních údajů jsme nejmenovali, protože nám tato povinnost nevzniká."
+                ]
+            },
+            {
+                "id": "data",
+                "title": "Jaké údaje zpracováváme",
+                "content": [
+                    "Údaje k účtu: e-mail, uživatelské jméno, typ účtu (soukromá osoba nebo útulek) a heslo, které ukládáme pouze v zašifrované (hashované) podobě. Pokud je vyplníte, také telefon, město a profilovou fotografii.",
+                    "Údaje v inzerátech: informace o zvířeti, fotografie, město, adresa a bod na mapě, cena nebo odměna a stav inzerátu.",
+                    "Údaje o útulku: název, popis, telefon, e-mail, web, město, adresa a fotografie.",
+                    "Technické údaje: IP adresa, údaje o prohlížeči, časy přihlášení a záznamy o chybách. Vznikají automaticky při používání webu.",
+                    "Vaši polohu z prohlížeče zjišťujeme jen tehdy, když na mapě sami zvolíte „použít moji polohu“. Slouží pouze k vycentrování mapy a ukládáme jen bod, který potvrdíte."
+                ]
+            },
+            {
+                "id": "purposes",
+                "title": "Proč údaje zpracováváme a na jakém základě",
+                "content": [
+                    [
+                        "Vytvoření a správa účtu, přihlášení, potvrzení e-mailu a obnova hesla – plnění smlouvy (čl. 6 odst. 1 písm. b) GDPR).",
+                        "Zveřejnění vašich inzerátů a profilu útulku – plnění smlouvy (čl. 6 odst. 1 písm. b) GDPR).",
+                        "Zabezpečení webu, prevence zneužití a řešení chyb – oprávněný zájem na bezpečném provozu služby (čl. 6 odst. 1 písm. f) GDPR).",
+                        "Vyřizování hlášení nezákonného obsahu a žádostí orgánů veřejné moci – plnění právní povinnosti (čl. 6 odst. 1 písm. c) GDPR) a oprávněný zájem.",
+                        "Uplatnění a obrana právních nároků – oprávněný zájem (čl. 6 odst. 1 písm. f) GDPR)."
+                    ],
+                    "Údaje nepoužíváme k reklamě ani marketingu, neprodáváme je a neprovádíme profilování ani automatizované rozhodování."
+                ]
+            },
+            {
+                "id": "public",
+                "title": "Co je veřejně viditelné",
+                "content": [
+                    "Aktivní inzeráty a profily útulků vidí kdokoli, i bez přihlášení. Zveřejňuje se vše, co do nich vyplníte, včetně fotografií, města, adresy a kontaktů útulku. Neuvádějte proto údaje, které nechcete zveřejnit.",
+                    "Bod na mapě zaokrouhlujeme přibližně na 100 m a na veřejné stránce zobrazujeme jen kruh o poloměru 300 m, nikoli přesné místo.",
+                    "Váš e-mail, heslo a údaje profilu veřejně nezobrazujeme."
+                ]
+            },
+            {
+                "id": "recipients",
+                "title": "Komu údaje předáváme",
+                "content": [
+                    "Údaje zpracovávají tito poskytovatelé služeb, kteří nám pomáhají web provozovat:",
+                    [
+                        "Supabase, Inc. (USA) – databáze, přihlašování a odesílání e-mailů k účtu.",
+                        "Cloudinary Ltd. (Izrael, USA) – ukládání a zobrazování fotografií.",
+                        "Vercel Inc. (USA) – hosting webu.",
+                        "Seznam.cz, a.s. (Česká republika) – mapové podklady a určení adresy z bodu na mapě (Mapy.com). Při zobrazení mapy obdrží vaši IP adresu a při určení adresy souřadnice zvoleného bodu."
+                    ],
+                    "Jiným osobám údaje předáme jen tehdy, když nám to ukládá zákon, například na žádost soudu nebo policie."
+                ]
+            },
+            {
+                "id": "transfers",
+                "title": "Předávání údajů mimo EU",
+                "content": [
+                    "Někteří poskytovatelé sídlí mimo Evropskou unii. Údaje jim předáváme na základě rozhodnutí Evropské komise o odpovídající ochraně (EU–US Data Privacy Framework, Izrael) nebo standardních smluvních doložek schválených Evropskou komisí."
+                ]
+            },
+            {
+                "id": "retention",
+                "title": "Jak dlouho údaje uchováváme",
+                "content": [
+                    [
+                        "Údaje k účtu, inzeráty a profily útulků po dobu existence účtu. Inzerát nebo útulek, který smažete, odstraníme i s fotografiemi.",
+                        "Po zrušení účtu smažeme jeho údaje do 30 dnů. V zálohách mohou přetrvat nejdéle dalších 90 dní, než budou přepsány.",
+                        "Technické záznamy po dobu, kterou je uchovává poskytovatel infrastruktury, zpravidla nejvýše 90 dní.",
+                        "Údaje potřebné k obraně právních nároků nebo ke splnění zákonné povinnosti po dobu, kterou to vyžaduje."
+                    ]
+                ]
+            },
+            {
+                "id": "rights",
+                "title": "Vaše práva",
+                "content": [
+                    "Máte právo na přístup ke svým údajům, jejich opravu, výmaz, omezení zpracování a přenositelnost a právo vznést námitku proti zpracování založenému na oprávněném zájmu.",
+                    "Většinu údajů můžete upravit nebo smazat sami v administraci. Zrušení účtu a ostatní žádosti pošlete na {email}. Odpovíme bez zbytečného odkladu, nejpozději do jednoho měsíce. Abychom údaje nevydali nesprávné osobě, můžeme ověřit, že žádost posíláte z e-mailu svého účtu.",
+                    "Máte také právo podat stížnost u Úřadu pro ochranu osobních údajů, Pplk. Sochora 27, 170 00 Praha 7, www.uoou.gov.cz."
+                ]
+            },
+            {
+                "id": "cookies",
+                "title": "Cookies",
+                "content": [
+                    "Používáme pouze technicky nezbytné cookies, bez kterých web nefunguje. Podle § 89 odst. 3 zákona č. 127/2005 Sb., o elektronických komunikacích, k nim není potřeba váš souhlas, a proto nezobrazujeme cookie lištu.",
+                    [
+                        "sb-…-auth-token a související cookies – udržují vaše přihlášení. Platí do odhlášení nebo vypršení relace.",
+                        "NEXT_LOCALE – pamatuje si zvolený jazyk webu. Platí do zavření prohlížeče."
+                    ],
+                    "Analytické, marketingové ani reklamní cookies nepoužíváme. Mapové podklady a fotografie načítáme ze serverů poskytovatelů uvedených výše, kteří při tom obdrží vaši IP adresu. Cookies můžete smazat nebo zablokovat v nastavení prohlížeče, ale přihlášení pak nebude fungovat."
+                ]
+            },
+            {
+                "id": "children",
+                "title": "Děti",
+                "content": [
+                    "Účet si mohou založit osoby starší 15 let. Mladší děti mohou web používat jen se souhlasem a pod dohledem zákonného zástupce."
+                ]
+            },
+            {
+                "id": "changes",
+                "title": "Změny zásad",
+                "content": [
+                    "Zásady můžeme aktualizovat, například když přidáme novou funkci nebo změníme poskytovatele. Platná verze je vždy na této stránce s datem účinnosti. O podstatných změnách předem informujeme registrované uživatele e-mailem nebo na webu."
+                ]
+            }
+        ]
+    },
+    "terms": {
+        "metaTitle": "Podmínky užívání",
+        "title": "Podmínky užívání",
+        "intro": [
+            "Tyto podmínky upravují používání webu Pet Finder (dále jen „služba“). Registrací nebo zveřejněním obsahu s nimi souhlasíte. Jak zpracováváme osobní údaje, popisují samostatné Zásady zpracování osobních údajů."
+        ],
+        "sections": [
+            {
+                "id": "about",
+                "title": "Úvodní ustanovení",
+                "content": [
+                    "Službu provozuje {name}, fyzická osoba, kontaktní e-mail {email} (dále jen „provozovatel“).",
+                    "Služba je bezplatná platforma, na které uživatelé zveřejňují inzeráty ztracených a nalezených zvířat, zvířat k adopci a k prodeji a útulky své profily. Provozovatel sám zvířata neprodává ani nezprostředkovává a není stranou dohod mezi uživateli.",
+                    "Vztahy neupravené těmito podmínkami se řídí právním řádem České republiky, zejména zákonem č. 89/2012 Sb., občanským zákoníkem."
+                ]
+            },
+            {
+                "id": "account",
+                "title": "Uživatelský účet",
+                "content": [
+                    [
+                        "Účet si může založit osoba starší 15 let. Při registraci uveďte pravdivé údaje a typ účtu, který vám odpovídá.",
+                        "Účet typu útulek smí založit jen osoba oprávněná jednat za útulek nebo organizaci na ochranu zvířat.",
+                        "Přístupové údaje chraňte a nesdílejte. Za činnost ve svém účtu odpovídáte vy.",
+                        "Účet můžete kdykoli zrušit žádostí na {email}."
+                    ]
+                ]
+            },
+            {
+                "id": "content",
+                "title": "Pravidla pro inzeráty a další obsah",
+                "content": [
+                    "Za obsah, který zveřejníte, odpovídáte vy. Musí být pravdivý, aktuální a v souladu s právními předpisy. Zejména je zakázáno:",
+                    [
+                        "nabízet zvířata v rozporu se zákonem č. 246/1992 Sb., na ochranu zvířat proti týrání, s veterinárními předpisy nebo s pravidly ochrany ohrožených druhů;",
+                        "zveřejňovat vymyšlené, klamavé nebo duplicitní inzeráty a inzeráty, které se netýkají zvířat;",
+                        "zveřejňovat osobní údaje jiných lidí bez jejich souhlasu nebo fotografie, ke kterým nemáte práva;",
+                        "zveřejňovat urážlivý, nenávistný či násilný obsah, spam nebo reklamu;",
+                        "narušovat chod služby nebo obcházet její zabezpečení."
+                    ],
+                    "Inzerát, který už není aktuální, uzavřete nebo smažte."
+                ]
+            },
+            {
+                "id": "sale",
+                "title": "Prodej, adopce a předání zvířat",
+                "content": [
+                    "Dohoda o prodeji, adopci nebo předání zvířete vzniká přímo mezi uživateli. Provozovatel neověřuje zdraví, původ ani doklady zvířat, nepřijímá platby a neodpovídá za splnění dohody.",
+                    "Pokud zvířata prodáváte v rámci podnikání, uveďte to v inzerátu a dodržujte povinnosti podnikatele, včetně předpisů na ochranu spotřebitele.",
+                    "Před převzetím zvířete doporučujeme ověřit jeho zdravotní stav, očkování a čipování a zvíře si prohlédnout osobně."
+                ]
+            },
+            {
+                "id": "lost-found",
+                "title": "Ztracená a nalezená zvířata",
+                "content": [
+                    "Inzerát nenahrazuje povinnosti nálezce podle občanského zákoníku (§ 1051 a násl.). Nalezené zvíře je třeba vrátit vlastníkovi, a pokud není znám, oznámit nález obci. Pomoci může také nejbližší útulek nebo městská policie.",
+                    "Za odměnu uvedenou v inzerátu odpovídá ten, kdo ji nabídl."
+                ]
+            },
+            {
+                "id": "license",
+                "title": "Práva k obsahu",
+                "content": [
+                    "Zveřejněním fotografií a textů udělujete provozovateli bezúplatnou nevýhradní licenci k jejich uložení, úpravě velikosti a formátu a zobrazení ve službě, a to po dobu jejich zveřejnění. Jinak je provozovatel nepoužívá. Autorská práva vám zůstávají.",
+                    "Vzhled, kód a značka služby patří provozovateli."
+                ]
+            },
+            {
+                "id": "report",
+                "title": "Hlášení nezákonného obsahu",
+                "content": [
+                    "Jednotným kontaktním místem pro uživatele i orgány veřejné moci podle nařízení (EU) 2022/2065 (akt o digitálních službách) je e-mail {email}. Komunikovat lze česky nebo anglicky.",
+                    "Hlášení obsahu, který považujete za nezákonný nebo v rozporu s těmito podmínkami, by mělo obsahovat:",
+                    [
+                        "odkaz na konkrétní inzerát nebo profil;",
+                        "vysvětlení, proč je obsah podle vás nezákonný;",
+                        "vaše jméno a e-mail (to neplatí pro hlášení některých trestných činů, například zneužívání dětí);",
+                        "prohlášení, že hlášení podáváte v dobré víře a údaje v něm jsou podle vašeho nejlepšího vědomí přesné a úplné."
+                    ],
+                    "Hlášení posoudíme bez zbytečného odkladu, nestranně a s péčí a o výsledku vás informujeme. Pokud obsah odstraníme nebo omezíme, sdělíme autorovi, z jakého důvodu, a ten se může proti rozhodnutí ozvat na stejném e-mailu."
+                ]
+            },
+            {
+                "id": "suspension",
+                "title": "Omezení a zrušení účtu",
+                "content": [
+                    "Při porušení těchto podmínek nebo zákona můžeme obsah skrýt nebo odstranit, a při závažném či opakovaném porušení účet dočasně zablokovat nebo zrušit. Pokud to není vyloučeno zákonem, rozhodnutí odůvodníme.",
+                    "Opakovaně zjevně nepodložená hlášení můžeme po předchozím upozornění přestat vyřizovat."
+                ]
+            },
+            {
+                "id": "liability",
+                "title": "Odpovědnost",
+                "content": [
+                    "Služba je poskytována bezplatně, tak jak je. Usilujeme o její spolehlivý provoz, ale nezaručujeme nepřetržitou dostupnost ani bezchybnost a službu můžeme měnit nebo ukončit.",
+                    "Za obsah uživatelů odpovídáme jen v rozsahu stanoveném zákonem č. 480/2004 Sb., o některých službách informační společnosti, a aktem o digitálních službách, tedy pokud se o nezákonném obsahu dozvíme a neodstraníme jej bez zbytečného odkladu.",
+                    "Neodpovídáme za škodu vzniklou z dohod mezi uživateli. Tím není dotčena odpovědnost, kterou nelze ze zákona vyloučit, zejména za újmu způsobenou úmyslně nebo z hrubé nedbalosti."
+                ]
+            },
+            {
+                "id": "disputes",
+                "title": "Řešení sporů",
+                "content": [
+                    "Stížnosti a podněty posílejte na {email}. Spotřebitel může podat návrh na mimosoudní řešení sporu u České obchodní inspekce, www.coi.cz.",
+                    "Spory rozhodují české soudy. Spotřebitelům tím nejsou odňata práva, která jim zaručují kogentní předpisy státu jejich bydliště."
+                ]
+            },
+            {
+                "id": "final",
+                "title": "Změny podmínek a závěrečná ustanovení",
+                "content": [
+                    "Podmínky můžeme měnit, například při rozšíření služby nebo změně právních předpisů. O změně informujeme registrované uživatele e-mailem nebo na webu nejméně 14 dní před její účinností. Pokud se změnou nesouhlasíte, můžete účet do té doby zrušit; dalším používáním služby změnu přijímáte.",
+                    "Podmínky jsou vydány v češtině a v anglickém překladu. V případě rozporu má přednost česká verze."
+                ]
+            }
+        ]
+    }
+}

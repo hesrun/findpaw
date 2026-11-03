@@ -3,10 +3,11 @@ export default function SignInLayout({
 }: {
     children: React.ReactNode;
 }) {
-    // Lavender backdrop so the white form card stands out.
+    // Lavender backdrop so the white form card stands out; m-auto inside
+    // the flex parent centers the form both ways.
     return (
-        <main className="flex-1 bg-hero">
-            <div className="container mx-auto p-4">{children}</div>
+        <main className="flex-1 flex bg-hero">
+            <div className="container m-auto p-4">{children}</div>
         </main>
     );
 }

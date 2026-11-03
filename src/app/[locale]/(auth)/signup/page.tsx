@@ -24,6 +24,7 @@ import {
 } from '@features/auth/constants';
 import { useSignUpForm } from '@features/auth/hooks/useSignUpForm';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
+import { LEGAL_ROUTES } from '@shared/constants/legal';
 
 // Keyed by the database role enum: adding or renaming a sign-up role
 // fails type checking until it has an icon here.
@@ -42,7 +43,7 @@ export default function SignUp() {
     return (
         <form
             onSubmit={handleSubmit}
-            className="grid gap-8 w-full max-w-md m-auto p-6 mt-[8%]"
+            className="grid gap-8 w-full max-w-md m-auto p-6"
         >
             <Card className="p-6 grid gap-6">
                 <h1 className="text-3xl font-display font-extrabold">
@@ -117,6 +118,28 @@ export default function SignUp() {
                 <Button fullWidth type="submit" isPending={isPending}>
                     {t('btns.signup')}
                 </Button>
+                <p className="text-sm text-center text-muted">
+                    {t.rich('hints.signUpConsent', {
+                        terms: (chunks) => (
+                            <Link
+                                href={LEGAL_ROUTES.terms}
+                                target="_blank"
+                                className="font-bold text-accent hover:underline"
+                            >
+                                {chunks}
+                            </Link>
+                        ),
+                        privacy: (chunks) => (
+                            <Link
+                                href={LEGAL_ROUTES.privacy}
+                                target="_blank"
+                                className="font-bold text-accent hover:underline"
+                            >
+                                {chunks}
+                            </Link>
+                        ),
+                    })}
+                </p>
                 <p className="text-sm text-center text-muted">
                     {t('links.haveAccount')}{' '}
                     <Link

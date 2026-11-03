@@ -26,7 +26,7 @@ export default function ForgotPasswordForm({
     return (
         <form
             onSubmit={handleSubmit}
-            className="grid gap-8 w-full max-w-md m-auto p-6 mt-[10%]"
+            className="grid gap-8 w-full max-w-md m-auto p-6"
         >
             <Card className="p-6 grid gap-6">
                 <div className="grid gap-2">

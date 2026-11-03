@@ -53,7 +53,8 @@
             "passwordUpdated": "Password updated successfully"
         },
         "hints": {
-            "forgotPassword": "Enter your account email and we'll send you a link to reset your password."
+            "forgotPassword": "Enter your account email and we'll send you a link to reset your password.",
+            "signUpConsent": "By signing up you agree to the <terms>Terms of Use</terms> and confirm you have read the <privacy>Privacy Policy</privacy>."
         }
     },
     "HomePage": {
@@ -435,5 +436,15 @@
         "remove": "Remove photo",
         "tooLarge": "Max file size is {size} MB",
         "uploadError": "Failed to upload one or more images"
+    },
+    "footer": {
+        "tagline": "Lost, found, and looking for a home: listings of pets and shelters across the Czech Republic.",
+        "explore": "Explore",
+        "legal": "Legal",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Use",
+        "cookies": "Cookies",
+        "contact": "Contact us",
+        "copyright": "© {year} Pet Finder"
     }
 }

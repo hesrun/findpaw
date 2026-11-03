@@ -1,0 +1,243 @@
+{
+    "effectiveFrom": "Effective from {date}",
+    "contents": "Contents",
+    "privacy": {
+        "metaTitle": "Privacy Policy",
+        "title": "Privacy Policy",
+        "intro": [
+            "This policy explains how we process personal data when running the Pet Finder website, for what purposes, for how long, and what rights you have. It follows Regulation (EU) 2016/679 (GDPR) and Czech Act No. 110/2019 Coll., on personal data processing.",
+            "This is a translation. If it differs from the Czech version, the Czech version prevails."
+        ],
+        "sections": [
+            {
+                "id": "controller",
+                "title": "Who the controller is",
+                "content": [
+                    "The controller of personal data is {name}, a natural person (the “operator” or “we”).",
+                    "For anything related to personal data, contact us at {email}. We have not appointed a data protection officer because we are not required to."
+                ]
+            },
+            {
+                "id": "data",
+                "title": "What data we process",
+                "content": [
+                    "Account data: email, user name, account type (private person or shelter), and a password stored only in hashed form. If you fill them in, also phone, city, and profile photo.",
+                    "Listing data: information about the animal, photos, city, address and a map point, price or reward, and the listing status.",
+                    "Shelter data: name, description, phone, email, website, city, address, and photos.",
+                    "Technical data: IP address, browser details, sign-in times, and error logs. They are created automatically when you use the website.",
+                    "We read your location from the browser only when you choose “use my location” on a map yourself. It is used only to center the map, and we store only the point you confirm."
+                ]
+            },
+            {
+                "id": "purposes",
+                "title": "Why we process data and on what legal basis",
+                "content": [
+                    [
+                        "Creating and managing your account, signing in, confirming your email, and resetting your password – performance of a contract (Art. 6(1)(b) GDPR).",
+                        "Publishing your listings and shelter profile – performance of a contract (Art. 6(1)(b) GDPR).",
+                        "Keeping the website secure, preventing abuse, and fixing errors – our legitimate interest in running the service safely (Art. 6(1)(f) GDPR).",
+                        "Handling reports of illegal content and requests from public authorities – compliance with a legal obligation (Art. 6(1)(c) GDPR) and legitimate interest.",
+                        "Establishing and defending legal claims – legitimate interest (Art. 6(1)(f) GDPR)."
+                    ],
+                    "We do not use your data for advertising or marketing, we do not sell it, and we do not carry out profiling or automated decision-making."
+                ]
+            },
+            {
+                "id": "public",
+                "title": "What is publicly visible",
+                "content": [
+                    "Active listings and shelter profiles are visible to anyone, even without signing in. Everything you enter in them is published, including photos, city, address, and shelter contacts. Do not enter anything you do not want to make public.",
+                    "We round the map point to about 100 m, and the public page shows only a circle with a 300 m radius, not the exact place.",
+                    "Your email, password, and profile data are never shown publicly."
+                ]
+            },
+            {
+                "id": "recipients",
+                "title": "Who we share data with",
+                "content": [
+                    "Your data is processed by these service providers that help us run the website:",
+                    [
+                        "Supabase, Inc. (USA) – database, sign-in, and account emails.",
+                        "Cloudinary Ltd. (Israel, USA) – storing and displaying photos.",
+                        "Vercel Inc. (USA) – website hosting.",
+                        "Seznam.cz, a.s. (Czech Republic) – map tiles and finding the address of a map point (Mapy.com). When a map is shown it receives your IP address, and when an address is looked up, the coordinates of the chosen point."
+                    ],
+                    "We share data with anyone else only when the law requires it, for example at the request of a court or the police."
+                ]
+            },
+            {
+                "id": "transfers",
+                "title": "Transfers outside the EU",
+                "content": [
+                    "Some providers are based outside the European Union. We transfer data to them on the basis of a European Commission adequacy decision (EU–US Data Privacy Framework, Israel) or standard contractual clauses approved by the European Commission."
+                ]
+            },
+            {
+                "id": "retention",
+                "title": "How long we keep data",
+                "content": [
+                    [
+                        "Account data, listings, and shelter profiles for as long as the account exists. A listing or shelter you delete is removed together with its photos.",
+                        "After an account is closed, we delete its data within 30 days. Backups may keep it for up to 90 more days until they are overwritten.",
+                        "Technical logs for as long as the infrastructure provider keeps them, usually no more than 90 days.",
+                        "Data needed to defend legal claims or to meet a legal obligation for as long as that requires."
+                    ]
+                ]
+            },
+            {
+                "id": "rights",
+                "title": "Your rights",
+                "content": [
+                    "You have the right to access your data, to have it corrected or erased, to restrict its processing, to data portability, and to object to processing based on legitimate interest.",
+                    "You can edit or delete most data yourself in the dashboard. Send account closure and other requests to {email}. We reply without undue delay and within one month at the latest. To avoid giving data to the wrong person, we may check that the request comes from your account email.",
+                    "You also have the right to lodge a complaint with the Czech Office for Personal Data Protection (Úřad pro ochranu osobních údajů), Pplk. Sochora 27, 170 00 Prague 7, www.uoou.gov.cz."
+                ]
+            },
+            {
+                "id": "cookies",
+                "title": "Cookies",
+                "content": [
+                    "We use only strictly necessary cookies, without which the website does not work. Under Section 89(3) of Czech Act No. 127/2005 Coll., on electronic communications, they do not require your consent, so we do not show a cookie banner.",
+                    [
+                        "sb-…-auth-token and related cookies – keep you signed in. They last until you sign out or the session expires.",
+                        "NEXT_LOCALE – remembers the language of the website. It lasts until you close the browser."
+                    ],
+                    "We do not use analytics, marketing, or advertising cookies. Map tiles and photos are loaded from the servers of the providers listed above, which receive your IP address when they do. You can delete or block cookies in your browser settings, but signing in will then not work."
+                ]
+            },
+            {
+                "id": "children",
+                "title": "Children",
+                "content": [
+                    "People over 15 years of age may create an account. Younger children may use the website only with the consent and under the supervision of a parent or guardian."
+                ]
+            },
+            {
+                "id": "changes",
+                "title": "Changes to this policy",
+                "content": [
+                    "We may update this policy, for example when we add a feature or change a provider. The current version is always on this page with its effective date. We inform registered users about significant changes in advance by email or on the website."
+                ]
+            }
+        ]
+    },
+    "terms": {
+        "metaTitle": "Terms of Use",
+        "title": "Terms of Use",
+        "intro": [
+            "These terms govern the use of the Pet Finder website (the “service”). By signing up or publishing content you agree to them. How we process personal data is described in the separate Privacy Policy.",
+            "This is a translation. If it differs from the Czech version, the Czech version prevails."
+        ],
+        "sections": [
+            {
+                "id": "about",
+                "title": "Introduction",
+                "content": [
+                    "The service is run by {name}, a natural person, contact email {email} (the “operator”).",
+                    "The service is a free platform where users publish listings of lost and found animals and animals for adoption or sale, and shelters publish their profiles. The operator does not sell or broker animals and is not a party to agreements between users.",
+                    "Matters not covered by these terms are governed by the laws of the Czech Republic, in particular Act No. 89/2012 Coll., the Civil Code."
+                ]
+            },
+            {
+                "id": "account",
+                "title": "User account",
+                "content": [
+                    [
+                        "People over 15 years of age may create an account. Enter true information and the account type that fits you.",
+                        "A shelter account may be created only by a person authorized to act for the shelter or animal welfare organization.",
+                        "Keep your sign-in details safe and do not share them. You are responsible for activity in your account.",
+                        "You can close your account at any time by writing to {email}."
+                    ]
+                ]
+            },
+            {
+                "id": "content",
+                "title": "Rules for listings and other content",
+                "content": [
+                    "You are responsible for the content you publish. It must be true, up to date, and lawful. In particular, you must not:",
+                    [
+                        "offer animals in breach of Czech Act No. 246/1992 Coll., on the protection of animals against cruelty, veterinary regulations, or rules protecting endangered species;",
+                        "publish invented, misleading, or duplicate listings, or listings unrelated to animals;",
+                        "publish other people’s personal data without their consent, or photos you have no rights to;",
+                        "publish offensive, hateful, or violent content, spam, or advertising;",
+                        "disrupt the service or bypass its security."
+                    ],
+                    "Close or delete a listing once it is no longer current."
+                ]
+            },
+            {
+                "id": "sale",
+                "title": "Sale, adoption, and handover of animals",
+                "content": [
+                    "An agreement to sell, adopt, or hand over an animal is made directly between users. The operator does not check the health, origin, or documents of animals, does not accept payments, and is not responsible for the agreement being fulfilled.",
+                    "If you sell animals as a business, say so in the listing and meet the obligations of a business, including consumer protection law.",
+                    "Before taking an animal, we recommend checking its health, vaccinations, and microchip and seeing it in person."
+                ]
+            },
+            {
+                "id": "lost-found",
+                "title": "Lost and found animals",
+                "content": [
+                    "A listing does not replace the finder’s duties under the Czech Civil Code (Section 1051 et seq.). A found animal must be returned to its owner, and if the owner is unknown, the find must be reported to the municipality. The nearest shelter or municipal police can also help.",
+                    "A reward stated in a listing is the responsibility of the person who offered it."
+                ]
+            },
+            {
+                "id": "license",
+                "title": "Rights to content",
+                "content": [
+                    "By publishing photos and texts you grant the operator a free, non-exclusive license to store them, change their size and format, and display them in the service for as long as they are published. The operator does not use them otherwise. You keep your copyright.",
+                    "The design, code, and brand of the service belong to the operator."
+                ]
+            },
+            {
+                "id": "report",
+                "title": "Reporting illegal content",
+                "content": [
+                    "The single point of contact for users and public authorities under Regulation (EU) 2022/2065 (Digital Services Act) is {email}. You can write in Czech or English.",
+                    "A report of content you consider illegal or contrary to these terms should include:",
+                    [
+                        "a link to the specific listing or profile;",
+                        "an explanation of why you consider the content illegal;",
+                        "your name and email (not required when reporting certain criminal offences, such as child abuse);",
+                        "a statement that you make the report in good faith and that the information in it is accurate and complete to the best of your knowledge."
+                    ],
+                    "We assess reports without undue delay, objectively, and with care, and let you know the outcome. If we remove or restrict content, we tell its author why, and the author can contest the decision at the same email."
+                ]
+            },
+            {
+                "id": "suspension",
+                "title": "Restricting and closing accounts",
+                "content": [
+                    "If these terms or the law are broken, we may hide or remove content and, for serious or repeated breaches, suspend or close the account. Unless the law prevents it, we explain our decision.",
+                    "We may stop handling reports from someone who repeatedly sends manifestly unfounded reports, after a prior warning."
+                ]
+            },
+            {
+                "id": "liability",
+                "title": "Liability",
+                "content": [
+                    "The service is provided free of charge and as is. We aim to run it reliably but do not guarantee uninterrupted availability or freedom from errors, and we may change or discontinue it.",
+                    "We are liable for user content only to the extent set by Czech Act No. 480/2004 Coll., on certain information society services, and the Digital Services Act, that is, if we learn about illegal content and do not remove it without undue delay.",
+                    "We are not liable for damage arising from agreements between users. This does not affect liability that cannot be excluded by law, in particular for harm caused intentionally or through gross negligence."
+                ]
+            },
+            {
+                "id": "disputes",
+                "title": "Disputes",
+                "content": [
+                    "Send complaints and suggestions to {email}. A consumer may file a proposal for out-of-court dispute resolution with the Czech Trade Inspection Authority (Česká obchodní inspekce), www.coi.cz.",
+                    "Disputes are decided by Czech courts. This does not deprive consumers of the rights guaranteed to them by the mandatory laws of their country of residence."
+                ]
+            },
+            {
+                "id": "final",
+                "title": "Changes and final provisions",
+                "content": [
+                    "We may change these terms, for example when the service grows or the law changes. We inform registered users of a change by email or on the website at least 14 days before it takes effect. If you disagree with a change, you can close your account before then; by continuing to use the service you accept it.",
+                    "These terms are issued in Czech with an English translation. In case of conflict, the Czech version prevails."
+                ]
+            }
+        ]
+    }
+}
