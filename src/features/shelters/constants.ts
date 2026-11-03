@@ -12,3 +12,6 @@ export const SHELTER_PETS_PAGE_SIZE = 6;
 
 // Columns the public shelter list may be sorted by.
 export const SHELTER_SORT_FIELDS = ['created_at', 'name'] as const;
+
+// Photos per shelter profile.
+export const SHELTER_MAX_PHOTOS = 3;

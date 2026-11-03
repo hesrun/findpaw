@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { CLOUDINARY_IMAGE_URL_PREFIX } from '@shared/constants/images';
 
 // Building blocks for Zod schemas of HTML forms and URL parameters, where
 // every value arrives as a string, an empty field as "", and an unchecked
@@ -37,8 +38,15 @@ export const optionalText = <T extends z.ZodTypeAny>(schema: T) =>
 // Checkbox or switch: the browser sends "on" only when it is checked.
 export const checkbox = z.preprocess((value) => value === 'on', z.boolean());
 
-// Uploaded image URLs; no images are saved as null.
-export const imageUrls = z
-    .array(z.string())
-    .default([])
-    .transform((urls) => (urls.length ? urls : null));
+// Uploaded image URLs, at most `max`, only from our Cloudinary cloud (a
+// foreign URL would also break next/image). No images are saved as null.
+export const imageUrls = (max: number) =>
+    z
+        .array(
+            z
+                .string()
+                .refine((url) => url.startsWith(CLOUDINARY_IMAGE_URL_PREFIX)),
+        )
+        .max(max)
+        .default([])
+        .transform((urls) => (urls.length ? urls : null));

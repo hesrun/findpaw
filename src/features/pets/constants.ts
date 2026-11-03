@@ -143,3 +143,6 @@ export const PET_LOCATION_PUBLIC_RADIUS_M = 300;
 
 // Zoom used once a point is chosen or shown.
 export const PET_LOCATION_ZOOM = 15;
+
+// Photos per pet listing.
+export const PET_MAX_PHOTOS = 5;

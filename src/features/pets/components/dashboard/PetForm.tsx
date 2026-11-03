@@ -23,12 +23,13 @@ import {
     LISTING_TYPES,
     PRICED_LISTING_TYPE,
     REWARD_LISTING_TYPE,
+    PET_MAX_PHOTOS,
 } from '@features/pets/constants';
 import { useTranslations } from 'next-intl';
 import {
     FileUploader,
     FileUploaderRef,
-} from '@shared/components/UI/FileUploader';
+} from '@shared/components/UI/uploader/FileUploader';
 import { createPet, updatePet } from '@features/pets/actions';
 import {
     LuBadgeAlert,
@@ -370,9 +371,7 @@ export default function PetForm({
                             currentFiles={initialData?.image_url ?? undefined}
                             label={t('fields.photo')}
                             folder="pets"
-                            multiple
-                            maxFiles={5}
-                            maxSizeMB={5}
+                            maxFiles={PET_MAX_PHOTOS}
                         />
                     </DashboardCard>
                     <DashboardCard

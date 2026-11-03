@@ -44,9 +44,11 @@ Chosen from four concepts (2026-11). White page; lavender (`--hero`, `--soft`) o
 
 HeroUI v3 is built on Tailwind CSS v4 (`@heroui/styles` has `tailwindcss` as a peer dependency), so Tailwind cannot be removed while HeroUI components are in use. The preferred direction is SCSS modules on the existing CSS custom-property tokens in `src/css/styles.css`, possibly replacing HeroUI with React Aria Components over time. Not yet decided.
 
-## Open: image storage
+## Images: Cloudinary with signed browser uploads
 
-Pet images are uploaded to Cloudinary from the client with an unsigned preset, while Supabase Storage buckets and policies also exist. One storage provider should be chosen, and uploads should be signed or validated on the server.
+Images go from the browser straight to Cloudinary, so files never pass through our server or its request size limit. The upload is signed: `signImageUpload` (`src/shared/lib/cloudinary/actions.ts`) checks the session and signs the folder (`<pets|shelters>/<user id>`), the timestamp, and the allowed formats with `CLOUDINARY_API_SECRET`; Cloudinary rejects any changed parameter. The old unsigned preset let anyone upload to the account with values from the client bundle. The signature is a SHA-1 over the sorted parameters, done with `node:crypto` instead of the Cloudinary SDK. Saved URLs are validated by `imageUrls(max)` in `src/shared/lib/form.ts`: only our cloud, at most the feature's photo limit. Images are shown with `CloudImage` (a client wrapper over next-cloudinary's `CldImage`), so Cloudinary picks size, format, and quality instead of the Next.js image optimizer. The uploader is our own UI on React Aria `DropZone` and `FileTrigger` (already a HeroUI dependency); the Cloudinary upload widget was rejected for its look. Files stay in the browser until the form is saved.
+
+Saving a form or deleting a pet or shelter deletes the photos it no longer uses (`deleteUserImages` in `src/shared/lib/cloudinary/server.ts`, run with `after()` so the response does not wait). Only files inside the user's own folder are deleted: any URL from our cloud may be saved on a listing, so a URL alone does not prove ownership. Older images uploaded before user folders are never deleted. Supabase Storage is not used; its buckets and policies were removed (`20261103000300_drop_storage_buckets.sql`).
 
 ## Password recovery and sign-up confirmation through `token_hash` and `/api/auth/confirm`
 

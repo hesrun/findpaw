@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
+import CloudImage from '@shared/components/UI/CloudImage';
 import { useState, type ReactNode } from 'react';
 
 // Main image with thumbnails. `placeholder` is shown when there are no images.
@@ -23,7 +23,7 @@ export default function ImageGallery({
         <div className="grid gap-3">
             <div className="relative aspect-4/3 overflow-hidden rounded-card bg-soft ring-1 ring-border">
                 {active ? (
-                    <Image
+                    <CloudImage
                         src={active}
                         alt={name}
                         fill
@@ -52,7 +52,7 @@ export default function ImageGallery({
                                         : 'ring-1 ring-border opacity-70 hover:opacity-100',
                                 )}
                             >
-                                <Image
+                                <CloudImage
                                     src={url}
                                     alt=""
                                     fill

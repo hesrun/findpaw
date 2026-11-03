@@ -41,4 +41,4 @@ After every schema change, run `npm run gentypes`. Use the generated `Database` 
 
 ## Storage
 
-Storage uploads and policies must be documented together. Any new bucket or path convention needs policies that restrict writes and deletes appropriately and a corresponding update to the feature documentation.
+Supabase Storage is not used: images live in Cloudinary (see `docs/decisions.md`). If a bucket is added again, storage uploads and policies must be documented together. Any new bucket or path convention needs policies that restrict writes and deletes appropriately and a corresponding update to the feature documentation.

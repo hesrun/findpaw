@@ -1,6 +1,6 @@
 import { Button, Modal } from '@heroui/react';
 import { useLocale, useTranslations } from 'next-intl';
-import Image from 'next/image';
+import CloudImage from '@shared/components/UI/CloudImage';
 import {
     LuBadgeAlert,
     LuCamera,
@@ -75,7 +75,7 @@ export default function MyPetsDetailModal({
                                                     url: string,
                                                     index: number,
                                                 ) => (
-                                                    <Image
+                                                    <CloudImage
                                                         key={index}
                                                         width={600}
                                                         height={400}

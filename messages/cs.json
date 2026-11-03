@@ -427,5 +427,13 @@
         "home": "Zpět na hlavní stránku",
         "pets": "Prohlédnout zvířata",
         "catLabel": "404: mourovatá kočka mezi dvěma závěsy, otočená zády"
+    },
+    "uploader": {
+        "label": "Přetáhněte sem fotky nebo klikněte pro výběr",
+        "limits": "Do {size} MB · {count, plural, one {# fotka} few {až # fotky} other {až # fotek}}",
+        "notSaved": "Zatím neuloženo",
+        "remove": "Odebrat fotku",
+        "tooLarge": "Maximální velikost souboru je {size} MB",
+        "uploadError": "Nepodařilo se nahrát jednu nebo více fotek"
     }
 }

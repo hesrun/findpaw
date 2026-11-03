@@ -8,7 +8,7 @@ import {
     optionalText,
     toNumber,
 } from '@shared/lib/form';
-import { PET_AGE_GROUPS, PET_SORT_FIELDS } from './constants';
+import { PET_AGE_GROUPS, PET_MAX_PHOTOS, PET_SORT_FIELDS } from './constants';
 
 const PetListingTypeSchema = z.enum(Constants.public.Enums.pet_listing_type);
 const PetSexSchema = z.enum(Constants.public.Enums.pet_sex);
@@ -27,7 +27,7 @@ export const PetFormSchema = z.object({
     breed: optionalText(z.string()),
     city: optionalText(z.string()),
     address: optionalText(z.string()),
-    image_url: imageUrls,
+    image_url: imageUrls(PET_MAX_PHOTOS),
     shelter_id: optionalText(z.string().uuid()),
     listing_type: PetListingTypeSchema,
     price: nullableNumber(z.number().nonnegative()),

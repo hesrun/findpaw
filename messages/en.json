@@ -427,5 +427,13 @@
         "home": "Back to home",
         "pets": "Browse pets",
         "catLabel": "404: a tabby cat between two curtains, turned away from you"
+    },
+    "uploader": {
+        "label": "Drop photos here or click to choose",
+        "limits": "Up to {size} MB · {count, plural, one {# photo} other {up to # photos}}",
+        "notSaved": "Not saved yet",
+        "remove": "Remove photo",
+        "tooLarge": "Max file size is {size} MB",
+        "uploadError": "Failed to upload one or more images"
     }
 }

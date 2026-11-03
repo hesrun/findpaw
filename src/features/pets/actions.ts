@@ -3,6 +3,8 @@
 import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { readFormData } from '@shared/lib/form';
 import { revalidatePath } from 'next/cache';
+import { after } from 'next/server';
+import { deleteUserImages, removedImages } from '@shared/lib/cloudinary/server';
 import { PetFormSchema, PetStatusChangeSchema, type PetForm } from './schemas';
 import { PET_LOCATION_DECIMALS, REWARD_LISTING_TYPE } from './constants';
 
@@ -72,13 +74,30 @@ export async function updatePet(petId: string, formData: FormData) {
     }
     await assertOwnShelter(parsed.data.shelter_id);
 
+    const { data: before } = await supabase
+        .from('pets')
+        .select('image_url')
+        .eq('id', petId)
+        .eq('owner_id', user.id)
+        .maybeSingle();
+    const row = toPetRow(parsed.data);
+
     const { error } = await supabase
         .from('pets')
-        .update(toPetRow(parsed.data))
+        .update(row)
         .eq('id', petId)
         .eq('owner_id', user.id);
 
     if (error) throw error;
+
+    // Photos removed in the form are deleted after the response is sent.
+    after(() =>
+        deleteUserImages(
+            removedImages(before?.image_url, row.image_url),
+            'pets',
+            user.id,
+        ),
+    );
 
     revalidatePath('/dashboard/pets');
     return { success: true };
@@ -87,16 +106,19 @@ export async function updatePet(petId: string, formData: FormData) {
 export async function deletePet(petId: string) {
     const { supabase, user } = await getSupabaseWithUser();
 
-    const { error } = await supabase
+    const { data: deleted, error } = await supabase
         .from('pets')
         .delete()
         .eq('id', petId)
-        .eq('owner_id', user.id);
+        .eq('owner_id', user.id)
+        .select('image_url')
+        .maybeSingle();
 
     if (error) throw error;
 
-    revalidatePath('/dashboard/pets');
+    after(() => deleteUserImages(deleted?.image_url ?? [], 'pets', user.id));
 
+    revalidatePath('/dashboard/pets');
     return { success: true };
 }
 

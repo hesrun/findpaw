@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import type { PetWithShelter } from '@/types/pets';
-import Image from 'next/image';
+import CloudImage from '@shared/components/UI/CloudImage';
 import { LuGift, LuMapPin } from 'react-icons/lu';
 import ListingChip from '@/shared/components/UI/ListingChips';
 import { formatCzk } from '@shared/helpers/currencyFormat';
@@ -46,7 +46,7 @@ export default function PetCard({ pet }: { pet: PetWithShelter }) {
             <article className="h-full bg-surface rounded-card shadow-my ring-1 ring-border flex flex-col transition-shadow duration-300 group-hover:ring-accent/40">
                 <div className="relative m-2 mb-0 aspect-4/3 overflow-hidden rounded-media">
                     {image ? (
-                        <Image
+                        <CloudImage
                             src={image}
                             alt={pet.name ?? ''}
                             fill

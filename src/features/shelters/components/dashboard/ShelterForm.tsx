@@ -15,7 +15,8 @@ import { useRouter } from 'next/navigation';
 import {
     FileUploader,
     FileUploaderRef,
-} from '@shared/components/UI/FileUploader';
+} from '@shared/components/UI/uploader/FileUploader';
+import { SHELTER_MAX_PHOTOS } from '@features/shelters/constants';
 import DashboardCard from '@shared/components/UI/DashboardCard';
 import { createShelter, updateShelter } from '@features/shelters/actions';
 import { LuBuilding2, LuCamera, LuContact, LuMapPin } from 'react-icons/lu';
@@ -144,9 +145,8 @@ export default function ShelterForm({
                     >
                         <FileUploader
                             ref={fileUploaderRef}
-                            multiple
-                            maxFiles={3}
-                            folder="shelter-images"
+                            maxFiles={SHELTER_MAX_PHOTOS}
+                            folder="shelters"
                             currentFiles={initialData?.img_url}
                             label={t('fields.photos')}
                         />

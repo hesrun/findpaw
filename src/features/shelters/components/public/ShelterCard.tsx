@@ -1,5 +1,5 @@
 import type { Shelter } from '@/types/shelters';
-import Image from 'next/image';
+import CloudImage from '@shared/components/UI/CloudImage';
 import { isHttpUrl } from '@shared/lib/url';
 import { PiEnvelopeSimple, PiGlobe, PiMapPin, PiPhone } from 'react-icons/pi';
 import { ShelterPlaceholder } from '@UI/PetPlaceholder';
@@ -20,7 +20,7 @@ export default function ShelterCard({ shelter }: { shelter: Shelter }) {
         <article className="group relative bg-surface rounded-card shadow-my ring-1 ring-border h-full flex flex-col transition-shadow duration-300 hover:ring-accent/40 has-focus-visible:ring-accent">
             <div className="relative m-2 mb-0 aspect-2/1 overflow-hidden rounded-media">
                 {image ? (
-                    <Image
+                    <CloudImage
                         src={image}
                         alt={shelter.name}
                         fill

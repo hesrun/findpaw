@@ -1,7 +1,11 @@
 import { z } from 'zod';
 import { imageUrls, optionalNumber, optionalText } from '@shared/lib/form';
 import { isHttpUrl } from '@shared/lib/url';
-import { SHELTER_MAX_PAGE_SIZE, SHELTER_SORT_FIELDS } from './constants';
+import {
+    SHELTER_MAX_PAGE_SIZE,
+    SHELTER_MAX_PHOTOS,
+    SHELTER_SORT_FIELDS,
+} from './constants';
 
 // One form creates and edits a shelter, so one schema serves both actions.
 export const ShelterFormSchema = z.object({
@@ -14,7 +18,7 @@ export const ShelterFormSchema = z.object({
     ),
     city: optionalText(z.string()),
     address: optionalText(z.string()),
-    img_url: imageUrls,
+    img_url: imageUrls(SHELTER_MAX_PHOTOS),
 });
 
 export const ShelterIdSchema = z.string().uuid();
