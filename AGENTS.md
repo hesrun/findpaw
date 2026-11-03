@@ -32,6 +32,15 @@ Step-by-step procedures live in Claude Code skills, not in `docs/`:
 - Keep shared code in `src/shared` only when it is genuinely reusable across domains.
 - Prefer configured path aliases such as `@features/*` and `@shared/*` over long relative imports.
 
+## Simplicity (KISS, DRY)
+
+- Write the simplest code that solves the task. No options, layers, or abstractions "for later".
+- Before writing a helper, search the feature and `src/shared` for an existing one. Extend or generalize it instead of adding a near-copy next to it.
+- When the same logic appears a second time, extract it instead of copying: one rule lives in one place. Code used once stays inline; do not extract it just to look tidy.
+- Fix the cause, not each symptom. If several places need the same patch, the shared piece is missing.
+- Form and schema building blocks (`readFormData`, `optionalText`, `nullableNumber`, `optionalNumber`, `checkbox`, `imageUrls`) live in `src/shared/lib/form.ts`.
+- One form, one schema: create and update actions share `<Domain>FormSchema` and one parse function (plus a row mapper when rules apply). Do not keep separate Create/Update schemas or copy FormData field by field. Reference: `src/features/pets/actions.ts`.
+
 ## Components
 
 - Logic always goes into hooks: URL or state syncing, debouncing, derived lists, event handlers with rules, data loading. A component body is hook calls, a few derived values, and `return`. ESLint `max-statements` (10, `.tsx` only) warns when a component or one of its handlers grows past that; extract a hook instead of raising the limit.

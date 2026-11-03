@@ -1,5 +1,13 @@
 import { z } from 'zod';
 import { Constants } from '@supabase/database.types';
+import {
+    checkbox,
+    imageUrls,
+    nullableNumber,
+    optionalNumber,
+    optionalText,
+    toNumber,
+} from '@shared/lib/form';
 import { PET_AGE_GROUPS, PET_SORT_FIELDS } from './constants';
 
 const PetListingTypeSchema = z.enum(Constants.public.Enums.pet_listing_type);
@@ -8,52 +16,39 @@ const PetSpeciesSchema = z.enum(Constants.public.Enums.pet_species);
 const PetStatusSchema = z.enum(Constants.public.Enums.pet_status);
 const PetCloseReasonSchema = z.enum(Constants.public.Enums.pet_close_reason);
 
-const optionalNumber = (schema: z.ZodNumber) =>
-    z.preprocess(
-        (value) => (value === '' || value == null ? undefined : Number(value)),
-        schema.optional(),
-    );
-
-export const PetCreateSchema = z.object({
+// One form creates and edits a pet, so one schema serves both actions.
+export const PetFormSchema = z.object({
     name: z.string().min(1),
-    description: z.string().nullish(),
+    description: optionalText(z.string()),
     age_months: z.preprocess(
-        (value) => (value === '' || value == null ? undefined : Number(value)),
+        toNumber(undefined),
         z.number().int().nonnegative(),
     ),
-    breed: z.string().nullish(),
-    city: z.string().nullish(),
-    address: z.string().nullish(),
-    image_url: z.array(z.string()).optional(),
-    shelter_id: z.string().nullable().optional(),
-    listing_type: PetListingTypeSchema.optional(),
-    price: z.preprocess(
-        (value) => (value === '' || value == null ? null : Number(value)),
-        z.number().nonnegative().nullable().optional(),
-    ),
+    breed: optionalText(z.string()),
+    city: optionalText(z.string()),
+    address: optionalText(z.string()),
+    image_url: imageUrls,
+    shelter_id: optionalText(z.string().uuid()),
+    listing_type: PetListingTypeSchema,
+    price: nullableNumber(z.number().nonnegative()),
     // Kept only for lost listings; the actions clear it for other types.
-    reward: z.preprocess(
-        (value) => (value === '' || value == null ? null : Number(value)),
-        z.number().positive().nullable().optional(),
-    ),
+    reward: nullableNumber(z.number().positive()),
+    // Map point; kept only as a pair.
+    latitude: nullableNumber(z.number().min(-90).max(90)),
+    longitude: nullableNumber(z.number().min(-180).max(180)),
     sex: PetSexSchema.optional(),
     species: PetSpeciesSchema,
-    is_special_needs: z.boolean().optional(),
-    is_sterilized: z.boolean().optional(),
-    is_vaccinated: z.boolean().optional(),
+    is_special_needs: checkbox,
+    is_sterilized: checkbox,
+    is_vaccinated: checkbox,
 });
-
-export const PetUpdateSchema = PetCreateSchema.partial();
 
 // A closed listing needs a reason; other statuses must not carry one.
 // The database enforces the same rule and checks the reason against the listing type.
 export const PetStatusChangeSchema = z
     .object({
         status: PetStatusSchema,
-        close_reason: z.preprocess(
-            (value) => (value === '' ? null : value),
-            PetCloseReasonSchema.nullish(),
-        ),
+        close_reason: optionalText(PetCloseReasonSchema),
     })
     .refine(
         ({ status, close_reason }) => (status === 'closed') === !!close_reason,
@@ -90,7 +85,6 @@ export const PetFiltersSchema = z.object({
     ),
 });
 
-export type PetCreate = z.infer<typeof PetCreateSchema>;
-export type PetUpdate = z.infer<typeof PetUpdateSchema>;
+export type PetForm = z.infer<typeof PetFormSchema>;
 export type PetFilters = z.infer<typeof PetFiltersSchema>;
 export type PetStatusChange = z.infer<typeof PetStatusChangeSchema>;

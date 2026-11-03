@@ -1,95 +1,86 @@
 'use server';
 
-import { Enums } from '@supabase/database.types';
 import getSupabaseWithUser from '@shared/lib/supabase/auth';
+import { readFormData } from '@shared/lib/form';
 import { revalidatePath } from 'next/cache';
-import {
-    PetCreateSchema,
-    PetStatusChangeSchema,
-    PetUpdateSchema,
-} from './schemas';
-import { REWARD_LISTING_TYPE } from './constants';
+import { PetFormSchema, PetStatusChangeSchema, type PetForm } from './schemas';
+import { PET_LOCATION_DECIMALS, REWARD_LISTING_TYPE } from './constants';
 
-// The database allows a reward only on lost listings, so switching the type
-// away from 'lost' must clear it in the same write.
-function rewardFor(
-    listingType: string | undefined,
-    reward: number | null | undefined,
-) {
-    return listingType === REWARD_LISTING_TYPE ? (reward ?? null) : null;
+function roundCoordinate(value: number) {
+    const factor = 10 ** PET_LOCATION_DECIMALS;
+    return Math.round(value * factor) / factor;
+}
+
+// Form values to a pets row, shared by create and update:
+// - the database allows a reward only on lost listings, so switching the type
+//   away from 'lost' must clear it in the same write;
+// - a map point is kept only as a full pair, rounded so that a pin on
+//   someone's home is not published exactly.
+function toPetRow({ latitude, longitude, reward, ...pet }: PetForm) {
+    const hasPoint = latitude != null && longitude != null;
+    return {
+        ...pet,
+        reward:
+            pet.listing_type === REWARD_LISTING_TYPE ? (reward ?? null) : null,
+        latitude: hasPoint ? roundCoordinate(latitude) : null,
+        longitude: hasPoint ? roundCoordinate(longitude) : null,
+    };
+}
+
+function parsePetForm(formData: FormData) {
+    return PetFormSchema.safeParse(readFormData(formData, ['image_url']));
+}
+
+// A pet may be attached only to a shelter of the current user.
+async function assertOwnShelter(shelterId: string | null | undefined) {
+    if (!shelterId) return;
+    const { supabase, user } = await getSupabaseWithUser();
+    const { data: shelter } = await supabase
+        .from('shelters')
+        .select('owner_id')
+        .eq('id', shelterId)
+        .maybeSingle();
+
+    if (shelter?.owner_id !== user.id) {
+        throw new Error('Unauthorized shelter');
+    }
 }
 
 export async function createPet(formData: FormData) {
     const { supabase, user } = await getSupabaseWithUser();
-
-    const imageUrls = formData.getAll('image_url') as string[];
-    const shelterId = (formData.get('shelter_id') as string) || null;
-
-    if (shelterId) {
-        const { data: shelter, error: shelterErr } = await supabase
-            .from('shelters')
-            .select('owner_id')
-            .eq('id', shelterId)
-            .single();
-
-        if (shelterErr || !shelter || shelter.owner_id !== user.id) {
-            throw new Error('Unauthorized shelter');
-        }
-    }
-
-    const raw = {
-        name: formData.get('name'),
-        description: formData.get('description'),
-        age_months: formData.get('age_months'),
-        breed: formData.get('breed'),
-        city: formData.get('city'),
-        address: formData.get('address'),
-        image_url: imageUrls,
-        shelter_id: shelterId,
-        listing_type: formData.get('listing_type'),
-        price: formData.get('price'),
-        reward: formData.get('reward'),
-        sex: formData.get('sex'),
-        species: formData.get('species'),
-        is_special_needs: formData.get('is_special_needs') === 'on',
-        is_sterilized: formData.get('is_sterilized') === 'on',
-        is_vaccinated: formData.get('is_vaccinated') === 'on',
-    };
-
-    const parsed = PetCreateSchema.safeParse(raw);
+    const parsed = parsePetForm(formData);
     if (!parsed.success) {
         return { success: false, errors: parsed.error.flatten() };
     }
+    await assertOwnShelter(parsed.data.shelter_id);
 
-    const data = parsed.data;
-
-    const { error } = await supabase.from('pets').insert({
-        name: data.name,
-        address: data.address,
-        age_months: data.age_months,
-        breed: data.breed,
-        city: data.city,
-        created_at: new Date().toISOString(),
-        description: data.description,
-        image_url:
-            data.image_url && data.image_url.length ? data.image_url : null,
-        owner_id: user.id,
-        shelter_id: data.shelter_id ?? null,
-        listing_type: (data.listing_type ??
-            'adoption') as Enums<'pet_listing_type'>,
-        price: (data.price ?? null) as number | null,
-        reward: rewardFor(data.listing_type ?? 'adoption', data.reward),
-        sex: data.sex as Enums<'pet_sex'> | undefined,
-        species: data.species as Enums<'pet_species'>,
-        is_special_needs: data.is_special_needs ?? false,
-        is_sterilized: data.is_sterilized ?? false,
-        is_vaccinated: data.is_vaccinated ?? false,
-    });
+    const { error } = await supabase
+        .from('pets')
+        .insert({ ...toPetRow(parsed.data), owner_id: user.id });
 
     if (error) throw error;
 
     revalidatePath('/dashboard/pets');
+    return { success: true };
+}
 
+export async function updatePet(petId: string, formData: FormData) {
+    const { supabase, user } = await getSupabaseWithUser();
+    const parsed = parsePetForm(formData);
+    if (!parsed.success) {
+        return { success: false, errors: parsed.error.flatten() };
+    }
+    await assertOwnShelter(parsed.data.shelter_id);
+
+    const { error } = await supabase
+        .from('pets')
+        .update(toPetRow(parsed.data))
+        .eq('id', petId)
+        .eq('owner_id', user.id);
+
+    if (error) throw error;
+
+    revalidatePath('/dashboard/pets');
     return { success: true };
 }
 
@@ -106,83 +97,6 @@ export async function deletePet(petId: string) {
 
     revalidatePath('/dashboard/pets');
 
-    return { success: true };
-}
-
-export async function updatePet(petId: string, formData: FormData) {
-    const { supabase, user } = await getSupabaseWithUser();
-
-    const imageUrls = formData.getAll('image_url') as string[];
-    const shelterId = (formData.get('shelter_id') as string) || null;
-
-    if (shelterId) {
-        const { data: shelter, error: shelterErr } = await supabase
-            .from('shelters')
-            .select('owner_id')
-            .eq('id', shelterId)
-            .single();
-
-        if (shelterErr || !shelter || shelter.owner_id !== user.id) {
-            throw new Error('Unauthorized shelter');
-        }
-    }
-
-    const raw = {
-        name: formData.get('name'),
-        description: formData.get('description'),
-        age_months: formData.get('age_months'),
-        breed: formData.get('breed'),
-        city: formData.get('city'),
-        address: formData.get('address'),
-        image_url: imageUrls,
-        shelter_id: shelterId,
-        listing_type: formData.get('listing_type'),
-        price: formData.get('price'),
-        reward: formData.get('reward'),
-        sex: formData.get('sex'),
-        species: formData.get('species'),
-        is_special_needs: formData.get('is_special_needs') === 'on',
-        is_sterilized: formData.get('is_sterilized') === 'on',
-        is_vaccinated: formData.get('is_vaccinated') === 'on',
-    };
-
-    const parsed = PetUpdateSchema.safeParse(raw);
-
-    if (!parsed.success) {
-        return { success: false, errors: parsed.error.flatten() };
-    }
-
-    const data = parsed.data;
-
-    const { error } = await supabase
-        .from('pets')
-        .update({
-            name: data.name,
-            address: data.address,
-            age_months: data.age_months,
-            breed: data.breed,
-            city: data.city,
-            description: data.description,
-            image_url:
-                data.image_url && data.image_url.length ? data.image_url : null,
-            listing_type: (data.listing_type ?? undefined) as
-                | Enums<'pet_listing_type'>
-                | undefined,
-            price: (data.price ?? null) as number | null,
-            reward: rewardFor(data.listing_type, data.reward),
-            sex: data.sex as Enums<'pet_sex'> | undefined,
-            species: data.species as Enums<'pet_species'> | undefined,
-            is_special_needs: data.is_special_needs ?? false,
-            is_sterilized: data.is_sterilized ?? false,
-            is_vaccinated: data.is_vaccinated ?? false,
-            shelter_id: data.shelter_id ?? null,
-        })
-        .eq('id', petId)
-        .eq('owner_id', user.id);
-
-    if (error) throw error;
-
-    revalidatePath('/dashboard/pets');
     return { success: true };
 }
 

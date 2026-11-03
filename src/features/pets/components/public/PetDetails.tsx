@@ -9,6 +9,7 @@ import { PRICED_LISTING_TYPE, REWARD_LISTING_TYPE } from '../../constants';
 import { formatDate } from '@shared/helpers/dateFormat';
 import type { PetWithShelter } from '@/types/pets';
 import PetShelterContact from './PetShelterContact';
+import PetAreaSection from './location/PetAreaSection';
 
 function Fact({ label, value }: { label: string; value: ReactNode }) {
     return (
@@ -159,6 +160,8 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
                     />
                 </ul>
             </section>
+
+            <PetAreaSection pet={pet} />
 
             {pet.shelter ? (
                 <PetShelterContact shelter={pet.shelter} />

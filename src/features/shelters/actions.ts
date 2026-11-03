@@ -1,43 +1,24 @@
 'use server';
 
 import getSupabaseWithUser from '@shared/lib/supabase/auth';
+import { readFormData } from '@shared/lib/form';
 import { revalidatePath } from 'next/cache';
-import { ShelterCreateSchema, ShelterUpdateSchema } from './schemas';
+import { ShelterFormSchema } from './schemas';
+
+function parseShelterForm(formData: FormData) {
+    return ShelterFormSchema.safeParse(readFormData(formData, ['img_url']));
+}
 
 export async function createShelter(formData: FormData) {
     const { supabase, user } = await getSupabaseWithUser();
-
-    const imgUrls = formData.getAll('img_url') as string[];
-
-    const raw = {
-        name: formData.get('name'),
-        description: formData.get('description'),
-        phone: formData.get('phone'),
-        email: formData.get('email'),
-        website: formData.get('website'),
-        city: formData.get('city'),
-        address: formData.get('address'),
-        img_url: imgUrls,
-    };
-
-    const parsed = ShelterCreateSchema.safeParse(raw);
+    const parsed = parseShelterForm(formData);
     if (!parsed.success) {
         return { success: false, errors: parsed.error.flatten() };
     }
 
-    const data = parsed.data;
-
-    const { error } = await supabase.from('shelters').insert({
-        owner_id: user.id,
-        name: data.name,
-        description: data.description ?? null,
-        phone: data.phone ?? null,
-        email: data.email ?? null,
-        website: data.website ?? null,
-        city: data.city ?? null,
-        address: data.address ?? null,
-        img_url: data.img_url && data.img_url.length ? data.img_url : null,
-    });
+    const { error } = await supabase
+        .from('shelters')
+        .insert({ ...parsed.data, owner_id: user.id });
 
     if (error) throw error;
     revalidatePath('/dashboard/shelters');
@@ -46,40 +27,14 @@ export async function createShelter(formData: FormData) {
 
 export async function updateShelter(shelterId: string, formData: FormData) {
     const { supabase, user } = await getSupabaseWithUser();
-
-    const imgUrls = formData.getAll('img_url') as string[];
-
-    const raw = {
-        name: formData.get('name'),
-        description: formData.get('description'),
-        phone: formData.get('phone'),
-        email: formData.get('email'),
-        website: formData.get('website'),
-        city: formData.get('city'),
-        address: formData.get('address'),
-        img_url: imgUrls,
-    };
-
-    const parsed = ShelterUpdateSchema.safeParse(raw);
+    const parsed = parseShelterForm(formData);
     if (!parsed.success) {
         return { success: false, errors: parsed.error.flatten() };
     }
 
-    const data = parsed.data;
-
     const { error } = await supabase
         .from('shelters')
-        .update({
-            name: data.name,
-            description: data.description ?? null,
-            phone: data.phone ?? null,
-            email: data.email ?? null,
-            website: data.website ?? null,
-            city: data.city ?? null,
-            address: data.address ?? null,
-            img_url: data.img_url && data.img_url.length ? data.img_url : null,
-            updated_at: new Date().toISOString(),
-        })
+        .update({ ...parsed.data, updated_at: new Date().toISOString() })
         .eq('id', shelterId)
         .eq('owner_id', user.id);
 

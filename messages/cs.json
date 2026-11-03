@@ -147,7 +147,22 @@
                 "sterilized": "Sterilizovaný",
                 "specialNeeds": "Zvláštní potřeby",
                 "reward": "Odměna (Kč)",
-                "rewardHint": "Nepovinné. Uvidí ji každý, kdo si inzerát prohlédne."
+                "rewardHint": "Nepovinné. Uvidí ji každý, kdo si inzerát prohlédne.",
+                "mapPoint": {
+                    "lost": "Kde byl mazlíček naposledy viděn?",
+                    "found": "Kde byl mazlíček nalezen?",
+                    "adoption": "Kde se mazlíček nachází?",
+                    "sale": "Kde se mazlíček nachází?",
+                    "default": "Kde se mazlíček nachází?"
+                },
+                "mapHint": "Klikněte do mapy nebo přetáhněte špendlík. Město a ulice se doplní podle bodu. Ostatní uvidí jen přibližnou oblast, ne přesné místo.",
+                "mapUseMyLocation": "Použít mou polohu",
+                "mapClear": "Odebrat bod",
+                "mapLocationError": "Vaši polohu se nepodařilo zjistit",
+                "mapButton": "Vybrat na mapě",
+                "mapChange": "Změnit na mapě",
+                "mapSelected": "Bod na mapě je vybrán",
+                "mapConfirm": "Potvrdit"
             },
             "cardTitles": {
                 "general": "Obecné informace",
@@ -347,7 +362,14 @@
             "contactShelter": "Kontaktovat útulek",
             "noContact": "Kontaktní údaje k tomuto inzerátu zatím nejsou veřejné.",
             "reward": "Odměna pro nálezce",
-            "rewardShort": "Odměna {amount}"
+            "rewardShort": "Odměna {amount}",
+            "mapTitle": {
+                "lost": "Naposledy viděn v této oblasti",
+                "found": "Nalezen v této oblasti",
+                "adoption": "Mazlíček je v této oblasti",
+                "sale": "Mazlíček je v této oblasti"
+            },
+            "mapApproximate": "Přibližná oblast"
         }
     },
     "sheltersPage": {

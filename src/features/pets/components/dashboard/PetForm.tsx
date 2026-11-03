@@ -44,6 +44,7 @@ import { useRouter } from 'next/navigation';
 import type { PetWithShelter } from '@/types/pets';
 import type { Shelter } from '@/types/shelters';
 import clsx from 'clsx';
+import PetLocationFields from './location/PetLocationFields';
 
 const radioClasses = {
     base: 'rounded-xl border border-accent px-4 py-1.5 transition-all',
@@ -412,30 +413,10 @@ export default function PetForm({
                             </Select>
                         )}
                         {!selectedShelterId && (
-                            <>
-                                <TextField
-                                    name="city"
-                                    variant="secondary"
-                                    defaultValue={
-                                        initialData?.city ?? undefined
-                                    }
-                                >
-                                    <Label>{t('fields.city')}</Label>
-                                    <Input placeholder={t('fields.city')} />
-                                    <FieldError />
-                                </TextField>
-                                <TextField
-                                    name="address"
-                                    variant="secondary"
-                                    defaultValue={
-                                        initialData?.address ?? undefined
-                                    }
-                                >
-                                    <Label>{t('fields.address')}</Label>
-                                    <Input placeholder={t('fields.address')} />
-                                    <FieldError />
-                                </TextField>
-                            </>
+                            <PetLocationFields
+                                initialData={initialData}
+                                listingType={listingType}
+                            />
                         )}
                     </DashboardCard>
                 </div>

@@ -132,3 +132,14 @@ export const CATALOG_FLAG_LABEL_KEYS = {
 export const SEX_FILTER_OPTIONS = SEX_OPTIONS.filter(
     ({ id }) => id !== 'unknown',
 );
+
+
+// Saved coordinates are rounded to this many decimals (~100 m), so a point
+// placed on someone's home does not publish the exact address.
+export const PET_LOCATION_DECIMALS = 3;
+
+// The public pet page shows the point as an area of this radius, not a pin.
+export const PET_LOCATION_PUBLIC_RADIUS_M = 300;
+
+// Zoom used once a point is chosen or shown.
+export const PET_LOCATION_ZOOM = 15;

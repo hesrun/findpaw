@@ -147,7 +147,22 @@
                 "sterilized": "Sterilized",
                 "specialNeeds": "Special needs",
                 "reward": "Reward (CZK)",
-                "rewardHint": "Optional. Shown to everyone who sees the listing."
+                "rewardHint": "Optional. Shown to everyone who sees the listing.",
+                "mapPoint": {
+                    "lost": "Where was the pet last seen?",
+                    "found": "Where was the pet found?",
+                    "adoption": "Where is the pet?",
+                    "sale": "Where is the pet?",
+                    "default": "Where is the pet?"
+                },
+                "mapHint": "Click the map or drag the pin. City and street are filled in from the point. Others see only an approximate area, not the exact point.",
+                "mapUseMyLocation": "Use my location",
+                "mapClear": "Remove point",
+                "mapLocationError": "Could not get your location",
+                "mapButton": "Pick on the map",
+                "mapChange": "Change on the map",
+                "mapSelected": "Point on the map selected",
+                "mapConfirm": "Confirm"
             },
             "cardTitles": {
                 "general": "General information",
@@ -347,7 +362,14 @@
             "contactShelter": "Contact the shelter",
             "noContact": "Contact details are not public for this listing yet.",
             "reward": "Reward for the finder",
-            "rewardShort": "Reward {amount}"
+            "rewardShort": "Reward {amount}",
+            "mapTitle": {
+                "lost": "Last seen around here",
+                "found": "Found around here",
+                "adoption": "The pet is around here",
+                "sale": "The pet is around here"
+            },
+            "mapApproximate": "Approximate area"
         }
     },
     "sheltersPage": {

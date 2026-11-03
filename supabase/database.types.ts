@@ -29,7 +29,9 @@ export type Database = {
           is_special_needs: boolean | null
           is_sterilized: boolean | null
           is_vaccinated: boolean | null
+          latitude: number | null
           listing_type: Database["public"]["Enums"]["pet_listing_type"]
+          longitude: number | null
           name: string | null
           owner_id: string
           price: number | null
@@ -54,7 +56,9 @@ export type Database = {
           is_special_needs?: boolean | null
           is_sterilized?: boolean | null
           is_vaccinated?: boolean | null
+          latitude?: number | null
           listing_type: Database["public"]["Enums"]["pet_listing_type"]
+          longitude?: number | null
           name?: string | null
           owner_id: string
           price?: number | null
@@ -79,7 +83,9 @@ export type Database = {
           is_special_needs?: boolean | null
           is_sterilized?: boolean | null
           is_vaccinated?: boolean | null
+          latitude?: number | null
           listing_type?: Database["public"]["Enums"]["pet_listing_type"]
+          longitude?: number | null
           name?: string | null
           owner_id?: string
           price?: number | null

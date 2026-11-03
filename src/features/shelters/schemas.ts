@@ -1,36 +1,28 @@
 import { z } from 'zod';
+import { imageUrls, optionalNumber, optionalText } from '@shared/lib/form';
 import { isHttpUrl } from '@shared/lib/url';
 import { SHELTER_MAX_PAGE_SIZE, SHELTER_SORT_FIELDS } from './constants';
 
-// Empty form inputs arrive as "": store them as null instead of failing validation.
-const optional = <T extends z.ZodTypeAny>(schema: T) =>
-    z.preprocess((value) => (value === '' ? null : value), schema.nullish());
-
-export const ShelterCreateSchema = z.object({
+// One form creates and edits a shelter, so one schema serves both actions.
+export const ShelterFormSchema = z.object({
     name: z.string().min(1),
-    description: optional(z.string()),
-    phone: optional(z.string()),
-    email: optional(z.string().email()),
-    website: optional(
+    description: optionalText(z.string()),
+    phone: optionalText(z.string()),
+    email: optionalText(z.string().email()),
+    website: optionalText(
         z.string().url().refine(isHttpUrl, { message: 'websiteInvalid' }),
     ),
-    city: optional(z.string()),
-    address: optional(z.string()),
-    img_url: z.array(z.string()).optional(),
+    city: optionalText(z.string()),
+    address: optionalText(z.string()),
+    img_url: imageUrls,
 });
-
-export const ShelterUpdateSchema = ShelterCreateSchema.partial();
 
 export const ShelterIdSchema = z.string().uuid();
 
 export const ShelterFiltersSchema = z.object({
-    page: z.preprocess(
-        (v) => (v ? Number(v) : undefined),
-        z.number().int().positive().optional(),
-    ),
-    pageSize: z.preprocess(
-        (v) => (v ? Number(v) : undefined),
-        z.number().int().positive().max(SHELTER_MAX_PAGE_SIZE).optional(),
+    page: optionalNumber(z.number().int().positive()),
+    pageSize: optionalNumber(
+        z.number().int().positive().max(SHELTER_MAX_PAGE_SIZE),
     ),
     city: z.string().optional(),
     q: z.string().optional(),
@@ -50,6 +42,5 @@ export function parsePageParam(value: string | string[] | undefined) {
     return (parsed.success && parsed.data) || 1;
 }
 
-export type ShelterCreate =z.infer<typeof ShelterCreateSchema>;
-export type ShelterUpdate = z.infer<typeof ShelterUpdateSchema>;
+export type ShelterForm = z.infer<typeof ShelterFormSchema>;
 export type ShelterFilters = z.infer<typeof ShelterFiltersSchema>;

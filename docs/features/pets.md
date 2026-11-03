@@ -11,6 +11,14 @@ The pets feature owns pet listings, public discovery, owner dashboard management
 - `listing_type` is one of the database enum values.
 - Price must be non-negative and is relevant to sale listings.
 - `reward` is the owner's reward for whoever finds a lost pet (CZK). The `pets_reward_only_for_lost` check allows it only on `lost` listings and only above zero. `createPet` / `updatePet` clear it when the listing type is not `lost`, so changing the type cannot violate the check. `PRICED_LISTING_TYPE` and `REWARD_LISTING_TYPE` in `constants.ts` decide which amount the form and the cards show; `formatCzk` (`src/shared/helpers/currencyFormat.ts`) formats both.
+- `latitude` / `longitude` mark where the pet is, or where a lost pet was last seen or a found pet was found. Any listing type may have them; `pets_location_pair` requires both or neither, in valid ranges. `createPet` / `updatePet` round the point to `PET_LOCATION_DECIMALS` (3 decimals, about 100 m) so a pin on someone's home does not publish the exact address.
+
+## Map Location
+
+- The pet form (`components/dashboard/location/`) keeps city and address as text fields and adds a "Pick on the map" button that opens a modal with a Mapy.com map: click or drag the pin, or use the browser location. The modal edits a draft; Cancel keeps the previous point. Shelter pets have no location fields: they live at the shelter's address.
+- Confirming a point makes one reverse geocoding request (`reverseGeocode` in `src/shared/lib/mapy.ts`) and fills the city and the street name. The house number is never filled in. Both fields stay editable, and the city keeps working for the catalog `city` filter. Picking points inside the modal makes no requests, to save the Mapy.com quota; address search is not offered for the same reason.
+- The public pet page shows the point as a circle of `PET_LOCATION_PUBLIC_RADIUS_M` (300 m), not a pin.
+- Maps load with `next/dynamic` and `ssr: false` because Leaflet needs `window`. Without `NEXT_PUBLIC_MAPY_API_KEY` the map button is hidden and the form works as before.
 
 ## Listing Status
 
