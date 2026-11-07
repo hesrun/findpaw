@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { PasswordField } from '@shared/components/UI/PasswordField';
 import {
     Button,
     Card,
@@ -39,16 +40,13 @@ export default function SignIn() {
                         <Input placeholder={t('fields.email')} />
                         <FieldError />
                     </TextField>
-                    <TextField
+                    <PasswordField
+                        autoComplete="current-password"
                         isRequired
                         name="password"
-                        type="password"
                         validate={validatePassword}
-                    >
-                        <Label>{t('fields.password')}</Label>
-                        <Input placeholder={t('fields.password')} />
-                        <FieldError />
-                    </TextField>
+                        label={t('fields.password')}
+                    />
                     <Link
                         href={AUTH_ROUTES.forgotPassword}
                         className="justify-self-end text-sm text-accent hover:underline"

@@ -1,14 +1,8 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import {
-    Button,
-    Card,
-    FieldError,
-    Input,
-    Label,
-    TextField,
-} from '@heroui/react';
+import { PasswordField } from '@shared/components/UI/PasswordField';
+import { Button, Card } from '@heroui/react';
 import { useResetPasswordForm } from '@features/auth/hooks/useResetPasswordForm';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
 
@@ -27,25 +21,19 @@ export default function ResetPassword() {
                     {t('titles.resetPassword')}
                 </h1>
                 <div className="grid gap-4">
-                    <TextField
+                    <PasswordField
+                        autoComplete="new-password"
                         isRequired
                         name="password"
-                        type="password"
                         validate={validatePassword}
-                    >
-                        <Label>{t('fields.newPassword')}</Label>
-                        <Input placeholder={t('fields.newPassword')} />
-                        <FieldError />
-                    </TextField>
-                    <TextField
+                        label={t('fields.newPassword')}
+                    />
+                    <PasswordField
+                        autoComplete="new-password"
                         isRequired
                         name="confirmPassword"
-                        type="password"
-                    >
-                        <Label>{t('fields.confirmPassword')}</Label>
-                        <Input placeholder={t('fields.confirmPassword')} />
-                        <FieldError />
-                    </TextField>
+                        label={t('fields.confirmPassword')}
+                    />
                 </div>
                 <Button fullWidth type="submit" isPending={isPending}>
                     {t('btns.updatePassword')}

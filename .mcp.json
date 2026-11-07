@@ -3,6 +3,10 @@
         "supabase": {
             "type": "http",
             "url": "https://mcp.supabase.com/mcp?project_ref=igulesrzbrglolehioxa&read_only=true"
+        },
+        "heroui-react": {
+            "command": "cmd",
+            "args": ["/c", "npx", "-y", "@heroui/react-mcp@1.1.4"]
         }
     }
 }

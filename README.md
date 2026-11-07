@@ -48,7 +48,7 @@ Open [http://localhost:3000](http://localhost:3000). Copy `.env.example` to `.en
 
 ```text
 src/app/       routes, layouts, and API route handlers
-src/features/  domain modules: pets, shelters, auth
+src/features/  domain modules: pets, shelters, auth, account
 src/shared/    reusable UI, providers, helpers, and Supabase clients
 src/i18n/      locale routing and request configuration
 supabase/      migrations, policies, and generated database types
@@ -61,6 +61,7 @@ messages/      locale message catalogs
 - [Development guide](docs/development.md)
 - [Database and Supabase](docs/database.md)
 - [Internationalization](docs/i18n.md)
+- [Account feature](docs/features/account.md)
 - [Pets feature](docs/features/pets.md)
 - [Shelters feature](docs/features/shelters.md)
 - [Decisions](docs/decisions.md)

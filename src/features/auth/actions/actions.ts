@@ -1,10 +1,14 @@
 'use server';
 
 import { headers } from 'next/headers';
+import type { ZodError } from 'zod';
 import { redirect } from 'next/navigation';
 import { supabaseServer } from '@shared/lib/supabase/server';
-import { getCurrentUser } from '@shared/lib/supabase/auth';
+import getSupabaseWithUser, {
+    getCurrentUser,
+} from '@shared/lib/supabase/auth';
 import {
+    ChangePasswordSchema,
     ForgotPasswordSchema,
     ResetPasswordSchema,
     SignInSchema,
@@ -20,8 +24,17 @@ export type AuthResult = {
         | 'signUpFailed'
         | 'passwordsMismatch'
         | 'updatePasswordFailed'
-        | 'linkExpired';
+        | 'linkExpired'
+        | 'wrongCurrentPassword';
 };
+
+// A failed new-password form: a mismatch gets its own message.
+function newPasswordError(error: ZodError): AuthResult {
+    const mismatch = error.issues.some(
+        (issue) => issue.path[0] === 'confirmPassword',
+    );
+    return { error: mismatch ? 'passwordsMismatch' : 'invalidData' };
+}
 
 export async function signIn(formData: FormData): Promise<AuthResult> {
     const parsed = SignInSchema.safeParse({
@@ -116,10 +129,7 @@ export async function updatePassword(formData: FormData): Promise<AuthResult> {
     });
 
     if (!parsed.success) {
-        const mismatch = parsed.error.issues.some(
-            (issue) => issue.path[0] === 'confirmPassword',
-        );
-        return { error: mismatch ? 'passwordsMismatch' : 'invalidData' };
+        return newPasswordError(parsed.error);
     }
 
     // The session comes from the recovery link; without it the link has expired.
@@ -135,6 +145,42 @@ export async function updatePassword(formData: FormData): Promise<AuthResult> {
 
     if (error) {
         console.error('[updatePassword]', error.message);
+        return { error: 'updatePasswordFailed' };
+    }
+
+    return {};
+}
+
+// Password change of a signed-in user. Supabase does not ask for the current
+// password, so it is checked by signing in with it first.
+export async function changePassword(formData: FormData): Promise<AuthResult> {
+    const parsed = ChangePasswordSchema.safeParse({
+        currentPassword: formData.get('currentPassword'),
+        password: formData.get('password'),
+        confirmPassword: formData.get('confirmPassword'),
+    });
+
+    if (!parsed.success) {
+        return newPasswordError(parsed.error);
+    }
+
+    const { supabase, user } = await getSupabaseWithUser();
+
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: user.email ?? '',
+        password: parsed.data.currentPassword,
+    });
+
+    if (signInError) {
+        return { error: 'wrongCurrentPassword' };
+    }
+
+    const { error } = await supabase.auth.updateUser({
+        password: parsed.data.password,
+    });
+
+    if (error) {
+        console.error('[changePassword]', error.message);
         return { error: 'updatePasswordFailed' };
     }
 

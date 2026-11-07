@@ -10,8 +10,16 @@ export const CLOUDINARY_IMAGE_URL_PREFIX = `https://res.cloudinary.com/${CLOUDIN
 
 // Top-level upload folders; the server appends the user id, so every user
 // uploads only into their own folder.
-export const IMAGE_UPLOAD_FOLDERS = ['pets', 'shelters'] as const;
+export const IMAGE_UPLOAD_FOLDERS = ['pets', 'shelters', 'avatars'] as const;
 export type ImageUploadFolder = (typeof IMAGE_UPLOAD_FOLDERS)[number];
+
+// Incoming transformations: Cloudinary applies them on upload, so the stored
+// image is already cropped. Avatars become a square around the subject.
+export const IMAGE_UPLOAD_TRANSFORMATIONS: Partial<
+    Record<ImageUploadFolder, string>
+> = {
+    avatars: 'c_fill,g_auto,w_512,h_512',
+};
 
 // Enforced by Cloudinary through the signed upload parameters.
 export const IMAGE_ALLOWED_FORMATS = ['jpg', 'png', 'webp', 'avif', 'heic'];

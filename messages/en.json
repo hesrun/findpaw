@@ -38,7 +38,8 @@
             "signUpFailed": "Could not create the account. Please try again later",
             "passwordsMismatch": "Passwords do not match",
             "updatePasswordFailed": "Could not update the password. Please try again later",
-            "linkExpired": "The reset link is invalid or has expired. Request a new one."
+            "linkExpired": "The reset link is invalid or has expired. Request a new one.",
+            "wrongCurrentPassword": "The current password is incorrect"
         },
         "links": {
             "noAccount": "Don't have an account?",
@@ -91,7 +92,9 @@
             "prev": "Prev",
             "next": "Next"
         },
-        "photo": "Photo {index}"
+        "photo": "Photo {index}",
+        "showPassword": "Show password",
+        "hidePassword": "Hide password"
     },
     "sidebar": {
         "pets": "My Pets",
@@ -239,6 +242,34 @@
                 "deleteError": "An error occurred while deleting the shelter",
                 "updateSuccess": "Shelter updated successfully",
                 "updateError": "An error occurred while updating the shelter"
+            }
+        },
+        "settings": {
+            "title": "Account settings",
+            "tabs": {
+                "profile": "Profile",
+                "password": "Password"
+            },
+            "cardTitles": {
+                "profile": "Profile",
+                "password": "Password"
+            },
+            "fields": {
+                "avatar": "Profile photo",
+                "fullName": "Name",
+                "email": "Email",
+                "phone": "Phone",
+                "currentPassword": "Current password"
+            },
+            "btns": {
+                "saveProfile": "Save profile"
+            },
+            "notifications": {
+                "profileUpdated": "Profile saved"
+            },
+            "errors": {
+                "invalidData": "Please check the form and try again",
+                "updateFailed": "Could not save the profile. Please try again later"
             }
         }
     },

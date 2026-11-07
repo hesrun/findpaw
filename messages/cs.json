@@ -38,7 +38,8 @@
             "signUpFailed": "Účet se nepodařilo vytvořit. Zkuste to prosím později",
             "passwordsMismatch": "Hesla se neshodují",
             "updatePasswordFailed": "Heslo se nepodařilo změnit. Zkuste to prosím později",
-            "linkExpired": "Odkaz pro obnovení je neplatný nebo vypršel. Vyžádejte si nový."
+            "linkExpired": "Odkaz pro obnovení je neplatný nebo vypršel. Vyžádejte si nový.",
+            "wrongCurrentPassword": "Současné heslo není správné"
         },
         "links": {
             "noAccount": "Nemáte účet?",
@@ -91,7 +92,9 @@
             "prev": "Předchozí",
             "next": "Další"
         },
-        "photo": "Fotka {index}"
+        "photo": "Fotka {index}",
+        "showPassword": "Zobrazit heslo",
+        "hidePassword": "Skrýt heslo"
     },
     "sidebar": {
         "pets": "Moji mazlíčci",
@@ -239,6 +242,34 @@
                 "deleteError": "Při mazání útulku došlo k chybě",
                 "updateSuccess": "Útulek byl úspěšně aktualizován",
                 "updateError": "Při aktualizaci útulku došlo k chybě"
+            }
+        },
+        "settings": {
+            "title": "Nastavení účtu",
+            "tabs": {
+                "profile": "Profil",
+                "password": "Heslo"
+            },
+            "cardTitles": {
+                "profile": "Profil",
+                "password": "Heslo"
+            },
+            "fields": {
+                "avatar": "Profilová fotka",
+                "fullName": "Jméno",
+                "email": "E-mail",
+                "phone": "Telefon",
+                "currentPassword": "Současné heslo"
+            },
+            "btns": {
+                "saveProfile": "Uložit profil"
+            },
+            "notifications": {
+                "profileUpdated": "Profil uložen"
+            },
+            "errors": {
+                "invalidData": "Zkontrolujte formulář a zkuste to znovu",
+                "updateFailed": "Profil se nepodařilo uložit. Zkuste to prosím později"
             }
         }
     },

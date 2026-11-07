@@ -23,10 +23,11 @@ type FileUploaderProps = {
     currentFiles?: string[] | null;
     label?: string;
     icon?: ReactNode;
+    // One round picture (avatar) instead of a grid of square photos.
+    round?: boolean;
 };
 
-const previewClasses = 'relative aspect-square';
-const imageClasses = 'w-full h-full object-cover rounded-2xl border';
+const roundClasses = 'w-40 justify-self-center rounded-full';
 
 // Image picker with drag and drop. The parent form calls `ref.upload()` on
 // submit and saves the returned URLs.
@@ -37,9 +38,26 @@ export function FileUploader({
     currentFiles,
     label,
     icon = <MdPets className="w-10 h-10" />,
+    round = false,
 }: FileUploaderProps) {
     const t = useTranslations('uploader');
     const uploader = useFileUploader({ ref, folder, maxFiles, currentFiles });
+    const previewClasses = clsx('relative aspect-square', round && roundClasses);
+    const imageClasses = clsx(
+        'w-full h-full object-cover border',
+        round ? 'rounded-full' : 'rounded-2xl',
+    );
+    const removeClasses = clsx(
+        'absolute',
+        round ? 'right-2 top-2' : '-right-2 -top-2',
+    );
+    const triggerClasses = clsx(
+        'w-full flex flex-col items-center justify-center cursor-pointer outline-none data-focus-visible:ring-2 data-focus-visible:ring-accent',
+        round
+            ? 'h-full gap-0.5 px-4 rounded-full text-center text-sm leading-tight'
+            : 'gap-2 py-8 rounded-2xl',
+    );
+    const gridClasses = clsx('grid gap-2', round ? 'grid-cols-1' : 'grid-cols-3');
 
     return (
         <div className="grid gap-2">
@@ -50,6 +68,7 @@ export function FileUploader({
                     className={({ isDropTarget }) =>
                         clsx(
                             'rounded-2xl border-2 border-dashed border-accent text-accent transition-colors',
+                            round && clsx(roundClasses, 'aspect-square'),
                             isDropTarget ? 'bg-accent/10' : 'hover:bg-accent/5',
                         )
                     }
@@ -59,7 +78,7 @@ export function FileUploader({
                         allowsMultiple={maxFiles > 1}
                         onSelect={uploader.selectFiles}
                     >
-                        <Button className="w-full py-8 flex flex-col items-center justify-center gap-2 cursor-pointer rounded-2xl outline-none data-focus-visible:ring-2 data-focus-visible:ring-accent">
+                        <Button className={triggerClasses}>
                             {icon}
                             <span>{label ?? t('label')}</span>
                             <span className="text-xs text-muted">
@@ -74,7 +93,7 @@ export function FileUploader({
             )}
 
             {uploader.existing.length + uploader.pending.length > 0 && (
-                <div className="grid grid-cols-3 gap-2">
+                <div className={gridClasses}>
                     {uploader.existing.map((url) => (
                         <div key={url} className={previewClasses}>
                             <CloudImage
@@ -86,7 +105,7 @@ export function FileUploader({
                             />
                             <CloseButton
                                 aria-label={t('remove')}
-                                className="absolute -right-2 -top-2"
+                                className={removeClasses}
                                 onPress={() => uploader.removeExisting(url)}
                             />
                         </div>
@@ -105,7 +124,7 @@ export function FileUploader({
                             </span>
                             <CloseButton
                                 aria-label={t('remove')}
-                                className="absolute -right-2 -top-2"
+                                className={removeClasses}
                                 onPress={() => uploader.removePending(item.id)}
                             />
                         </div>

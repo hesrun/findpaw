@@ -16,6 +16,7 @@ import {
     FileUploader,
     FileUploaderRef,
 } from '@shared/components/UI/uploader/FileUploader';
+import { uploadToFormData } from '@shared/components/UI/uploader/uploadToFormData';
 import { SHELTER_MAX_PHOTOS } from '@features/shelters/constants';
 import DashboardCard from '@shared/components/UI/DashboardCard';
 import { createShelter, updateShelter } from '@features/shelters/actions';
@@ -41,9 +42,11 @@ export default function ShelterForm({
         const formData = new FormData(e.currentTarget);
 
         startTransition(async () => {
-            const imageUrls = (await fileUploaderRef.current?.upload()) ?? [];
-            formData.delete('img_url');
-            imageUrls.forEach((url) => formData.append('img_url', url));
+            await uploadToFormData(
+                fileUploaderRef.current,
+                formData,
+                'img_url',
+            );
 
             const response = isEditing
                 ? await updateShelter(initialData.id, formData)

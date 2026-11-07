@@ -32,14 +32,25 @@ export const ForgotPasswordSchema = z.object({
     locale: z.enum(routing.locales).catch(routing.defaultLocale),
 });
 
-export const ResetPasswordSchema = z
-    .object({
-        password: z.string().min(PASSWORD_MIN_LENGTH),
-        confirmPassword: z.string(),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        path: ['confirmPassword'],
-    });
+// New password typed twice; shared by the reset and change forms.
+const NewPasswordSchema = z.object({
+    password: z.string().min(PASSWORD_MIN_LENGTH),
+    confirmPassword: z.string(),
+});
+
+const passwordsMatch = (data: z.infer<typeof NewPasswordSchema>) =>
+    data.password === data.confirmPassword;
+
+const mismatchIssue = { path: ['confirmPassword'] };
+
+export const ResetPasswordSchema = NewPasswordSchema.refine(
+    passwordsMatch,
+    mismatchIssue,
+);
+
+export const ChangePasswordSchema = NewPasswordSchema.extend({
+    currentPassword: z.string().min(1),
+}).refine(passwordsMatch, mismatchIssue);
 
 // Query of the email link. Only the locale is taken from the URL; the
 // redirect target is built on the server, so the link cannot redirect elsewhere.

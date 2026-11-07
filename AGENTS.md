@@ -14,6 +14,7 @@ Read the relevant document in `docs/` before changing code:
 - development workflow or validation: `docs/development.md`;
 - Supabase, migrations, RLS, or generated types: `docs/database.md`;
 - localization: `docs/i18n.md`;
+- account settings: `docs/features/account.md`;
 - pets: `docs/features/pets.md`;
 - shelters: `docs/features/shelters.md`;
 - why something is the way it is: `docs/decisions.md`.

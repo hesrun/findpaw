@@ -30,6 +30,7 @@ import {
     FileUploader,
     FileUploaderRef,
 } from '@shared/components/UI/uploader/FileUploader';
+import { uploadToFormData } from '@shared/components/UI/uploader/uploadToFormData';
 import { createPet, updatePet } from '@features/pets/actions';
 import {
     LuBadgeAlert,
@@ -83,9 +84,11 @@ export default function PetForm({
         const formData = new FormData(e.currentTarget);
 
         startTransition(async () => {
-            const imageUrls = (await fileUploaderRef.current?.upload()) ?? [];
-            formData.delete('image_url');
-            imageUrls.forEach((url) => formData.append('image_url', url));
+            await uploadToFormData(
+                fileUploaderRef.current,
+                formData,
+                'image_url',
+            );
             const response = isEditing
                 ? await updatePet(initialData.id, formData)
                 : await createPet(formData);

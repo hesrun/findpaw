@@ -11,6 +11,7 @@ import {
     TextField,
 } from '@heroui/react';
 import { useTranslations } from 'next-intl';
+import { PasswordField } from '@shared/components/UI/PasswordField';
 import type { ReactNode } from 'react';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { TbHomeShield } from 'react-icons/tb';
@@ -103,17 +104,14 @@ export default function SignUp() {
                         <Input placeholder={t('fields.email')} />
                         <FieldError />
                     </TextField>
-                    <TextField
+                    <PasswordField
+                        autoComplete="new-password"
                         isRequired
                         name="password"
-                        type="password"
                         variant="secondary"
                         validate={validatePassword}
-                    >
-                        <Label>{t('fields.password')}</Label>
-                        <Input placeholder={t('fields.password')} />
-                        <FieldError />
-                    </TextField>
+                        label={t('fields.password')}
+                    />
                 </div>
                 <Button fullWidth type="submit" isPending={isPending}>
                     {t('btns.signup')}

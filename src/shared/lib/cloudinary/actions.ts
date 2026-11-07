@@ -5,6 +5,7 @@ import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import {
     IMAGE_ALLOWED_FORMATS,
     IMAGE_UPLOAD_FOLDERS,
+    IMAGE_UPLOAD_TRANSFORMATIONS,
     type ImageUploadFolder,
 } from '@shared/constants/images';
 import { signParams, userFolder } from './server';
@@ -24,10 +25,12 @@ export async function signImageUpload(
     const topFolder = z.enum(IMAGE_UPLOAD_FOLDERS).parse(folder);
     const { user } = await getSupabaseWithUser();
 
-    const params = {
+    const transformation = IMAGE_UPLOAD_TRANSFORMATIONS[topFolder];
+    const params: Record<string, string> = {
         folder: userFolder(topFolder, user.id),
         timestamp: String(Math.floor(Date.now() / 1000)),
         allowed_formats: IMAGE_ALLOWED_FORMATS.join(','),
+        ...(transformation && { transformation }),
     };
 
     return {
