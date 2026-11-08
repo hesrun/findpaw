@@ -73,7 +73,7 @@
         "noSheltersFound": "No shelters found.",
         "viewAllPets": "View all pets",
         "audience": {
-            "title": "Who Pet Finder helps",
+            "title": "Who FindPaw helps",
             "lead": "One place for everyone who is looking for a pet, has found one or wants to give an animal a home.",
             "items": {
                 "lost": {
@@ -462,7 +462,7 @@
         "yearsShort": "~{years} years"
     },
     "petsPage": {
-        "metaTitle": "Pets looking for a home — Pet Finder",
+        "metaTitle": "Pets looking for a home — FindPaw",
         "title": "All pets",
         "description": "Lost and found pets, adoption and sale listings from shelters and owners.",
         "results": "{count, plural, =0 {No pets} one {# pet} other {# pets}}",
@@ -520,7 +520,7 @@
         },
         "detail": {
             "backToList": "All pets",
-            "metaTitle": "{name} — {listingType} | Pet Finder",
+            "metaTitle": "{name} — {listingType} | FindPaw",
             "unnamed": "Pet without a name",
             "price": "Price",
             "free": "Free",
@@ -551,14 +551,14 @@
         }
     },
     "sheltersPage": {
-        "metaTitle": "Animal shelters — Pet Finder",
+        "metaTitle": "Animal shelters — FindPaw",
         "title": "Shelters",
-        "description": "Animal shelters on Pet Finder: contacts and pets looking for a home.",
+        "description": "Animal shelters on FindPaw: contacts and pets looking for a home.",
         "results": "{count, plural, =0 {No shelters} one {# shelter} other {# shelters}}",
         "empty": "No shelters yet.",
         "detail": {
             "backToList": "All shelters",
-            "metaTitle": "{name} — shelter | Pet Finder",
+            "metaTitle": "{name} — shelter | FindPaw",
             "about": "About the shelter",
             "noDescription": "The shelter has not added a description yet.",
             "contacts": "Contacts",
@@ -568,9 +568,9 @@
         }
     },
     "aboutPage": {
-        "metaTitle": "About Pet Finder",
+        "metaTitle": "About FindPaw",
         "title": "Helping pets find their way home",
-        "lead": "Pet Finder brings together pet owners, finders and animal shelters in one place: report a lost pet, help a found one get home, or give a shelter animal a new family.",
+        "lead": "FindPaw brings together pet owners, finders and animal shelters in one place: report a lost pet, help a found one get home, or give a shelter animal a new family.",
         "stats": {
             "pets": "Pets on the site",
             "shelters": "Shelters"
@@ -622,6 +622,6 @@
         "terms": "Terms of Use",
         "cookies": "Cookies",
         "contact": "Contact us",
-        "copyright": "© {year} Pet Finder"
+        "copyright": "© {year} FindPaw"
     }
 }

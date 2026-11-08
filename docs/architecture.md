@@ -2,7 +2,7 @@
 
 ## Overview
 
-Pet Finder is a Next.js App Router application with Supabase as its backend, `next-intl` for localization, and TanStack Query for client-side server state.
+FindPaw is a Next.js App Router application with Supabase as its backend, `next-intl` for localization, and TanStack Query for client-side server state.
 
 The application is organized by domain feature:
 

@@ -1,6 +1,6 @@
-# Pet Finder
+# FindPaw
 
-Pet Finder is a localized application for publishing, discovering, and managing pet listings and shelter profiles.
+FindPaw is a localized application for publishing, discovering, and managing pet listings and shelter profiles.
 
 ## Stack
 

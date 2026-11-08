@@ -73,7 +73,7 @@
         "noSheltersFound": "Nebyly nalezeny žádné útulky.",
         "viewAllPets": "Zobrazit všechny mazlíčky",
         "audience": {
-            "title": "Komu Pet Finder pomáhá",
+            "title": "Komu FindPaw pomáhá",
             "lead": "Jedno místo pro všechny, kdo hledají zvíře, nějaké našli nebo chtějí zvířeti dát domov.",
             "items": {
                 "lost": {
@@ -462,7 +462,7 @@
         "yearsShort": "~{years} let"
     },
     "petsPage": {
-        "metaTitle": "Mazlíčci hledající domov — Pet Finder",
+        "metaTitle": "Mazlíčci hledající domov — FindPaw",
         "title": "Všichni mazlíčci",
         "description": "Ztracená a nalezená zvířata, inzeráty k adopci a prodeji od útulků i majitelů.",
         "results": "{count, plural, =0 {Žádní mazlíčci} one {# mazlíček} few {# mazlíčci} other {# mazlíčků}}",
@@ -520,7 +520,7 @@
         },
         "detail": {
             "backToList": "Všichni mazlíčci",
-            "metaTitle": "{name} — {listingType} | Pet Finder",
+            "metaTitle": "{name} — {listingType} | FindPaw",
             "unnamed": "Mazlíček bez jména",
             "price": "Cena",
             "free": "Zdarma",
@@ -551,14 +551,14 @@
         }
     },
     "sheltersPage": {
-        "metaTitle": "Útulky pro zvířata — Pet Finder",
+        "metaTitle": "Útulky pro zvířata — FindPaw",
         "title": "Útulky",
-        "description": "Útulky pro zvířata na Pet Finder: kontakty a zvířata, která hledají domov.",
+        "description": "Útulky pro zvířata na FindPaw: kontakty a zvířata, která hledají domov.",
         "results": "{count, plural, =0 {Žádné útulky} one {# útulek} few {# útulky} other {# útulků}}",
         "empty": "Zatím zde nejsou žádné útulky.",
         "detail": {
             "backToList": "Všechny útulky",
-            "metaTitle": "{name} — útulek | Pet Finder",
+            "metaTitle": "{name} — útulek | FindPaw",
             "about": "O útulku",
             "noDescription": "Útulek zatím nepřidal popis.",
             "contacts": "Kontakty",
@@ -568,9 +568,9 @@
         }
     },
     "aboutPage": {
-        "metaTitle": "O projektu Pet Finder",
+        "metaTitle": "O projektu FindPaw",
         "title": "Pomáháme zvířatům najít cestu domů",
-        "lead": "Pet Finder spojuje majitele zvířat, nálezce a útulky na jednom místě: nahlaste ztracené zvíře, pomozte nalezenému vrátit se domů nebo dejte zvířeti z útulku novou rodinu.",
+        "lead": "FindPaw spojuje majitele zvířat, nálezce a útulky na jednom místě: nahlaste ztracené zvíře, pomozte nalezenému vrátit se domů nebo dejte zvířeti z útulku novou rodinu.",
         "stats": {
             "pets": "Zvířat na webu",
             "shelters": "Útulků"
@@ -622,6 +622,6 @@
         "terms": "Podmínky užívání",
         "cookies": "Cookies",
         "contact": "Kontakt",
-        "copyright": "© {year} Pet Finder"
+        "copyright": "© {year} FindPaw"
     }
 }

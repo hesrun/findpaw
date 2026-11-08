@@ -6,7 +6,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 <!-- END:nextjs-agent-rules -->
 
-# Pet Finder Project Rules
+# FindPaw Project Rules
 
 Read the relevant document in `docs/` before changing code:
 
