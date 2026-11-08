@@ -2,14 +2,17 @@ import { buttonVariants } from '@heroui/react';
 import { getTranslations } from 'next-intl/server';
 import type { Enums } from '@supabase/database.types';
 import ListingChip from '@UI/ListingChips';
+import FeatureCard from '@UI/FeatureCard';
+import CtaBand from '@UI/CtaBand';
 import { Link } from '@/i18n/navigation';
 import { countPublicPets } from '@features/pets/queries';
 import { countPublicShelters } from '@features/shelters/queries';
-import { ABOUT_AUDIENCE, ABOUT_LISTING_TYPES } from './constants';
+import { LISTING_TYPE_ICONS } from '@features/pets/constants';
+import { ABOUT_AUDIENCE } from './constants';
 
-const LISTING_TYPE_ENTRIES = Object.entries(ABOUT_LISTING_TYPES) as [
+const LISTING_TYPE_ENTRIES = Object.entries(LISTING_TYPE_ICONS) as [
     Enums<'pet_listing_type'>,
-    (typeof ABOUT_LISTING_TYPES)[Enums<'pet_listing_type'>],
+    (typeof LISTING_TYPE_ICONS)[Enums<'pet_listing_type'>],
 ][];
 
 export default async function AboutPage() {
@@ -84,53 +87,35 @@ export default async function AboutPage() {
                     {t('audienceTitle')}
                 </h2>
                 <ul className="grid gap-4 md:grid-cols-2">
-                    {ABOUT_AUDIENCE.map(({ key, icon: Icon }) => (
-                        <li
-                            key={key}
-                            className="bg-surface rounded-card shadow-my ring-1 ring-border p-6 flex gap-4"
-                        >
-                            <span
-                                aria-hidden
-                                className="size-12 shrink-0 rounded-2xl bg-accent text-accent-foreground flex items-center justify-center text-2xl"
-                            >
-                                <Icon />
-                            </span>
-                            <div>
-                                <h3 className="font-display font-extrabold text-xl mb-1">
-                                    {t(`audience.${key}.title`)}
-                                </h3>
-                                <p className="text-muted leading-relaxed">
-                                    {t(`audience.${key}.text`)}
-                                </p>
-                            </div>
+                    {ABOUT_AUDIENCE.map(({ key, icon }) => (
+                        <li key={key}>
+                            <FeatureCard
+                                icon={icon}
+                                title={t(`audience.${key}.title`)}
+                                text={t(`audience.${key}.text`)}
+                            />
                         </li>
                     ))}
                 </ul>
             </section>
 
-            <section className="bg-soft rounded-[36px] p-6 sm:p-10 text-center grid gap-4 justify-items-center">
-                <h2 className="font-display font-extrabold text-3xl text-balance">
-                    {t('ctaTitle')}
-                </h2>
-                <p className="text-muted max-w-[52ch]">{t('ctaText')}</p>
-                <div className="flex flex-wrap justify-center gap-3">
-                    <Link
-                        href="/pets"
-                        className={buttonVariants({ size: 'lg' })}
-                    >
-                        {t('ctaBrowse')}
-                    </Link>
-                    <Link
-                        href="/dashboard/pets/add"
-                        className={buttonVariants({
-                            size: 'lg',
-                            variant: 'outline',
-                        })}
-                    >
-                        {t('ctaAdd')}
-                    </Link>
-                </div>
-            </section>
+            <CtaBand title={t('ctaTitle')} text={t('ctaText')}>
+                <Link
+                    href="/pets"
+                    className={buttonVariants({ size: 'lg' })}
+                >
+                    {t('ctaBrowse')}
+                </Link>
+                <Link
+                    href="/dashboard/pets/add"
+                    className={buttonVariants({
+                        size: 'lg',
+                        variant: 'outline',
+                    })}
+                >
+                    {t('ctaAdd')}
+                </Link>
+            </CtaBand>
         </main>
     );
 }

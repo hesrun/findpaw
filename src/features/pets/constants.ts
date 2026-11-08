@@ -1,3 +1,5 @@
+import type { IconType } from 'react-icons';
+import { LuHandHeart, LuHouse, LuSearch, LuTag } from 'react-icons/lu';
 import { Enums } from '@supabase/database.types';
 
 export const SPECIES: { id: Enums<'pet_species'> }[] = [
@@ -19,6 +21,14 @@ export const LISTING_TYPES: { id: Enums<'pet_listing_type'> }[] = [
     { id: 'adoption' },
     { id: 'sale' },
 ] as const;
+
+// One icon per listing type, shared by the about and landing pages.
+export const LISTING_TYPE_ICONS = {
+    lost: LuSearch,
+    found: LuHandHeart,
+    adoption: LuHouse,
+    sale: LuTag,
+} satisfies Record<Enums<'pet_listing_type'>, IconType>;
 
 export const SEX_OPTIONS: { id: Enums<'pet_sex'> }[] = [
     { id: 'male' },

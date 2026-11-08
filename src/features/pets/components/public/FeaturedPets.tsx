@@ -9,8 +9,7 @@ import { usePublicPets } from '../../hooks';
 import PetCard from './PetCard';
 import PetCardSkeleton from './PetCardSkeleton';
 import clsx from 'clsx';
-import { Link } from '@/i18n/navigation';
-import { LuArrowRight } from 'react-icons/lu';
+import ArrowLink from '@UI/ArrowLink';
 
 type PublicPetsResult = Awaited<ReturnType<typeof getPublicPets>>;
 
@@ -52,13 +51,7 @@ export default function FeaturedPets({
                     <h2 className="font-display font-extrabold text-3xl">
                         {tHome('recentPetsTitle')}
                     </h2>
-                    <Link
-                        href="/pets"
-                        className="inline-flex items-center gap-1 font-heading font-bold text-accent hover:underline"
-                    >
-                        {tHome('viewAllPets')}
-                        <LuArrowRight aria-hidden />
-                    </Link>
+                    <ArrowLink href="/pets">{tHome('viewAllPets')}</ArrowLink>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-6" role="tablist">

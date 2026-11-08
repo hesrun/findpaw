@@ -71,7 +71,69 @@
         "recentSheltersTitle": "Nedávno přidané útulky",
         "loadingShelters": "Načítání útulků...",
         "noSheltersFound": "Nebyly nalezeny žádné útulky.",
-        "viewAllPets": "Zobrazit všechny mazlíčky"
+        "viewAllPets": "Zobrazit všechny mazlíčky",
+        "audience": {
+            "title": "Komu Pet Finder pomáhá",
+            "lead": "Jedno místo pro všechny, kdo hledají zvíře, nějaké našli nebo chtějí zvířeti dát domov.",
+            "items": {
+                "lost": {
+                    "title": "Ztratil se vám mazlíček?",
+                    "text": "Zveřejněte inzerát s fotkami a místem, kde byl naposledy viděn, a případně nabídněte nálezci odměnu.",
+                    "action": "Nahlásit ztracené zvíře"
+                },
+                "found": {
+                    "title": "Našli jste zvíře?",
+                    "text": "Zveřejněte ho s fotkami a místem nálezu, aby majitel svého mazlíčka poznal.",
+                    "action": "Nahlásit nalezené zvíře"
+                },
+                "adopt": {
+                    "title": "Hledáte parťáka?",
+                    "text": "Prohlédněte si zvířata z útulků i od majitelů, která hledají nový domov, a vyfiltrujte je podle druhu, věku a města.",
+                    "action": "Najít zvíře k adopci"
+                },
+                "shelters": {
+                    "title": "Provozujete útulek?",
+                    "text": "Vytvořte profil útulku s kontakty a fotkami a ukažte všechna svá zvířata na jedné veřejné stránce útulku.",
+                    "action": "Zaregistrovat útulek"
+                }
+            }
+        },
+        "features": {
+            "title": "Co tu můžete dělat",
+            "lead": "Nástroje, díky kterým si inzerátu všimnou ti správní lidé.",
+            "items": {
+                "filters": {
+                    "title": "Podrobné filtry",
+                    "text": "Filtrujte katalog podle typu inzerátu, druhu, pohlaví, věku, plemene, města a zdraví a sdílejte odkaz s filtry."
+                },
+                "map": {
+                    "title": "Přibližné místo",
+                    "text": "Označte, kde se zvíře ztratilo nebo bylo nalezeno. Ostatní uvidí oblast asi {radius} m, nikdy přesnou adresu."
+                },
+                "shelters": {
+                    "title": "Stránky útulků",
+                    "text": "Každý útulek má veřejnou stránku s kontakty, fotkami a všemi svými zvířaty."
+                },
+                "photos": {
+                    "title": "Až {photos} fotek",
+                    "text": "Ukažte znaky a detaily, podle kterých lidé zvíře poznají."
+                },
+                "status": {
+                    "title": "Stavy inzerátů",
+                    "text": "Rezervované, skryté a uzavřené inzeráty udrží katalog zaměřený na zvířata, která pomoc ještě potřebují."
+                },
+                "languages": {
+                    "title": "Čeština a angličtina",
+                    "text": "Celý web funguje v obou jazycích, takže inzerát snadno nasdílíte komukoli."
+                }
+            }
+        },
+        "cta": {
+            "title": "Pomozte zvířeti domů ještě dnes",
+            "text": "Prohlédněte si zvířata, která právě čekají, nebo za pár minut zveřejněte vlastní inzerát.",
+            "browse": "Prohlédnout zvířata",
+            "add": "Přidat inzerát"
+        }
     },
     "roles": {
         "user": "Uživatel",

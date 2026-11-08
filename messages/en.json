@@ -71,7 +71,69 @@
         "recentSheltersTitle": "Recently added shelters",
         "loadingShelters": "Loading shelters...",
         "noSheltersFound": "No shelters found.",
-        "viewAllPets": "View all pets"
+        "viewAllPets": "View all pets",
+        "audience": {
+            "title": "Who Pet Finder helps",
+            "lead": "One place for everyone who is looking for a pet, has found one or wants to give an animal a home.",
+            "items": {
+                "lost": {
+                    "title": "Lost your pet?",
+                    "text": "Publish a listing with photos and the area where your pet was last seen, and offer a reward to the finder if you like.",
+                    "action": "Report a lost pet"
+                },
+                "found": {
+                    "title": "Found an animal?",
+                    "text": "Post it with photos and the place where you found it, so the owner can recognise their pet.",
+                    "action": "Report a found pet"
+                },
+                "adopt": {
+                    "title": "Looking for a companion?",
+                    "text": "Browse animals from shelters and owners that need a new home, and narrow them down by species, age and city.",
+                    "action": "Find a pet to adopt"
+                },
+                "shelters": {
+                    "title": "Run a shelter?",
+                    "text": "Create a shelter profile with contacts and photos, and show all your animals on one public shelter page.",
+                    "action": "Register a shelter"
+                }
+            }
+        },
+        "features": {
+            "title": "What you can do here",
+            "lead": "Tools that help the right people notice a listing.",
+            "items": {
+                "filters": {
+                    "title": "Detailed filters",
+                    "text": "Filter the catalog by listing type, species, sex, age, breed, city and health, and share the filtered link."
+                },
+                "map": {
+                    "title": "Approximate location",
+                    "text": "Mark where a pet was lost or found. Others see an area of about {radius} m, never the exact address."
+                },
+                "shelters": {
+                    "title": "Shelter pages",
+                    "text": "Every shelter gets a public page with its contacts, photos and all of its animals."
+                },
+                "photos": {
+                    "title": "Up to {photos} photos",
+                    "text": "Show markings and details that help people recognise the pet."
+                },
+                "status": {
+                    "title": "Listing statuses",
+                    "text": "Reserved, hidden and closed listings keep the catalog focused on animals that still need help."
+                },
+                "languages": {
+                    "title": "Czech and English",
+                    "text": "The whole site works in both languages, so it is easy to share a listing with anyone."
+                }
+            }
+        },
+        "cta": {
+            "title": "Help a pet get home today",
+            "text": "Browse the animals waiting right now or publish your own listing in a couple of minutes.",
+            "browse": "Browse pets",
+            "add": "Add a listing"
+        }
     },
     "roles": {
         "user": "User",
