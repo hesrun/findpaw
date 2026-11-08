@@ -16,6 +16,13 @@
         box-shadow: 0 10px 22px -8px
             color-mix(in oklch, var(--accent) 55%, transparent);
     }
+    .button-- {
+        box-shadow: 0 10px 22px -8px
+            color-mix(in oklch, var(--accent) 55%, transparent);
+    }
+    .button--outline {
+        background: white;
+    }
     .button--secondary,
     .button--outline {
         box-shadow: 0 10px 22px -12px
