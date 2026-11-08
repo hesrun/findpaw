@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Claude Code personal settings
 .claude/settings.local.json
+
+# personal notes and plans
+/notes/
