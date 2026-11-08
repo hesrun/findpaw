@@ -8,6 +8,7 @@ The pets feature owns pet listings, public discovery, owner dashboard management
 
 - A pet listing has an owner.
 - `age_months` is stored as a non-negative integer.
+- `breed` depends on the species. Dogs, cats and rabbits pick it from `PET_BREEDS` (`constants.ts`) and the column stores the key; names live in `messages/*.json` under `pets.breeds`, and `breedLabel` (`breeds.ts`) shows them. Each list starts with a "no pedigree" option (`mixed`, or `domestic` for cats); an empty breed means "not sure". Other species keep a free-text breed of up to `PET_BREED_MAX_LENGTH` characters. `PetFormSchema` rejects a breed that is not in the list of the chosen species; the database does not check it.
 - `listing_type` is one of the database enum values.
 - Price must be non-negative and is relevant to sale listings.
 - `reward` is the owner's reward for whoever finds a lost pet (CZK). The `pets_reward_only_for_lost` check allows it only on `lost` listings and only above zero. `createPet` / `updatePet` clear it when the listing type is not `lost`, so changing the type cannot violate the check. `PRICED_LISTING_TYPE` and `REWARD_LISTING_TYPE` in `constants.ts` decide which amount the form and the cards show; `formatCzk` (`src/shared/helpers/currencyFormat.ts`) formats both.
@@ -55,7 +56,8 @@ Rules:
 - Layout: filters in a left sidebar on desktop and in a left drawer on mobile; search and sorting sit above the results; active filters are shown as removable chips. "Clear all" keeps the sort order.
 - `age` is an app-level bucket (`young` < 12 months, `adult` 12-95, `senior` 96+; `PET_AGE_GROUPS` and `PET_AGE_GROUP_MONTHS` in `constants.ts`), not a database enum. The `sex` filter offers only `male` and `female`.
 - Flags (`from_shelter`, `vaccinated`, `sterilized`) are on only with the value `true`; `false` or anything else is ignored.
-- `q` searches the name, breed, and description at once; `city` and `breed` filter one column. All three are case-insensitive substring searches. Characters that are PostgREST filter syntax or LIKE wildcards are replaced with spaces before building the pattern.
+- `q` searches the name, the free-text breed, and the description, and also matches listed breeds by their name in any locale (`findBreedKeys`), because the column stores keys. `city` is a case-insensitive substring filter.
+- `breed` is a comma-separated list of breed keys (`?breed=beagle,pug`), picked in a searchable multi-select that appears once a species with a breed list is chosen. Changing or clearing the species clears it. Characters that are PostgREST filter syntax or LIKE wildcards are replaced with spaces before building the pattern.
 - `sortBy` is limited to `PET_SORT_FIELDS` (`constants.ts`); unknown columns are rejected.
 - `getPublicPet` returns `null` for malformed ids and for missing, hidden, or closed listings; the page answers all of them with the same 404.
 - Contact details are shown only when the pet belongs to a shelter. Owner profiles are private under RLS, so private listings have no public contact yet.

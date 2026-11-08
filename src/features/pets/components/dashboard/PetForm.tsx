@@ -14,9 +14,8 @@ import {
     TextField,
     Select,
     ListBox,
-    toast,
 } from '@heroui/react';
-import { useState, useRef, useTransition } from 'react';
+import { useState } from 'react';
 import {
     SEX_OPTIONS,
     SPECIES,
@@ -26,12 +25,7 @@ import {
     PET_MAX_PHOTOS,
 } from '@features/pets/constants';
 import { useTranslations } from 'next-intl';
-import {
-    FileUploader,
-    FileUploaderRef,
-} from '@shared/components/UI/uploader/FileUploader';
-import { uploadToFormData } from '@shared/components/UI/uploader/uploadToFormData';
-import { createPet, updatePet } from '@features/pets/actions';
+import { FileUploader } from '@shared/components/UI/uploader/FileUploader';
 import {
     LuBadgeAlert,
     LuCamera,
@@ -42,11 +36,12 @@ import {
 } from 'react-icons/lu';
 import DashboardCard from '@shared/components/UI/DashboardCard';
 import { TbScissors, TbVaccine } from 'react-icons/tb';
-import { useRouter } from 'next/navigation';
 import type { PetWithShelter } from '@/types/pets';
 import type { Shelter } from '@/types/shelters';
 import clsx from 'clsx';
 import PetLocationFields from './location/PetLocationFields';
+import BreedField from './BreedField';
+import { usePetFormSubmit } from './hooks/usePetFormSubmit';
 
 const radioClasses = {
     base: 'rounded-xl border border-accent px-4 py-1.5 transition-all',
@@ -64,51 +59,20 @@ export default function PetForm({
     initialData?: PetWithShelter;
     shelters?: Shelter[] | null;
 }) {
-    const isEditing = !!initialData;
-
     const t = useTranslations('dashboard.myPets');
     const tPets = useTranslations('pets');
 
-    const router = useRouter();
-    const [isPending, startTransition] = useTransition();
-    const fileUploaderRef = useRef<FileUploaderRef>(null);
+    const { handleSubmit, isPending, fileUploaderRef, goBack } =
+        usePetFormSubmit(initialData?.id);
+    const [species, setSpecies] = useState<string | null>(
+        initialData?.species ?? null,
+    );
     const [listingType, setListingType] = useState<string | null>(
         initialData?.listing_type ?? null,
     );
     const [selectedShelterId, setSelectedShelterId] = useState(
         initialData?.shelter_id ?? null,
     );
-
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-
-        startTransition(async () => {
-            await uploadToFormData(
-                fileUploaderRef.current,
-                formData,
-                'image_url',
-            );
-            const response = isEditing
-                ? await updatePet(initialData.id, formData)
-                : await createPet(formData);
-
-            if (response.success) {
-                toast.success(
-                    isEditing
-                        ? t('notifications.updateSuccess')
-                        : t('notifications.createSuccess'),
-                );
-                router.push('/dashboard/pets');
-            } else {
-                toast.danger(
-                    isEditing
-                        ? t('notifications.updateError')
-                        : t('notifications.createError'),
-                );
-            }
-        });
-    }
 
     return (
         <form onSubmit={handleSubmit} className="relative">
@@ -121,7 +85,8 @@ export default function PetForm({
                         <RadioGroup
                             name="species"
                             isRequired
-                            defaultValue={initialData?.species ?? undefined}
+                            value={species}
+                            onChange={setSpecies}
                         >
                             <Label>{t('fields.species')}</Label>
                             <div className="flex flex-wrap gap-2 mt-1">
@@ -159,15 +124,11 @@ export default function PetForm({
                                 <Input placeholder={t('fields.petName')} />
                                 <FieldError />
                             </TextField>
-                            <TextField
-                                variant="secondary"
-                                name="breed"
-                                defaultValue={initialData?.breed ?? undefined}
-                            >
-                                <Label>{t('fields.breed')}</Label>
-                                <Input placeholder={t('fields.breed')} />
-                                <FieldError />
-                            </TextField>
+                            <BreedField
+                                key={species}
+                                species={species}
+                                saved={initialData}
+                            />
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
@@ -427,7 +388,7 @@ export default function PetForm({
                 <Button
                     variant="tertiary"
                     type="button"
-                    onPress={() => router.back()}
+                    onPress={goBack}
                 >
                     {t('buttons.back')}
                 </Button>

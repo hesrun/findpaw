@@ -8,7 +8,15 @@ import {
     optionalText,
     toNumber,
 } from '@shared/lib/form';
-import { PET_AGE_GROUPS, PET_MAX_PHOTOS, PET_SORT_FIELDS } from './constants';
+import {
+    PET_AGE_GROUPS,
+    PET_BREED_KEYS,
+    PET_BREED_MAX_LENGTH,
+    PET_BREEDS,
+    PET_MAX_PHOTOS,
+    PET_SORT_FIELDS,
+} from './constants';
+import { hasBreedList } from './breeds';
 
 const PetListingTypeSchema = z.enum(Constants.public.Enums.pet_listing_type);
 const PetSexSchema = z.enum(Constants.public.Enums.pet_sex);
@@ -17,31 +25,40 @@ const PetStatusSchema = z.enum(Constants.public.Enums.pet_status);
 const PetCloseReasonSchema = z.enum(Constants.public.Enums.pet_close_reason);
 
 // One form creates and edits a pet, so one schema serves both actions.
-export const PetFormSchema = z.object({
-    name: z.string().min(1),
-    description: optionalText(z.string()),
-    age_months: z.preprocess(
-        toNumber(undefined),
-        z.number().int().nonnegative(),
-    ),
-    breed: optionalText(z.string()),
-    city: optionalText(z.string()),
-    address: optionalText(z.string()),
-    image_url: imageUrls(PET_MAX_PHOTOS),
-    shelter_id: optionalText(z.string().uuid()),
-    listing_type: PetListingTypeSchema,
-    price: nullableNumber(z.number().nonnegative()),
-    // Kept only for lost listings; the actions clear it for other types.
-    reward: nullableNumber(z.number().positive()),
-    // Map point; kept only as a pair.
-    latitude: nullableNumber(z.number().min(-90).max(90)),
-    longitude: nullableNumber(z.number().min(-180).max(180)),
-    sex: PetSexSchema.optional(),
-    species: PetSpeciesSchema,
-    is_special_needs: checkbox,
-    is_sterilized: checkbox,
-    is_vaccinated: checkbox,
-});
+export const PetFormSchema = z
+    .object({
+        name: z.string().min(1),
+        description: optionalText(z.string()),
+        age_months: z.preprocess(
+            toNumber(undefined),
+            z.number().int().nonnegative(),
+        ),
+        // A key from PET_BREEDS for listed species, free text for the others.
+        breed: optionalText(z.string().trim().max(PET_BREED_MAX_LENGTH)),
+        city: optionalText(z.string()),
+        address: optionalText(z.string()),
+        image_url: imageUrls(PET_MAX_PHOTOS),
+        shelter_id: optionalText(z.string().uuid()),
+        listing_type: PetListingTypeSchema,
+        price: nullableNumber(z.number().nonnegative()),
+        // Kept only for lost listings; the actions clear it for other types.
+        reward: nullableNumber(z.number().positive()),
+        // Map point; kept only as a pair.
+        latitude: nullableNumber(z.number().min(-90).max(90)),
+        longitude: nullableNumber(z.number().min(-180).max(180)),
+        sex: PetSexSchema.optional(),
+        species: PetSpeciesSchema,
+        is_special_needs: checkbox,
+        is_sterilized: checkbox,
+        is_vaccinated: checkbox,
+    })
+    .refine(
+        ({ species, breed }) =>
+            !breed ||
+            !hasBreedList(species) ||
+            (PET_BREEDS[species] as readonly string[]).includes(breed),
+        { message: 'invalidBreed', path: ['breed'] },
+    );
 
 // A closed listing needs a reason; other statuses must not carry one.
 // The database enforces the same rule and checks the reason against the listing type.
@@ -68,7 +85,13 @@ export const PetFiltersSchema = z.object({
     pageSize: optionalNumber(z.number().int().positive().max(48)),
     species: PetSpeciesSchema.optional(),
     city: z.string().optional(),
-    breed: z.string().optional(),
+    // Comma-separated breed keys in the URL (?breed=beagle,pug); an array
+    // passes through, so already parsed filters parse again unchanged.
+    breed: z.preprocess(
+        (value) =>
+            typeof value === 'string' ? value.split(',').filter(Boolean) : value,
+        z.array(z.enum(PET_BREED_KEYS)).optional(),
+    ),
     listing_type: PetListingTypeSchema.optional(),
     sex: PetSexSchema.optional(),
     age: z.enum(PET_AGE_GROUPS).optional(),

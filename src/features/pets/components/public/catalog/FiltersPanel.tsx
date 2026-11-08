@@ -8,7 +8,9 @@ import {
     SEX_FILTER_OPTIONS,
     SPECIES,
 } from '@features/pets/constants';
+import { hasBreedList } from '@features/pets/breeds';
 import { useCatalogFilters } from './CatalogFiltersContext';
+import BreedFilter from './fields/BreedFilter';
 import FlagSwitches from './fields/FlagSwitches';
 import OptionSelect from './fields/OptionSelect';
 import PillGroup from './fields/PillGroup';
@@ -19,7 +21,8 @@ import TextFilterField from './fields/TextFilterField';
 export default function FiltersPanel() {
     const t = useTranslations('petsPage.filters');
     const tPets = useTranslations('pets');
-    const { filters, navigate, changeListingType } = useCatalogFilters();
+    const { filters, navigate, changeListingType, changeSpecies } =
+        useCatalogFilters();
 
     return (
         <div className="grid gap-6">
@@ -42,8 +45,12 @@ export default function FiltersPanel() {
                     label: tPets(`species.${id}`),
                 }))}
                 value={filters.species}
-                onChange={(id) => navigate({ species: id })}
+                onChange={changeSpecies}
             />
+
+            {hasBreedList(filters.species) && (
+                <BreedFilter species={filters.species} />
+            )}
 
             <PillGroup
                 label={t('sex')}
@@ -67,11 +74,6 @@ export default function FiltersPanel() {
                 onChange={(id) => navigate({ age: id })}
             />
 
-            <TextFilterField
-                name="breed"
-                label={t('breed')}
-                placeholder={t('breedPlaceholder')}
-            />
             <TextFilterField
                 name="city"
                 label={t('city')}

@@ -103,6 +103,15 @@ export function useCatalogUrl() {
         navigate({ listing_type: id });
     }
 
+    // Breeds belong to one species; drop them when the species changes.
+    function changeSpecies(id: string | null) {
+        navigate({ species: id, breed: null });
+    }
+
+    function changeBreeds(ids: readonly string[]) {
+        navigate({ breed: ids.join(',') || null });
+    }
+
     // Clears every filter but keeps the chosen sort order.
     function reset() {
         debouncedNavigate.cancel();
@@ -123,6 +132,8 @@ export function useCatalogUrl() {
         changeText,
         clearText,
         changeListingType,
+        changeSpecies,
+        changeBreeds,
         reset,
     };
 }

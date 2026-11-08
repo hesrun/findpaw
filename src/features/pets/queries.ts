@@ -2,7 +2,24 @@ import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { supabaseServer } from '@shared/lib/supabase/server';
 import { cache } from 'react';
 import { PetFiltersSchema, PetIdSchema } from './schemas';
-import { PET_AGE_GROUP_MONTHS, PUBLIC_PET_STATUSES } from './constants';
+import en from '@messages/en.json';
+import cs from '@messages/cs.json';
+import type { routing } from '@/i18n/routing';
+import {
+    PET_AGE_GROUP_MONTHS,
+    PUBLIC_PET_STATUSES,
+    type PetBreed,
+} from './constants';
+import { findBreedKeys } from './breeds';
+
+// Breed names in every locale, so a search finds a breed in either language.
+const BREED_NAMES = Object.values({
+    en: en.pets.breeds,
+    cs: cs.pets.breeds,
+} satisfies Record<
+    (typeof routing.locales)[number],
+    Record<PetBreed, string>
+>);
 
 // User text goes into ILIKE patterns and into a PostgREST `or` filter string,
 // where `,` `(` `)` `"` and `\` are syntax and `%` `_` `*` are wildcards.
@@ -124,14 +141,22 @@ export async function getPublicPets(
     const city = parsed.city ? toSearchPattern(parsed.city) : null;
     if (city) query = query.ilike('city', city);
 
-    const breed = parsed.breed ? toSearchPattern(parsed.breed) : null;
-    if (breed) query = query.ilike('breed', breed);
+    if (parsed.breed?.length) query = query.in('breed', parsed.breed);
 
+    // Free-text breeds match by substring; listed breeds are stored as keys,
+    // so the query is matched against their names first.
     const q = parsed.q ? toSearchPattern(parsed.q) : null;
     if (q) {
-        query = query.or(
-            `name.ilike.${q},breed.ilike.${q},description.ilike.${q}`,
-        );
+        const conditions = [
+            `name.ilike.${q}`,
+            `breed.ilike.${q}`,
+            `description.ilike.${q}`,
+        ];
+        const breedKeys = findBreedKeys(parsed.q ?? '', BREED_NAMES);
+        if (breedKeys.length) {
+            conditions.push(`breed.in.(${breedKeys.join(',')})`);
+        }
+        query = query.or(conditions.join(','));
     }
 
     const { data, error, count } = await query.range(from, from + pageSize - 1);

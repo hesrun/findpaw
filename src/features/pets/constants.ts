@@ -105,7 +105,6 @@ export const CATALOG_DEFAULT_SORT: CatalogSortKey = 'newest';
 export const CATALOG_TEXT_FILTER_KEYS = [
     'q',
     'city',
-    'breed',
     'min_price',
     'max_price',
 ] as const;
@@ -156,3 +155,103 @@ export const PET_LOCATION_ZOOM = 15;
 
 // Photos per pet listing.
 export const PET_MAX_PHOTOS = 5;
+
+// Breeds picked from a fixed list. `pets.breed` stores the key; the names live
+// in messages under `pets.breeds.<key>`. Other species keep a free-text breed.
+// An empty breed means "not sure". The first entry is the "no pedigree" option.
+export const PET_BREEDS = {
+    dog: [
+        'mixed',
+        'american_staffordshire_terrier',
+        'australian_shepherd',
+        'alaskan_malamute',
+        'beagle',
+        'belgian_shepherd',
+        'bernese_mountain_dog',
+        'bichon_frise',
+        'bohemian_shepherd',
+        'border_collie',
+        'boxer',
+        'cane_corso',
+        'cavalier_king_charles_spaniel',
+        'chihuahua',
+        'czech_fousek',
+        'czech_terrier',
+        'czechoslovakian_wolfdog',
+        'dachshund',
+        'dalmatian',
+        'dobermann',
+        'english_bulldog',
+        'english_cocker_spaniel',
+        'french_bulldog',
+        'german_shepherd',
+        'german_shorthaired_pointer',
+        'golden_retriever',
+        'great_dane',
+        'havanese',
+        'jack_russell_terrier',
+        'labrador_retriever',
+        'maltese',
+        'miniature_schnauzer',
+        'pembroke_welsh_corgi',
+        'pomeranian',
+        'poodle',
+        'prague_ratter',
+        'pug',
+        'rottweiler',
+        'samoyed',
+        'shiba_inu',
+        'shih_tzu',
+        'siberian_husky',
+        'staffordshire_bull_terrier',
+        'weimaraner',
+        'west_highland_white_terrier',
+        'yorkshire_terrier',
+    ],
+    cat: [
+        'domestic',
+        'abyssinian',
+        'bengal',
+        'birman',
+        'british_longhair',
+        'british_shorthair',
+        'burmese',
+        'cornish_rex',
+        'devon_rex',
+        'european_shorthair',
+        'exotic_shorthair',
+        'maine_coon',
+        'norwegian_forest',
+        'oriental_shorthair',
+        'persian',
+        'ragdoll',
+        'russian_blue',
+        'scottish_fold',
+        'siamese',
+        'siberian',
+        'sphynx',
+        'turkish_angora',
+    ],
+    rabbit: [
+        'mixed',
+        'angora',
+        'californian',
+        'czech_spotted',
+        'dutch',
+        'flemish_giant',
+        'french_lop',
+        'hermelin',
+        'lionhead',
+        'mini_lop',
+        'netherland_dwarf',
+        'rex',
+    ],
+} as const satisfies Partial<Record<Enums<'pet_species'>, readonly string[]>>;
+export type BreedSpecies = keyof typeof PET_BREEDS;
+export type PetBreed = (typeof PET_BREEDS)[BreedSpecies][number];
+export const PET_BREED_KEYS = [
+    ...new Set(Object.values(PET_BREEDS).flat()),
+] as [PetBreed, ...PetBreed[]];
+
+// Free-text breed of species without a list.
+export const PET_BREED_MAX_LENGTH = 60;

@@ -13,6 +13,7 @@ import { TbHomeShield, TbScissors, TbVaccine } from 'react-icons/tb';
 import { formatDate } from '@shared/helpers/dateFormat';
 import { formatCzk } from '@shared/helpers/currencyFormat';
 import { REWARD_LISTING_TYPE } from '@features/pets/constants';
+import { breedLabel } from '@features/pets/breeds';
 import ImageCap from '@shared/components/UI/ImageCap';
 import type { PetWithShelter } from '@/types/pets';
 
@@ -46,6 +47,7 @@ export default function MyPetsDetailModal({
 
     const pets = useTranslations('dashboard.myPets');
     const global = useTranslations('global');
+    const tBreeds = useTranslations('pets.breeds');
     const modalTitles = useTranslations('modalLabels');
 
     console.log(locale);
@@ -119,7 +121,7 @@ export default function MyPetsDetailModal({
                                             />
                                             <ListItem
                                                 label={pets('fields.breed')}
-                                                value={selectedPet.breed}
+                                                value={breedLabel(selectedPet.breed, tBreeds)}
                                             />
                                             <ListItem
                                                 label={pets(

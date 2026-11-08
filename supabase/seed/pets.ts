@@ -4,6 +4,8 @@ import * as path from 'path';
 dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from '@supabase/database.types'; // путь к твоим типам
+import { PET_BREEDS } from '@features/pets/constants';
+import { hasBreedList } from '@features/pets/breeds';
 
 const supabase = createClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -64,25 +66,6 @@ const otherNames = [
     'Бублик',
 ];
 
-const dogBreeds = [
-    'Лабрадор',
-    'Хаски',
-    'Овчарка',
-    'Бигль',
-    'Шпиц',
-    'Корги',
-    'Боксёр',
-    'Далматин',
-];
-const catBreeds = [
-    'Британская',
-    'Мейн-кун',
-    'Сфинкс',
-    'Персидская',
-    'Сиамская',
-    'Бенгальская',
-];
-
 const dogDescriptions = [
     'Дружелюбный пёс, обожает прогулки и игры с мячом.',
     'Ласковый и послушный, отлично ладит с детьми.',
@@ -137,12 +120,7 @@ function buildPet(ownerId: string, shelterId: string | null) {
               ? pick(catNames)
               : pick(otherNames);
 
-    const breed =
-        sp === 'dog'
-            ? maybe(pick(dogBreeds))
-            : sp === 'cat'
-              ? maybe(pick(catBreeds))
-              : null;
+    const breed = hasBreedList(sp) ? maybe(pick(PET_BREEDS[sp])) : null;
 
     const description =
         sp === 'dog'

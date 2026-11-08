@@ -7,6 +7,7 @@ import { LuGift, LuMapPin } from 'react-icons/lu';
 import ListingChip from '@/shared/components/UI/ListingChips';
 import { formatCzk } from '@shared/helpers/currencyFormat';
 import { PRICED_LISTING_TYPE, REWARD_LISTING_TYPE } from '../../constants';
+import { usePetCardFacts } from './hooks/usePetCardFacts';
 import PetPlaceholder from '@UI/PetPlaceholder';
 import { Link } from '@/i18n/navigation';
 
@@ -22,21 +23,8 @@ export default function PetCard({ pet }: { pet: PetWithShelter }) {
         pet.listing_type === REWARD_LISTING_TYPE && pet.reward
             ? formatCzk(pet.reward, locale)
             : null;
-    const ageTranslations = useTranslations('PetAge');
-    const ageFormat =
-        pet.age_months < 12
-            ? ageTranslations('monthsShort', { count: pet.age_months })
-            : ageTranslations('yearsShort', {
-                  years: Math.floor(pet.age_months / 12),
-              });
     const image = pet.image_url?.[0];
-    const facts = [
-        pet.breed,
-        pet.age_months != null ? ageFormat : null,
-        pet.sex && pet.sex !== 'unknown'
-            ? translations(`sex.${pet.sex}`)
-            : null,
-    ].filter(Boolean);
+    const facts = usePetCardFacts(pet);
 
     return (
         <Link

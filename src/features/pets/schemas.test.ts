@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { CLOUDINARY_IMAGE_URL_PREFIX } from '@shared/constants/images';
-import { PET_MAX_PHOTOS } from './constants';
+import { PET_BREED_MAX_LENGTH, PET_MAX_PHOTOS } from './constants';
 import {
     PetFiltersSchema,
     PetFormSchema,
@@ -104,6 +104,35 @@ describe('PetFormSchema', () => {
     });
 });
 
+describe('PetFormSchema breed', () => {
+    const parse = (species: string, breed: string) =>
+        PetFormSchema.safeParse({ ...validForm, species, breed });
+
+    it('accepts a breed from the list of the species', () => {
+        expect(parse('dog', 'beagle').success).toBe(true);
+        expect(parse('cat', 'domestic').success).toBe(true);
+    });
+
+    it('rejects free text and breeds of another species', () => {
+        const result = parse('dog', 'Labrador');
+        expect(result.success).toBe(false);
+        expect(result.error?.issues[0].path).toEqual(['breed']);
+        expect(parse('cat', 'beagle').success).toBe(false);
+    });
+
+    it('accepts no breed for any species', () => {
+        expect(PetFormSchema.parse({ ...validForm, breed: '' }).breed).toBeNull();
+    });
+
+    it('keeps free text for species without a list', () => {
+        const bird = { ...validForm, species: 'bird', breed: ' Budgie ' };
+        expect(PetFormSchema.parse(bird).breed).toBe('Budgie');
+        expect(
+            parse('bird', 'x'.repeat(PET_BREED_MAX_LENGTH + 1)).success,
+        ).toBe(false);
+    });
+});
+
 describe('PetStatusChangeSchema', () => {
     it('requires a reason for a closed listing', () => {
         const result = PetStatusChangeSchema.safeParse({
@@ -172,6 +201,26 @@ describe('PetFiltersSchema', () => {
         expect(result.min_price).toBeUndefined();
         expect(result.vaccinated).toBeUndefined();
         expect(result.from_shelter).toBeUndefined();
+    });
+
+    it('parses comma-separated breed keys', () => {
+        expect(PetFiltersSchema.parse({ breed: 'beagle,pug' }).breed).toEqual([
+            'beagle',
+            'pug',
+        ]);
+        expect(PetFiltersSchema.parse({ breed: '' }).breed).toEqual([]);
+    });
+
+    it('parses its own output again unchanged', () => {
+        // getPublicPets re-parses filters the page has already parsed.
+        const parsed = PetFiltersSchema.parse({ breed: 'beagle,pug', page: '2' });
+        expect(PetFiltersSchema.parse(parsed)).toEqual(parsed);
+    });
+
+    it('rejects unknown breed keys', () => {
+        expect(PetFiltersSchema.safeParse({ breed: 'beagle,dragon' }).success).toBe(
+            false,
+        );
     });
 
     it('rejects an oversized page size and unknown sort fields', () => {

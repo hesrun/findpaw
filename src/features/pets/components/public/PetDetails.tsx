@@ -6,6 +6,7 @@ import ListingChip from '@/shared/components/UI/ListingChips';
 import { formatAge } from '@shared/helpers/ageFormat';
 import { formatCzk } from '@shared/helpers/currencyFormat';
 import { PRICED_LISTING_TYPE, REWARD_LISTING_TYPE } from '../../constants';
+import { breedLabel } from '../../breeds';
 import { formatDate } from '@shared/helpers/dateFormat';
 import type { PetWithShelter } from '@/types/pets';
 import PetShelterContact from './PetShelterContact';
@@ -52,12 +53,14 @@ function HealthItem({
 }
 
 export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
-    const [t, tPets, tGlobal, locale] = await Promise.all([
+    const [t, tPets, tBreeds, tGlobal, locale] = await Promise.all([
         getTranslations('petsPage.detail'),
         getTranslations('pets'),
+        getTranslations('pets.breeds'),
         getTranslations('global'),
         getLocale(),
     ]);
+    const breed = breedLabel(pet.breed, tBreeds);
     const dateLocale = locale === 'cs' ? 'cs' : 'en';
     const age = await formatAge(pet.age_months, 'full');
 
@@ -129,7 +132,7 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
                     value={tPets(`species.${pet.species}`)}
                 />
                 <Fact label={t('age')} value={age} />
-                {pet.breed && <Fact label={t('breed')} value={pet.breed} />}
+                {breed && <Fact label={t('breed')} value={breed} />}
                 {pet.sex && pet.sex !== 'unknown' && (
                     <Fact label={t('sex')} value={tPets(`sex.${pet.sex}`)} />
                 )}

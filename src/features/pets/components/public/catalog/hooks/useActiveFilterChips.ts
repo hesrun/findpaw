@@ -21,7 +21,7 @@ function isTextKey(key: CatalogFilterKey): key is CatalogTextKey {
 export function useActiveFilterChips() {
     const t = useTranslations('petsPage.filters');
     const tPets = useTranslations('pets');
-    const { filters, navigate, clearText, changeListingType } =
+    const { filters, navigate, clearText, changeListingType, changeSpecies } =
         useCatalogFilters();
 
     const chips: FilterChip[] = [];
@@ -35,6 +35,13 @@ export function useActiveFilterChips() {
         chips.push({
             key: 'species',
             label: tPets(`species.${filters.species}`),
+        });
+    }
+    if (filters.breed?.length) {
+        const names = filters.breed.map((id) => tPets(`breeds.${id}`));
+        chips.push({
+            key: 'breed',
+            label: t('chips.breed', { value: names.join(', ') }),
         });
     }
     if (filters.sex) {
@@ -58,6 +65,7 @@ export function useActiveFilterChips() {
     function removeFilter(key: CatalogFilterKey) {
         if (isTextKey(key)) clearText([key]);
         if (key === 'listing_type') changeListingType(null);
+        else if (key === 'species') changeSpecies(null);
         else navigate({ [key]: null });
     }
 
