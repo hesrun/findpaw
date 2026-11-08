@@ -10,40 +10,35 @@ import ShelterPets from '@features/shelters/components/public/ShelterPets';
 import { getPublicShelter } from '@features/shelters/queries';
 import { parsePageParam } from '@features/shelters/schemas';
 import { Link } from '@/i18n/navigation';
+import { metaDescription, pageMetadata } from '@shared/lib/seo';
 
 type Params = Promise<{ locale: string; id: string }>;
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
-
-const META_DESCRIPTION_LENGTH = 160;
 
 export async function generateMetadata({
     params,
 }: {
     params: Params;
 }): Promise<Metadata> {
-    const { id } = await params;
+    const { locale, id } = await params;
     const [shelter, t, tPage] = await Promise.all([
         getPublicShelter(id),
-        getTranslations('sheltersPage.detail'),
-        getTranslations('sheltersPage'),
+        getTranslations({ locale, namespace: 'sheltersPage.detail' }),
+        getTranslations({ locale, namespace: 'sheltersPage' }),
     ]);
     if (!shelter) return {};
 
-    const title = t('metaTitle', { name: shelter.name });
-    const description =
-        shelter.description?.slice(0, META_DESCRIPTION_LENGTH) ||
-        tPage('description');
     const image = shelter.img_url?.[0];
 
-    return {
-        title,
-        description,
-        openGraph: {
-            title,
-            description,
-            ...(image && { images: [{ url: image, alt: shelter.name }] }),
-        },
-    };
+    return pageMetadata({
+        locale,
+        path: `/shelters/${shelter.id}`,
+        title: t('metaTitle', { name: shelter.name }),
+        description:
+            metaDescription(shelter.description) || tPage('description'),
+        image: image ? { url: image, alt: shelter.name } : undefined,
+        type: 'article',
+    });
 }
 
 export default async function ShelterPage({

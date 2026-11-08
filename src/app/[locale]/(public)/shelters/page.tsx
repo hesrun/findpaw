@@ -4,13 +4,22 @@ import { Suspense } from 'react';
 import SheltersCatalog from '@features/shelters/components/public/SheltersCatalog';
 import SheltersCatalogSkeleton from '@features/shelters/components/public/SheltersCatalogSkeleton';
 import { parsePageParam } from '@features/shelters/schemas';
+import { pageMetadata } from '@shared/lib/seo';
 
-export async function generateMetadata(): Promise<Metadata> {
-    const t = await getTranslations('sheltersPage');
-    return {
+// Pagination pages share the catalog canonical.
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'sheltersPage' });
+    return pageMetadata({
+        locale,
+        path: '/shelters',
         title: t('metaTitle'),
         description: t('description'),
-    };
+    });
 }
 
 export default async function SheltersPage({

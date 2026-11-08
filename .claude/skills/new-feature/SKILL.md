@@ -18,7 +18,7 @@ Read `AGENTS.md`, `docs/architecture.md`, and the closest existing feature (`src
    - `hooks.ts` - `'use client'` TanStack Query hooks only when client-side fetching is needed. Import query types with `import type`.
    - `components/public` and `components/dashboard` - UI split by audience. Prefer Server Components; add `'use client'` only for interactivity.
 2. If client fetching is needed, add thin route handlers in `src/app/api/<domain>/` that call the feature query and return a generic error message, never `String(err)`.
-3. Add route pages under `src/app/[locale]/...` that only compose feature components.
+3. Add route pages under `src/app/[locale]/...` that only compose feature components. Every public page gets the full SEO kit from `docs/seo.md`: `generateMetadata` returns `pageMetadata()` from `src/shared/lib/seo.ts` with localized title and description, and the page is added to `src/app/sitemap.ts` (a `getSitemap<Domain>()` query for detail pages). Private sections get `noindex` in their layout.
 4. If the domain needs tables, run the `migration` skill first.
 5. Create `docs/features/<domain>.md` with the sections Responsibilities, Domain Rules, Access Patterns, and Decisions. Do not add a file list; the code is the map.
 6. Add the doc to the list in `AGENTS.md` and `README.md`.
@@ -28,7 +28,7 @@ Read `AGENTS.md`, `docs/architecture.md`, and the closest existing feature (`src
 1. Run the `migration` skill (schema, RLS, `npm run gentypes`).
 2. Add the field to `<Domain>FormSchema` in `schemas.ts`, built from `src/shared/lib/form.ts` helpers. Remember that Zod drops keys missing from the schema. Add cases for the field to `schemas.test.ts`.
 3. The actions pick the field up through the shared parse function; touch `actions.ts` only if the field has a rule (then put it in the row mapper). Update the `select` lists in `queries.ts` and the forms.
-4. Review public exposure: is the field visible to anonymous users through the public select policy?
+4. Review public exposure: is the field visible to anonymous users through the public select policy? If it is shown on a public detail page, check whether it belongs in that page's metadata (`docs/seo.md`).
 5. Update `docs/features/<domain>.md` if a domain rule changed.
 
 ## Always

@@ -75,6 +75,19 @@ export async function countPublicPets() {
     return count ?? 0;
 }
 
+// Ids and dates of every public pet for sitemap.xml.
+export async function getSitemapPets() {
+    const supabase = await supabaseServer();
+    const { data, error } = await supabase
+        .from('pets')
+        .select('id, updated_at')
+        .in('status', PUBLIC_PET_STATUSES);
+
+    if (error) throw error;
+
+    return data;
+}
+
 // Returns null for malformed ids and for pets that are missing or not public.
 // cache() lets generateMetadata and the page share one query per request.
 export const getPublicPet = cache(async (petId: string) => {

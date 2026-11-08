@@ -141,6 +141,10 @@
         "admin": "Admin",
         "clinic": "Clinic"
     },
+    "metadata": {
+        "siteTitle": "FindPaw — lost, found and adoptable pets",
+        "siteDescription": "Report a lost pet, help a found one get home, or adopt a pet from a shelter or its owner."
+    },
     "global": {
         "noPhoto": "No photo",
         "loading": "Loading...",
@@ -462,7 +466,7 @@
         "yearsShort": "~{years} years"
     },
     "petsPage": {
-        "metaTitle": "Pets looking for a home — FindPaw",
+        "metaTitle": "Pets looking for a home",
         "title": "All pets",
         "description": "Lost and found pets, adoption and sale listings from shelters and owners.",
         "results": "{count, plural, =0 {No pets} one {# pet} other {# pets}}",
@@ -520,7 +524,7 @@
         },
         "detail": {
             "backToList": "All pets",
-            "metaTitle": "{name} — {listingType} | FindPaw",
+            "metaTitle": "{name} — {listingType}",
             "unnamed": "Pet without a name",
             "price": "Price",
             "free": "Free",
@@ -551,14 +555,14 @@
         }
     },
     "sheltersPage": {
-        "metaTitle": "Animal shelters — FindPaw",
+        "metaTitle": "Animal shelters",
         "title": "Shelters",
         "description": "Animal shelters on FindPaw: contacts and pets looking for a home.",
         "results": "{count, plural, =0 {No shelters} one {# shelter} other {# shelters}}",
         "empty": "No shelters yet.",
         "detail": {
             "backToList": "All shelters",
-            "metaTitle": "{name} — shelter | FindPaw",
+            "metaTitle": "{name} — shelter",
             "about": "About the shelter",
             "noDescription": "The shelter has not added a description yet.",
             "contacts": "Contacts",
@@ -568,7 +572,7 @@
         }
     },
     "aboutPage": {
-        "metaTitle": "About FindPaw",
+        "metaTitle": "About the project",
         "title": "Helping pets find their way home",
         "lead": "FindPaw brings together pet owners, finders and animal shelters in one place: report a lost pet, help a found one get home, or give a shelter animal a new family.",
         "stats": {

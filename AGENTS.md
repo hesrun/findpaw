@@ -14,6 +14,7 @@ Read the relevant document in `docs/` before changing code:
 - development workflow or validation: `docs/development.md`;
 - Supabase, migrations, RLS, or generated types: `docs/database.md`;
 - localization: `docs/i18n.md`;
+- public pages, metadata, sitemap: `docs/seo.md`;
 - account settings: `docs/features/account.md`;
 - pets: `docs/features/pets.md`;
 - shelters: `docs/features/shelters.md`;
@@ -66,6 +67,7 @@ Step-by-step procedures live in Claude Code skills, not in `docs/`:
 
 - Do not hardcode new user-visible strings in JSX; update both `messages/en.json` and `messages/cs.json`.
 - Preserve locale-aware routes and the Next.js 16 `src/proxy.ts` request lifecycle convention.
+- Every new or changed public page ships with the full SEO kit from `docs/seo.md` in the same change: server-rendered content, localized `generateMetadata` built with `pageMetadata()` from `src/shared/lib/seo.ts` (canonical, hreflang, Open Graph, Twitter card), and a sitemap entry. Non-public sections (auth, dashboard) get `noindex` in their layout. A public page without the kit is not done.
 - Update the relevant documentation when changing architecture, security, database schema, or development workflow. Record non-obvious choices in `docs/decisions.md`.
 - Cover new or changed schemas, form helpers, and other pure logic with a colocated `<name>.test.ts` (see "Testing" in `docs/development.md`).
 - Run the narrowest relevant validation after an edit (for tests, `npx vitest run <path>`), then `npm run check` when the change is complete.

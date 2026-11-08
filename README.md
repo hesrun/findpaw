@@ -61,6 +61,7 @@ messages/      locale message catalogs
 - [Development guide](docs/development.md)
 - [Database and Supabase](docs/database.md)
 - [Internationalization](docs/i18n.md)
+- [SEO](docs/seo.md)
 - [Account feature](docs/features/account.md)
 - [Pets feature](docs/features/pets.md)
 - [Shelters feature](docs/features/shelters.md)

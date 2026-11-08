@@ -141,6 +141,10 @@
         "admin": "Administrátor",
         "clinic": "Klinika"
     },
+    "metadata": {
+        "siteTitle": "FindPaw — ztracená, nalezená a zvířata k adopci",
+        "siteDescription": "Nahlaste ztraceného mazlíčka, pomozte nalezenému vrátit se domů nebo si vezměte zvíře z útulku či od majitele."
+    },
     "global": {
         "noPhoto": "Žádná fotografie",
         "loading": "Načítání...",
@@ -462,7 +466,7 @@
         "yearsShort": "~{years} let"
     },
     "petsPage": {
-        "metaTitle": "Mazlíčci hledající domov — FindPaw",
+        "metaTitle": "Mazlíčci hledající domov",
         "title": "Všichni mazlíčci",
         "description": "Ztracená a nalezená zvířata, inzeráty k adopci a prodeji od útulků i majitelů.",
         "results": "{count, plural, =0 {Žádní mazlíčci} one {# mazlíček} few {# mazlíčci} other {# mazlíčků}}",
@@ -520,7 +524,7 @@
         },
         "detail": {
             "backToList": "Všichni mazlíčci",
-            "metaTitle": "{name} — {listingType} | FindPaw",
+            "metaTitle": "{name} — {listingType}",
             "unnamed": "Mazlíček bez jména",
             "price": "Cena",
             "free": "Zdarma",
@@ -551,14 +555,14 @@
         }
     },
     "sheltersPage": {
-        "metaTitle": "Útulky pro zvířata — FindPaw",
+        "metaTitle": "Útulky pro zvířata",
         "title": "Útulky",
         "description": "Útulky pro zvířata na FindPaw: kontakty a zvířata, která hledají domov.",
         "results": "{count, plural, =0 {Žádné útulky} one {# útulek} few {# útulky} other {# útulků}}",
         "empty": "Zatím zde nejsou žádné útulky.",
         "detail": {
             "backToList": "Všechny útulky",
-            "metaTitle": "{name} — útulek | FindPaw",
+            "metaTitle": "{name} — útulek",
             "about": "O útulku",
             "noDescription": "Útulek zatím nepřidal popis.",
             "contacts": "Kontakty",
@@ -568,7 +572,7 @@
         }
     },
     "aboutPage": {
-        "metaTitle": "O projektu FindPaw",
+        "metaTitle": "O projektu",
         "title": "Pomáháme zvířatům najít cestu domů",
         "lead": "FindPaw spojuje majitele zvířat, nálezce a útulky na jednom místě: nahlaste ztracené zvíře, pomozte nalezenému vrátit se domů nebo dejte zvířeti z útulku novou rodinu.",
         "stats": {

@@ -63,6 +63,18 @@ export async function countPublicShelters() {
     return count ?? 0;
 }
 
+// Ids and dates of every shelter for sitemap.xml.
+export async function getSitemapShelters() {
+    const supabase = await supabaseServer();
+    const { data, error } = await supabase
+        .from('shelters')
+        .select('id, updated_at');
+
+    if (error) throw error;
+
+    return data;
+}
+
 // Returns null for malformed ids and missing shelters.
 // cache() lets generateMetadata and the page share one query per request.
 export const getPublicShelter = cache(async (shelterId: string) => {

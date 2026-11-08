@@ -7,44 +7,39 @@ import ImageGallery from '@UI/ImageGallery';
 import PetPlaceholder from '@UI/PetPlaceholder';
 import { getPublicPet } from '@features/pets/queries';
 import { Link } from '@/i18n/navigation';
+import { metaDescription, pageMetadata } from '@shared/lib/seo';
 
 type Params = Promise<{ locale: string; id: string }>;
-
-const META_DESCRIPTION_LENGTH = 160;
 
 export async function generateMetadata({
     params,
 }: {
     params: Params;
 }): Promise<Metadata> {
-    const { id } = await params;
+    const { locale, id } = await params;
     const [pet, t, tPets, tPage] = await Promise.all([
         getPublicPet(id),
-        getTranslations('petsPage.detail'),
-        getTranslations('pets'),
-        getTranslations('petsPage'),
+        getTranslations({ locale, namespace: 'petsPage.detail' }),
+        getTranslations({ locale, namespace: 'pets' }),
+        getTranslations({ locale, namespace: 'petsPage' }),
     ]);
     if (!pet) return {};
 
     const name = pet.name || t('unnamed');
-    const title = t('metaTitle', {
-        name,
-        listingType: tPets(`listingType.${pet.listing_type}`),
-    });
-    const description =
-        pet.description?.slice(0, META_DESCRIPTION_LENGTH) ||
-        tPage('description');
     const image = pet.image_url?.[0];
 
-    return {
-        title,
-        description,
-        openGraph: {
-            title,
-            description,
-            ...(image && { images: [{ url: image, alt: name }] }),
-        },
-    };
+    return pageMetadata({
+        locale,
+        path: `/pets/${pet.id}`,
+        title: t('metaTitle', {
+            name,
+            listingType: tPets(`listingType.${pet.listing_type}`),
+        }),
+        description:
+            metaDescription(pet.description) || tPage('description'),
+        image: image ? { url: image, alt: name } : undefined,
+        type: 'article',
+    });
 }
 
 export default async function PetPage({ params }: { params: Params }) {

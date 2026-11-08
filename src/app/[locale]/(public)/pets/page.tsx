@@ -8,6 +8,7 @@ import {
     PetFiltersSchema,
     type PetFilters as Filters,
 } from '@features/pets/schemas';
+import { pageMetadata } from '@shared/lib/seo';
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -24,12 +25,21 @@ function parseFilters(searchParams: SearchParams): Filters {
     return parsed.success ? parsed.data : {};
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-    const t = await getTranslations('petsPage');
-    return {
+// Filtered views share the catalog canonical: the filter combinations are
+// near-duplicates of it and should not be indexed separately.
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: 'petsPage' });
+    return pageMetadata({
+        locale,
+        path: '/pets',
         title: t('metaTitle'),
         description: t('description'),
-    };
+    });
 }
 
 export default async function PetsPage({

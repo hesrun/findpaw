@@ -1,3 +1,10 @@
+import type { Metadata } from 'next';
+
+// Sign-in forms are not search results (docs/seo.md).
+export const metadata: Metadata = {
+    robots: { index: false, follow: false },
+};
+
 export default function SignInLayout({
     children,
 }: {

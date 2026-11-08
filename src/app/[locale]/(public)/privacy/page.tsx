@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import LegalPage from '@features/legal/LegalPage';
-import { getLegalContent } from '@features/legal/content';
+import { getLegalMetadata } from '@features/legal/content';
 
-export async function generateMetadata(): Promise<Metadata> {
-    const { content } = await getLegalContent();
-    return { title: content.privacy.metaTitle };
+export function generateMetadata(): Promise<Metadata> {
+    return getLegalMetadata('privacy');
 }
 
 export default function Privacy() {
