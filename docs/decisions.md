@@ -71,3 +71,7 @@ The documents describe what the code does. Any feature that adds personal data f
 ## Password change checks the current password by signing in
 
 Supabase `updateUser({ password })` accepts a new password from any valid session, so a stolen or forgotten-open session could lock the owner out. `changePassword` first calls `signInWithPassword` with the current password and rejects the change if it fails. Supabase's "Secure password change" setting (reauthentication nonce by email) was not used: it adds an email round-trip, and auth emails are English-only for now.
+
+## Unit tests first: Vitest in Node, pure logic only
+
+Testing started with Vitest unit tests for schemas, form helpers, and other pure functions: they guard the validation boundary, run in under a second, and need no services. The environment is `node`, not `jsdom`, because no component tests exist; React Testing Library and jsdom can be added when a component needs one. Aliases come from `tsconfig.json` through Vite's built-in `resolve.tsconfigPaths`, so there is no `vite-tsconfig-paths` plugin. `@types/node` follows the Node 22 runtime, as Vitest requires. Tests for RLS policies (needs the local Supabase stack) and end-to-end flows (Playwright) are postponed.

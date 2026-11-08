@@ -27,7 +27,9 @@ Copy `.env.example` to `.env.local` and fill in the values locally. Never commit
 | `npm run build`          | Create a production build               |
 | `npm run start`          | Start the production build              |
 | `npm run typecheck`      | Run TypeScript without emitting files   |
-| `npm run check`          | Run lint, typecheck, and build          |
+| `npm run test`           | Run unit tests once                     |
+| `npm run test:watch`     | Run unit tests in watch mode            |
+| `npm run check`          | Run lint, typecheck, tests, and build   |
 | `npm run login`          | Authenticate the Supabase CLI           |
 | `npm run migration:push` | Apply pending Supabase migrations       |
 | `npm run gentypes`       | Regenerate `supabase/database.types.ts` |
@@ -40,6 +42,18 @@ Step-by-step procedures are Claude Code skills:
 - schema, policy, or storage change: `.claude/skills/migration/SKILL.md`.
 
 Run the narrowest relevant check after an edit, then `npm run check` before sharing the change.
+
+## Testing
+
+Unit tests use Vitest (`vitest.config.mts`) and run in Node without a DOM, network, or database. They cover pure logic only:
+
+- Zod schemas in feature `schemas.ts`;
+- form and schema building blocks in `src/shared/lib/form.ts`;
+- other pure functions: mappers, URL parsing, derived values.
+
+Test files sit next to the code as `<name>.test.ts`. Build test input the way the browser sends it (strings, `""` for empty fields, missing unchecked checkboxes) and import limits from `constants.ts` instead of repeating the numbers.
+
+Not covered yet: components, server actions with Supabase, RLS policies, and end-to-end flows. Logic that needs a test belongs in a pure function, not inside a component or a server action with side effects.
 
 ## Validation Boundaries
 

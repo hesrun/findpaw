@@ -67,4 +67,5 @@ Step-by-step procedures live in Claude Code skills, not in `docs/`:
 - Do not hardcode new user-visible strings in JSX; update both `messages/en.json` and `messages/cs.json`.
 - Preserve locale-aware routes and the Next.js 16 `src/proxy.ts` request lifecycle convention.
 - Update the relevant documentation when changing architecture, security, database schema, or development workflow. Record non-obvious choices in `docs/decisions.md`.
-- Run the narrowest relevant validation after an edit, then `npm run check` when the change is complete.
+- Cover new or changed schemas, form helpers, and other pure logic with a colocated `<name>.test.ts` (see "Testing" in `docs/development.md`).
+- Run the narrowest relevant validation after an edit (for tests, `npx vitest run <path>`), then `npm run check` when the change is complete.
