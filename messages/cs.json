@@ -386,7 +386,7 @@
         "emptyHint": "Zkuste odebrat některé filtry nebo hledat něco jiného.",
         "filters": {
             "search": "Hledat",
-            "searchPlaceholder": "Jméno nebo popis",
+            "searchPlaceholder": "Hledat mazlíčky",
             "species": "Druh",
             "allSpecies": "Všechny druhy",
             "listingType": "Typ inzerátu",

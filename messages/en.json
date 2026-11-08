@@ -386,7 +386,7 @@
         "emptyHint": "Try removing some filters or searching for something else.",
         "filters": {
             "search": "Search",
-            "searchPlaceholder": "Name or description",
+            "searchPlaceholder": "Search pets",
             "species": "Species",
             "allSpecies": "All species",
             "listingType": "Listing type",

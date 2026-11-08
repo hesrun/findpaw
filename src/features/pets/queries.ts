@@ -128,7 +128,11 @@ export async function getPublicPets(
     if (breed) query = query.ilike('breed', breed);
 
     const q = parsed.q ? toSearchPattern(parsed.q) : null;
-    if (q) query = query.or(`name.ilike.${q},description.ilike.${q}`);
+    if (q) {
+        query = query.or(
+            `name.ilike.${q},breed.ilike.${q},description.ilike.${q}`,
+        );
+    }
 
     const { data, error, count } = await query.range(from, from + pageSize - 1);
 

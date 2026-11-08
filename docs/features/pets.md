@@ -55,7 +55,7 @@ Rules:
 - Layout: filters in a left sidebar on desktop and in a left drawer on mobile; search and sorting sit above the results; active filters are shown as removable chips. "Clear all" keeps the sort order.
 - `age` is an app-level bucket (`young` < 12 months, `adult` 12-95, `senior` 96+; `PET_AGE_GROUPS` and `PET_AGE_GROUP_MONTHS` in `constants.ts`), not a database enum. The `sex` filter offers only `male` and `female`.
 - Flags (`from_shelter`, `vaccinated`, `sterilized`) are on only with the value `true`; `false` or anything else is ignored.
-- `q`, `city`, and `breed` are case-insensitive substring searches. Characters that are PostgREST filter syntax or LIKE wildcards are replaced with spaces before building the pattern.
+- `q` searches the name, breed, and description at once; `city` and `breed` filter one column. All three are case-insensitive substring searches. Characters that are PostgREST filter syntax or LIKE wildcards are replaced with spaces before building the pattern.
 - `sortBy` is limited to `PET_SORT_FIELDS` (`constants.ts`); unknown columns are rejected.
 - `getPublicPet` returns `null` for malformed ids and for missing, hidden, or closed listings; the page answers all of them with the same 404.
 - Contact details are shown only when the pet belongs to a shelter. Owner profiles are private under RLS, so private listings have no public contact yet.
