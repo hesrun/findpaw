@@ -56,7 +56,9 @@
                 "content": [
                     "Údaje zpracovávají tito poskytovatelé služeb, kteří nám pomáhají web provozovat:",
                     [
-                        "Supabase, Inc. (USA) – databáze, přihlašování a odesílání e-mailů k účtu.",
+                        "Supabase, Inc. (USA) – databáze a přihlašování.",
+                        "Sendinblue SAS (Brevo, Francie) – odesílání e-mailů k účtu (potvrzení registrace, obnova hesla).",
+                        "Cloudflare, Inc. (USA) – DNS domény a přeposílání zpráv zaslaných na naši kontaktní adresu.",
                         "Cloudinary Ltd. (Izrael, USA) – ukládání a zobrazování fotografií.",
                         "Vercel Inc. (USA) – hosting webu.",
                         "Seznam.cz, a.s. (Česká republika) – mapové podklady a určení adresy z bodu na mapě (Mapy.com). Při zobrazení mapy obdrží vaši IP adresu a při určení adresy souřadnice zvoleného bodu."

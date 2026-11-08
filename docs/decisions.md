@@ -66,7 +66,11 @@ Every listing type may have a map point, picked in a modal next to the plain cit
 
 The documents describe what the code does. Any feature that adds personal data fields, a new third-party service, analytics or other non-essential cookies, payments, messaging between users, new public data, or moderation must update `messages/legal/*.json` and `LEGAL_EFFECTIVE_DATE` in the same change, after the change is agreed with the project owner. These texts are a draft written without a lawyer.
 
-**Open** before launch: fill in `LEGAL_OPERATOR`; confirm the hosting provider (Vercel is assumed in the recipients list) and the Supabase region; add the custom SMTP provider to the recipients list once it is chosen.
+**Open** before launch: fill in `LEGAL_OPERATOR.name`; confirm the hosting provider (Vercel is assumed in the recipients list) and the Supabase region.
+
+## Email: Brevo SMTP for auth, Cloudflare DNS and Email Routing
+
+The built-in Supabase email service sends only a few emails per hour, which is not enough for real sign-ups, so Supabase Auth sends through Brevo SMTP (free tier) from `noreply@findpaw.cz`. Automatic emails use a separate no-reply sender so that replies never land in a place nobody reads by mistake; people who need to write to us use `info@findpaw.cz`. That address is forwarded by Cloudflare Email Routing instead of being a hosted mailbox: it is free and enough for the MVP. The domain's DNS moved to Cloudflare for this, and it also holds the Brevo SPF/DKIM/DMARC records. Brevo and Cloudflare are listed as recipients in the privacy policy. Setup details are in `docs/development.md`.
 
 ## Password change checks the current password by signing in
 

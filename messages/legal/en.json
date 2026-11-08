@@ -57,7 +57,9 @@
                 "content": [
                     "Your data is processed by these service providers that help us run the website:",
                     [
-                        "Supabase, Inc. (USA) – database, sign-in, and account emails.",
+                        "Supabase, Inc. (USA) – database and sign-in.",
+                        "Sendinblue SAS (Brevo, France) – sending account emails (sign-up confirmation, password reset).",
+                        "Cloudflare, Inc. (USA) – domain DNS and forwarding of messages sent to our contact address.",
                         "Cloudinary Ltd. (Israel, USA) – storing and displaying photos.",
                         "Vercel Inc. (USA) – website hosting.",
                         "Seznam.cz, a.s. (Czech Republic) – map tiles and finding the address of a map point (Mapy.com). When a map is shown it receives your IP address, and when an address is looked up, the coordinates of the chosen point."

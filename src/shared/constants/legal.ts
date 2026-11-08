@@ -1,8 +1,8 @@
 // Operator identity shown in the legal documents (GDPR Art. 13, DSA
-// contact point) and the footer. TODO: fill in before launch.
+// contact point) and the footer. TODO: fill in the name before launch.
 export const LEGAL_OPERATOR = {
     name: '[Jméno a příjmení]',
-    email: '[kontakt@example.cz]',
+    email: 'info@findpaw.cz',
 } as const;
 
 // Shown as "Effective from" on both documents. Change it together with

@@ -91,4 +91,9 @@ Sign-up confirmation and password recovery need these settings in the Supabase D
 
 `supabase config push` is not used for this: it pushes the whole local Auth config, including the local `site_url`, rate limits, and `enable_confirmations = false`.
 
-The built-in Supabase email service sends only a few emails per hour; configure custom SMTP for production.
+## Email and DNS
+
+- DNS for `findpaw.cz` is managed in Cloudflare (the domain's NS records point there). The SPF, DKIM, and DMARC records that let Brevo send for the domain live there too.
+- Supabase Auth sends its emails (sign-up confirmation, password reset) through Brevo SMTP, set in Supabase Dashboard → Authentication → SMTP Settings. The sender is `noreply@findpaw.cz`; replies to it are not read. The built-in Supabase email service sends only a few emails per hour, so it is not used in production.
+- `info@findpaw.cz` is the contact address (`LEGAL_OPERATOR.email`) and the sender for informational emails. It has no mailbox: Cloudflare Email Routing forwards it to the owner's inbox.
+- The Brevo SMTP key is stored only in the Supabase Dashboard, never in the repository or `.env` files.
