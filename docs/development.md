@@ -77,8 +77,7 @@ Sign-up confirmation and password recovery need these settings in the Supabase D
 1. Authentication → URL Configuration → Redirect URLs: add `http://localhost:3000/**` and the production origin with `/**`.
 2. Authentication → Emails → Templates: the email templates live in `supabase/templates/` and are the source of truth. The local stack loads them through `supabase/config.toml`; the hosted project does not, so after changing a template paste its HTML and subject into the Dashboard by hand:
     - Confirm sign up ← `supabase/templates/confirmation.html`, subject "Confirm your email";
-    - Reset password ← `supabase/templates/recovery.html`, subject "Reset your password";
-    - Change email address ← `supabase/templates/email_change.html`, subject "Confirm your new email". With "Secure email change" on (the default), Supabase sends it to both the old and the new address, and the email changes after both links are opened.
+    - Reset password ← `supabase/templates/recovery.html`, subject "Reset your password".
 
     Each link carries the token hash to the app's confirm route, for example:
 
@@ -86,7 +85,7 @@ Sign-up confirmation and password recovery need these settings in the Supabase D
     <a href="{{ .RedirectTo }}&token_hash={{ .TokenHash }}&type=recovery">Reset password</a>
     ```
 
-    `redirectTo` / `emailRedirectTo` is built by `requestPasswordReset`, `signUp` and `changeEmail` as `<origin>/api/auth/confirm?locale=<locale>`, so the template appends parameters with `&`. Emails are English-only for now.
+    `redirectTo` / `emailRedirectTo` is built by `requestPasswordReset` and `signUp` as `<origin>/api/auth/confirm?locale=<locale>`, so the template appends parameters with `&`. Emails are English-only for now.
 
     The logo is loaded from `{{ .SiteURL }}/logo/logo-email.png`, a PNG rendered from `public/logo/LogoColor.svg` (Gmail and Outlook do not show SVG). It only loads when Site URL is a public origin, so it is missing in emails from the local stack. Re-render the PNG when the logo changes.
 

@@ -80,7 +80,7 @@ export default function PetForm({
                 <div className="col-span-8 grid gap-6">
                     <DashboardCard
                         title={t('cardTitles.general')}
-                        icon={<LuInfo className="text-accent text-xl" />}
+                        icon={<LuInfo />}
                     >
                         <RadioGroup
                             name="species"
@@ -196,7 +196,7 @@ export default function PetForm({
                     </DashboardCard>
                     <DashboardCard
                         title={t('cardTitles.listing')}
-                        icon={<LuTag className="text-accent text-xl" />}
+                        icon={<LuTag />}
                     >
                         <div className="grid grid-cols-2 gap-4">
                             {/* Listing type */}
@@ -274,7 +274,7 @@ export default function PetForm({
                     </DashboardCard>
                     <DashboardCard
                         title={t('cardTitles.checkList')}
-                        icon={<LuCross className="text-accent text-xl" />}
+                        icon={<LuCross />}
                     >
                         <div className="flex  gap-4">
                             <Switch
@@ -328,7 +328,7 @@ export default function PetForm({
                 <div className="col-span-4 grid gap-6">
                     <DashboardCard
                         title={t('cardTitles.photo')}
-                        icon={<LuCamera className="text-accent text-xl" />}
+                        icon={<LuCamera />}
                     >
                         <FileUploader
                             ref={fileUploaderRef}
@@ -340,7 +340,7 @@ export default function PetForm({
                     </DashboardCard>
                     <DashboardCard
                         title={t('cardTitles.location')}
-                        icon={<LuMapPin className="text-accent text-xl" />}
+                        icon={<LuMapPin />}
                     >
                         {shelters && (
                             <Select

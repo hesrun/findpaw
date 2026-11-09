@@ -79,7 +79,7 @@ export default function ShelterForm({
                 <div className="col-span-8 grid gap-6">
                     <DashboardCard
                         title={t('cardTitles.general')}
-                        icon={<LuBuilding2 className="text-accent text-xl" />}
+                        icon={<LuBuilding2 />}
                     >
                         <TextField
                             isRequired
@@ -106,7 +106,7 @@ export default function ShelterForm({
                     </DashboardCard>
                     <DashboardCard
                         title={t('cardTitles.contacts')}
-                        icon={<LuContact className="text-accent text-xl" />}
+                        icon={<LuContact />}
                     >
                         <div className="grid grid-cols-2 gap-4">
                             <TextField
@@ -148,7 +148,7 @@ export default function ShelterForm({
                 <div className="col-span-4 grid gap-6">
                     <DashboardCard
                         title={t('cardTitles.photos')}
-                        icon={<LuCamera className="text-accent text-xl" />}
+                        icon={<LuCamera />}
                     >
                         <FileUploader
                             ref={fileUploaderRef}
@@ -160,7 +160,7 @@ export default function ShelterForm({
                     </DashboardCard>
                     <DashboardCard
                         title={t('cardTitles.location')}
-                        icon={<LuMapPin className="text-accent text-xl" />}
+                        icon={<LuMapPin />}
                     >
                         <TextField
                             name="city"

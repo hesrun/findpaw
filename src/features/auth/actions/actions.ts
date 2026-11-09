@@ -8,7 +8,6 @@ import getSupabaseWithUser, {
     getCurrentUser,
 } from '@shared/lib/supabase/auth';
 import {
-    ChangeEmailSchema,
     ChangePasswordSchema,
     ForgotPasswordSchema,
     ResetPasswordSchema,
@@ -26,8 +25,7 @@ export type AuthResult = {
         | 'passwordsMismatch'
         | 'updatePasswordFailed'
         | 'linkExpired'
-        | 'wrongCurrentPassword'
-        | 'updateEmailFailed';
+        | 'wrongCurrentPassword';
 };
 
 // A failed new-password form: a mismatch gets its own message.
@@ -155,20 +153,8 @@ export async function updatePassword(formData: FormData): Promise<AuthResult> {
     return {};
 }
 
-// Supabase changes the password or email of any valid session without asking
-// for the current password, so the change forms check it by signing in first.
-// Returns the client of the signed-in user, or null for a wrong password.
-async function reauthenticate(currentPassword: string) {
-    const { supabase, user } = await getSupabaseWithUser();
-
-    const { error } = await supabase.auth.signInWithPassword({
-        email: user.email ?? '',
-        password: currentPassword,
-    });
-
-    return error ? null : supabase;
-}
-
+// Password change of a signed-in user. Supabase does not ask for the current
+// password, so it is checked by signing in with it first.
 export async function changePassword(formData: FormData): Promise<AuthResult> {
     const parsed = ChangePasswordSchema.safeParse({
         currentPassword: formData.get('currentPassword'),
@@ -180,9 +166,14 @@ export async function changePassword(formData: FormData): Promise<AuthResult> {
         return newPasswordError(parsed.error);
     }
 
-    const supabase = await reauthenticate(parsed.data.currentPassword);
+    const { supabase, user } = await getSupabaseWithUser();
 
-    if (!supabase) {
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: user.email ?? '',
+        password: parsed.data.currentPassword,
+    });
+
+    if (signInError) {
         return { error: 'wrongCurrentPassword' };
     }
 
@@ -193,40 +184,6 @@ export async function changePassword(formData: FormData): Promise<AuthResult> {
     if (error) {
         console.error('[changePassword]', error.message);
         return { error: 'updatePasswordFailed' };
-    }
-
-    return {};
-}
-
-// Supabase emails a confirmation link (to both addresses when "Secure email
-// change" is on); the sign-in email changes only after the link is opened.
-export async function changeEmail(formData: FormData): Promise<AuthResult> {
-    const parsed = ChangeEmailSchema.safeParse({
-        email: formData.get('email'),
-        currentPassword: formData.get('currentPassword'),
-        locale: formData.get('locale'),
-    });
-
-    if (!parsed.success) {
-        return { error: 'invalidData' };
-    }
-
-    const { email, currentPassword, locale } = parsed.data;
-    const supabase = await reauthenticate(currentPassword);
-
-    if (!supabase) {
-        return { error: 'wrongCurrentPassword' };
-    }
-
-    const origin = await getRequestOrigin();
-    const { error } = await supabase.auth.updateUser(
-        { email },
-        { emailRedirectTo: `${origin}${AUTH_CONFIRM_PATH}?locale=${locale}` },
-    );
-
-    if (error) {
-        console.error('[changeEmail]', error.message);
-        return { error: 'updateEmailFailed' };
     }
 
     return {};

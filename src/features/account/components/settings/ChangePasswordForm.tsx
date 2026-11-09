@@ -18,7 +18,7 @@ export default function ChangePasswordForm() {
         <form onSubmit={handleSubmit}>
             <DashboardCard
                 title={t('cardTitles.password')}
-                icon={<LuLock className="text-xl" />}
+                icon={<LuLock />}
             >
                 <div className="grid gap-4">
                     <PasswordField

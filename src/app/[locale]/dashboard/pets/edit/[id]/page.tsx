@@ -1,14 +1,17 @@
+import { getTranslations } from 'next-intl/server';
 import { getMyPet } from '@features/pets/queries';
 import PetForm from '@/features/pets/components/dashboard/PetForm';
 import getProfile from '@shared/lib/supabase/profile';
 import { getMyAllShelters } from '@features/shelters/queries';
+import DashboardPageHeader from '@UI/DashboardPageHeader';
 
 export default async function PetEditPage({
     params,
 }: {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 }) {
     const { id } = await params;
+    const t = await getTranslations('dashboard.myPets');
 
     const pet = await getMyPet(id);
     const profile = await getProfile();
@@ -16,9 +19,9 @@ export default async function PetEditPage({
         profile?.role === 'shelter' ? await getMyAllShelters() : null;
 
     return (
-        <div>
-            <h1 className="text-accent text-3xl font-medium mb-8">Edit Pet</h1>
+        <>
+            <DashboardPageHeader title={t('titles.editPet')} />
             <PetForm shelters={shelters} initialData={pet} />
-        </div>
+        </>
     );
 }

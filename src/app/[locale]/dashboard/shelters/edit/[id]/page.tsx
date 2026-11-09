@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import ShelterForm from '@/features/shelters/components/dashboard/ShelterForm';
 import { getMyShelter } from '@features/shelters/queries';
 import { notFound } from 'next/navigation';
+import DashboardPageHeader from '@UI/DashboardPageHeader';
 
 export default async function EditShelterPage({
     params,
@@ -19,11 +20,9 @@ export default async function EditShelterPage({
     }
 
     return (
-        <div>
-            <h1 className={'text-accent text-3xl font-medium mb-8'}>
-                {t('titles.editShelter')}
-            </h1>
+        <>
+            <DashboardPageHeader title={t('titles.editShelter')} />
             <ShelterForm initialData={shelter} />
-        </div>
+        </>
     );
 }

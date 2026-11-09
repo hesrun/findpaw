@@ -24,7 +24,7 @@ export default function DashboardCard({
             <Card.Header>
                 {title && (
                     <Card.Title className="flex items-center gap-2 font-display font-extrabold text-lg">
-                        {icon && <span className="text-accent">{icon}</span>}
+                        {icon && <span className="text-accent text-xl">{icon}</span>}
                         {title}
                     </Card.Title>
                 )}

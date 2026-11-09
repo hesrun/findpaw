@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { getCurrentUser } from '@shared/lib/supabase/auth';
 import getProfile from '@shared/lib/supabase/profile';
 import SettingsTabs from '@features/account/components/settings/SettingsTabs';
+import DashboardPageHeader from '@UI/DashboardPageHeader';
 
 export default async function DashboardSettings() {
     const [t, profile, { user }] = await Promise.all([
@@ -15,9 +16,12 @@ export default async function DashboardSettings() {
     if (!profile || !user) return null;
 
     return (
-        <div className="grid gap-6">
-            <h1 className="text-accent text-3xl font-medium">{t('title')}</h1>
+        <>
+            <DashboardPageHeader
+                title={t('title')}
+                description={t('description')}
+            />
             <SettingsTabs profile={profile} email={user.email ?? ''} />
-        </div>
+        </>
     );
 }

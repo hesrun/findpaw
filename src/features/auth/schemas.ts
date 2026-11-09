@@ -60,12 +60,6 @@ export const ChangePasswordSchema = NewPasswordSchema.extend({
     currentPassword: z.string().min(1),
 }).refine(passwordsMatch, mismatchIssue);
 
-export const ChangeEmailSchema = z.object({
-    email: z.string().email(),
-    currentPassword: z.string().min(1),
-    locale: z.enum(routing.locales).catch(routing.defaultLocale),
-});
-
 // Query of the email link. Only the locale is taken from the URL; the
 // redirect target is built on the server, so the link cannot redirect elsewhere.
 export const AuthConfirmParamsSchema = z.object({

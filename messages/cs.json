@@ -41,8 +41,7 @@
             "passwordsMismatch": "Hesla se neshodují",
             "updatePasswordFailed": "Heslo se nepodařilo změnit. Zkuste to prosím později",
             "linkExpired": "Odkaz pro obnovení je neplatný nebo vypršel. Vyžádejte si nový.",
-            "wrongCurrentPassword": "Současné heslo není správné",
-            "updateEmailFailed": "E-mail se nepodařilo změnit. Možná je již používán, nebo to zkuste později"
+            "wrongCurrentPassword": "Současné heslo není správné"
         },
         "links": {
             "noAccount": "Nemáte účet?",
@@ -54,8 +53,7 @@
             "signInSuccess": "Přihlášení proběhlo úspěšně",
             "signUpSuccess": "Účet byl úspěšně vytvořen, zkontrolujte prosím svůj e-mail pro ověření účtu",
             "resetEmailSent": "Pokud k tomuto e-mailu existuje účet, odkaz pro obnovení je na cestě. Zkontrolujte svou schránku.",
-            "passwordUpdated": "Heslo bylo úspěšně změněno",
-            "emailChangeSent": "Zkontrolujte schránku a otevřete potvrzovací odkaz. E-mail se změní po potvrzení."
+            "passwordUpdated": "Heslo bylo úspěšně změněno"
         },
         "hints": {
             "forgotPassword": "Zadejte e-mail svého účtu a pošleme vám odkaz pro obnovení hesla.",
@@ -177,6 +175,7 @@
             "titles": {
                 "title": "Moji mazlíčci",
                 "addPet": "Přidat nového mazlíčka",
+                "editPet": "Upravit mazlíčka",
                 "description": "Zde můžete spravovat své mazlíčky a jejich informace."
             },
             "buttons": {
@@ -317,28 +316,26 @@
         },
         "settings": {
             "title": "Nastavení účtu",
+            "description": "Spravujte svůj profil a heslo.",
             "tabs": {
                 "profile": "Profil",
                 "password": "Heslo"
             },
             "cardTitles": {
                 "profile": "Profil",
-                "email": "Přihlašovací e-mail",
                 "password": "Heslo"
             },
             "fields": {
                 "avatar": "Profilová fotka",
                 "fullName": "Jméno",
-                "newEmail": "Nový e-mail",
                 "phone": "Telefon",
                 "currentPassword": "Současné heslo"
             },
             "hints": {
-                "email": "Současný e-mail: {email}. Pokud v profilu nemáte telefon, návštěvníci vašich inzerátů uvidí tento e-mail po kliknutí na „Zobrazit kontakt“. Na novou adresu pošleme potvrzovací odkaz."
+                "contact": "Návštěvníci vašich inzerátů uvidí po kliknutí na „Zobrazit kontakt“ vaše jméno a telefon. Bez telefonu uvidí místo něj váš e-mail."
             },
             "btns": {
-                "saveProfile": "Uložit profil",
-                "changeEmail": "Změnit e-mail"
+                "saveProfile": "Uložit profil"
             },
             "notifications": {
                 "profileUpdated": "Profil uložen"

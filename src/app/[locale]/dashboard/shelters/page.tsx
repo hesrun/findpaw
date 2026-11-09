@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import MyShelters from '@/features/shelters/components/dashboard/MyShelters';
+import DashboardPageHeader from '@UI/DashboardPageHeader';
 
 export default async function SheltersPage({
     searchParams,
@@ -13,12 +14,10 @@ export default async function SheltersPage({
     const pageNumber = Math.max(1, Number(page) || 1);
     return (
         <>
-            <div className="mb-6">
-                <h1 className="font-display font-extrabold text-3xl mb-2">
-                    {t('titles.title')}
-                </h1>
-                <p className="text-muted">{t('titles.description')}</p>
-            </div>
+            <DashboardPageHeader
+                title={t('titles.title')}
+                description={t('titles.description')}
+            />
             <MyShelters page={pageNumber} />
         </>
     );

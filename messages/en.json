@@ -41,8 +41,7 @@
             "passwordsMismatch": "Passwords do not match",
             "updatePasswordFailed": "Could not update the password. Please try again later",
             "linkExpired": "The reset link is invalid or has expired. Request a new one.",
-            "wrongCurrentPassword": "The current password is incorrect",
-            "updateEmailFailed": "Could not change the email. It may already be in use, or try again later"
+            "wrongCurrentPassword": "The current password is incorrect"
         },
         "links": {
             "noAccount": "Don't have an account?",
@@ -54,8 +53,7 @@
             "signInSuccess": "Successfully signed in",
             "signUpSuccess": "Account created successfully, please check your email to verify your account",
             "resetEmailSent": "If an account exists for this email, a reset link is on its way. Check your inbox.",
-            "passwordUpdated": "Password updated successfully",
-            "emailChangeSent": "Check your inbox and open the confirmation link. The email changes after you confirm it."
+            "passwordUpdated": "Password updated successfully"
         },
         "hints": {
             "forgotPassword": "Enter your account email and we'll send you a link to reset your password.",
@@ -177,6 +175,7 @@
             "titles": {
                 "title": "My Pets",
                 "addPet": "Add a new pet",
+                "editPet": "Edit pet",
                 "description": "Here you can manage your pets and their information."
             },
             "buttons": {
@@ -317,28 +316,26 @@
         },
         "settings": {
             "title": "Account settings",
+            "description": "Manage your profile and password.",
             "tabs": {
                 "profile": "Profile",
                 "password": "Password"
             },
             "cardTitles": {
                 "profile": "Profile",
-                "email": "Sign-in email",
                 "password": "Password"
             },
             "fields": {
                 "avatar": "Profile photo",
                 "fullName": "Name",
-                "newEmail": "New email",
                 "phone": "Phone",
                 "currentPassword": "Current password"
             },
             "hints": {
-                "email": "Current email: {email}. If your profile has no phone, visitors of your listings can see this email after clicking \"Show contact\". We will send a confirmation link to the new address."
+                "contact": "Visitors of your listings see your name and phone after clicking \"Show contact\". Without a phone, they see your email instead."
             },
             "btns": {
-                "saveProfile": "Save profile",
-                "changeEmail": "Change email"
+                "saveProfile": "Save profile"
             },
             "notifications": {
                 "profileUpdated": "Profile saved"
