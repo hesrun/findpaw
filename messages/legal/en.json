@@ -21,7 +21,7 @@
                 "id": "data",
                 "title": "What data we process",
                 "content": [
-                    "Account data: email, user name, account type (private person or shelter), and a password stored only in hashed form. If you fill them in, also phone, city, and profile photo.",
+                    "Account data: email, user name, account type (private person or shelter), and a password stored only in hashed form. If you fill them in (at sign-up or in settings), also phone, city, and profile photo.",
                     "Listing data: information about the animal, photos, city, address and a map point, price or reward, and the listing status.",
                     "Shelter data: name, description, phone, email, website, city, address, and photos.",
                     "Technical data: IP address, browser details, sign-in times, and error logs. They are created automatically when you use the website.",
@@ -48,7 +48,7 @@
                 "content": [
                     "Active listings and shelter profiles are visible to anyone, even without signing in. Everything you enter in them is published, including photos, city, address, and shelter contacts. Do not enter anything you do not want to make public.",
                     "We round the map point to about 100 m, and the public page shows only a circle with a 300 m radius, not the exact place.",
-                    "Your email, password, and profile data are never shown publicly."
+                    "So that people can contact you about your active private listings, a visitor who clicks \"Show contact\" sees your name and your profile phone, or your sign-in email if you have not filled in a phone. This contact is not part of the page itself, so search engines do not index it. Your password and other profile data are never shown publicly."
                 ]
             },
             {

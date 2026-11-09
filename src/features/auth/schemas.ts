@@ -1,10 +1,12 @@
 import { z } from 'zod';
 import { Constants } from '@supabase/database.types';
 import { routing } from '@/i18n/routing';
+import { optionalText } from '@shared/lib/form';
 import {
     AUTH_CONFIRM_TYPES,
     DEFAULT_SIGN_UP_ROLE,
     PASSWORD_MIN_LENGTH,
+    PROFILE_PHONE_MAX_LENGTH,
     SIGN_UP_EXCLUDED_ROLES,
     USER_NAME_MIN_LENGTH,
 } from '@features/auth/constants';
@@ -13,6 +15,11 @@ import {
 const SignUpRoleSchema = z
     .enum(Constants.public.Enums.user_role)
     .exclude([...SIGN_UP_EXCLUDED_ROLES]);
+
+// Optional contact phone of an account; shared by sign-up and profile settings.
+export const PhoneSchema = optionalText(
+    z.string().trim().max(PROFILE_PHONE_MAX_LENGTH),
+);
 
 export const SignInSchema = z.object({
     email: z.string().email(),
@@ -23,6 +30,7 @@ export const SignUpSchema = z.object({
     email: z.string().email(),
     password: z.string().min(PASSWORD_MIN_LENGTH),
     userName: z.string().trim().min(USER_NAME_MIN_LENGTH),
+    phone: PhoneSchema,
     role: SignUpRoleSchema.catch(DEFAULT_SIGN_UP_ROLE),
     locale: z.enum(routing.locales).catch(routing.defaultLocale),
 });
@@ -51,6 +59,12 @@ export const ResetPasswordSchema = NewPasswordSchema.refine(
 export const ChangePasswordSchema = NewPasswordSchema.extend({
     currentPassword: z.string().min(1),
 }).refine(passwordsMatch, mismatchIssue);
+
+export const ChangeEmailSchema = z.object({
+    email: z.string().email(),
+    currentPassword: z.string().min(1),
+    locale: z.enum(routing.locales).catch(routing.defaultLocale),
+});
 
 // Query of the email link. Only the locale is taken from the URL; the
 // redirect target is built on the server, so the link cannot redirect elsewhere.

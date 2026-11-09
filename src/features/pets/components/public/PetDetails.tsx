@@ -9,7 +9,8 @@ import { PRICED_LISTING_TYPE, REWARD_LISTING_TYPE } from '../../constants';
 import { breedLabel } from '../../breeds';
 import { formatDate } from '@shared/helpers/dateFormat';
 import type { PetWithShelter } from '@/types/pets';
-import PetShelterContact from './PetShelterContact';
+import PetContact from './PetContact';
+import PetOwnerContact from './PetOwnerContact';
 import PetAreaSection from './location/PetAreaSection';
 
 function Fact({ label, value }: { label: string; value: ReactNode }) {
@@ -166,10 +167,18 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
 
             <PetAreaSection pet={pet} />
 
+            {/* A shelter is an organization: its contacts are public. A
+                private author's contact is revealed on click. */}
             {pet.shelter ? (
-                <PetShelterContact shelter={pet.shelter} />
+                <PetContact
+                    title={t('contactShelter')}
+                    name={pet.shelter.name}
+                    location={location}
+                    phone={pet.shelter.phone}
+                    email={pet.shelter.email}
+                />
             ) : (
-                <p className="text-sm text-muted">{t('noContact')}</p>
+                <PetOwnerContact petId={pet.id} />
             )}
 
             {pet.created_at && (

@@ -24,6 +24,8 @@ Never authorize from `user_metadata` / `raw_user_meta_data`: users can set it th
 
 When adding related data, consider storage policies and delete behavior (`on delete cascade` / `set null`) together with the table.
 
+When public pages need a few fields of a private table, expose them through a narrow `security definer` function (with `set search_path = ''`) instead of widening the table's select policy. `get_pet_owner_contact(pet_id)` is the example: it returns the author's name and one contact channel (phone, or the sign-in email when there is no phone) only for a public listing without a shelter, while `profiles` stays owner-only.
+
 A server action or middleware check is not a replacement for RLS. Client-side checks are not security controls.
 
 Permissive policies combine with OR. When a table has both an owner policy and a public policy, the server client (which carries the user's session) returns the owner's private rows too, so public queries must filter visibility explicitly (for example `status in ('active', 'reserved')` for pets) instead of relying on the public policy alone.

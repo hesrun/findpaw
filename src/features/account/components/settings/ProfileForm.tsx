@@ -10,16 +10,15 @@ import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidat
 import {
     AVATAR_MAX_FILES,
     PROFILE_NAME_MAX_LENGTH,
-    PROFILE_PHONE_MAX_LENGTH,
 } from '@features/account/constants';
+import { PROFILE_PHONE_MAX_LENGTH } from '@features/auth/constants';
 import { useProfileForm } from './hooks/useProfileForm';
 
-type ProfileFormProps = {
+export default function ProfileForm({
+    profile,
+}: {
     profile: Tables<'profiles'>;
-    email: string;
-};
-
-export default function ProfileForm({ profile, email }: ProfileFormProps) {
+}) {
     const t = useTranslations('dashboard.settings');
     const { handleSubmit, isPending, uploaderRef } = useProfileForm();
     const { validateUserName } = useAuthFieldValidation();
@@ -54,14 +53,6 @@ export default function ProfileForm({ profile, email }: ProfileFormProps) {
                             <Label>{t('fields.fullName')}</Label>
                             <Input placeholder={t('fields.fullName')} />
                             <FieldError />
-                        </TextField>
-                        <TextField
-                            isReadOnly
-                            variant="secondary"
-                            value={email}
-                        >
-                            <Label>{t('fields.email')}</Label>
-                            <Input />
                         </TextField>
                         <TextField
                             name="phone"

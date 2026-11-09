@@ -26,11 +26,15 @@ import { Database } from '@supabase/database.types';
 
 type Shelter = Database['public']['Tables']['shelters']['Row'];
 
+// `defaultContact` prefills a new shelter with the owner's account contact.
 export default function ShelterForm({
     initialData,
+    defaultContact,
 }: {
     initialData?: Shelter;
+    defaultContact?: Pick<Shelter, 'phone' | 'email'>;
 }) {
+    const contact = initialData ?? defaultContact;
     const isEditing = !!initialData;
     const t = useTranslations('dashboard.myShelters');
     const router = useRouter();
@@ -107,7 +111,7 @@ export default function ShelterForm({
                         <div className="grid grid-cols-2 gap-4">
                             <TextField
                                 name="phone"
-                                defaultValue={initialData?.phone ?? ''}
+                                defaultValue={contact?.phone ?? ''}
                                 variant="secondary"
                             >
                                 <Label>{t('fields.phone')}</Label>
@@ -118,7 +122,7 @@ export default function ShelterForm({
                                 name="email"
                                 type="email"
                                 variant="secondary"
-                                defaultValue={initialData?.email ?? ''}
+                                defaultValue={contact?.email ?? ''}
                             >
                                 <Label>{t('fields.email')}</Label>
                                 <Input placeholder={t('fields.email')} />

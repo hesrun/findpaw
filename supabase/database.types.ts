@@ -201,7 +201,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_pet_owner_contact: {
+        Args: { pet_id: string }
+        Returns: {
+          email: string
+          full_name: string
+          phone: string
+        }[]
+      }
     }
     Enums: {
       pet_close_reason: "reunited" | "adopted" | "sold" | "withdrawn"

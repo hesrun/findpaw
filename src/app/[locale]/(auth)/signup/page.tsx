@@ -20,6 +20,7 @@ import { Link } from '@/i18n/navigation';
 import {
     AUTH_ROUTES,
     DEFAULT_SIGN_UP_ROLE,
+    PROFILE_PHONE_MAX_LENGTH,
     SIGN_UP_ROLES,
     type SignUpRole,
 } from '@features/auth/constants';
@@ -102,6 +103,17 @@ export default function SignUp() {
                     >
                         <Label>{t('fields.email')}</Label>
                         <Input placeholder={t('fields.email')} />
+                        <FieldError />
+                    </TextField>
+                    <TextField
+                        name="phone"
+                        type="tel"
+                        autoComplete="tel"
+                        variant="secondary"
+                        maxLength={PROFILE_PHONE_MAX_LENGTH}
+                    >
+                        <Label>{t('fields.phoneOptional')}</Label>
+                        <Input placeholder={t('fields.phone')} />
                         <FieldError />
                     </TextField>
                     <PasswordField

@@ -49,7 +49,7 @@ Rules:
 | Route | What it shows |
 | --- | --- |
 | `/pets` | Catalog of public listings, 12 per page, newest first by default. |
-| `/pets/[id]` | One listing: gallery, facts, health, description, shelter contacts. |
+| `/pets/[id]` | One listing: gallery, facts, health, description, contacts of the shelter or the author. |
 
 - Catalog filters live in the URL (`q`, `species`, `listing_type`, `sex`, `age`, `breed`, `city`, `min_price`, `max_price`, `from_shelter`, `vaccinated`, `sterilized`, `sortBy`, `ascending`, `page`), so filtered views can be shared and indexed. The page parses them with `PetFiltersSchema`; malformed parameters fall back to the unfiltered catalog. Changing any filter resets `page`.
 - Price filters are shown only for `sale` listings and are cleared when another listing type is chosen.
@@ -60,7 +60,7 @@ Rules:
 - `breed` is a comma-separated list of breed keys (`?breed=beagle,pug`), picked in a searchable multi-select that appears once a species with a breed list is chosen. Changing or clearing the species clears it. Characters that are PostgREST filter syntax or LIKE wildcards are replaced with spaces before building the pattern.
 - `sortBy` is limited to `PET_SORT_FIELDS` (`constants.ts`); unknown columns are rejected.
 - `getPublicPet` returns `null` for malformed ids and for missing, hidden, or closed listings; the page answers all of them with the same 404.
-- Contact details are shown only when the pet belongs to a shelter. Owner profiles are private under RLS, so private listings have no public contact yet.
+- A shelter pet shows the shelter's contacts in the page. A private listing shows a "Show contact" button (`PetOwnerContact`); on click `usePetOwnerContact` loads `/api/pets/[id]/contact`, so the contact is never in the HTML and is not indexed (`/api/` is disallowed in robots.txt). It is the author's live account contact: name plus one channel, the profile phone or, without a phone, the sign-in email. Owner profiles stay private under RLS; `getPetOwnerContact` calls the `get_pet_owner_contact` database function, which returns the contact only for public listings without a shelter and picks the channel itself, so a direct call cannot reveal the email either. Both cases render `PetContact`.
 
 ## Access Patterns
 

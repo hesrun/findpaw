@@ -107,6 +107,20 @@ export const getPublicPet = cache(async (petId: string) => {
     return data;
 });
 
+// Live account contact of a private listing's author (profile phone and
+// sign-in email). Profiles are owner-only under RLS, so the database function
+// returns it only for public listings without a shelter; otherwise null.
+export const getPetOwnerContact = cache(async (petId: string) => {
+    const supabase = await supabaseServer();
+    const { data, error } = await supabase
+        .rpc('get_pet_owner_contact', { pet_id: petId })
+        .maybeSingle();
+
+    if (error) throw error;
+
+    return data;
+});
+
 // `scope` is set by the server, not by URL filters: the shelter page lists
 // only that shelter's pets.
 export async function getPublicPets(

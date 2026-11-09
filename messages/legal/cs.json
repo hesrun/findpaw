@@ -20,7 +20,7 @@
                 "id": "data",
                 "title": "Jaké údaje zpracováváme",
                 "content": [
-                    "Údaje k účtu: e-mail, uživatelské jméno, typ účtu (soukromá osoba nebo útulek) a heslo, které ukládáme pouze v zašifrované (hashované) podobě. Pokud je vyplníte, také telefon, město a profilovou fotografii.",
+                    "Údaje k účtu: e-mail, uživatelské jméno, typ účtu (soukromá osoba nebo útulek) a heslo, které ukládáme pouze v zašifrované (hashované) podobě. Pokud je vyplníte (při registraci nebo v nastavení), také telefon, město a profilovou fotografii.",
                     "Údaje v inzerátech: informace o zvířeti, fotografie, město, adresa a bod na mapě, cena nebo odměna a stav inzerátu.",
                     "Údaje o útulku: název, popis, telefon, e-mail, web, město, adresa a fotografie.",
                     "Technické údaje: IP adresa, údaje o prohlížeči, časy přihlášení a záznamy o chybách. Vznikají automaticky při používání webu.",
@@ -47,7 +47,7 @@
                 "content": [
                     "Aktivní inzeráty a profily útulků vidí kdokoli, i bez přihlášení. Zveřejňuje se vše, co do nich vyplníte, včetně fotografií, města, adresy a kontaktů útulku. Neuvádějte proto údaje, které nechcete zveřejnit.",
                     "Bod na mapě zaokrouhlujeme přibližně na 100 m a na veřejné stránce zobrazujeme jen kruh o poloměru 300 m, nikoli přesné místo.",
-                    "Váš e-mail, heslo a údaje profilu veřejně nezobrazujeme."
+                    "Aby vás lidé mohli kontaktovat kvůli vašim aktivním soukromým inzerátům, návštěvník po kliknutí na „Zobrazit kontakt“ uvidí vaše jméno a telefon z profilu, nebo přihlašovací e-mail, pokud telefon nemáte vyplněný. Tento kontakt není součástí samotné stránky, a proto jej vyhledávače neindexují. Heslo a ostatní údaje profilu veřejně nezobrazujeme."
                 ]
             },
             {

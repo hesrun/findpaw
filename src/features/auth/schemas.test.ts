@@ -3,10 +3,12 @@ import { routing } from '@/i18n/routing';
 import {
     DEFAULT_SIGN_UP_ROLE,
     PASSWORD_MIN_LENGTH,
+    PROFILE_PHONE_MAX_LENGTH,
     SIGN_UP_EXCLUDED_ROLES,
 } from './constants';
 import {
     AuthConfirmParamsSchema,
+    ChangeEmailSchema,
     ChangePasswordSchema,
     ResetPasswordSchema,
     SignUpSchema,
@@ -56,6 +58,52 @@ describe('SignUpSchema', () => {
             SignUpSchema.safeParse({ ...validSignUp, userName: '  J  ' }).success,
         ).toBe(false);
     });
+
+    it('accepts a sign-up without a phone', () => {
+        expect(SignUpSchema.parse({ ...validSignUp, phone: '' }).phone).toBeNull();
+        expect(
+            SignUpSchema.parse({ ...validSignUp, phone: null }).phone,
+        ).toBeNull();
+    });
+
+    it('trims the phone and rejects a too long one', () => {
+        expect(
+            SignUpSchema.parse({ ...validSignUp, phone: ' +420 777 123 456 ' })
+                .phone,
+        ).toBe('+420 777 123 456');
+        expect(
+            SignUpSchema.safeParse({
+                ...validSignUp,
+                phone: '1'.repeat(PROFILE_PHONE_MAX_LENGTH + 1),
+            }).success,
+        ).toBe(false);
+    });
+});
+
+describe('ChangeEmailSchema', () => {
+    const validChange = {
+        email: 'new@example.cz',
+        currentPassword: 'old',
+        locale: 'cs',
+    };
+
+    it('parses a valid change', () => {
+        expect(ChangeEmailSchema.parse(validChange)).toEqual(validChange);
+    });
+
+    it('rejects an invalid email', () => {
+        expect(
+            ChangeEmailSchema.safeParse({ ...validChange, email: 'new' })
+                .success,
+        ).toBe(false);
+    });
+
+    it('requires the current password', () => {
+        expect(
+            ChangeEmailSchema.safeParse({ ...validChange, currentPassword: '' })
+                .success,
+        ).toBe(false);
+    });
 });
 
 describe('ResetPasswordSchema', () => {
@@ -103,6 +151,13 @@ describe('AuthConfirmParamsSchema', () => {
             AuthConfirmParamsSchema.safeParse({
                 token_hash: 'abc',
                 type: 'recovery',
+                locale: 'en',
+            }).success,
+        ).toBe(true);
+        expect(
+            AuthConfirmParamsSchema.safeParse({
+                token_hash: 'abc',
+                type: 'email_change',
                 locale: 'en',
             }).success,
         ).toBe(true);

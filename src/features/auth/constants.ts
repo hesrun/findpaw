@@ -14,6 +14,8 @@ export type SignUpRole = Exclude<
 
 export const PASSWORD_MIN_LENGTH = 8;
 export const USER_NAME_MIN_LENGTH = 3;
+// Also capped in the sign-up trigger (handle_new_user), which reads it from metadata.
+export const PROFILE_PHONE_MAX_LENGTH = 30;
 
 export const SIGN_UP_ROLES = Constants.public.Enums.user_role.filter(
     (role): role is SignUpRole =>
@@ -28,6 +30,7 @@ export const AUTH_ROUTES = {
     forgotPassword: '/forgot-password',
     resetPassword: '/reset-password',
     afterSignIn: '/dashboard/pets',
+    settings: '/dashboard/settings',
 } as const;
 
 // Route handler that verifies email links. It lives under /api so the
@@ -38,10 +41,12 @@ export const AUTH_CONFIRM_PATH = '/api/auth/confirm';
 export const LINK_EXPIRED_ERROR = 'linkExpired';
 
 // Email link types accepted by the confirm route. `email` confirms a sign-up
-// (Supabase deprecated `signup` in its favor); `recovery` resets a password.
+// (Supabase deprecated `signup` in its favor); `recovery` resets a password;
+// `email_change` confirms a new sign-in email.
 export const AUTH_CONFIRM_TYPES = [
     'email',
     'recovery',
+    'email_change',
 ] as const satisfies readonly EmailOtpType[];
 
 export type AuthConfirmType = (typeof AUTH_CONFIRM_TYPES)[number];
@@ -55,6 +60,11 @@ export const AUTH_CONFIRM_REDIRECTS = {
     recovery: {
         success: AUTH_ROUTES.resetPassword,
         failure: `${AUTH_ROUTES.forgotPassword}?error=${LINK_EXPIRED_ERROR}`,
+    },
+    // The settings page shows the current email, so it shows the result too.
+    email_change: {
+        success: AUTH_ROUTES.settings,
+        failure: AUTH_ROUTES.settings,
     },
 } as const satisfies Record<
     AuthConfirmType,

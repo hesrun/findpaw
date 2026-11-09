@@ -27,7 +27,9 @@
             "password": "Heslo",
             "confirmPassword": "Potvrdit heslo",
             "role": "Typ účtu",
-            "newPassword": "Nové heslo"
+            "newPassword": "Nové heslo",
+            "phone": "Telefon",
+            "phoneOptional": "Telefon (nepovinné)"
         },
         "errors": {
             "emailInvalid": "Zadejte prosím platnou e-mailovou adresu",
@@ -39,7 +41,8 @@
             "passwordsMismatch": "Hesla se neshodují",
             "updatePasswordFailed": "Heslo se nepodařilo změnit. Zkuste to prosím později",
             "linkExpired": "Odkaz pro obnovení je neplatný nebo vypršel. Vyžádejte si nový.",
-            "wrongCurrentPassword": "Současné heslo není správné"
+            "wrongCurrentPassword": "Současné heslo není správné",
+            "updateEmailFailed": "E-mail se nepodařilo změnit. Možná je již používán, nebo to zkuste později"
         },
         "links": {
             "noAccount": "Nemáte účet?",
@@ -51,7 +54,8 @@
             "signInSuccess": "Přihlášení proběhlo úspěšně",
             "signUpSuccess": "Účet byl úspěšně vytvořen, zkontrolujte prosím svůj e-mail pro ověření účtu",
             "resetEmailSent": "Pokud k tomuto e-mailu existuje účet, odkaz pro obnovení je na cestě. Zkontrolujte svou schránku.",
-            "passwordUpdated": "Heslo bylo úspěšně změněno"
+            "passwordUpdated": "Heslo bylo úspěšně změněno",
+            "emailChangeSent": "Zkontrolujte schránku a otevřete potvrzovací odkaz. E-mail se změní po potvrzení."
         },
         "hints": {
             "forgotPassword": "Zadejte e-mail svého účtu a pošleme vám odkaz pro obnovení hesla.",
@@ -319,17 +323,22 @@
             },
             "cardTitles": {
                 "profile": "Profil",
+                "email": "Přihlašovací e-mail",
                 "password": "Heslo"
             },
             "fields": {
                 "avatar": "Profilová fotka",
                 "fullName": "Jméno",
-                "email": "E-mail",
+                "newEmail": "Nový e-mail",
                 "phone": "Telefon",
                 "currentPassword": "Současné heslo"
             },
+            "hints": {
+                "email": "Současný e-mail: {email}. Pokud v profilu nemáte telefon, návštěvníci vašich inzerátů uvidí tento e-mail po kliknutí na „Zobrazit kontakt“. Na novou adresu pošleme potvrzovací odkaz."
+            },
             "btns": {
-                "saveProfile": "Uložit profil"
+                "saveProfile": "Uložit profil",
+                "changeEmail": "Změnit e-mail"
             },
             "notifications": {
                 "profileUpdated": "Profil uložen"
@@ -542,7 +551,9 @@
             "publishedAt": "Zveřejněno {date}",
             "shelter": "Útulek",
             "contactShelter": "Kontaktovat útulek",
-            "noContact": "Kontaktní údaje k tomuto inzerátu zatím nejsou veřejné.",
+            "contactOwner": "Kontaktovat autora",
+            "showContact": "Zobrazit kontakt",
+            "noContact": "Kontaktní údaje k tomuto inzerátu nejsou k dispozici.",
             "reward": "Odměna pro nálezce",
             "rewardShort": "Odměna {amount}",
             "mapTitle": {

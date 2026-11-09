@@ -83,3 +83,11 @@ Testing started with Vitest unit tests for schemas, form helpers, and other pure
 ## Pet breeds: fixed lists in code, keys in the text column
 
 Free-text breeds could not be filtered or translated ("Labrador", "labrador", "Лабрадор"). Dogs, cats and rabbits now pick a breed from `PET_BREEDS`; `pets.breed` stays a text column and stores the key, with names in the message files. A Postgres enum was rejected because every new breed would need a migration and other species keep free text in the same column; a `breeds` table was rejected as an extra layer for under a hundred static entries. Validation is in `PetFormSchema` only. There is no "other" option: a breed missing from the list is "no pedigree" or left empty, otherwise free text would come back. Old dog, cat and rabbit breeds were cleared by a migration instead of being mapped. The catalog search matches listed breeds by name in every locale before querying, since the database holds keys.
+
+## Listing contact comes live from the author's account
+
+A private listing's contact is the author's account contact, read live through the `get_pet_owner_contact` security definer function. Copying a contact onto each listing was tried and dropped: the user would have to update every listing after changing their phone or email. The trade-off is that one listing cannot have its own contact.
+
+Lost and found listings need a contact without registration, since a finder will not sign up first. To limit harvesting, the contact is not in the page HTML: a "Show contact" button loads it from `/api/pets/[id]/contact`, which crawlers do not index. Only one channel is revealed: the phone, or the sign-in email when there is no phone. The sign-in email is the account identifier, so showing it invites phishing and password guessing; the function picks the channel, so a direct RPC call cannot get the email of a user with a phone. A relay contact form (messages sent through our email provider) was rejected for the MVP. The endpoint has no rate limit yet: a determined bot can still call it per listing. Cloudflare Turnstile (planned for sign-up) is the next step if harvesting appears.
+
+A new shelter is prefilled with the same contact but keeps its own copy afterwards, because a shelter is an organization with its own phone and email.
