@@ -56,7 +56,7 @@
                 "content": [
                     "Údaje zpracovávají tito poskytovatelé služeb, kteří nám pomáhají web provozovat:",
                     [
-                        "Supabase, Inc. (USA) – databáze a přihlašování.",
+                        "Supabase, Inc. (USA) – databáze a přihlašování; data jsou uložena v Irsku (EU).",
                         "Sendinblue SAS (Brevo, Francie) – odesílání e-mailů k účtu (potvrzení registrace, obnova hesla).",
                         "Cloudflare, Inc. (USA) – DNS domény a přeposílání zpráv zaslaných na naši kontaktní adresu.",
                         "Cloudinary Ltd. (Izrael, USA) – ukládání a zobrazování fotografií.",

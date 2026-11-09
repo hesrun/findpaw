@@ -57,7 +57,7 @@
                 "content": [
                     "Your data is processed by these service providers that help us run the website:",
                     [
-                        "Supabase, Inc. (USA) – database and sign-in.",
+                        "Supabase, Inc. (USA) – database and sign-in; data is stored in Ireland (EU).",
                         "Sendinblue SAS (Brevo, France) – sending account emails (sign-up confirmation, password reset).",
                         "Cloudflare, Inc. (USA) – domain DNS and forwarding of messages sent to our contact address.",
                         "Cloudinary Ltd. (Israel, USA) – storing and displaying photos.",

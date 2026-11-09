@@ -1,7 +1,7 @@
 // Operator identity shown in the legal documents (GDPR Art. 13, DSA
-// contact point) and the footer. TODO: fill in the name before launch.
+// contact point) and the footer.
 export const LEGAL_OPERATOR = {
-    name: '[Jméno a příjmení]',
+    name: 'Vladyslav Otroshchenko',
     email: 'info@findpaw.cz',
 } as const;
 

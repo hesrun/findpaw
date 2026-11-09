@@ -66,7 +66,7 @@ Every listing type may have a map point, picked in a modal next to the plain cit
 
 The documents describe what the code does. Any feature that adds personal data fields, a new third-party service, analytics or other non-essential cookies, payments, messaging between users, new public data, or moderation must update `messages/legal/*.json` and `LEGAL_EFFECTIVE_DATE` in the same change, after the change is agreed with the project owner. These texts are a draft written without a lawyer.
 
-**Open** before launch: fill in `LEGAL_OPERATOR.name`; confirm the hosting provider (Vercel is assumed in the recipients list) and the Supabase region.
+The website is hosted on Vercel; the Supabase project is in West EU (Ireland). Both are listed as recipients in the privacy policy, so moving either one means updating `messages/legal/*.json`.
 
 ## Email: Brevo SMTP for auth, Cloudflare DNS and Email Routing
 
