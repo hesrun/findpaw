@@ -626,6 +626,11 @@
         "tooLarge": "Maximální velikost souboru je {size} MB",
         "uploadError": "Nepodařilo se nahrát jednu nebo více fotek"
     },
+    "report": {
+        "link": "Nahlásit nevhodný obsah",
+        "subject": "Nahlášení: {url}",
+        "body": "Odkaz: {url}\n\nProč považuji obsah za nezákonný nebo v rozporu s podmínkami:\n\n\nMoje jméno:\n\nHlášení podávám v dobré víře a údaje v něm jsou podle mého nejlepšího vědomí přesné a úplné."
+    },
     "footer": {
         "tagline": "Ztracená, nalezená i hledající domov: inzeráty zvířat a útulky z celé České republiky.",
         "explore": "Procházet",

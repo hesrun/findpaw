@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { LuBadgeAlert, LuGift, LuMapPin } from 'react-icons/lu';
 import { TbScissors, TbVaccine } from 'react-icons/tb';
 import ListingChip from '@/shared/components/UI/ListingChips';
+import ReportLink from '@UI/ReportLink';
 import { formatAge } from '@shared/helpers/ageFormat';
 import { formatCzk } from '@shared/helpers/currencyFormat';
 import { PRICED_LISTING_TYPE, REWARD_LISTING_TYPE } from '../../constants';
@@ -181,16 +182,19 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
                 <PetOwnerContact petId={pet.id} />
             )}
 
-            {pet.created_at && (
-                <p className="text-sm text-muted">
-                    {t('publishedAt', {
-                        date: formatDate(pet.created_at, {
-                            locale: dateLocale,
-                            format: 'medium',
-                        }),
-                    })}
-                </p>
-            )}
+            <div className="flex flex-wrap items-center justify-between gap-2">
+                {pet.created_at && (
+                    <p className="text-sm text-muted">
+                        {t('publishedAt', {
+                            date: formatDate(pet.created_at, {
+                                locale: dateLocale,
+                                format: 'medium',
+                            }),
+                        })}
+                    </p>
+                )}
+                <ReportLink path={`/pets/${pet.id}`} />
+            </div>
         </div>
     );
 }

@@ -23,7 +23,7 @@ type PageMetadataInput = {
     absoluteTitle?: boolean;
 };
 
-function toLocale(value: string): Locale {
+export function toLocale(value: string): Locale {
     return routing.locales.find((l) => l === value) ?? routing.defaultLocale;
 }
 

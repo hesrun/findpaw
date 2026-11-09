@@ -626,6 +626,11 @@
         "tooLarge": "Max file size is {size} MB",
         "uploadError": "Failed to upload one or more images"
     },
+    "report": {
+        "link": "Report inappropriate content",
+        "subject": "Report: {url}",
+        "body": "Link: {url}\n\nWhy I consider this content illegal or contrary to the terms:\n\n\nMy name:\n\nI make this report in good faith, and the information in it is accurate and complete to the best of my knowledge."
+    },
     "footer": {
         "tagline": "Lost, found, and looking for a home: listings of pets and shelters across the Czech Republic.",
         "explore": "Explore",

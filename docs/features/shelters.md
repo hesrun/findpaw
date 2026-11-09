@@ -24,6 +24,7 @@ The shelters feature owns shelter profiles, shelter dashboard management, public
 - The shelter's pets come from `getPublicPets(filters, { shelterId })`. `shelterId` is a server-side scope, not a URL filter, so it does not appear in the pets catalog filters. Public pet statuses still apply.
 - `ShelterCard` links to the detail page through its title with a stretched `::after` overlay, because the card already contains contact links and links cannot be nested.
 - `sortBy` for public shelter queries is limited to `SHELTER_SORT_FIELDS`.
+- The contacts card ends with a "Report inappropriate content" link (`ReportLink`, see "Reports and takedowns" in `docs/decisions.md`).
 
 ## Access Patterns
 

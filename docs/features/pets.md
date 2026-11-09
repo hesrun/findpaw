@@ -61,6 +61,7 @@ Rules:
 - `sortBy` is limited to `PET_SORT_FIELDS` (`constants.ts`); unknown columns are rejected.
 - `getPublicPet` returns `null` for malformed ids and for missing, hidden, or closed listings; the page answers all of them with the same 404.
 - A shelter pet shows the shelter's contacts in the page. A private listing shows a "Show contact" button (`PetOwnerContact`); on click `usePetOwnerContact` loads `/api/pets/[id]/contact`, so the contact is never in the HTML and is not indexed (`/api/` is disallowed in robots.txt). It is the author's live account contact: name plus one channel, the profile phone or, without a phone, the sign-in email. Owner profiles stay private under RLS; `getPetOwnerContact` calls the `get_pet_owner_contact` database function, which returns the contact only for public listings without a shelter and picks the channel itself, so a direct call cannot reveal the email either. Both cases render `PetContact`.
+- The page ends with a "Report inappropriate content" link (`ReportLink`, see "Reports and takedowns" in `docs/decisions.md`).
 
 ## Access Patterns
 

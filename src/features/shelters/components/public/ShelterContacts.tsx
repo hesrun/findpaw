@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { PiEnvelopeSimple, PiGlobe, PiMapPin, PiPhone } from 'react-icons/pi';
+import ReportLink from '@UI/ReportLink';
 import { isHttpUrl } from '@shared/lib/url';
 import type { Shelter } from '@/types/shelters';
 import ContactLink from './ContactLink';
@@ -69,6 +70,8 @@ export default async function ShelterContacts({
                     <p className="text-sm text-muted">{t('noContacts')}</p>
                 )}
             </section>
+
+            <ReportLink path={`/shelters/${shelter.id}`} />
         </aside>
     );
 }
