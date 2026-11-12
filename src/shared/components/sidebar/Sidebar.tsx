@@ -6,7 +6,7 @@ export default async function Sidebar() {
 
     return (
         // Stretches to the full grid row, so the account block sits at the bottom.
-        <aside className="flex flex-col gap-4 rounded-card bg-surface p-3 shadow-my ring-1 ring-border">
+        <aside className="flex flex-col gap-4 surface-card p-3">
             <SideBarNav role={profile?.role ?? 'user'} />
         </aside>
     );

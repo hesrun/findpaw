@@ -31,7 +31,7 @@ export default function PetCard({ pet }: { pet: PetWithShelter }) {
             href={`/pets/${pet.id}`}
             className="group block h-full rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
-            <article className="h-full bg-surface rounded-card shadow-my ring-1 ring-border flex flex-col transition-shadow duration-300 group-hover:ring-accent/40">
+            <article className="h-full surface-card flex flex-col transition-shadow duration-300 group-hover:shadow-my-hover">
                 <div className="relative m-2 mb-0 aspect-4/3 overflow-hidden rounded-media">
                     {image ? (
                         <CloudImage

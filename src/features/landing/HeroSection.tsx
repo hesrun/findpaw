@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import type { Enums } from '@supabase/database.types';
 import PetPlaceholder from '@UI/PetPlaceholder';
 import { countPublicPets } from '@features/pets/queries';
+import HeroBlobs from './HeroBlobs';
 
 // Round pet face set inline with the headline text.
 function InlineFace({
@@ -24,24 +25,6 @@ function InlineFace({
         </span>
     );
 }
-
-const BLOBS = [
-    {
-        species: 'cat',
-        className:
-            'w-[60%] left-[2%] top-[4%] -rotate-5 rounded-[46%_54%_58%_42%/52%_44%_56%_48%]',
-    },
-    {
-        species: 'dog',
-        className:
-            'w-[44%] right-0 top-0 rotate-7 rounded-[55%_45%_40%_60%/50%_55%_45%_50%]',
-    },
-    {
-        species: 'rabbit',
-        className:
-            'w-[42%] right-[10%] bottom-0 -rotate-3 rounded-[42%_58%_52%_48%/58%_42%_58%_42%]',
-    },
-] satisfies { species: Enums<'pet_species'>; className: string }[];
 
 export default async function HeroSection() {
     const t = await getTranslations('HomePage');
@@ -114,22 +97,7 @@ export default async function HeroSection() {
                             </div>
                         )}
                     </div>
-                    <div
-                        aria-hidden
-                        className="relative mx-auto w-full max-w-md aspect-[1/0.92]"
-                    >
-                        {BLOBS.map(({ species, className }) => (
-                            <div
-                                key={species}
-                                className={clsx(
-                                    'absolute aspect-square overflow-hidden border-[6px] border-surface shadow-my',
-                                    className,
-                                )}
-                            >
-                                <PetPlaceholder species={species} />
-                            </div>
-                        ))}
-                    </div>
+                    <HeroBlobs />
                 </div>
             </div>
         </section>

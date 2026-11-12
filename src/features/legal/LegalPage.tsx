@@ -30,7 +30,7 @@ export default async function LegalPage({ type }: { type: LegalDocumentType }) {
                     screens they become a sticky sidebar on the right. */}
                 <nav
                     aria-labelledby="legal-contents"
-                    className="bg-surface rounded-card shadow-my ring-1 ring-border p-6 lg:order-last lg:sticky lg:top-6"
+                    className="surface-card p-6 lg:order-last lg:sticky lg:top-6"
                 >
                     <h2
                         id="legal-contents"

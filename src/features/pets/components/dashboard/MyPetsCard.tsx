@@ -49,7 +49,7 @@ export default function MyPetsCard({
         <Card
             key={pet.id}
             onClick={handleCardClick}
-            className="cursor-pointer rounded-[24px] shadow-my ring-1 ring-border hover:ring-accent/40 transition-shadow"
+            className="cursor-pointer rounded-[24px] shadow-my transition-shadow hover:shadow-my-hover"
         >
             <div className="grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center">
                 <Avatar size="lg">

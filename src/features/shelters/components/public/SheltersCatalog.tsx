@@ -27,7 +27,7 @@ export default async function SheltersCatalog({ page }: { page: number }) {
                     ))}
                 </ul>
             ) : (
-                <div className="bg-surface rounded-card ring-1 ring-border p-10 text-center">
+                <div className="surface-card p-10 text-center">
                     <p className="font-display font-extrabold text-xl">
                         {t('empty')}
                     </p>

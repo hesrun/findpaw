@@ -21,7 +21,7 @@ export default function PetContact({
     children?: ReactNode;
 }) {
     return (
-        <section className="bg-surface rounded-card shadow-my ring-1 ring-border p-5">
+        <section className="surface-card p-5">
             <h2 className="font-display font-extrabold text-xl mb-1">
                 {title}
             </h2>

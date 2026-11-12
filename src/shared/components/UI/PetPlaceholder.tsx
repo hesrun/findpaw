@@ -159,7 +159,9 @@ export default function PetPlaceholder({
             aria-hidden="true"
             className={clsx('block w-full h-full', className)}
         >
-            <rect x="0" y="0" width="160" height="120" fill={palette.bg} />
+            {/* Bleeds past the viewBox, so an `overflow-visible` svg turned
+                inside a clipping shape (hero blobs) shows no bare corners. */}
+            <rect x="-160" y="-120" width="480" height="360" fill={palette.bg} />
             {art(palette)}
         </svg>
     );

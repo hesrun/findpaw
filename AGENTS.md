@@ -53,6 +53,7 @@ Step-by-step procedures live in Claude Code skills, not in `docs/`:
 - Hook locations: every hook of a feature (React Query fetching and UI hooks alike) lives in the flat feature `hooks/` folder, one `use<Name>.ts` per hook, never inside `components/`; hooks reusable across domains go to `src/shared/hooks/`. Search `src/shared/hooks` before writing a new one.
 - A widget split into several components shares its state through one context provider at the widget root (see `components/public/catalog/CatalogFiltersContext.tsx`). State that belongs in the URL stays in the URL. Do not add a global store (Zustand or similar) without recording the decision in `docs/decisions.md`.
 - React Compiler is enabled: do not add `useMemo`/`useCallback`/`memo` for performance.
+- Cards have no border: a plain card is `surface-card` (surface, card radius, soft `shadow-my`), a HeroUI `Card` gets the same shadow from `.card`. Show hover with `hover:shadow-my-hover`, not a colored ring. Both live in `src/css/styles.css`.
 
 ## Security And Data
 

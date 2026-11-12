@@ -17,7 +17,7 @@ export default function ShelterCard({ shelter }: { shelter: Shelter }) {
         : null;
 
     return (
-        <article className="group relative bg-surface rounded-card shadow-my ring-1 ring-border h-full flex flex-col transition-shadow duration-300 hover:ring-accent/40 has-focus-visible:ring-accent">
+        <article className="group relative surface-card h-full flex flex-col transition-shadow duration-300 hover:shadow-my-hover has-focus-visible:ring-2 has-focus-visible:ring-accent">
             <div className="relative m-2 mb-0 aspect-2/1 overflow-hidden rounded-media">
                 {image ? (
                     <CloudImage

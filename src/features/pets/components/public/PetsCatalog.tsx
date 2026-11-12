@@ -34,7 +34,7 @@ export default async function PetsCatalog({
                     ))}
                 </ul>
             ) : (
-                <div className="bg-surface rounded-card ring-1 ring-border p-10 text-center">
+                <div className="surface-card p-10 text-center">
                     <p className="font-display font-extrabold text-xl mb-1">
                         {t('empty')}
                     </p>

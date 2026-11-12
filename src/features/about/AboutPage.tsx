@@ -35,7 +35,7 @@ export default async function AboutPage() {
                     </p>
                 </div>
                 <dl className="grid grid-cols-2 gap-3">
-                    <div className="bg-surface rounded-card shadow-my ring-1 ring-border p-5">
+                    <div className="surface-card p-5">
                         <dt className="text-sm font-bold text-muted">
                             {t('stats.pets')}
                         </dt>
@@ -43,7 +43,7 @@ export default async function AboutPage() {
                             {petsCount}
                         </dd>
                     </div>
-                    <div className="bg-surface rounded-card shadow-my ring-1 ring-border p-5">
+                    <div className="surface-card p-5">
                         <dt className="text-sm font-bold text-muted">
                             {t('stats.shelters')}
                         </dt>
@@ -65,7 +65,7 @@ export default async function AboutPage() {
                     {LISTING_TYPE_ENTRIES.map(([type, Icon]) => (
                         <li
                             key={type}
-                            className="bg-surface rounded-card shadow-my ring-1 ring-border p-5 grid gap-3 content-start"
+                            className="surface-card p-5 grid gap-3 content-start"
                         >
                             <span
                                 aria-hidden

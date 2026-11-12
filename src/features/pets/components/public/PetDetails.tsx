@@ -85,7 +85,6 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
                     <ListingChip
                         label={tPets(`listingType.${pet.listing_type}`)}
                         type={pet.listing_type}
-                        className="ring-1 ring-border"
                     />
                     {pet.status === 'reserved' && (
                         <span className="inline-flex items-center rounded-full bg-[#ffe2c4] px-3 py-1 text-xs font-extrabold text-[#7c2d12]">
@@ -140,7 +139,7 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
                 )}
             </dl>
 
-            <section className="bg-surface rounded-card shadow-my ring-1 ring-border p-5">
+            <section className="surface-card p-5">
                 <h2 className="font-display font-extrabold text-xl mb-4">
                     {t('health')}
                 </h2>

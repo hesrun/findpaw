@@ -7,28 +7,26 @@ interface ListingChipProps {
     className?: string;
 }
 
-// Sentence-case pill with a colored dot: readable on photos and on white cards.
-const DOT_COLORS = {
-    sale: 'bg-emerald-500',
-    adoption: 'bg-violet-500',
-    lost: 'bg-rose-500',
-    found: 'bg-amber-500',
+// Solid sentence-case pill with a glow in its own color: readable on photos
+// and on white cards.
+const CHIP_COLORS = {
+    sale: 'bg-emerald-500 shadow-emerald-500/40',
+    adoption: 'bg-violet-500 shadow-violet-500/40',
+    lost: 'bg-rose-500 shadow-rose-500/40',
+    found: 'bg-amber-500 shadow-amber-500/40',
 } satisfies Record<Enums<'pet_listing_type'>, string>;
 
 export default function ListingChip({ label, type, className }: ListingChipProps) {
     return (
         <span
             className={clsx(
-                'inline-flex max-w-max items-center gap-1.5 rounded-full bg-surface px-3 py-1 text-xs font-extrabold text-foreground ring-1 ring-border',
+                'inline-flex max-w-max items-center rounded-full px-3 py-1 text-xs font-extrabold',
+                type
+                    ? ['text-white shadow-md', CHIP_COLORS[type]]
+                    : 'bg-surface text-foreground',
                 className,
             )}
         >
-            {type && (
-                <i
-                    aria-hidden
-                    className={clsx('size-2 rounded-full', DOT_COLORS[type])}
-                />
-            )}
             {label}
         </span>
     );

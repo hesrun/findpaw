@@ -2,7 +2,7 @@ import { Skeleton } from '@heroui/react';
 
 export default function PetCardSkeleton() {
     return (
-        <div className="bg-surface rounded-card shadow-my ring-1 ring-border">
+        <div className="surface-card">
             <div className="m-2 mb-0 aspect-4/3 overflow-hidden rounded-media">
                 <Skeleton className="h-full rounded-media bg-soft" />
             </div>

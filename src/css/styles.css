@@ -33,15 +33,21 @@
     .chip {
         @apply font-heading font-bold;
     }
-    /* Cards must stand out on the white page: soft lilac shadow + hairline ring. */
+    /* Cards stand out on the white page by a soft lilac shadow, no border. */
     .card {
         border-radius: var(--radius-card);
-        box-shadow:
-            var(--shadow-my),
-            0 0 0 1px var(--border);
+        box-shadow: var(--shadow-my);
     }
 }
 @layer utilities {
+}
+
+/* Plain (non-HeroUI) card surface; hover states use shadow-my-hover. */
+@utility surface-card {
+    background-color: var(--surface);
+    border-radius: var(--radius-card);
+    /* Via the shadow utility, so focus rings (ring-*) add to it. */
+    @apply shadow-my;
 }
 
 @theme inline {
@@ -81,6 +87,32 @@
     --shadow-my:
         0 1px 2px 0 rgba(76, 29, 149, 0.05),
         0 12px 32px -8px rgba(76, 29, 149, 0.14);
+    --shadow-my-hover:
+        0 2px 4px 0 rgba(76, 29, 149, 0.06),
+        0 18px 40px -10px rgba(76, 29, 149, 0.24);
+}
+
+/* Hero blobs (HeroSection): the outline turns one way, the face inside turns
+   back at the same speed, so the face stays still. */
+@keyframes blob-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* A slow wandering loop; --drift (set per blob) is the reach. Uses `translate`,
+   so it adds to the spin's `transform` instead of replacing it. */
+@keyframes blob-float {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+    33% {
+        translate: var(--drift) calc(var(--drift) * -0.8);
+    }
+    66% {
+        translate: calc(var(--drift) * -0.7) calc(var(--drift) * 0.6);
+    }
 }
 
 :root,

@@ -13,7 +13,7 @@ export default function FiltersSidebar() {
     return (
         <aside
             aria-label={t('title')}
-            className="hidden lg:block sticky top-6 bg-surface rounded-card shadow-my ring-1 ring-border p-5"
+            className="hidden lg:block sticky top-6 surface-card p-5"
         >
             <div className="flex items-baseline justify-between mb-4">
                 <h2 className="font-display font-extrabold text-xl">

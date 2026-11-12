@@ -14,10 +14,11 @@ export default async function AudienceSection() {
                 </h2>
                 <p className="text-muted mb-6 max-w-[60ch]">{t('lead')}</p>
                 <ul className="grid gap-4 md:grid-cols-2">
-                    {LANDING_AUDIENCE.map(({ key, icon, href }) => (
+                    {LANDING_AUDIENCE.map(({ key, icon, tone, href }) => (
                         <li key={key}>
                             <FeatureCard
                                 icon={icon}
+                                tone={tone}
                                 title={t(`items.${key}.title`)}
                                 text={t(`items.${key}.text`)}
                                 action={

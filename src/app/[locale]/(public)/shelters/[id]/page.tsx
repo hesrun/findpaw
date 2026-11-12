@@ -77,7 +77,7 @@ export default async function ShelterPage({
                         name={shelter.name}
                         placeholder={<ShelterPlaceholder />}
                     />
-                    <section className="bg-surface rounded-card shadow-my ring-1 ring-border p-5">
+                    <section className="surface-card p-5">
                         <h2 className="font-display font-extrabold text-xl mb-2">
                             {t('about')}
                         </h2>

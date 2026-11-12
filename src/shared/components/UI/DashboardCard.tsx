@@ -19,7 +19,7 @@ export default function DashboardCard({
     return (
         <Card
             {...props}
-            className={clsx('rounded-card shadow-my ring-1 ring-border', className)}
+            className={clsx('rounded-card shadow-my', className)}
         >
             <Card.Header>
                 {title && (

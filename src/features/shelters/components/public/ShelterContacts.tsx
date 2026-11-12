@@ -21,7 +21,7 @@ export default async function ShelterContacts({
     const hasContacts = Boolean(shelter.phone || shelter.email || website);
 
     return (
-        <aside className="bg-surface rounded-card shadow-my ring-1 ring-border p-5 grid gap-4 lg:sticky lg:top-6">
+        <aside className="surface-card p-5 grid gap-4 lg:sticky lg:top-6">
             <div>
                 <h1 className="font-display font-extrabold text-3xl leading-tight">
                     {shelter.name}

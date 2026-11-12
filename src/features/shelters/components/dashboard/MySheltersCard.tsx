@@ -11,7 +11,7 @@ type Shelter = Database['public']['Tables']['shelters']['Row'];
 
 export default function MySheltersCard({ shelter }: { shelter: Shelter }) {
     return (
-        <Card className="rounded-[24px] shadow-my ring-1 ring-border hover:ring-accent/40 transition-shadow">
+        <Card className="rounded-[24px] shadow-my transition-shadow hover:shadow-my-hover">
             <div className="grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr_auto] gap-4 items-center">
                 <Avatar size="lg">
                     {shelter.img_url?.length ? (

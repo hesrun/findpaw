@@ -24,7 +24,7 @@ export default async function FeaturesSection() {
                     {LANDING_FEATURES.map(({ key, icon: Icon }) => (
                         <li
                             key={key}
-                            className="bg-surface rounded-card shadow-my ring-1 ring-border p-5 grid gap-3 content-start"
+                            className="surface-card p-5 grid gap-3 content-start"
                         >
                             <span
                                 aria-hidden

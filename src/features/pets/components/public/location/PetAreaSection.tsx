@@ -16,7 +16,7 @@ export default async function PetAreaSection({
     }
 
     return (
-        <section className="bg-surface rounded-card shadow-my ring-1 ring-border p-5 grid gap-3">
+        <section className="surface-card p-5 grid gap-3">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 className="font-display font-extrabold text-xl">
                     {t(`mapTitle.${pet.listing_type}`)}

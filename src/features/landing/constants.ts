@@ -15,11 +15,22 @@ const ADD_PET_PATH = '/dashboard/pets/add';
 // "Who it helps" cards; text lives in HomePage.audience.items.<key>.
 // Shelters go to sign-up: adding a shelter needs the shelter role.
 export const LANDING_AUDIENCE = [
-    { key: 'lost', icon: LISTING_TYPE_ICONS.lost, href: ADD_PET_PATH },
-    { key: 'found', icon: LISTING_TYPE_ICONS.found, href: ADD_PET_PATH },
+    {
+        key: 'lost',
+        icon: LISTING_TYPE_ICONS.lost,
+        tone: 'rose',
+        href: ADD_PET_PATH,
+    },
+    {
+        key: 'found',
+        icon: LISTING_TYPE_ICONS.found,
+        tone: 'amber',
+        href: ADD_PET_PATH,
+    },
     {
         key: 'adopt',
         icon: LISTING_TYPE_ICONS.adoption,
+        tone: 'accent',
         href: {
             pathname: '/pets',
             query: {
@@ -27,7 +38,12 @@ export const LANDING_AUDIENCE = [
             },
         },
     },
-    { key: 'shelters', icon: TbHomeShield, href: AUTH_ROUTES.signUp },
+    {
+        key: 'shelters',
+        icon: TbHomeShield,
+        tone: 'sky',
+        href: AUTH_ROUTES.signUp,
+    },
 ] as const;
 
 // "What it can do" cards; text lives in HomePage.features.items.<key>.
