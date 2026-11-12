@@ -2,21 +2,29 @@ import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 import { updateSession } from './shared/lib/supabase/proxy';
 import { NextRequest, NextResponse } from 'next/server';
+import { LINK_EXPIRED_ERROR } from '@features/auth/constants';
+import { DASHBOARD_HOME, ROUTES } from '@shared/constants/routes';
 
 const intlMiddleware = createMiddleware(routing);
 
-const PROTECTED_PATHS = ['/dashboard'];
-const AUTH_PATHS = ['/signin', '/signup', '/forgot-password'];
+const PROTECTED_PATHS = [ROUTES.dashboard.root];
+const AUTH_PATHS = [
+    ROUTES.auth.signIn,
+    ROUTES.auth.signUp,
+    ROUTES.auth.forgotPassword,
+];
 // Needs the session created by the recovery email link. Not an auth path:
 // the user is already signed in when they get here.
-const RECOVERY_PATH = '/reset-password';
+const RECOVERY_PATH = ROUTES.auth.resetPassword;
 
 // Routes that require specific roles. First matching rule wins.
 const ROLE_RESTRICTED_ROUTES: Array<{
     path: string;
     allowedRoles: string[];
     redirectTo?: string;
-}> = [{ path: '/dashboard/shelters', allowedRoles: ['shelter', 'admin'] }];
+}> = [
+    { path: ROUTES.dashboard.shelters, allowedRoles: ['shelter', 'admin'] },
+];
 
 export async function proxy(request: NextRequest) {
     const {
@@ -46,7 +54,7 @@ export async function proxy(request: NextRequest) {
 
     // Unauthenticated user hitting a protected route → send to sign-in
     if (isProtectedRoute && !isAuthenticated) {
-        const url = new URL(`/${locale}/signin`, request.url);
+        const url = new URL(`/${locale}${ROUTES.auth.signIn}`, request.url);
         const redirectResponse = NextResponse.redirect(url);
         supabaseResponse.cookies
             .getAll()
@@ -59,7 +67,7 @@ export async function proxy(request: NextRequest) {
     // No recovery session (expired or reused link) → ask for a new email
     if (pathnameWithoutLocale.startsWith(RECOVERY_PATH) && !isAuthenticated) {
         const url = new URL(
-            `/${locale}/forgot-password?error=linkExpired`,
+            `/${locale}${ROUTES.auth.forgotPassword}?error=${LINK_EXPIRED_ERROR}`,
             request.url,
         );
         const redirectResponse = NextResponse.redirect(url);
@@ -71,9 +79,9 @@ export async function proxy(request: NextRequest) {
         return redirectResponse;
     }
 
-    // Authenticated user hitting an auth route → send to dashboard
+    // Authenticated user hitting an auth route → send to the dashboard home
     if (isAuthRoute && isAuthenticated) {
-        const url = new URL(`/${locale}/dashboard`, request.url);
+        const url = new URL(`/${locale}${DASHBOARD_HOME}`, request.url);
         const redirectResponse = NextResponse.redirect(url);
         supabaseResponse.cookies
             .getAll()
@@ -98,7 +106,7 @@ export async function proxy(request: NextRequest) {
             .maybeSingle();
         const userRole = profile?.role;
         if (!userRole || !restricted.allowedRoles.includes(userRole)) {
-            const fallback = restricted.redirectTo ?? '/dashboard';
+            const fallback = restricted.redirectTo ?? DASHBOARD_HOME;
             const url = new URL(`/${locale}${fallback}`, request.url);
             const redirectResponse = NextResponse.redirect(url);
             supabaseResponse.cookies

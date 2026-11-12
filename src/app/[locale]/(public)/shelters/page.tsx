@@ -5,6 +5,7 @@ import SheltersCatalog from '@features/shelters/components/public/SheltersCatalo
 import SheltersCatalogSkeleton from '@features/shelters/components/public/SheltersCatalogSkeleton';
 import { parsePageParam } from '@features/shelters/schemas';
 import { pageMetadata } from '@shared/lib/seo';
+import { ROUTES } from '@shared/constants/routes';
 
 // Pagination pages share the catalog canonical.
 export async function generateMetadata({
@@ -16,7 +17,7 @@ export async function generateMetadata({
     const t = await getTranslations({ locale, namespace: 'sheltersPage' });
     return pageMetadata({
         locale,
-        path: '/shelters',
+        path: ROUTES.shelters,
         title: t('metaTitle'),
         description: t('description'),
     });

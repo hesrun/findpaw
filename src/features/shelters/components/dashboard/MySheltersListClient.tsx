@@ -5,6 +5,7 @@ import MyPagination from '@UI/Pagination';
 import Link from 'next/link';
 import { Button } from '@heroui/react';
 import { useTranslations } from 'next-intl';
+import { ROUTES } from '@shared/constants/routes';
 
 export default function MySheltersListClient({
     shelters,
@@ -24,7 +25,7 @@ export default function MySheltersListClient({
     return (
         <div className="relative">
             <Link
-                href="/dashboard/shelters/add"
+                href={ROUTES.dashboard.addShelter}
                 className="absolute -top-16 right-0"
             >
                 <Button variant="primary">{t('buttons.addShelter')}</Button>

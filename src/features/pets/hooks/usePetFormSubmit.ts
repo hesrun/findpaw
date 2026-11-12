@@ -7,6 +7,7 @@ import { useRef, useTransition, type SubmitEvent } from 'react';
 import type { FileUploaderRef } from '@shared/components/UI/uploader/FileUploader';
 import { uploadToFormData } from '@shared/components/UI/uploader/uploadToFormData';
 import { createPet, updatePet } from '@features/pets/actions';
+import { ROUTES } from '@shared/constants/routes';
 
 // Uploads the new photos, then creates or updates the pet and reports the result.
 export function usePetFormSubmit(petId: string | undefined) {
@@ -34,7 +35,7 @@ export function usePetFormSubmit(petId: string | undefined) {
                 toast.success(
                     isEditing ? t('updateSuccess') : t('createSuccess'),
                 );
-                router.push('/dashboard/pets');
+                router.push(ROUTES.dashboard.pets);
             } else {
                 toast.danger(isEditing ? t('updateError') : t('createError'));
             }

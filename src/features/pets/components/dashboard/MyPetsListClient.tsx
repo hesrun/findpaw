@@ -8,6 +8,7 @@ import { useState } from 'react';
 import MyPetsDetailModal from './myPetsDetailModal';
 import MyPagination from '@shared/components/UI/Pagination';
 import type { PetWithShelter } from '@/types/pets';
+import { ROUTES } from '@shared/constants/routes';
 
 export default function MyPetsListClient({
     pets,
@@ -29,7 +30,7 @@ export default function MyPetsListClient({
     return (
         <div className="relative">
             <Link
-                href="/dashboard/pets/add"
+                href={ROUTES.dashboard.addPet}
                 className="absolute -top-16 right-0"
             >
                 <Button variant="primary">{t('buttons.addPet')}</Button>

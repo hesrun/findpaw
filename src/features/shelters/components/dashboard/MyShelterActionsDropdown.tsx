@@ -8,6 +8,7 @@ import { deleteShelter } from '@features/shelters/actions';
 import { LuEllipsis } from 'react-icons/lu';
 import { BiPencil } from 'react-icons/bi';
 import { IoTrashBin } from 'react-icons/io5';
+import { ROUTES } from '@shared/constants/routes';
 
 export default function MyShelterActionsDropdown({
     shelterId,
@@ -40,7 +41,7 @@ export default function MyShelterActionsDropdown({
                         <Dropdown.Item
                             onClick={() =>
                                 router.push(
-                                    `/dashboard/shelters/edit/${shelterId}`,
+                                    ROUTES.dashboard.editShelter(shelterId),
                                 )
                             }
                         >

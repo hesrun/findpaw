@@ -10,6 +10,7 @@ import PetCard from './PetCard';
 import PetCardSkeleton from './PetCardSkeleton';
 import clsx from 'clsx';
 import ArrowLink from '@UI/ArrowLink';
+import { ROUTES } from '@shared/constants/routes';
 
 type PublicPetsResult = Awaited<ReturnType<typeof getPublicPets>>;
 
@@ -51,7 +52,7 @@ export default function FeaturedPets({
                     <h2 className="font-display font-extrabold text-3xl">
                         {tHome('recentPetsTitle')}
                     </h2>
-                    <ArrowLink href="/pets">{tHome('viewAllPets')}</ArrowLink>
+                    <ArrowLink href={ROUTES.pets}>{tHome('viewAllPets')}</ArrowLink>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-6" role="tablist">

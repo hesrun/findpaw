@@ -19,6 +19,7 @@ import { useTranslations } from 'next-intl';
 import type { Enums } from '@supabase/database.types';
 import type { Pet } from '@/types/pets';
 import ClosePetModal from './ClosePetModal';
+import { ROUTES } from '@shared/constants/routes';
 
 type PetStatus = Enums<'pet_status'>;
 type StatusAction = {
@@ -106,7 +107,7 @@ export default function MyPetActionsDropdown({
     };
 
     const handleEdit = () => {
-        router.push(`/dashboard/pets/edit/${pet.id}`);
+        router.push(ROUTES.dashboard.editPet(pet.id));
     };
 
     return (

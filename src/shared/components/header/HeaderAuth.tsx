@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { getCurrentUser } from '@shared/lib/supabase/auth';
 import getProfile from '@shared/lib/supabase/profile';
 import HeaderUserMenu from './HeaderUserMenu';
+import { ROUTES } from '@shared/constants/routes';
 
 export default async function HeaderAuth() {
     const t = await getTranslations('auth');
@@ -29,7 +30,7 @@ export default async function HeaderAuth() {
     return (
         <>
             <Link
-                href="/signin"
+                href={ROUTES.auth.signIn}
                 aria-label={t('btns.sign')}
                 title={t('btns.sign')}
                 className={buttonVariants({
@@ -42,7 +43,7 @@ export default async function HeaderAuth() {
             </Link>
             <div className="hidden md:flex items-center gap-2">
                 <Link
-                    href="/signin"
+                    href={ROUTES.auth.signIn}
                     className={buttonVariants({
                         size: 'sm',
                         variant: 'outline',
@@ -51,7 +52,7 @@ export default async function HeaderAuth() {
                     {t('btns.sign')}
                 </Link>
                 <Link
-                    href="/signup"
+                    href={ROUTES.auth.signUp}
                     className={buttonVariants({ size: 'sm' })}
                 >
                     {t('btns.signup')}

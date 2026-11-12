@@ -5,6 +5,7 @@ import type { Enums } from '@supabase/database.types';
 import PetPlaceholder from '@UI/PetPlaceholder';
 import { countPublicPets } from '@features/pets/queries';
 import HeroBlobs from './HeroBlobs';
+import { ROUTES } from '@shared/constants/routes';
 
 // Round pet face set inline with the headline text.
 function InlineFace({
@@ -46,7 +47,7 @@ export default async function HeroSection() {
                         </p>
                         <div className="mt-7 flex flex-wrap items-center gap-3.5">
                             <Link
-                                href="/pets"
+                                href={ROUTES.pets}
                                 className={buttonVariants({
                                     size: 'lg',
                                     variant: 'primary',
@@ -55,7 +56,7 @@ export default async function HeroSection() {
                                 {t('browsePets')}
                             </Link>
                             <Link
-                                href="/dashboard/pets/add"
+                                href={ROUTES.dashboard.addPet}
                                 className={buttonVariants({
                                     size: 'lg',
                                     variant: 'outline',

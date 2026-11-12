@@ -11,6 +11,7 @@ import { getPublicShelter } from '@features/shelters/queries';
 import { parsePageParam } from '@features/shelters/schemas';
 import { Link } from '@/i18n/navigation';
 import { metaDescription, pageMetadata } from '@shared/lib/seo';
+import { ROUTES } from '@shared/constants/routes';
 
 type Params = Promise<{ locale: string; id: string }>;
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -32,7 +33,7 @@ export async function generateMetadata({
 
     return pageMetadata({
         locale,
-        path: `/shelters/${shelter.id}`,
+        path: ROUTES.shelter(shelter.id),
         title: t('metaTitle', { name: shelter.name }),
         description:
             metaDescription(shelter.description) || tPage('description'),
@@ -63,7 +64,7 @@ export default async function ShelterPage({
     return (
         <main className="container pt-8 pb-16">
             <Link
-                href="/shelters"
+                href={ROUTES.shelters}
                 className="inline-flex items-center gap-1.5 font-heading font-bold text-muted hover:text-accent transition-colors mb-6"
             >
                 <LuArrowLeft aria-hidden />

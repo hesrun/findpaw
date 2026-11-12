@@ -2,6 +2,7 @@ import { buttonVariants } from '@heroui/react';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
+import { ROUTES } from '@shared/constants/routes';
 // Localized 404 inside the site layout: for notFound() in pages and,
 // through [...rest], for any unknown path under a locale.
 export default async function NotFound() {
@@ -26,11 +27,11 @@ export default async function NotFound() {
                 </h1>
                 <p className="text-muted max-w-[46ch]">{t('text')}</p>
                 <div className="flex flex-wrap justify-center gap-3">
-                    <Link href="/" className={buttonVariants({ size: 'lg' })}>
+                    <Link href={ROUTES.home} className={buttonVariants({ size: 'lg' })}>
                         {t('home')}
                     </Link>
                     <Link
-                        href="/pets"
+                        href={ROUTES.pets}
                         className={buttonVariants({
                             size: 'lg',
                             variant: 'outline',

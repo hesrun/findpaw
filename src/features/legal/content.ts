@@ -4,8 +4,8 @@ import { getLocale } from 'next-intl/server';
 import cs from '@messages/legal/cs.json';
 import en from '@messages/legal/en.json';
 import { routing } from '@/i18n/routing';
-import { LEGAL_ROUTES } from '@shared/constants/legal';
 import { metaDescription, pageMetadata } from '@shared/lib/seo';
+import { ROUTES } from '@shared/constants/routes';
 
 // Long legal texts stay out of messages/*.json: NextIntlClientProvider
 // sends those to the browser on every page. Import this file only from
@@ -33,7 +33,7 @@ export async function getLegalMetadata(
     const document = content[type];
     return pageMetadata({
         locale,
-        path: LEGAL_ROUTES[type],
+        path: ROUTES.legal[type],
         title: document.metaTitle,
         description: metaDescription(document.intro[0]),
     });

@@ -8,6 +8,7 @@ import PetPlaceholder from '@UI/PetPlaceholder';
 import { getPublicPet } from '@features/pets/queries';
 import { Link } from '@/i18n/navigation';
 import { metaDescription, pageMetadata } from '@shared/lib/seo';
+import { ROUTES } from '@shared/constants/routes';
 
 type Params = Promise<{ locale: string; id: string }>;
 
@@ -30,7 +31,7 @@ export async function generateMetadata({
 
     return pageMetadata({
         locale,
-        path: `/pets/${pet.id}`,
+        path: ROUTES.pet(pet.id),
         title: t('metaTitle', {
             name,
             listingType: tPets(`listingType.${pet.listing_type}`),
@@ -56,7 +57,7 @@ export default async function PetPage({ params }: { params: Params }) {
     return (
         <main className="container pt-8 pb-16">
             <Link
-                href="/pets"
+                href={ROUTES.pets}
                 className="inline-flex items-center gap-1.5 font-heading font-bold text-muted hover:text-accent transition-colors mb-6"
             >
                 <LuArrowLeft aria-hidden />

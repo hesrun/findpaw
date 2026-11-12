@@ -4,12 +4,13 @@ import LanguageSwitcher from './LanguageSwitcher';
 import HeaderNav from './HeaderNav';
 import HeaderMobileMenu from './HeaderMobileMenu';
 import { Link } from '@/i18n/navigation';
+import { ROUTES } from '@shared/constants/routes';
 
 export default function Header() {
     return (
         <header className="bg-surface text-foreground px-4 py-3 sm:p-6 border-b border-border">
             <div className="container flex justify-between items-center gap-4">
-                <Link href="/" className="shrink-0">
+                <Link href={ROUTES.home} className="shrink-0">
                     <Image
                         width={128}
                         height={32}

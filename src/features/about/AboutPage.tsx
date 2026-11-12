@@ -9,6 +9,7 @@ import { countPublicPets } from '@features/pets/queries';
 import { countPublicShelters } from '@features/shelters/queries';
 import { LISTING_TYPE_ICONS } from '@features/pets/constants';
 import { ABOUT_AUDIENCE } from './constants';
+import { ROUTES } from '@shared/constants/routes';
 
 const LISTING_TYPE_ENTRIES = Object.entries(LISTING_TYPE_ICONS) as [
     Enums<'pet_listing_type'>,
@@ -101,13 +102,13 @@ export default async function AboutPage() {
 
             <CtaBand title={t('ctaTitle')} text={t('ctaText')}>
                 <Link
-                    href="/pets"
+                    href={ROUTES.pets}
                     className={buttonVariants({ size: 'lg' })}
                 >
                     {t('ctaBrowse')}
                 </Link>
                 <Link
-                    href="/dashboard/pets/add"
+                    href={ROUTES.dashboard.addPet}
                     className={buttonVariants({
                         size: 'lg',
                         variant: 'outline',

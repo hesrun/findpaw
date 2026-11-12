@@ -9,6 +9,7 @@ import {
     type PetFilters as Filters,
 } from '@features/pets/schemas';
 import { pageMetadata } from '@shared/lib/seo';
+import { ROUTES } from '@shared/constants/routes';
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -36,7 +37,7 @@ export async function generateMetadata({
     const t = await getTranslations({ locale, namespace: 'petsPage' });
     return pageMetadata({
         locale,
-        path: '/pets',
+        path: ROUTES.pets,
         title: t('metaTitle'),
         description: t('description'),
     });

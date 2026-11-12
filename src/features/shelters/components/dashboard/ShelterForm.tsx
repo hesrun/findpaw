@@ -23,6 +23,7 @@ import { createShelter, updateShelter } from '@features/shelters/actions';
 import { LuBuilding2, LuCamera, LuContact, LuMapPin } from 'react-icons/lu';
 import { isHttpUrl } from '@shared/lib/url';
 import { Database } from '@supabase/database.types';
+import { ROUTES } from '@shared/constants/routes';
 
 type Shelter = Database['public']['Tables']['shelters']['Row'];
 
@@ -62,7 +63,7 @@ export default function ShelterForm({
                         ? t('notifications.updateSuccess')
                         : t('notifications.createSuccess'),
                 );
-                router.push('/dashboard/shelters');
+                router.push(ROUTES.dashboard.shelters);
             } else {
                 toast.danger(
                     isEditing

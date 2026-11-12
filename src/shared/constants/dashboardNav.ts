@@ -2,6 +2,7 @@ import type { IconType } from 'react-icons';
 import { MdPets, MdSettings } from 'react-icons/md';
 import { TbHomeShield } from 'react-icons/tb';
 import type { Database } from '@supabase/database.types';
+import { ROUTES } from '@shared/constants/routes';
 
 type UserRole = Database['public']['Enums']['user_role'];
 
@@ -18,19 +19,19 @@ export type DashboardNavItem = {
 export const DASHBOARD_NAV: readonly DashboardNavItem[] = [
     {
         id: 'pets',
-        href: '/dashboard/pets',
+        href: ROUTES.dashboard.pets,
         icon: MdPets,
         roles: ['user', 'shelter', 'admin', 'clinic'],
     },
     {
         id: 'shelters',
-        href: '/dashboard/shelters',
+        href: ROUTES.dashboard.shelters,
         icon: TbHomeShield,
         roles: ['shelter', 'admin'],
     },
     {
         id: 'settings',
-        href: '/dashboard/settings',
+        href: ROUTES.dashboard.settings,
         icon: MdSettings,
         roles: ['user', 'shelter', 'admin', 'clinic'],
     },

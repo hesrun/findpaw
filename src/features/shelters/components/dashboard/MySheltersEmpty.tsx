@@ -2,6 +2,7 @@ import { Button } from '@heroui/react';
 import Link from 'next/link';
 import { TbHomeShield } from 'react-icons/tb';
 import { getTranslations } from 'next-intl/server';
+import { ROUTES } from '@shared/constants/routes';
 
 export default async function MySheltersEmpty() {
     const t = await getTranslations('dashboard.myShelters');
@@ -11,7 +12,7 @@ export default async function MySheltersEmpty() {
             <h2 className="text-2xl font-bold mb-4 font-heading px-4 leading-none">
                 {t('emptyState.title')}
             </h2>
-            <Link href="/dashboard/shelters/add">
+            <Link href={ROUTES.dashboard.addShelter}>
                 <Button variant="primary">{t('emptyState.btn')}</Button>
             </Link>
         </div>

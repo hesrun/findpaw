@@ -11,9 +11,9 @@ import {
     TextField,
 } from '@heroui/react';
 import { Link } from '@/i18n/navigation';
-import { AUTH_ROUTES } from '@features/auth/constants';
 import { useSignInForm } from '@features/auth/hooks/useSignInForm';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
+import { ROUTES } from '@shared/constants/routes';
 
 export default function SignIn() {
     const t = useTranslations('auth');
@@ -48,7 +48,7 @@ export default function SignIn() {
                         label={t('fields.password')}
                     />
                     <Link
-                        href={AUTH_ROUTES.forgotPassword}
+                        href={ROUTES.auth.forgotPassword}
                         className="justify-self-end text-sm text-accent hover:underline"
                     >
                         {t('links.forgotPassword')}
@@ -60,7 +60,7 @@ export default function SignIn() {
                 <p className="text-sm text-center text-muted">
                     {t('links.noAccount')}{' '}
                     <Link
-                        href={AUTH_ROUTES.signUp}
+                        href={ROUTES.auth.signUp}
                         className="font-bold text-accent hover:underline"
                     >
                         {t('btns.signup')}

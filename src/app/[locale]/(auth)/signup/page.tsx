@@ -18,7 +18,6 @@ import { TbHomeShield } from 'react-icons/tb';
 import clsx from 'clsx';
 import { Link } from '@/i18n/navigation';
 import {
-    AUTH_ROUTES,
     DEFAULT_SIGN_UP_ROLE,
     PROFILE_PHONE_MAX_LENGTH,
     SIGN_UP_ROLES,
@@ -26,7 +25,7 @@ import {
 } from '@features/auth/constants';
 import { useSignUpForm } from '@features/auth/hooks/useSignUpForm';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
-import { LEGAL_ROUTES } from '@shared/constants/legal';
+import { ROUTES } from '@shared/constants/routes';
 
 // Keyed by the database role enum: adding or renaming a sign-up role
 // fails type checking until it has an icon here.
@@ -132,7 +131,7 @@ export default function SignUp() {
                     {t.rich('hints.signUpConsent', {
                         terms: (chunks) => (
                             <Link
-                                href={LEGAL_ROUTES.terms}
+                                href={ROUTES.legal.terms}
                                 target="_blank"
                                 className="font-bold text-accent hover:underline"
                             >
@@ -141,7 +140,7 @@ export default function SignUp() {
                         ),
                         privacy: (chunks) => (
                             <Link
-                                href={LEGAL_ROUTES.privacy}
+                                href={ROUTES.legal.privacy}
                                 target="_blank"
                                 className="font-bold text-accent hover:underline"
                             >
@@ -153,7 +152,7 @@ export default function SignUp() {
                 <p className="text-sm text-center text-muted">
                     {t('links.haveAccount')}{' '}
                     <Link
-                        href={AUTH_ROUTES.signIn}
+                        href={ROUTES.auth.signIn}
                         className="font-bold text-accent hover:underline"
                     >
                         {t('btns.sign')}

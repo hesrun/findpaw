@@ -33,6 +33,7 @@ Step-by-step procedures live in Claude Code skills, not in `docs/`:
 - Put feature constants in the feature `constants.ts`: option lists, limits, page sizes, sort fields, buckets, debounce delays, value-to-config maps. This applies even when only one file uses the constant today. `schemas.ts`, `queries.ts`, and components import from there instead of declaring their own. Before adding a constant, search `constants.ts` and `src/shared` for an existing one. Only presentation details private to a single component (Tailwind class strings) may stay in that component. Constants shared by several domains go to `src/shared/constants/`.
 - Keep shared code in `src/shared` only when it is genuinely reusable across domains.
 - Prefer configured path aliases such as `@features/*` and `@shared/*` over long relative imports.
+- App paths come only from `ROUTES` in `src/shared/constants/routes.ts` (locale-less; builders like `ROUTES.pet(id)` for dynamic pages). Never write a path as a string literal in links, redirects, `router.push`, metadata, the sitemap, or the proxy; add a missing route there first. Tests may use literal paths.
 
 ## Simplicity (KISS, DRY)
 

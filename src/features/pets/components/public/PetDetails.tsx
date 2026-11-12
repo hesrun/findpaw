@@ -13,6 +13,7 @@ import type { PetWithShelter } from '@/types/pets';
 import PetContact from './PetContact';
 import PetOwnerContact from './PetOwnerContact';
 import PetAreaSection from './location/PetAreaSection';
+import { ROUTES } from '@shared/constants/routes';
 
 function Fact({ label, value }: { label: string; value: ReactNode }) {
     return (
@@ -192,7 +193,7 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
                         })}
                     </p>
                 )}
-                <ReportLink path={`/pets/${pet.id}`} />
+                <ReportLink path={ROUTES.pet(pet.id)} />
             </div>
         </div>
     );

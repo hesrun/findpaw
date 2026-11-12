@@ -5,6 +5,7 @@ import { PiEnvelopeSimple, PiGlobe, PiMapPin, PiPhone } from 'react-icons/pi';
 import { ShelterPlaceholder } from '@UI/PetPlaceholder';
 import { Link } from '@/i18n/navigation';
 import ContactLink from './ContactLink';
+import { ROUTES } from '@shared/constants/routes';
 
 export default function ShelterCard({ shelter }: { shelter: Shelter }) {
     const location = [shelter.city, shelter.address].filter(Boolean).join(', ');
@@ -36,7 +37,7 @@ export default function ShelterCard({ shelter }: { shelter: Shelter }) {
                     {/* The ::after overlay makes the whole card clickable;
                         contact links sit above it (z-10). */}
                     <Link
-                        href={`/shelters/${shelter.id}`}
+                        href={ROUTES.shelter(shelter.id)}
                         className="outline-none after:absolute after:inset-0 after:rounded-card"
                     >
                         {shelter.name}

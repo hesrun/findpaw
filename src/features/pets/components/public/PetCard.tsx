@@ -10,6 +10,7 @@ import { PRICED_LISTING_TYPE, REWARD_LISTING_TYPE } from '../../constants';
 import { usePetCardFacts } from '@features/pets/hooks/usePetCardFacts';
 import PetPlaceholder from '@UI/PetPlaceholder';
 import { Link } from '@/i18n/navigation';
+import { ROUTES } from '@shared/constants/routes';
 
 export default function PetCard({ pet }: { pet: PetWithShelter }) {
     const translations = useTranslations('pets');
@@ -28,7 +29,7 @@ export default function PetCard({ pet }: { pet: PetWithShelter }) {
 
     return (
         <Link
-            href={`/pets/${pet.id}`}
+            href={ROUTES.pet(pet.id)}
             className="group block h-full rounded-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
             <article className="h-full surface-card flex flex-col transition-shadow duration-300 group-hover:shadow-my-hover">

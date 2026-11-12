@@ -10,9 +10,9 @@ import {
     TextField,
 } from '@heroui/react';
 import { Link } from '@/i18n/navigation';
-import { AUTH_ROUTES } from '@features/auth/constants';
 import { useForgotPasswordForm } from '@features/auth/hooks/useForgotPasswordForm';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
+import { ROUTES } from '@shared/constants/routes';
 
 export default function ForgotPasswordForm({
     isLinkExpired,
@@ -60,7 +60,7 @@ export default function ForgotPasswordForm({
                     </>
                 )}
                 <Link
-                    href={AUTH_ROUTES.signIn}
+                    href={ROUTES.auth.signIn}
                     className="text-sm text-accent hover:underline"
                 >
                     {t('links.backToSignIn')}

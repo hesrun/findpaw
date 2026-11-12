@@ -2,10 +2,11 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { HEADER_NAV } from '@shared/constants/headerNav';
-import { LEGAL_OPERATOR, LEGAL_ROUTES } from '@shared/constants/legal';
+import { LEGAL_OPERATOR } from '@shared/constants/legal';
+import { ROUTES } from '@shared/constants/routes';
 
-const LEGAL_LINKS = Object.entries(LEGAL_ROUTES) as [
-    keyof typeof LEGAL_ROUTES,
+const LEGAL_LINKS = Object.entries(ROUTES.legal) as [
+    keyof typeof ROUTES.legal,
     string,
 ][];
 
@@ -21,7 +22,7 @@ export default async function Footer() {
         <footer className="bg-surface border-t border-border px-4 py-10 sm:px-6">
             <div className="container grid gap-8 sm:grid-cols-[1.5fr_1fr_1fr]">
                 <div className="grid gap-3 content-start">
-                    <Link href="/" className="w-fit">
+                    <Link href={ROUTES.home} className="w-fit">
                         <Image
                             width={128}
                             height={32}

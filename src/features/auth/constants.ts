@@ -1,5 +1,6 @@
 import type { EmailOtpType } from '@supabase/supabase-js';
 import { Constants, type Database } from '@supabase/database.types';
+import { DASHBOARD_HOME, ROUTES } from '@shared/constants/routes';
 
 type UserRole = Database['public']['Enums']['user_role'];
 
@@ -23,15 +24,6 @@ export const SIGN_UP_ROLES = Constants.public.Enums.user_role.filter(
 );
 export const DEFAULT_SIGN_UP_ROLE = 'user' satisfies SignUpRole;
 
-// Locale-less app paths; next-intl navigation adds the locale prefix.
-export const AUTH_ROUTES = {
-    signIn: '/signin',
-    signUp: '/signup',
-    forgotPassword: '/forgot-password',
-    resetPassword: '/reset-password',
-    afterSignIn: '/dashboard/pets',
-} as const;
-
 // Route handler that verifies email links. It lives under /api so the
 // next-intl proxy does not rewrite it with a locale prefix.
 export const AUTH_CONFIRM_PATH = '/api/auth/confirm';
@@ -51,12 +43,12 @@ export type AuthConfirmType = (typeof AUTH_CONFIRM_TYPES)[number];
 // Locale-less pages the confirm route redirects to after verifying a link.
 export const AUTH_CONFIRM_REDIRECTS = {
     email: {
-        success: AUTH_ROUTES.afterSignIn,
-        failure: AUTH_ROUTES.signIn,
+        success: DASHBOARD_HOME,
+        failure: ROUTES.auth.signIn,
     },
     recovery: {
-        success: AUTH_ROUTES.resetPassword,
-        failure: `${AUTH_ROUTES.forgotPassword}?error=${LINK_EXPIRED_ERROR}`,
+        success: ROUTES.auth.resetPassword,
+        failure: `${ROUTES.auth.forgotPassword}?error=${LINK_EXPIRED_ERROR}`,
     },
 } as const satisfies Record<
     AuthConfirmType,

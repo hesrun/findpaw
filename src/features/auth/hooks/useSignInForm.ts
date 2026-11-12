@@ -5,7 +5,7 @@ import { useTransition } from 'react';
 import { toast } from '@heroui/react';
 import { useRouter } from '@/i18n/navigation';
 import { signIn } from '@features/auth/actions/actions';
-import { AUTH_ROUTES } from '@features/auth/constants';
+import { DASHBOARD_HOME } from '@shared/constants/routes';
 
 export function useSignInForm() {
     const t = useTranslations('auth');
@@ -25,7 +25,7 @@ export function useSignInForm() {
             }
 
             toast.success(t('notifications.signInSuccess'));
-            router.push(AUTH_ROUTES.afterSignIn);
+            router.push(DASHBOARD_HOME);
         });
     }
 

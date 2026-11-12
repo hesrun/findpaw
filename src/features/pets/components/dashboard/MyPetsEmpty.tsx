@@ -2,6 +2,7 @@ import { Button } from '@heroui/react';
 import Link from 'next/link';
 import { MdPets } from 'react-icons/md';
 import { getTranslations } from 'next-intl/server';
+import { ROUTES } from '@shared/constants/routes';
 
 export default async function MyPetsEmpty() {
     const t = await getTranslations('dashboard.myPets');
@@ -11,7 +12,7 @@ export default async function MyPetsEmpty() {
             <h2 className="text-2xl font-extrabold mb-4 font-display px-4 leading-none">
                 {t('emptyState.title')}
             </h2>
-            <Link href="/dashboard/pets/add">
+            <Link href={ROUTES.dashboard.addPet}>
                 <Button variant="primary">{t('emptyState.btn')}</Button>
             </Link>
         </div>

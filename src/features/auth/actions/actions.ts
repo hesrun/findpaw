@@ -15,6 +15,7 @@ import {
     SignUpSchema,
 } from '@features/auth/schemas';
 import { AUTH_CONFIRM_PATH } from '@features/auth/constants';
+import { ROUTES } from '@shared/constants/routes';
 
 // Error values are `auth.errors.*` translation keys; raw Supabase messages are not exposed.
 export type AuthResult = {
@@ -204,5 +205,5 @@ async function getRequestOrigin() {
 export async function signOut() {
     const supabase = await supabaseServer();
     await supabase.auth.signOut();
-    redirect('/signin');
+    redirect(ROUTES.auth.signIn);
 }

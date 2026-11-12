@@ -7,10 +7,8 @@ import {
 } from 'react-icons/lu';
 import { TbHomeShield } from 'react-icons/tb';
 import type { Enums } from '@supabase/database.types';
-import { AUTH_ROUTES } from '@features/auth/constants';
 import { LISTING_TYPE_ICONS } from '@features/pets/constants';
-
-const ADD_PET_PATH = '/dashboard/pets/add';
+import { ROUTES } from '@shared/constants/routes';
 
 // "Who it helps" cards; text lives in HomePage.audience.items.<key>.
 // Shelters go to sign-up: adding a shelter needs the shelter role.
@@ -19,20 +17,20 @@ export const LANDING_AUDIENCE = [
         key: 'lost',
         icon: LISTING_TYPE_ICONS.lost,
         tone: 'rose',
-        href: ADD_PET_PATH,
+        href: ROUTES.dashboard.addPet,
     },
     {
         key: 'found',
         icon: LISTING_TYPE_ICONS.found,
         tone: 'amber',
-        href: ADD_PET_PATH,
+        href: ROUTES.dashboard.addPet,
     },
     {
         key: 'adopt',
         icon: LISTING_TYPE_ICONS.adoption,
         tone: 'accent',
         href: {
-            pathname: '/pets',
+            pathname: ROUTES.pets,
             query: {
                 listing_type: 'adoption' satisfies Enums<'pet_listing_type'>,
             },
@@ -42,7 +40,7 @@ export const LANDING_AUDIENCE = [
         key: 'shelters',
         icon: TbHomeShield,
         tone: 'sky',
-        href: AUTH_ROUTES.signUp,
+        href: ROUTES.auth.signUp,
     },
 ] as const;
 

@@ -5,7 +5,7 @@ import { useTransition } from 'react';
 import { toast } from '@heroui/react';
 import { useRouter } from '@/i18n/navigation';
 import { updatePassword } from '@features/auth/actions/actions';
-import { AUTH_ROUTES } from '@features/auth/constants';
+import { DASHBOARD_HOME } from '@shared/constants/routes';
 
 export function useResetPasswordForm() {
     const t = useTranslations('auth');
@@ -25,7 +25,7 @@ export function useResetPasswordForm() {
             }
 
             toast.success(t('notifications.passwordUpdated'));
-            router.push(AUTH_ROUTES.afterSignIn);
+            router.push(DASHBOARD_HOME);
         });
     }
 

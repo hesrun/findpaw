@@ -1,5 +1,5 @@
 import type { routing } from '@/i18n/routing';
-import { LEGAL_ROUTES } from './legal';
+import { ROUTES } from './routes';
 
 export const SITE_NAME = 'FindPaw';
 
@@ -24,10 +24,10 @@ export const META_DESCRIPTION_LENGTH = 160;
 
 // Locale-less paths of public pages without a dynamic segment (sitemap.ts).
 export const SITEMAP_STATIC_PATHS = [
-    '/',
-    '/pets',
-    '/shelters',
-    '/about',
-    LEGAL_ROUTES.privacy,
-    LEGAL_ROUTES.terms,
+    ROUTES.home,
+    ROUTES.pets,
+    ROUTES.shelters,
+    ROUTES.about,
+    ROUTES.legal.privacy,
+    ROUTES.legal.terms,
 ] as const;

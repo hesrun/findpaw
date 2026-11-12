@@ -4,6 +4,7 @@ import ReportLink from '@UI/ReportLink';
 import { isHttpUrl } from '@shared/lib/url';
 import type { Shelter } from '@/types/shelters';
 import ContactLink from './ContactLink';
+import { ROUTES } from '@shared/constants/routes';
 
 export default async function ShelterContacts({
     shelter,
@@ -71,7 +72,7 @@ export default async function ShelterContacts({
                 )}
             </section>
 
-            <ReportLink path={`/shelters/${shelter.id}`} />
+            <ReportLink path={ROUTES.shelter(shelter.id)} />
         </aside>
     );
 }
