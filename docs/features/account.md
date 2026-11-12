@@ -19,7 +19,7 @@ The account feature owns the signed-in user's settings page (`/dashboard/setting
 ## Access Patterns
 
 - The page reads the profile with `getProfile()` and the email with `getCurrentUser()`; no feature query is needed.
-- `updateProfile` revalidates the root layout, because the header shows the name and photo on every page.
+- `updateProfile` calls `refresh()`, which re-renders the whole tree including the layout, because the header shows the name and photo on every page.
 - Profile rows are never public: the profiles select policy is owner-only. Only the contact of authors of public listings leaves through the `get_pet_owner_contact` function.
 
 ## Decisions

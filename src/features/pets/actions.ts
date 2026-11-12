@@ -2,7 +2,7 @@
 
 import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { readFormData } from '@shared/lib/form';
-import { revalidatePath } from 'next/cache';
+import { refresh } from 'next/cache';
 import { after } from 'next/server';
 import { deleteUserImages, removedImages } from '@shared/lib/cloudinary/server';
 import { PetFormSchema, PetStatusChangeSchema, type PetForm } from './schemas';
@@ -62,7 +62,6 @@ export async function createPet(formData: FormData) {
 
     if (error) throw error;
 
-    revalidatePath('/dashboard/pets');
     return { success: true };
 }
 
@@ -99,7 +98,6 @@ export async function updatePet(petId: string, formData: FormData) {
         ),
     );
 
-    revalidatePath('/dashboard/pets');
     return { success: true };
 }
 
@@ -118,7 +116,8 @@ export async function deletePet(petId: string) {
 
     after(() => deleteUserImages(deleted?.image_url ?? [], 'pets', user.id));
 
-    revalidatePath('/dashboard/pets');
+    // The list stays on screen after this action; re-render it with fresh data.
+    refresh();
     return { success: true };
 }
 
@@ -149,6 +148,7 @@ export async function changePetStatus(petId: string, formData: FormData) {
         return { success: false, error: 'statusChangeError' as const };
     }
 
-    revalidatePath('/dashboard/pets');
+    // The list stays on screen after this action; re-render it with fresh data.
+    refresh();
     return { success: true };
 }

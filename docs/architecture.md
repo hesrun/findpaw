@@ -106,8 +106,10 @@ Client form
   -> Zod validation
   -> authentication and ownership checks
   -> Supabase mutation
-  -> revalidatePath or targeted cache invalidation
+  -> the form navigates to the list, or refresh() when the user stays on the page
 ```
+
+Nothing is cached on the server (all pages are dynamic and there is no `'use cache'`), so actions do not call `revalidatePath`. A page reached by navigation is rendered fresh. An action run from the page it changes (delete, status change, profile update) calls `refresh()` from `next/cache` so that page re-renders with the new data. If server caching is added later, invalidate it by tag (`updateTag`), not by path.
 
 ### API route
 

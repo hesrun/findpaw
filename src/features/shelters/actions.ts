@@ -2,7 +2,7 @@
 
 import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { readFormData } from '@shared/lib/form';
-import { revalidatePath } from 'next/cache';
+import { refresh } from 'next/cache';
 import { after } from 'next/server';
 import { deleteUserImages, removedImages } from '@shared/lib/cloudinary/server';
 import { ShelterFormSchema } from './schemas';
@@ -23,7 +23,6 @@ export async function createShelter(formData: FormData) {
         .insert({ ...parsed.data, owner_id: user.id });
 
     if (error) throw error;
-    revalidatePath('/dashboard/shelters');
     return { success: true };
 }
 
@@ -57,7 +56,6 @@ export async function updateShelter(shelterId: string, formData: FormData) {
             user.id,
         ),
     );
-    revalidatePath('/dashboard/shelters');
     return { success: true };
 }
 
@@ -75,6 +73,7 @@ export async function deleteShelter(shelterId: string) {
     if (error) throw error;
 
     after(() => deleteUserImages(deleted?.img_url ?? [], 'shelters', user.id));
-    revalidatePath('/dashboard/shelters');
+    // The list stays on screen after this action; re-render it with fresh data.
+    refresh();
     return { success: true };
 }

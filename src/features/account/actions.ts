@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { refresh } from 'next/cache';
 import { after } from 'next/server';
 import getSupabaseWithUser from '@shared/lib/supabase/auth';
 import { readFormData } from '@shared/lib/form';
@@ -49,6 +49,6 @@ export async function updateProfile(formData: FormData): Promise<ProfileResult> 
     );
 
     // The name and photo are also shown in the header on every page.
-    revalidatePath('/', 'layout');
+    refresh();
     return {};
 }
