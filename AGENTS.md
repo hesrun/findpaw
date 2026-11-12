@@ -29,7 +29,7 @@ Step-by-step procedures live in Claude Code skills, not in `docs/`:
 
 - Keep domain-specific code in `src/features/<domain>`.
 - Keep route files in `src/app` focused on composition and request adaptation.
-- Put reads in feature `queries.ts`, browser mutations in server `actions.ts`, runtime validation in `schemas.ts`, and client fetching in `hooks.ts`.
+- Put reads in feature `queries.ts`, browser mutations in server `actions.ts`, runtime validation in `schemas.ts`, and all feature hooks (React Query fetching and UI logic) in `hooks/`, one file per hook.
 - Put feature constants in the feature `constants.ts`: option lists, limits, page sizes, sort fields, buckets, debounce delays, value-to-config maps. This applies even when only one file uses the constant today. `schemas.ts`, `queries.ts`, and components import from there instead of declaring their own. Before adding a constant, search `constants.ts` and `src/shared` for an existing one. Only presentation details private to a single component (Tailwind class strings) may stay in that component. Constants shared by several domains go to `src/shared/constants/`.
 - Keep shared code in `src/shared` only when it is genuinely reusable across domains.
 - Prefer configured path aliases such as `@features/*` and `@shared/*` over long relative imports.
@@ -47,10 +47,10 @@ Step-by-step procedures live in Claude Code skills, not in `docs/`:
 
 - Logic always goes into hooks: URL or state syncing, debouncing, derived lists, event handlers with rules, data loading. A component body is hook calls, a few derived values, and `return`. ESLint `max-statements` (10, `.tsx` only) warns when a component or one of its handlers grows past that; extract a hook instead of raising the limit.
 - No logic inside JSX: multi-line arrow handlers in `onClick`/`onChange`, ternary chains, and `.filter().map()` with conditions go into a hook or a named function above `return`. The linter cannot see this (all JSX is one statement), so it relies on this rule and review.
-- One hook per concern. A shared resource has one owning hook, and thinner hooks build on it: only `useCatalogUrl` writes the catalog URL, while `useCatalogSort` and `useActiveFilterChips` use it. Reference: `src/features/pets/components/public/catalog/hooks/`.
+- One hook per concern. A shared resource has one owning hook, and thinner hooks build on it: only `useCatalogUrl` writes the catalog URL, while `useCatalogSort` and `useActiveFilterChips` use it. Reference: `src/features/pets/hooks/useCatalogUrl.ts`.
 - Long markup is fine. Do not split JSX into subcomponents on your own initiative. Split when the user asks, when the same markup repeats (make a generic component with props, like `PillGroup` / `OptionSelect`), or when a part needs its own state.
 - Never define a component inside another component, and do not use `renderX()` helpers for JSX blocks; extract a real component instead.
-- Hook locations: React Query fetching stays in the feature `hooks.ts`; UI hooks for one widget live in `components/<audience>/<widget>/hooks/`; hooks reusable across domains go to `src/shared/hooks/`. Search `src/shared/hooks` before writing a new one.
+- Hook locations: every hook of a feature (React Query fetching and UI hooks alike) lives in the flat feature `hooks/` folder, one `use<Name>.ts` per hook, never inside `components/`; hooks reusable across domains go to `src/shared/hooks/`. Search `src/shared/hooks` before writing a new one.
 - A widget split into several components shares its state through one context provider at the widget root (see `components/public/catalog/CatalogFiltersContext.tsx`). State that belongs in the URL stays in the URL. Do not add a global store (Zustand or similar) without recording the decision in `docs/decisions.md`.
 - React Compiler is enabled: do not add `useMemo`/`useCallback`/`memo` for performance.
 

@@ -6,7 +6,7 @@ import {
     CATALOG_SORT_KEYS,
     type CatalogSortKey,
 } from '@features/pets/constants';
-import { useCatalogSort } from './hooks/useCatalogSort';
+import { useCatalogSort } from '@features/pets/hooks/useCatalogSort';
 
 export default function SortSelect() {
     const t = useTranslations('petsPage.filters');

@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { LuSlidersHorizontal } from 'react-icons/lu';
 import { useCatalogFilters } from './CatalogFiltersContext';
 import FiltersPanel from './FiltersPanel';
-import { useActiveFilterChips } from './hooks/useActiveFilterChips';
+import { useActiveFilterChips } from '@features/pets/hooks/useActiveFilterChips';
 
 // Mobile filters: a trigger with the active filter count and a side drawer.
 export default function FiltersDrawer() {

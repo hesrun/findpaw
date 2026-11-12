@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import FiltersPanel from './FiltersPanel';
 import ClearFiltersButton from './fields/ClearFiltersButton';
-import { useActiveFilterChips } from './hooks/useActiveFilterChips';
+import { useActiveFilterChips } from '@features/pets/hooks/useActiveFilterChips';
 
 // Desktop filters; the mobile layout uses FiltersDrawer instead.
 export default function FiltersSidebar() {

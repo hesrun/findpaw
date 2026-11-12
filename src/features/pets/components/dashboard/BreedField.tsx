@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import SearchableSelect from '@UI/SearchableSelect';
 import type { BreedSpecies } from '@features/pets/constants';
 import { hasBreedList, isPetBreed } from '@features/pets/breeds';
-import { useBreedOptions } from '../hooks/useBreedOptions';
+import { useBreedOptions } from '@features/pets/hooks/useBreedOptions';
 
 type BreedFieldProps = {
     species: string | null;

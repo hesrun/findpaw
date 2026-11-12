@@ -41,7 +41,7 @@ import type { Shelter } from '@/types/shelters';
 import clsx from 'clsx';
 import PetLocationFields from './location/PetLocationFields';
 import BreedField from './BreedField';
-import { usePetFormSubmit } from './hooks/usePetFormSubmit';
+import { usePetFormSubmit } from '@features/pets/hooks/usePetFormSubmit';
 
 const radioClasses = {
     base: 'rounded-xl border border-accent px-4 py-1.5 transition-all',

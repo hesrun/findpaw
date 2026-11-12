@@ -4,7 +4,7 @@ import { Button, FieldError, Input, Label, TextField } from '@heroui/react';
 import { useTranslations } from 'next-intl';
 import { LuMap, LuMapPinCheck, LuX } from 'react-icons/lu';
 import type { Pet } from '@/types/pets';
-import { usePetLocation } from './hooks/usePetLocation';
+import { usePetLocation } from '@features/pets/hooks/usePetLocation';
 import PetLocationModal from './PetLocationModal';
 
 type PetLocationFieldsProps = {

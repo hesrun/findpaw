@@ -12,7 +12,7 @@ import {
     PROFILE_NAME_MAX_LENGTH,
 } from '@features/account/constants';
 import { PROFILE_PHONE_MAX_LENGTH } from '@features/auth/constants';
-import { useProfileForm } from './hooks/useProfileForm';
+import { useProfileForm } from '@features/account/hooks/useProfileForm';
 
 type ProfileFormProps = {
     profile: Tables<'profiles'>;

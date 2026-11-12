@@ -4,7 +4,7 @@ import type { Key } from '@heroui/react';
 import { useTranslations } from 'next-intl';
 import SearchableSelect from '@UI/SearchableSelect';
 import type { BreedSpecies } from '@features/pets/constants';
-import { useBreedOptions } from '../../../hooks/useBreedOptions';
+import { useBreedOptions } from '@features/pets/hooks/useBreedOptions';
 import { useCatalogFilters } from '../CatalogFiltersContext';
 
 // Several breeds of the chosen species, with a search box.

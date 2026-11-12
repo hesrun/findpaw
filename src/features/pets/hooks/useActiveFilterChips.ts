@@ -7,7 +7,7 @@ import {
     CATALOG_TEXT_FILTER_KEYS,
     type CatalogTextKey,
 } from '@features/pets/constants';
-import { useCatalogFilters } from '../CatalogFiltersContext';
+import { useCatalogFilters } from '../components/public/catalog/CatalogFiltersContext';
 import type { CatalogFilterKey } from './useCatalogUrl';
 
 export type FilterChip = { key: CatalogFilterKey; label: string };

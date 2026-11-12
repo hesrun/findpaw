@@ -1,8 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import type { getPublicShelters } from './queries';
-import type { ShelterFilters } from './schemas';
+import type { getPublicShelters } from '../queries';
+import type { ShelterFilters } from '../schemas';
 
 type PublicSheltersResult = Awaited<ReturnType<typeof getPublicShelters>>;
 

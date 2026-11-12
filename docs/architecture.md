@@ -34,8 +34,8 @@ A feature owns code that is specific to one business domain:
 - `actions.ts` - server actions for browser mutations;
 - `schemas.ts` - runtime validation of external input and inferred types;
 - `constants.ts` - the single home for the feature's constants (option lists, limits, sort fields, buckets, config maps); other files import them instead of declaring their own;
-- `hooks.ts` - client-side React Query hooks when a client fetch is required;
-- `components/` - domain UI, separated by audience where useful.
+- `hooks/` - every client hook of the feature, one `use<Name>.ts` per hook: React Query fetching and UI logic for components;
+- `components/` - domain UI (`.tsx` and widget context providers only), separated by audience where useful.
 
 Current domains include `pets`, `shelters`, and `auth`.
 
@@ -95,7 +95,7 @@ Client filter form
   -> RLS
 ```
 
-The URL is the only filter state. Every result page is server-rendered, shareable, and indexable. The client component holds only debounced text input and the pending state. The pet catalog (`/pets`) uses this pattern: `components/public/catalog/hooks/useCatalogUrl.ts` is the only code that reads and writes the catalog query string, and `CatalogFiltersContext` shares that one instance with the sidebar, mobile drawer, toolbar, chips, and results wrapper.
+The URL is the only filter state. Every result page is server-rendered, shareable, and indexable. The client component holds only debounced text input and the pending state. The pet catalog (`/pets`) uses this pattern: `hooks/useCatalogUrl.ts` is the only code that reads and writes the catalog query string, and `CatalogFiltersContext` shares that one instance with the sidebar, mobile drawer, toolbar, chips, and results wrapper.
 
 ### Form mutation
 

@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { LuX } from 'react-icons/lu';
 import ClearFiltersButton from './fields/ClearFiltersButton';
-import { useActiveFilterChips } from './hooks/useActiveFilterChips';
+import { useActiveFilterChips } from '@features/pets/hooks/useActiveFilterChips';
 
 export default function ActiveFilterChips() {
     const t = useTranslations('petsPage.filters');

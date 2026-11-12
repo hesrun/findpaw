@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, use, type ReactNode } from 'react';
-import { useCatalogUrl, type CatalogUrlState } from './hooks/useCatalogUrl';
+import { useCatalogUrl, type CatalogUrlState } from '@features/pets/hooks/useCatalogUrl';
 
 // One instance of the catalog URL state, shared by the sidebar, the mobile
 // drawer, the toolbar, the chips and the results wrapper.

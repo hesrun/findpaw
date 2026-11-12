@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import type { getPublicShelters } from '../../queries';
-import { usePublicShelters } from '../../hooks';
+import { usePublicShelters } from '@features/shelters/hooks/usePublicShelters';
 import ShelterCard from './ShelterCard';
 import ShelterCardSkeleton from './ShelterCardSkeleton';
 

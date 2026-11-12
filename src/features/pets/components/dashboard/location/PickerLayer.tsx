@@ -2,7 +2,7 @@
 
 import { Marker } from 'react-leaflet';
 import { pinIcon } from '@shared/components/UI/map/pinIcon';
-import { usePickerMap } from './hooks/usePickerMap';
+import { usePickerMap } from '@features/pets/hooks/usePickerMap';
 
 type PickerLayerProps = {
     position: [number, number] | null;

@@ -7,7 +7,7 @@ import { LuGift, LuMapPin } from 'react-icons/lu';
 import ListingChip from '@/shared/components/UI/ListingChips';
 import { formatCzk } from '@shared/helpers/currencyFormat';
 import { PRICED_LISTING_TYPE, REWARD_LISTING_TYPE } from '../../constants';
-import { usePetCardFacts } from './hooks/usePetCardFacts';
+import { usePetCardFacts } from '@features/pets/hooks/usePetCardFacts';
 import PetPlaceholder from '@UI/PetPlaceholder';
 import { Link } from '@/i18n/navigation';
 

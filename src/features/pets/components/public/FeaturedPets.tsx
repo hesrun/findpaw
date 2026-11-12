@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { FEATURED_PETS_COUNT, LISTING_TYPES } from '../../constants';
 import type { PetFilters } from '../../schemas';
 import type { getPublicPets } from '../../queries';
-import { usePublicPets } from '../../hooks';
+import { usePublicPets } from '@features/pets/hooks/usePublicPets';
 import PetCard from './PetCard';
 import PetCardSkeleton from './PetCardSkeleton';
 import clsx from 'clsx';

@@ -6,7 +6,7 @@ import { LuLock } from 'react-icons/lu';
 import DashboardCard from '@shared/components/UI/DashboardCard';
 import { PasswordField } from '@shared/components/UI/PasswordField';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
-import { useChangePasswordForm } from './hooks/useChangePasswordForm';
+import { useChangePasswordForm } from '@features/account/hooks/useChangePasswordForm';
 
 export default function ChangePasswordForm() {
     const t = useTranslations('dashboard.settings');

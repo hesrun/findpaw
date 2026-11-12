@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Button } from '@heroui/react';
-import { usePetOwnerContact } from '../../hooks';
+import { usePetOwnerContact } from '@features/pets/hooks/usePetOwnerContact';
 import PetContact from './PetContact';
 
 // Author contact of a private listing, revealed on click (see usePetOwnerContact).

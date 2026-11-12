@@ -7,7 +7,7 @@ import {
     type CatalogSortKey,
 } from '@features/pets/constants';
 import type { PetFilters } from '@features/pets/schemas';
-import { useCatalogFilters } from '../CatalogFiltersContext';
+import { useCatalogFilters } from '../components/public/catalog/CatalogFiltersContext';
 
 function getSortKey({ sortBy, ascending }: PetFilters): CatalogSortKey {
     const fallback = CATALOG_SORT_OPTIONS[CATALOG_DEFAULT_SORT];
