@@ -104,3 +104,10 @@ Sign-up confirmation and password recovery need these settings in the Supabase D
 - Its site key is `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (`.env.local`, Vercel env). Its secret key is stored only in Supabase Dashboard → Authentication → Attack Protection → Captcha (provider Turnstile).
 - Turn captcha on in Supabase only after the site key is deployed: from that moment every sign-up, sign-in, and password reset without a token fails.
 - The local Supabase stack has captcha off (`[auth.captcha]` in `supabase/config.toml`), so the widget is optional there.
+
+## Error Tracking (Sentry)
+
+- Sentry organization in the EU data region, project `findpaw` (platform Next.js).
+- `NEXT_PUBLIC_SENTRY_DSN` turns reporting on (Vercel env; leave it out of `.env.local` unless you test Sentry locally).
+- `SENTRY_AUTH_TOKEN` (organization token) is set only in Vercel; the build uses it to upload source maps.
+- The environment of an event is `NEXT_PUBLIC_VERCEL_ENV` (`production` or `preview`), `development` locally.

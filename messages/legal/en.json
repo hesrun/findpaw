@@ -62,6 +62,7 @@
                         "Cloudflare, Inc. (USA) – domain DNS, forwarding of messages sent to our contact address, and bot protection of the sign-in, sign-up, and password forms (Turnstile). The protection receives your IP address and browser details when such a form is shown.",
                         "Cloudinary Ltd. (Israel, USA) – storing and displaying photos.",
                         "Vercel Inc. (USA) – website hosting.",
+                        "Functional Software, Inc. (Sentry, USA) – error reports used to fix bugs; data is stored in Germany (EU). A report contains technical data about the error: the page address, browser and operating system, and what happened before the error, without your name or email.",
                         "Seznam.cz, a.s. (Czech Republic) – map tiles and finding the address of a map point (Mapy.com). When a map is shown it receives your IP address, and when an address is looked up, the coordinates of the chosen point."
                     ],
                     "We share data with anyone else only when the law requires it, for example at the request of a court or the police."
