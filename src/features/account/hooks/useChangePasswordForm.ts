@@ -4,10 +4,12 @@ import { useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { toast } from '@heroui/react';
 import { changePassword } from '@features/auth/actions/actions';
+import { useCaptcha } from '@shared/hooks/useCaptcha';
 
 export function useChangePasswordForm() {
     const t = useTranslations('auth');
     const [isPending, startTransition] = useTransition();
+    const { captchaRef, resetCaptcha } = useCaptcha();
 
     function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -16,6 +18,7 @@ export function useChangePasswordForm() {
 
         startTransition(async () => {
             const result = await changePassword(formData);
+            resetCaptcha();
 
             if (result.error) {
                 toast.danger(t(`errors.${result.error}`));
@@ -27,5 +30,5 @@ export function useChangePasswordForm() {
         });
     }
 
-    return { handleSubmit, isPending };
+    return { handleSubmit, isPending, captchaRef };
 }

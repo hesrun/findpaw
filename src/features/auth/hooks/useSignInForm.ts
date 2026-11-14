@@ -6,11 +6,13 @@ import { toast } from '@heroui/react';
 import { useRouter } from '@/i18n/navigation';
 import { signIn } from '@features/auth/actions/actions';
 import { DASHBOARD_HOME } from '@shared/constants/routes';
+import { useCaptcha } from '@shared/hooks/useCaptcha';
 
 export function useSignInForm() {
     const t = useTranslations('auth');
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
+    const { captchaRef, resetCaptcha } = useCaptcha();
 
     function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -18,6 +20,7 @@ export function useSignInForm() {
 
         startTransition(async () => {
             const result = await signIn(formData);
+            resetCaptcha();
 
             if (result.error) {
                 toast.danger(t(`errors.${result.error}`));
@@ -29,5 +32,5 @@ export function useSignInForm() {
         });
     }
 
-    return { handleSubmit, isPending };
+    return { handleSubmit, isPending, captchaRef };
 }

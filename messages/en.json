@@ -41,7 +41,8 @@
             "passwordsMismatch": "Passwords do not match",
             "updatePasswordFailed": "Could not update the password. Please try again later",
             "linkExpired": "The reset link is invalid or has expired. Request a new one.",
-            "wrongCurrentPassword": "The current password is incorrect"
+            "wrongCurrentPassword": "The current password is incorrect",
+            "captchaFailed": "The security check failed. Please wait a moment and try again."
         },
         "links": {
             "noAccount": "Don't have an account?",

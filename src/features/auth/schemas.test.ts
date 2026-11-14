@@ -10,10 +10,12 @@ import {
     AuthConfirmParamsSchema,
     ChangePasswordSchema,
     ResetPasswordSchema,
+    SignInSchema,
     SignUpSchema,
 } from './schemas';
 
 const password = 'p'.repeat(PASSWORD_MIN_LENGTH);
+const credentials = { email: 'jan@example.cz', password };
 
 const validSignUp = {
     email: 'jan@example.cz',
@@ -76,6 +78,23 @@ describe('SignUpSchema', () => {
                 phone: '1'.repeat(PROFILE_PHONE_MAX_LENGTH + 1),
             }).success,
         ).toBe(false);
+    });
+});
+
+describe('captchaToken', () => {
+    it('passes the Turnstile token through', () => {
+        expect(
+            SignInSchema.parse({ ...credentials, captchaToken: 'token' })
+                .captchaToken,
+        ).toBe('token');
+    });
+
+    // FormData.get gives null for a missing field; Supabase decides whether
+    // a token is required, so the form itself stays valid.
+    it.each([null, ''])('treats %j as no token', (captchaToken) => {
+        expect(
+            SignInSchema.parse({ ...credentials, captchaToken }).captchaToken,
+        ).toBeUndefined();
     });
 });
 

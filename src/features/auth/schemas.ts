@@ -21,9 +21,15 @@ export const PhoneSchema = optionalText(
     z.string().trim().max(PROFILE_PHONE_MAX_LENGTH),
 );
 
+// Cloudflare Turnstile token from the form's `captchaToken` field. Supabase Auth
+// verifies it; here it is only passed through. Missing when no site key is set
+// (local development against a stack without captcha).
+const CaptchaTokenSchema = z.string().min(1).optional().catch(undefined);
+
 export const SignInSchema = z.object({
     email: z.string().email(),
     password: z.string().min(1),
+    captchaToken: CaptchaTokenSchema,
 });
 
 export const SignUpSchema = z.object({
@@ -33,11 +39,13 @@ export const SignUpSchema = z.object({
     phone: PhoneSchema,
     role: SignUpRoleSchema.catch(DEFAULT_SIGN_UP_ROLE),
     locale: z.enum(routing.locales).catch(routing.defaultLocale),
+    captchaToken: CaptchaTokenSchema,
 });
 
 export const ForgotPasswordSchema = z.object({
     email: z.string().email(),
     locale: z.enum(routing.locales).catch(routing.defaultLocale),
+    captchaToken: CaptchaTokenSchema,
 });
 
 // New password typed twice; shared by the reset and change forms.
@@ -58,6 +66,8 @@ export const ResetPasswordSchema = NewPasswordSchema.refine(
 
 export const ChangePasswordSchema = NewPasswordSchema.extend({
     currentPassword: z.string().min(1),
+    // Checking the current password is a sign-in, which also needs a token.
+    captchaToken: CaptchaTokenSchema,
 }).refine(passwordsMatch, mismatchIssue);
 
 // Query of the email link. Only the locale is taken from the URL; the

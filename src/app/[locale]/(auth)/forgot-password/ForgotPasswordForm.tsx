@@ -13,6 +13,7 @@ import { Link } from '@/i18n/navigation';
 import { useForgotPasswordForm } from '@features/auth/hooks/useForgotPasswordForm';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
 import { ROUTES } from '@shared/constants/routes';
+import { Captcha } from '@shared/components/UI/Captcha';
 
 export default function ForgotPasswordForm({
     isLinkExpired,
@@ -20,7 +21,8 @@ export default function ForgotPasswordForm({
     isLinkExpired: boolean;
 }) {
     const t = useTranslations('auth');
-    const { handleSubmit, isPending, isSent } = useForgotPasswordForm();
+    const { handleSubmit, isPending, isSent, captchaRef } =
+        useForgotPasswordForm();
     const { validateEmail } = useAuthFieldValidation();
 
     return (
@@ -54,6 +56,7 @@ export default function ForgotPasswordForm({
                             <Input placeholder={t('fields.email')} />
                             <FieldError />
                         </TextField>
+                        <Captcha ref={captchaRef} />
                         <Button fullWidth type="submit" isPending={isPending}>
                             {t('btns.sendResetLink')}
                         </Button>

@@ -5,13 +5,14 @@ import { Button } from '@heroui/react';
 import { LuLock } from 'react-icons/lu';
 import DashboardCard from '@shared/components/UI/DashboardCard';
 import { PasswordField } from '@shared/components/UI/PasswordField';
+import { Captcha } from '@shared/components/UI/Captcha';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
 import { useChangePasswordForm } from '@features/account/hooks/useChangePasswordForm';
 
 export default function ChangePasswordForm() {
     const t = useTranslations('dashboard.settings');
     const tAuth = useTranslations('auth');
-    const { handleSubmit, isPending } = useChangePasswordForm();
+    const { handleSubmit, isPending, captchaRef } = useChangePasswordForm();
     const { validatePassword } = useAuthFieldValidation();
 
     return (
@@ -43,6 +44,7 @@ export default function ChangePasswordForm() {
                         variant="secondary"
                         label={tAuth('fields.confirmPassword')}
                     />
+                    <Captcha ref={captchaRef} />
                     <Button
                         type="submit"
                         className="justify-self-end"

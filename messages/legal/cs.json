@@ -58,7 +58,7 @@
                     [
                         "Supabase, Inc. (USA) – databáze a přihlašování; data jsou uložena v Irsku (EU).",
                         "Sendinblue SAS (Brevo, Francie) – odesílání e-mailů k účtu (potvrzení registrace, obnova hesla).",
-                        "Cloudflare, Inc. (USA) – DNS domény a přeposílání zpráv zaslaných na naši kontaktní adresu.",
+                        "Cloudflare, Inc. (USA) – DNS domény, přeposílání zpráv zaslaných na naši kontaktní adresu a ochrana formulářů pro přihlášení, registraci a heslo před roboty (Turnstile). Při zobrazení takového formuláře obdrží vaši IP adresu a údaje o prohlížeči.",
                         "Cloudinary Ltd. (Izrael, USA) – ukládání a zobrazování fotografií.",
                         "Vercel Inc. (USA) – hosting webu.",
                         "Seznam.cz, a.s. (Česká republika) – mapové podklady a určení adresy z bodu na mapě (Mapy.com). Při zobrazení mapy obdrží vaši IP adresu a při určení adresy souřadnice zvoleného bodu."

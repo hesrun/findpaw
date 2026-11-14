@@ -41,7 +41,8 @@
             "passwordsMismatch": "Hesla se neshodují",
             "updatePasswordFailed": "Heslo se nepodařilo změnit. Zkuste to prosím později",
             "linkExpired": "Odkaz pro obnovení je neplatný nebo vypršel. Vyžádejte si nový.",
-            "wrongCurrentPassword": "Současné heslo není správné"
+            "wrongCurrentPassword": "Současné heslo není správné",
+            "captchaFailed": "Bezpečnostní kontrola selhala. Chvíli počkejte a zkuste to znovu."
         },
         "links": {
             "noAccount": "Nemáte účet?",

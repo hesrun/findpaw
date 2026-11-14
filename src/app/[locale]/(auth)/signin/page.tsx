@@ -14,10 +14,11 @@ import { Link } from '@/i18n/navigation';
 import { useSignInForm } from '@features/auth/hooks/useSignInForm';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
 import { ROUTES } from '@shared/constants/routes';
+import { Captcha } from '@shared/components/UI/Captcha';
 
 export default function SignIn() {
     const t = useTranslations('auth');
-    const { handleSubmit, isPending } = useSignInForm();
+    const { handleSubmit, isPending, captchaRef } = useSignInForm();
     const { validateEmail, validatePassword } = useAuthFieldValidation();
 
     return (
@@ -54,6 +55,7 @@ export default function SignIn() {
                         {t('links.forgotPassword')}
                     </Link>
                 </div>
+                <Captcha ref={captchaRef} />
                 <Button fullWidth type="submit" isPending={isPending}>
                     {t('btns.sign')}
                 </Button>

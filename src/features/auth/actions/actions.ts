@@ -2,6 +2,7 @@
 
 import { headers } from 'next/headers';
 import type { ZodError } from 'zod';
+import type { AuthError } from '@supabase/supabase-js';
 import { redirect } from 'next/navigation';
 import { supabaseServer } from '@shared/lib/supabase/server';
 import getSupabaseWithUser, {
@@ -26,8 +27,12 @@ export type AuthResult = {
         | 'passwordsMismatch'
         | 'updatePasswordFailed'
         | 'linkExpired'
-        | 'wrongCurrentPassword';
+        | 'wrongCurrentPassword'
+        | 'captchaFailed';
 };
+
+// Supabase rejects a missing, expired, or reused Turnstile token with this code.
+const isCaptchaError = (error: AuthError) => error.code === 'captcha_failed';
 
 // A failed new-password form: a mismatch gets its own message.
 function newPasswordError(error: ZodError): AuthResult {
@@ -41,18 +46,26 @@ export async function signIn(formData: FormData): Promise<AuthResult> {
     const parsed = SignInSchema.safeParse({
         email: formData.get('email'),
         password: formData.get('password'),
+        captchaToken: formData.get('captchaToken'),
     });
 
     if (!parsed.success) {
         return { error: 'invalidData' };
     }
 
+    const { email, password, captchaToken } = parsed.data;
     const supabase = await supabaseServer();
 
-    const { error } = await supabase.auth.signInWithPassword(parsed.data);
+    const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+        options: { captchaToken },
+    });
 
     if (error) {
-        return { error: 'signInFailed' };
+        return {
+            error: isCaptchaError(error) ? 'captchaFailed' : 'signInFailed',
+        };
     }
 
     return {};
@@ -66,13 +79,15 @@ export async function signUp(formData: FormData): Promise<AuthResult> {
         phone: formData.get('phone'),
         role: formData.get('role'),
         locale: formData.get('locale'),
+        captchaToken: formData.get('captchaToken'),
     });
 
     if (!parsed.success) {
         return { error: 'invalidData' };
     }
 
-    const { email, password, userName, phone, role, locale } = parsed.data;
+    const { email, password, userName, phone, role, locale, captchaToken } =
+        parsed.data;
     const origin = await getRequestOrigin();
     const supabase = await supabaseServer();
 
@@ -85,41 +100,48 @@ export async function signUp(formData: FormData): Promise<AuthResult> {
         options: {
             data: { full_name: userName, phone, role },
             emailRedirectTo: `${origin}${AUTH_CONFIRM_PATH}?locale=${locale}`,
+            captchaToken,
         },
     });
 
     if (error) {
         console.error('[signUp]', error.message);
-        return { error: 'signUpFailed' };
+        return {
+            error: isCaptchaError(error) ? 'captchaFailed' : 'signUpFailed',
+        };
     }
 
     return {};
 }
 
-// Always reports success, so the form does not reveal which emails have accounts.
+// Reports success for any email, so the form does not reveal which emails have
+// accounts. Only a failed captcha is reported: it does not depend on the email.
 export async function requestPasswordReset(
     formData: FormData,
 ): Promise<AuthResult> {
     const parsed = ForgotPasswordSchema.safeParse({
         email: formData.get('email'),
         locale: formData.get('locale'),
+        captchaToken: formData.get('captchaToken'),
     });
 
     if (!parsed.success) {
         return { error: 'invalidData' };
     }
 
-    const { email, locale } = parsed.data;
+    const { email, locale, captchaToken } = parsed.data;
     const origin = await getRequestOrigin();
     const supabase = await supabaseServer();
 
     // Supabase checks redirectTo against the project's Redirect URLs allow-list.
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${origin}${AUTH_CONFIRM_PATH}?locale=${locale}`,
+        captchaToken,
     });
 
     if (error) {
         console.error('[requestPasswordReset]', error.message);
+        if (isCaptchaError(error)) return { error: 'captchaFailed' };
     }
 
     return {};
@@ -161,6 +183,7 @@ export async function changePassword(formData: FormData): Promise<AuthResult> {
         currentPassword: formData.get('currentPassword'),
         password: formData.get('password'),
         confirmPassword: formData.get('confirmPassword'),
+        captchaToken: formData.get('captchaToken'),
     });
 
     if (!parsed.success) {
@@ -172,10 +195,15 @@ export async function changePassword(formData: FormData): Promise<AuthResult> {
     const { error: signInError } = await supabase.auth.signInWithPassword({
         email: user.email ?? '',
         password: parsed.data.currentPassword,
+        options: { captchaToken: parsed.data.captchaToken },
     });
 
     if (signInError) {
-        return { error: 'wrongCurrentPassword' };
+        return {
+            error: isCaptchaError(signInError)
+                ? 'captchaFailed'
+                : 'wrongCurrentPassword',
+        };
     }
 
     const { error } = await supabase.auth.updateUser({

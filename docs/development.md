@@ -97,3 +97,10 @@ Sign-up confirmation and password recovery need these settings in the Supabase D
 - Supabase Auth sends its emails (sign-up confirmation, password reset) through Brevo SMTP, set in Supabase Dashboard → Authentication → SMTP Settings. The sender is `noreply@findpaw.cz`; replies to it are not read. The built-in Supabase email service sends only a few emails per hour, so it is not used in production.
 - `info@findpaw.cz` is the contact address (`LEGAL_OPERATOR.email`) and the sender for informational emails. It has no mailbox: Cloudflare Email Routing forwards it to the owner's inbox.
 - The Brevo SMTP key is stored only in the Supabase Dashboard, never in the repository or `.env` files.
+
+## Bot Protection (Turnstile)
+
+- The widget is created in Cloudflare Dashboard → Turnstile (Managed mode, hostnames `findpaw.cz` and `localhost`).
+- Its site key is `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (`.env.local`, Vercel env). Its secret key is stored only in Supabase Dashboard → Authentication → Attack Protection → Captcha (provider Turnstile).
+- Turn captcha on in Supabase only after the site key is deployed: from that moment every sign-up, sign-in, and password reset without a token fails.
+- The local Supabase stack has captcha off (`[auth.captcha]` in `supabase/config.toml`), so the widget is optional there.

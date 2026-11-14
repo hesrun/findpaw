@@ -26,6 +26,7 @@ import {
 import { useSignUpForm } from '@features/auth/hooks/useSignUpForm';
 import { useAuthFieldValidation } from '@features/auth/hooks/useAuthFieldValidation';
 import { ROUTES } from '@shared/constants/routes';
+import { Captcha } from '@shared/components/UI/Captcha';
 
 // Keyed by the database role enum: adding or renaming a sign-up role
 // fails type checking until it has an icon here.
@@ -37,7 +38,7 @@ const roleIcons = {
 export default function SignUp() {
     const roles = useTranslations('roles');
     const t = useTranslations('auth');
-    const { handleSubmit, isPending } = useSignUpForm();
+    const { handleSubmit, isPending, captchaRef } = useSignUpForm();
     const { validateEmail, validatePassword, validateUserName } =
         useAuthFieldValidation();
 
@@ -124,6 +125,7 @@ export default function SignUp() {
                         label={t('fields.password')}
                     />
                 </div>
+                <Captcha ref={captchaRef} />
                 <Button fullWidth type="submit" isPending={isPending}>
                     {t('btns.signup')}
                 </Button>
