@@ -10,6 +10,7 @@ import PetCard from './PetCard';
 import PetCardSkeleton from './PetCardSkeleton';
 import clsx from 'clsx';
 import ArrowLink from '@UI/ArrowLink';
+import { EmptyState } from '@UI/EmptyState';
 import { ROUTES } from '@shared/constants/routes';
 
 type PublicPetsResult = Awaited<ReturnType<typeof getPublicPets>>;
@@ -102,7 +103,7 @@ export default function FeaturedPets({
                         ))}
                     </ul>
                 ) : (
-                    <p>{tHome('noPetsFound')}</p>
+                    <EmptyState title={tHome('noPetsFound')} />
                 )}
             </div>
         </section>

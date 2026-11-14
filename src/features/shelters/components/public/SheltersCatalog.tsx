@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import MyPagination from '@shared/components/UI/Pagination';
+import { EmptyState } from '@UI/EmptyState';
 import { getPublicShelters } from '../../queries';
 import { SHELTER_CATALOG_PAGE_SIZE } from '../../constants';
 import ShelterCard from './ShelterCard';
@@ -27,11 +28,7 @@ export default async function SheltersCatalog({ page }: { page: number }) {
                     ))}
                 </ul>
             ) : (
-                <div className="surface-card p-10 text-center">
-                    <p className="font-display font-extrabold text-xl">
-                        {t('empty')}
-                    </p>
-                </div>
+                <EmptyState title={t('empty')} />
             )}
 
             {totalPages > 1 && (

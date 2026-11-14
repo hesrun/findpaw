@@ -5,6 +5,7 @@ import type { getPublicShelters } from '../../queries';
 import { usePublicShelters } from '@features/shelters/hooks/usePublicShelters';
 import ShelterCard from './ShelterCard';
 import ShelterCardSkeleton from './ShelterCardSkeleton';
+import { EmptyState } from '@UI/EmptyState';
 
 type PublicSheltersResult = Awaited<ReturnType<typeof getPublicShelters>>;
 
@@ -50,7 +51,7 @@ export default function FeaturedShelters({
                         ))}
                     </ul>
                 ) : (
-                    <p>{t('noSheltersFound')}</p>
+                    <EmptyState title={t('noSheltersFound')} />
                 )}
             </div>
         </section>

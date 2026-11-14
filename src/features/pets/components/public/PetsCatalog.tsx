@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import MyPagination from '@shared/components/UI/Pagination';
+import { EmptyState } from '@UI/EmptyState';
 import { getPublicPets } from '../../queries';
 import type { PetFilters } from '../../schemas';
 import PetCard from './PetCard';
@@ -34,12 +35,7 @@ export default async function PetsCatalog({
                     ))}
                 </ul>
             ) : (
-                <div className="surface-card p-10 text-center">
-                    <p className="font-display font-extrabold text-xl mb-1">
-                        {t('empty')}
-                    </p>
-                    <p className="text-muted">{t('emptyHint')}</p>
-                </div>
+                <EmptyState title={t('empty')} hint={t('emptyHint')} />
             )}
 
             {totalPages > 1 && (

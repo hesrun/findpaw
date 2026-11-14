@@ -1,20 +1,22 @@
-import { Button } from '@heroui/react';
-import Link from 'next/link';
-import { TbHomeShield } from 'react-icons/tb';
+import { buttonVariants } from '@heroui/react';
 import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 import { ROUTES } from '@shared/constants/routes';
+import { EmptyState } from '@UI/EmptyState';
 
 export default async function MySheltersEmpty() {
     const t = await getTranslations('dashboard.myShelters');
     return (
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-accent bg-white rounded-[2rem] w-60 mx-auto aspect-square flex flex-col items-center justify-center">
-            <TbHomeShield className="mx-auto text-6xl mb-4" />
-            <h2 className="text-2xl font-bold mb-4 font-heading px-4 leading-none">
-                {t('emptyState.title')}
-            </h2>
-            <Link href={ROUTES.dashboard.addShelter}>
-                <Button variant="primary">{t('emptyState.btn')}</Button>
-            </Link>
-        </div>
+        <EmptyState
+            title={t('emptyState.title')}
+            action={
+                <Link
+                    href={ROUTES.dashboard.addShelter}
+                    className={buttonVariants()}
+                >
+                    {t('emptyState.btn')}
+                </Link>
+            }
+        />
     );
 }

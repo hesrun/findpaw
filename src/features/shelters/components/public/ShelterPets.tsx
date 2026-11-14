@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import MyPagination from '@shared/components/UI/Pagination';
+import { EmptyState } from '@UI/EmptyState';
 import { getPublicPets } from '@features/pets/queries';
 import PetCard from '@features/pets/components/public/PetCard';
 import { SHELTER_PETS_PAGE_SIZE } from '../../constants';
@@ -34,9 +35,7 @@ export default async function ShelterPets({
                     ))}
                 </ul>
             ) : (
-                <div className="surface-card p-10 text-center">
-                    <p className="text-muted">{t('noPets')}</p>
-                </div>
+                <EmptyState title={t('noPets')} />
             )}
 
             {totalPages > 1 && (
