@@ -3,6 +3,7 @@ import { hasLocale } from 'next-intl';
 import { getLocale } from 'next-intl/server';
 import cs from '@messages/legal/cs.json';
 import en from '@messages/legal/en.json';
+import uk from '@messages/legal/uk.json';
 import { routing } from '@/i18n/routing';
 import { metaDescription, pageMetadata } from '@shared/lib/seo';
 import { ROUTES } from '@shared/constants/routes';
@@ -10,7 +11,7 @@ import { ROUTES } from '@shared/constants/routes';
 // Long legal texts stay out of messages/*.json: NextIntlClientProvider
 // sends those to the browser on every page. Import this file only from
 // Server Components.
-const LEGAL_CONTENT = { en, cs } satisfies Record<
+const LEGAL_CONTENT = { en, cs, uk } satisfies Record<
     (typeof routing.locales)[number],
     typeof en
 >;

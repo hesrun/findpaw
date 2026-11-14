@@ -17,6 +17,7 @@ export const DEFAULT_OG_IMAGE = {
 export const OG_LOCALES = {
     en: 'en_US',
     cs: 'cs_CZ',
+    uk: 'uk_UA',
 } satisfies Record<(typeof routing.locales)[number], string>;
 
 // Search engines cut longer descriptions.

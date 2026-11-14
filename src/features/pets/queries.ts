@@ -4,6 +4,7 @@ import { cache } from 'react';
 import { PetFiltersSchema, PetIdSchema } from './schemas';
 import en from '@messages/en.json';
 import cs from '@messages/cs.json';
+import uk from '@messages/uk.json';
 import type { routing } from '@/i18n/routing';
 import {
     PET_AGE_GROUP_MONTHS,
@@ -12,10 +13,11 @@ import {
 } from './constants';
 import { findBreedKeys } from './breeds';
 
-// Breed names in every locale, so a search finds a breed in either language.
+// Breed names in every locale, so a search finds a breed in any language.
 const BREED_NAMES = Object.values({
     en: en.pets.breeds,
     cs: cs.pets.breeds,
+    uk: uk.pets.breeds,
 } satisfies Record<
     (typeof routing.locales)[number],
     Record<PetBreed, string>

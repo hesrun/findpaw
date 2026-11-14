@@ -1,15 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import en from '@messages/en.json';
 import cs from '@messages/cs.json';
+import uk from '@messages/uk.json';
 import { PET_BREED_KEYS, PET_BREEDS } from './constants';
 import { breedLabel, findBreedKeys, hasBreedList, isPetBreed } from './breeds';
 
-const NAMES = [en.pets.breeds, cs.pets.breeds];
+const NAMES = [en.pets.breeds, cs.pets.breeds, uk.pets.breeds];
 
 describe('PET_BREEDS', () => {
     it.each([
         ['en', en.pets.breeds],
         ['cs', cs.pets.breeds],
+        ['uk', uk.pets.breeds],
     ])('has a %s name for every breed and no extra names', (_, names) => {
         expect(Object.keys(names).sort()).toEqual([...PET_BREED_KEYS].sort());
     });

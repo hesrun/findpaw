@@ -64,7 +64,6 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
         getLocale(),
     ]);
     const breed = breedLabel(pet.breed, tBreeds);
-    const dateLocale = locale === 'cs' ? 'cs' : 'en';
     const age = await formatAge(pet.age_months, 'full');
 
     // A pet attached to a shelter lives at the shelter's address.
@@ -187,7 +186,7 @@ export default async function PetDetails({ pet }: { pet: PetWithShelter }) {
                     <p className="text-sm text-muted">
                         {t('publishedAt', {
                             date: formatDate(pet.created_at, {
-                                locale: dateLocale,
+                                locale,
                                 format: 'medium',
                             }),
                         })}

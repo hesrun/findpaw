@@ -10,24 +10,19 @@
 // formatDate(iso, { locale: 'en', format: 'long' }); // "May 27, 2026 at 03:08 PM"
 // formatDate(iso, { locale: 'en', format: 'relative' }); // "4 days ago"
 
-type Locale = 'cs' | 'en';
+import { toIntlLocale } from './intlLocale';
 
 interface FormatDateOptions {
-    locale: Locale;
+    locale: string;
     format?: 'short' | 'medium' | 'long' | 'relative';
 }
-
-const localeMap: Record<Locale, string> = {
-    cs: 'cs-CZ',
-    en: 'en-US',
-};
 
 export function formatDate(
     input: string | Date,
     { locale, format = 'medium' }: FormatDateOptions,
 ): string {
     const date = typeof input === 'string' ? new Date(input) : input;
-    const loc = localeMap[locale];
+    const loc = toIntlLocale(locale);
 
     switch (format) {
         case 'short':

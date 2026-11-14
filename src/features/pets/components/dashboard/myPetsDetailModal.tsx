@@ -43,7 +43,7 @@ export default function MyPetsDetailModal({
     setIsModalOpen: (open: boolean) => void;
     selectedPet: PetWithShelter;
 }) {
-    const locale = useLocale() as 'en' | 'cs';
+    const locale = useLocale();
 
     const pets = useTranslations('dashboard.myPets');
     const global = useTranslations('global');

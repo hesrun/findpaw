@@ -38,7 +38,7 @@ export default function MyPetsCard({
     const tSpecies = useTranslations('pets.species');
     const tListingType = useTranslations('pets.listingType');
     const tReason = useTranslations('pets.closeReason');
-    const locale = useLocale() as 'en' | 'cs';
+    const locale = useLocale();
 
     const handleCardClick = () => {
         setSelectedPet(pet);

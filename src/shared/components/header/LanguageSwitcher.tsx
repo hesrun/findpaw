@@ -2,11 +2,13 @@
 
 import { Dropdown } from '@heroui/react';
 import { usePathname, useRouter } from '@/i18n/navigation';
-import { routing } from '@/i18n/routing';
+import { routing, type Locale } from '@/i18n/routing';
 import { useLocale } from 'next-intl';
+import { LOCALE_LABELS } from '@shared/constants/locales';
 
 export default function LanguageSwitcher() {
-    const locale = useLocale();
+    // The [locale] layout rejects unknown locales, so this is always one of them.
+    const locale = useLocale() as Locale;
     const pathname = usePathname();
     const router = useRouter();
 
@@ -16,7 +18,7 @@ export default function LanguageSwitcher() {
                 <Dropdown.Trigger className="flex items-center gap-2 cursor-pointer">
                     <img className="w-6" src={`/flags/${locale}.svg`} alt="" />
                     <span className="font-heading font-bold text-sm">
-                        {locale.toUpperCase()}
+                        {LOCALE_LABELS[locale]}
                     </span>
                 </Dropdown.Trigger>
                 <Dropdown.Popover
@@ -37,7 +39,7 @@ export default function LanguageSwitcher() {
                                     alt=""
                                 />
                                 <span className="font-heading font-bold text-sm">
-                                    {l.toUpperCase()}
+                                    {LOCALE_LABELS[l]}
                                 </span>
                             </Dropdown.Item>
                         ))}

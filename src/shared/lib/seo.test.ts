@@ -29,6 +29,7 @@ describe('localizedAlternates', () => {
             languages: {
                 en: '/en/about',
                 cs: '/cs/about',
+                uk: '/uk/about',
                 'x-default': '/en/about',
             },
         });
@@ -102,6 +103,7 @@ describe('sitemapEntries', () => {
         expect(entries.map((e) => e.url)).toEqual([
             'https://findpaw.cz/en/pets/1',
             'https://findpaw.cz/cs/pets/1',
+            'https://findpaw.cz/uk/pets/1',
         ]);
         expect(entries[0]).toMatchObject({
             lastModified: '2026-11-08',
@@ -109,6 +111,7 @@ describe('sitemapEntries', () => {
                 languages: {
                     en: 'https://findpaw.cz/en/pets/1',
                     cs: 'https://findpaw.cz/cs/pets/1',
+                    uk: 'https://findpaw.cz/uk/pets/1',
                     'x-default': 'https://findpaw.cz/en/pets/1',
                 },
             },
